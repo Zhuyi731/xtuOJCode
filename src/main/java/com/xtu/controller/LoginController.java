@@ -1,8 +1,10 @@
 package com.xtu.controller;
 
+import com.xtu.DB.UsersRepository;
+import com.xtu.DB.entity.UsersEntity;
 import com.xtu.constant.Constant;
-import com.xtu.entity.UsersEntity;
 import com.xtu.tools.OUT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Ilovezilian on 2017/4/13.
  */
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
@@ -30,6 +33,7 @@ public class LoginController {
     @RequestMapping(value = {"/login", "/info"}, method = RequestMethod.POST)
     public String showUserInfo(
             @NotNull @Valid UsersEntity usersEntiy,
+            Model model,
             Errors errors) {
         OUT.prt("info", usersEntiy);
 
@@ -39,17 +43,19 @@ public class LoginController {
 
         usersEntiy = new UsersEntity();
         // TODO: 2017/4/13 select form DB
-        Map<String, Object> model = new HashMap<>();
         if (null == usersEntiy) {
-            model.put("message", "wrong use id or password");
+            model.addAttribute("message", "wrong use id or password");
             return "login";
         }
         // TODO: 2017/4/13 add user infomation
         usersEntiy.setRoleId(Constant.STUDENT);
 
-        usersEntiy.setName("panshuai");
+        int cont = usersRepository.count().intValue();
         usersEntiy.setId("2013551830");
-        model.put("usersEntity", usersEntiy);
+        usersEntiy.setName("panshuai+"+cont);
+        usersEntiy.setUserId(cont);
+        OUT.prt("count", cont);
+        model.addAttribute("usersEntity", usersEntiy);
 //        return getRoleType(usersEntiy.getRoleId()) + "/info";
         return "info";
     }

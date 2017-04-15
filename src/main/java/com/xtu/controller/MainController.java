@@ -17,9 +17,4 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/panshuai", method = RequestMethod.GET)
-    public String home(){
-        OUT.prt("request:", "panshuai");
-        return "panshuai";
-    }
 }

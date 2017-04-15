@@ -4,6 +4,10 @@
 <body>
 <h2>Hello panshuai!</h2>
 </body>
-<c:out value="${usersEntity.id}" />
-<c:out value="${usersEntity.name}" />
+<label> id: </label>
+<c:out value="${usersEntity.id}"/>
+<label> name: </label>
+<c:out value="${usersEntity.name}"/>
+<label> userId: </label>
+<c:out value="${usersEntity.userId}"/>
 </html>
