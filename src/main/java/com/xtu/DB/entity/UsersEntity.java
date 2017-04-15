@@ -1,4 +1,4 @@
-package com.xtu.entity;
+package com.xtu.DB.entity;
 
 
 import com.sun.istack.internal.NotNull;
