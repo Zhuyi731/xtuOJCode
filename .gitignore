@@ -10,6 +10,9 @@ ignoreSource/
 /target
 *.class
 
+# test file
+src/test
+
 # Log file
 *.log
 
