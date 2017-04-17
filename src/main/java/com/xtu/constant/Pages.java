@@ -11,19 +11,19 @@ public class Pages {
     /**
      * 404错误处理页面
      */
-    public static final String NOTFOUNDERROR = "error404";
+    public static final String NOT_FOUND_ERROR = "error404";
     /**
      * 登录失败页面
      */
-    public static final String LOGINERROR = "errorLogin";
+    public static final String LOGIN_ERROR = "errorLogin";
     /**
      * 修改密码
      */
-    public static final String MODIFYPASSWORD = "modifyPassword";
+    public static final String MODIFY_PASSWORD = "modifyPassword";
     /**
      * 忘记密码页面
      */
-    public static final String FORGETPASSWORD = "forgetPassword";
+    public static final String FORGET_PASSWORD = "forgetPassword";
     /**
      * 主页
      */
@@ -39,15 +39,15 @@ public class Pages {
     /**
      * 题库主页
      */
-    public static final String PROBLEMS = "problems";
+    public static final String PROBLEMS_INDEX = "problems";
     /**
      * 题目详细信息
      */
-    public static final String PRODETAIL = "proDetail";
+    public static final String PROBLEM_DETAIL = "proDetail";
     /**
      * 做题排行榜界面
      */
-    public static final String RANKLIST = "ranklist";
+    public static final String RANK_LIST = "ranklist";
     /**
      * 注册用户页面
      */
@@ -59,7 +59,7 @@ public class Pages {
     /**
      * 框架页面
      */
-    public static final String MAIN = "main";
+    public static final String MAIN_PAGE = "main";
     /**
      * 个人信息
      */
@@ -72,7 +72,7 @@ public class Pages {
     /**
      * 修改个人信息页面
      */
-    public static final String STUINFO = "stuInfo";
+    public static final String STUDENT_INFO = "stuInfo";
     /**
      * 修改密码或个人信息成功后跳转的界面
      */
@@ -85,23 +85,23 @@ public class Pages {
     /**
      * 修改个人信息
      */
-    public static final String TEACHERINFO = "teacherInfo";
+    public static final String TEACHER_INFO = "teacherInfo";
     /**
      * 查看所有学生
      */
-    public static final String SHOWSTUDENT = "showStudent";
+    public static final String SHOW_STUDENT_INFO = "showStudent";
     /**
      * 添加学生
      */
-    public static final String ADDSTUDENT = "addStudent";
+    public static final String ADD_STUDENT = "addStudent";
     /**
      * 添加题目
      */
-    public static final String ADDPROBLEM = "addProblem";
+    public static final String ADD_PROBLEM = "addProblem";
     /**
      * 题目管理
      */
-    public static final String PROMANAGER = "proManager";
+    public static final String PROBLEM_MANAGER = "proManager";
     /**
      * 管理员目录
      */
@@ -114,13 +114,17 @@ public class Pages {
     /**
      * 所有比赛
      */
-    public static final String ALLTEST = "allTest";
+    public static final String TOTAL_TEST = "allTest";
     /**
      * 创建比赛
      */
-    public static final String CREATETEST = "createTest";
+    public static final String CREATE_TEST = "createTest";
     /**
      * 加入比赛
      */
-    public static final String JOINTEST = "joinTest";
+    public static final String JOIN_TEST = "joinTest";
+    /**
+     * 运行状态
+     */
+    public static final String STATUS = "status";
 }

@@ -1,5 +1,6 @@
 package com.xtu.exception;
 
+import com.xtu.constant.Pages;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,6 +13,6 @@ public class AppWideExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public String handleNotFound()
     {
-        return "error";
+        return Pages.NOT_FOUND_ERROR;
     }
 }
