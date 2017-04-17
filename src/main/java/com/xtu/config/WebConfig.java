@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.xtu.controller")
+@ComponentScan({"com.xtu.controller","com.xtu.exception"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
