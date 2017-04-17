@@ -21,16 +21,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <%@ include file="/WEB-INF/views/navigation.jsp"%>
 	
 	<!-- 翻页功能 -->
-	<div class="container" width="60%" style="margin:50">
+	<div class="container" width="60%" style="margin:50px">
 		<div class="page">
-		<ul class="pager" style="padding:0 150">
+		<ul class="pager" style="padding:0px 150px">
 		  <li class="previous"><a href="#">&laquo;上一页</a></li>
 		  <li class="next"><a href="#">下一页&raquo;</a></li>
 		</ul>
 	</div>
 		
 		<div class="ranklist"  style="position:relative;height:auto;min-height:100%;padding-bottom:60px;">
-		<table class="table table-hover" style="width: 1000px;margin:30 100; ">
+		<table class="table table-hover" style="width: 1000px;margin:30px 100px; ">
 			<thead >
 			  <tr >
 			    <th class="col-md-1">Rank</th>
