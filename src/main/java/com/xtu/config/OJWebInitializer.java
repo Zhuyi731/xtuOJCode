@@ -2,6 +2,9 @@ package com.xtu.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+
 /**
  * Created by Ilovezilian on 2017/4/12.
  */
@@ -36,4 +39,26 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
     protected String[] getServletMappings() {
         return new String[] {"/"};
     }
+
+    /**
+     * set multipart uploads file
+     * @param registration
+     */
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        //设置上传文件的临时目录为/tmp/uploads
+        registration.setMultipartConfig(
+                new MultipartConfigElement("/tmp/uploads", 2097152, 4194304, 0));
+    }
+
+
+    /**
+     * set filter
+     * @return
+     */
+//    @Override
+//    protected Filter[] getServletFilters(){
+//        return new Filter[]{new MyFilter()};
+//    }
+
 }
