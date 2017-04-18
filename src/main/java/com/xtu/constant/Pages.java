@@ -127,4 +127,8 @@ public class Pages {
      * 运行状态
      */
     public static final String STATUS = "status";
+    /**
+     * 管理菜单栏
+     */
+    public static final String MENU = "menu";
 }
