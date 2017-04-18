@@ -1,22 +1,16 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>
-<div class="navbar navbar-default " role="navigation" style="margin-bottom:50px;">
+<div class="navbar  navbar-default" role="navigation" style="margin-bottom:50px;background-color:#2c333d; ">
 	<div class="col-md-9" >
 	<div class="navbar-header">
 	<a href=<%=basePath+"index" %> class="navbar-brand">XTUOJ</a>
 	  　</div>
-    <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;">
-        <li><a href="index">首页</a></li>
-      	<li><a href="problems">题库</a></li>
-      	<li><a href="ranklist">Ranklist</a></li>
-      	<li><a href="status">Status</a>
-      	<li class="dropdown">
-          <a href="test" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-        	<li><a href="test/joinTest">参加考试</a></li>
-        	<li><a href="test/createTest">创建考试（仅老师）</a></li>
-          </ul>
-       </li>
+    <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
+        <li><a href="index" style="color:white; ">首页</a></li>
+      	<li><a href="problems" style="color:white;">题库</a></li>
+      	<li><a href="ranklist" style="color:white;">Ranklist</a></li>
+        <li><a href="status" style="color:white;">Status</a></li>
+      	<li class="dropdown"><a href="test/test"style="color:white;">考试</a></li>
 
     </ul>
    </div>
@@ -42,5 +36,6 @@
         <button type="submit" class="btn btn-default">搜索</button>
       -->
      </form>
-     </div>
+
+</div>
 </div>

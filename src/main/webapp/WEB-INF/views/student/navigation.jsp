@@ -21,8 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href=<%=basePath+"index.jsp" %> class="navbar-brand">XTUOJ</a>
 	  　</div> 
     <ul class="nav navbar-nav" style="font-size:18px;margin:20 auto;text-align:center;">
-        <li><a href=index">首页</a></li>
-      	<li><a href=basePath+"problems">题库</a></li>
+        <li><a href="index">首页</a></li>
+      	<li><a href="problems">题库</a></li>
       	<li><a href="ranklist">Ranklist</a></li>
       	<li><a href="status" >Status</a>
       	<li class="dropdown">
