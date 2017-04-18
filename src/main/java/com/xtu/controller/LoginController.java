@@ -55,6 +55,8 @@ public class LoginController {
         usersEntiy.setRoleId(Constant.STUDENT);
 
         int cont = usersRepository.count().intValue();
+        usersEntiy = usersRepository.findOne("2013551830");
+        model.addFlashAttribute("usersEntity from db", usersEntiy);
         usersEntiy.setId("2013551830");
         usersEntiy.setName("panshuai+" + cont);
         usersEntiy.setUserId(cont);
@@ -96,13 +98,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/" + Pages.FORGET_PASSWORD, method = RequestMethod.GET)
-    public String forgetPassword(){
+    public String forgetPassword() {
         OUT.prt("request", Pages.FORGET_PASSWORD);
         return Pages.FORGET_PASSWORD;
     }
 
     @RequestMapping(value = "/" + Pages.SUCCESS, method = RequestMethod.GET)
-    public String showSuccess(){
+    public String showSuccess() {
         OUT.prt("request", Pages.SUCCESS);
         return Pages.SUCCESS;
     }
