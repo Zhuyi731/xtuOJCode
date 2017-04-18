@@ -11,7 +11,7 @@
       	<li><a href="ranklist">Ranklist</a></li>
       	<li><a href="status">Status</a>
       	<li class="dropdown">
-          <a href="test/test" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
+          <a href="test" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
           <ul class="dropdown-menu">
         	<li><a href="test/joinTest">参加考试</a></li>
         	<li><a href="test/createTest">创建考试（仅老师）</a></li>

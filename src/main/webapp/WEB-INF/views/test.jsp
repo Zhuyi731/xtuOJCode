@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/navigation.jsp" %>
-  <div class="chooseTest" style="margin:20 50;" align="center">
+  <div class="chooseTest" style="margin:20px 50px;" align="center">
     <a class="btn btn-info btn-lg col-md-3" href="test/allTest" >所有考试</a>
     <a class="btn btn-info btn-lg col-md-offset-1 col-md-3" href="test/createTest" >创建考试(仅老师)</a>
     <a class="btn btn-success btn-lg col-md-offset-1 col-md-3"  href="test/joinTest">参加考试</a>
