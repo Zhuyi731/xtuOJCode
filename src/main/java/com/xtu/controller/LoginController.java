@@ -95,6 +95,19 @@ public class LoginController {
         return "redirect:/" + getRoleType(usersEntity.getRoleId()) + "/" + Pages.INFO;
     }
 
+    @RequestMapping(value = "/" + Pages.FORGET_PASSWORD, method = RequestMethod.GET)
+    public String forgetPassword(){
+        OUT.prt("request", Pages.FORGET_PASSWORD);
+        return Pages.FORGET_PASSWORD;
+    }
+
+    @RequestMapping(value = "/" + Pages.SUCCESS, method = RequestMethod.GET)
+    public String showSuccess(){
+        OUT.prt("request", Pages.SUCCESS);
+        return Pages.SUCCESS;
+    }
+
+
     private String getRoleType(int role_id) {
         String res;
         if (role_id == Constant.ADMIN) {
