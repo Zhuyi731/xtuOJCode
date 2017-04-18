@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body style="background-color:DCDCDC">
 	  <div class="head" align="center">
-	     	<font size="5px" color="0099CC">教师后台管理</font>	  
+	     	<p size="5px" color="0099CC">教师后台管理</p>
 	  </div>
     
    <div class="menuBar"  style="padding-left:30px;" >
@@ -89,16 +89,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </td></tr></thead>
      <tbody id="subMenu4" style="display:on;"> 
      <tr><td>
-     <a href="#">查看所有考试</a>
+     <a href="teacher/showTest">查看所有考试</a>
      </td></tr>
      <tr><td>
-     <a href="#">创建考试</a>
+     <a href="/test/createTest" target="_top">创建考试</a>
      </td></tr>
      <tr><td>
-     <a href="#">过往考试</a>
+     <a href="/test/pastTest" target="_top">过往考试</a>
      </td></tr>
      <tr><td>
-     <a href="#">正在进行</a>
+     <a href="/test/joinTest" target="_top">正在进行</a>
      </td></tr>
      </tbody>
      </table>

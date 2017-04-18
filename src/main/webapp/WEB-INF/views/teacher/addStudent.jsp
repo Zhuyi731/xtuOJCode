@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	   </tbody>
   	   </table>
   	   </div>
-      
+      <input type="submit" class="btn btn-primary btn-lg" align="middle" value="添加所选">
 <script type="text/javascript">
  function show(){
    var a=document.getElementById("select");

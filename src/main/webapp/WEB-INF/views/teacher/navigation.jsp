@@ -24,7 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="index">首页</a></li>
       	<li><a href="problems.jsp">题库</a></li>
       	<li><a href="ranklist">Ranklist</a></li>
-      	<li><a href="status" >Status</a>
       	<li class="dropdown">
           <a href="test/test" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
           <ul class="dropdown-menu">
