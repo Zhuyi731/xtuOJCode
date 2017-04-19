@@ -116,6 +116,10 @@ public class Pages {
      */
     public static final String TOTAL_TEST = "allTest";
     /**
+     * 查看比赛，题库
+     */
+    public static final String SHOW_TEST_PAGE = "showTest";
+    /**
      * 创建比赛
      */
     public static final String CREATE_TEST = "createTest";
@@ -131,4 +135,16 @@ public class Pages {
      * 管理菜单栏
      */
     public static final String MENU = "menu";
+    /**
+     * 公告目录
+     */
+    public static final String NOTICE = "news";
+    /**
+     * 添加公告
+     */
+    public static final String ADD_NOTICE = "addNews";
+    /**
+     * 查看公告
+     */
+    public static final String SHOW_NOTICE = "showNews";
 }
