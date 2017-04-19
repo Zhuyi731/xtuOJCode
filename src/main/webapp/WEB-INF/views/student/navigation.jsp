@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="navbar navbar-default " role="navigation" style="margin-bottom:50;">
 	<div class="col-md-9" >
 	<div class="navbar-header">
-	<a href=<%=basePath+"index.jsp" %> class="navbar-brand">XTUOJ</a>
+	<a href=<%=basePath+"index" %> class="navbar-brand">XTUOJ</a>
 	  　</div> 
     <ul class="nav navbar-nav" style="font-size:18px;margin:20 auto;text-align:center;">
         <li><a href="index">首页</a></li>
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	<li><a href="ranklist">Ranklist</a></li>
       	<li><a href="status" >Status</a>
       	<li class="dropdown">
-          <a href="<%=basePath+"test/test.jsp" %>" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
+          <a href="<%=basePath+"test/test" %>" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
           <ul class="dropdown-menu">
         	<li><a href="test/createTest">参加考试</a></li>
         	<li><a href="test/joinTest" >创建考试（仅老师）</a></li>
@@ -38,13 +38,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="col-md-3" style="float:right:0px;top:0px;">
      <c:if test="${student eq null}">
      <c:if test="${teachers eq null }">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"login.jsp"%> style="width:150px;float:right;">登录</a>
+     <a class="btn btn-primary btn-lg" href=<%=basePath+"login"%> style="width:150px;float:right;">登录</a>
      </c:if>
      <c:if test="${teachers ne null }">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"teacher/main.jsp"%>  style="width:150px;float:right;">${teachers.tID}</a></c:if>
+     <a class="btn btn-primary btn-lg" href=<%=basePath+"teacher/main"%>  style="width:150px;float:right;">${teachers.tID}</a></c:if>
      </c:if>
      <c:if test="${student ne null}">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"student/main.jsp"%>  style="width:150px;float:right;">${student.stuID}</a>
+     <a class="btn btn-primary btn-lg" href=<%=basePath+"student/main"%>  style="width:150px;float:right;">${student.stuID}</a>
      </c:if>
      </div>
    <!-- 搜索按钮 -->

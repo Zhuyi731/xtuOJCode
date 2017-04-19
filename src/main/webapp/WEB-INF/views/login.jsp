@@ -18,7 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--登录表单  -->
 <div class="formDiv">
- <form method="post" name="login" class="form-horizontal" action="loginServlet" role="form" >
+ <form method="post" name="login" class="form-horizontal"  role="form" >
+	 <%--<form method="post" name="login" class="form-horizontal" action="loginServlet" role="form" >--%>
  	<div class="form-group " id="tab-list"  class="loginType1">
  	<div  class="col-md-offset-4 col-md-2">
  	学生登录<input type="radio" class="loginType" name="loginType" value="0" checked="checked"></div>
@@ -28,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="form-group">
  		<label for="username" class="col-sm-2 col-sm-offset-2 control-label">账号：</label>
    		 <div class="col-sm-3">
-   		 <input type="text" class="form-control" id="username"  name="username" placeholder="请输入账号">
+   		 <input type="text" class="form-control" id="username"  name="id" placeholder="请输入账号">
  		 </div>
  	</div>
  	<div class="form-group">

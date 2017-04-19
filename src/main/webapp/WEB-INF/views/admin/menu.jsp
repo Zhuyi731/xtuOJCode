@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
   <body style="background-color:DCDCDC">
 	  <div class="head" align="center">
-	     	<p size="5px" color="0099CC">教师后台管理</p>
+	     	<p size="5px" color="0099CC">管理员后台管理</p>
 	  </div>
 
    <div class="menuBar"  style="padding-left:30px;" >
@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <tr><td id="menuTitle2"><button class="btn btn-primary btn-sm " onclick="showSubmenu(2)">前台管理</button>
      </td></tr></thead>
      <tbody id="subMenu2" style="display:none;">
-     <tr><td><a href="status/status">查看Status</a>
+     <tr><td><a href="status">查看Status</a>
      </td></tr>
      <tr><td><a href="news/showNews">查看公告</a>
      </td></tr>
