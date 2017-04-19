@@ -48,7 +48,7 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         //设置上传文件的临时目录为/tmp/uploads
         registration.setMultipartConfig(
-                new MultipartConfigElement("/tmp/uploads", 2097152, 4194304, 0));
+                new MultipartConfigElement("D:/Pictures/", 2097152, 4194304, 0));
     }
 
 
