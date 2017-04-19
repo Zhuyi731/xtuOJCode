@@ -1,49 +1,46 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
-<base  target="_top"  href="<%=basePath%>">
-    <title>Teacher</title>  
-	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+    <title>Navigation</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<base href="<%=basePath%>" target="_top">
 </head>
 <body>
-<div class="navbar navbar-default " role="navigation" style="margin-bottom:50;">
+
+<div class="navbar  navbar-default" role="navigation" style="margin-bottom:50px;background-color:#2c333d; ">
 	<div class="col-md-9" >
 	<div class="navbar-header">
-	<a href=<%=basePath+"index" %> class="navbar-brand">XTUOJ</a>
-	  　</div> 
-    <ul class="nav navbar-nav" style="font-size:18px;margin:20 auto;text-align:center;">
-        <li><a href="index">首页</a></li>
-      	<li><a href="problems">题库</a></li>
-      	<li><a href="ranklist">Ranklist</a></li>
-      	<li class="dropdown">
-          <a href="test/test" data-toggle="dropdown" class="dropdown-toggle">考试<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-        	<li><a href="test/createTest">参加考试</a></li>
-        	<li><a href="test/joinTest" >创建考试（仅老师）</a></li>
-          </ul>
-       </li>
-        
+	<a href="index" class="navbar-brand">XTUOJ</a>
+	  　</div>
+    <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
+        <li><a href="index" style="color:white; ">Home</a></li>
+      	<li><a href="problems" style="color:white;">Problem Set</a></li>
+      	<li><a href="ranklist" style="color:white;">Ranklist</a></li>
+        <li><a href="status" style="color:white;">Status</a></li>
+      	<li class="dropdown"><a href="test/test"style="color:white;">Contest</a></li>
+
     </ul>
-   </div> 
-    <div class="col-md-3" style="float:right:0px;top:0px;">
+   </div>
+    <div class="col-md-3" style="float:right;top:0px;">
      <c:if test="${student eq null}">
      <c:if test="${teachers eq null }">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"login"%> style="width:150px;float:right;">登录</a>
+     <a class="btn btn-primary btn-lg" href="login" style="width:150px;float:right;">Login</a>
      </c:if>
      <c:if test="${teachers ne null }">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"teacher/main"%>  style="width:150px;float:right;">${teachers.tID}</a></c:if>
+     <a class="btn btn-primary btn-lg" href="teacher/main"  style="width:150px;float:right;">${teachers.tID}</a></c:if>
      </c:if>
      <c:if test="${student ne null}">
-     <a class="btn btn-primary btn-lg" href=<%=basePath+"stuInfo"%>  style="width:150px;float:right;">${student.stuID}</a>
+     <a class="btn btn-primary btn-lg" href="student/main"  style="width:150px;float:right;">${student.stuID}</a>
      </c:if>
      </div>
    <!-- 搜索按钮 -->
@@ -56,7 +53,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <button type="submit" class="btn btn-default">搜索</button>
       -->
      </form>
-     </div>
+
+</div>
 </div>
 </body>
 </html>

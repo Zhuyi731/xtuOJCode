@@ -53,8 +53,8 @@
             </tr></tbody>
         </table>
     </div>
-    <div class="function">
-        <a class="btn btn-lg btn-primary " href="news/addNews" >创建新考试</a>
+    <div class="function pull-right">
+        <a class="btn btn-lg btn-primary " href="news/addNews" >添加公告</a>
         <a class="btn btn-lg btn-primary " href="deleteStuServlet">删除选中记录</a>
     </div>
     <script type="text/javascript">
