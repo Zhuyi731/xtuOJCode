@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
 
    <div class="menuBar"  style="padding-left:30px;" >
-    <table class="table table-hover table-border table-condensed" style="margin-bottom: -20px;" >
+    <table class="table table-hover table-border table-condensed"  >
      <thead >
       <tr>
      	<td id="menuTitle1"><button class="btn btn-primary btn-sm " onclick="showSubmenu(1)">个人信息管理</button><td>
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <tr><td><a href="logoutServlet">退出登录</a>
      	</td></tr></tbody></table>
      	
-     <table class="table table-hover table-border table-condensed" style="margin-bottom: -20px;">
+     <table class="table table-hover table-border table-condensed" >
      <thead>
      <tr><td id="menuTitle2"><button class="btn btn-primary btn-sm " onclick="showSubmenu(2)">前台管理</button>
      </td></tr></thead>
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tbody>
      </table>
     
-    <table class="table table-hover table-border table-condensed" style="margin-bottom: -20px;">
+    <table class="table table-hover table-border table-condensed" >
      <thead>
      <tr><td id="menuTitle3" ><button class="btn btn-primary btn-sm "  onclick="showSubmenu(3)">题库管理</button>
      </td></tr></thead>
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </table>
     
     
-    <table class="table table-hover table-border table-condensed" style="margin-bottom: -20px;">
+    <table class="table table-hover table-border table-condensed">
      <thead>
      <tr><td id="menuTitle4" ><button class="btn btn-primary btn-sm " onclick="showSubmenu(4)">比赛管理</button>
      </td></tr></thead>
@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </table>
     
     </div>
-      <script  language=javascript1.2>
+      <script >
           function showSubmenu(sid){
               var ss="subMenu"+sid;
               var whichEL=document.getElementById(ss);

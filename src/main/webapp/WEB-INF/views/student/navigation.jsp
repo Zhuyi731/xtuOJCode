@@ -1,5 +1,9 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +13,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<base href="<%=basePath%>" target="_top">
 </head>
 <body>
 <div class="navbar  navbar-default" role="navigation" style="margin-bottom:50px;background-color:#2c333d; ">
@@ -18,18 +22,18 @@
 	<a href="index" class="navbar-brand">XTUOJ</a>
 	  　</div>
     <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
-        <li><a href="index" style="color:white; ">首页</a></li>
-      	<li><a href="problems" style="color:white;">题库</a></li>
+        <li><a href="index" style="color:white; ">Home</a></li>
+      	<li><a href="problems" style="color:white;">Problem Set</a></li>
       	<li><a href="ranklist" style="color:white;">Ranklist</a></li>
         <li><a href="status" style="color:white;">Status</a></li>
-      	<li class="dropdown"><a href="test/test"style="color:white;">考试</a></li>
+      	<li class="dropdown"><a href="test/test"style="color:white;">Contest</a></li>
 
     </ul>
    </div>
     <div class="col-md-3" style="float:right;top:0px;">
      <c:if test="${student eq null}">
      <c:if test="${teachers eq null }">
-     <a class="btn btn-primary btn-lg" href="login" style="width:150px;float:right;">登录</a>
+     <a class="btn btn-primary btn-lg" href="login" style="width:150px;float:right;">Login</a>
      </c:if>
      <c:if test="${teachers ne null }">
      <a class="btn btn-primary btn-lg" href="teacher/main"  style="width:150px;float:right;">${teachers.tID}</a></c:if>

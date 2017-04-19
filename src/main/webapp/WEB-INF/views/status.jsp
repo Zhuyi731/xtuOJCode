@@ -9,7 +9,6 @@
 <html>
 <head>
     <title>Online Status</title>
-
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="type/css"/>
     <link href="/css/style.css" rel="stylesheet" />
@@ -27,10 +26,10 @@
             background-color: #4cae4c;
             color:white;
         }
-
     </style>
 </head>
 <body>
+  <%@ include file="/WEB-INF/views/navigation.jsp"%>
     <h1 >Online Status</h1>
     <div class="search" >
         <form role="form" method="get" action="statusSearch" class="form-horizontal" >
