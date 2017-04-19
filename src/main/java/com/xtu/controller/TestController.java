@@ -11,23 +11,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by Ilovezilian on 2017/4/18.
  */
 @Controller
+@RequestMapping(value = "/" + Pages.TEST)
 public class TestController {
 
     @RequestMapping(value = "/" + Pages.TEST, method = RequestMethod.GET)
     public String showTest() {
         OUT.prt("request", Pages.TEST);
         // TODO: 2017/4/18 select from db
-        return Pages.TEST;
+        return Pages.TEST + "/" + Pages.TEST;
     }
 
-    @RequestMapping(value = "/" + Pages.TEST + "/" + Pages.TOTAL_TEST, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.TOTAL_TEST, method = RequestMethod.GET)
     public String showTotalTest() {
         OUT.prt("request", Pages.TOTAL_TEST);
         // TODO: 2017/4/18 select from db
         return Pages.TEST + "/" + Pages.TOTAL_TEST;
     }
 
-    @RequestMapping(value = "/" + Pages.TEST + "/" + Pages.CREATE_TEST, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.CREATE_TEST, method = RequestMethod.GET)
     public String createTest(
 //            TODO: CreateEntity entity
             Model model) {
@@ -36,7 +37,7 @@ public class TestController {
         return Pages.TEST + "/" + Pages.CREATE_TEST;
     }
 
-    @RequestMapping(value = "/" + Pages.TEST + "/" + Pages.JOIN_TEST, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.JOIN_TEST, method = RequestMethod.GET)
     public String joinTest(
             // TODO: 2017/4/18 create entity
             Model model){

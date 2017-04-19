@@ -29,7 +29,8 @@ public class LoginController {
     public String login(Model model) {
         OUT.prt("login get", "");
         model.addAttribute(new UsersEntity());
-        return Pages.LOGIN;
+        String res = Pages.LOGIN;
+        return res;
     }
 
     @RequestMapping(value = {"/login", "/info"}, method = RequestMethod.POST)
@@ -37,33 +38,38 @@ public class LoginController {
             @NotNull @Valid UsersEntity usersEntiy,
             Errors errors,
             RedirectAttributes model) {
-        OUT.prt("info", usersEntiy);
+        OUT.prt("request", Pages.LOGIN + "," + Pages.INFO);
+        OUT.prt("userEntity", usersEntiy);
 
+        String res;
         if (errors.hasErrors()) {
-            return Pages.LOGIN;
+            res = Pages.LOGIN;
+            return res;
         }
 
         if (model.containsAttribute("usersEntity")) {
-            return Pages.INFO;
+            res = Pages.INFO;
+            return res;
         }
         // TODO: 2017/4/13 select form DB
-        if (null == usersEntiy) {
-            model.addAttribute("message", "wrong use id or password");
-            return Pages.LOGIN;
-        }
-        // TODO: 2017/4/13 add user infomation
-        usersEntiy.setRoleId(Constant.STUDENT);
+        UsersEntity usersEntiyDB = usersRepository.findOne(usersEntiy.getId());
 
-        int cont = usersRepository.count().intValue();
-        usersEntiy = usersRepository.findOne("2013551830");
-        model.addFlashAttribute("usersEntity from db", usersEntiy);
-        usersEntiy.setId("2013551830");
-        usersEntiy.setName("panshuai+" + cont);
-        usersEntiy.setUserId(cont);
-        OUT.prt("count", cont);
-        model.addFlashAttribute("usersEntity", usersEntiy);
-//        return getRoleType(usersEntiy.getRoleId()) + "/info";
-        return "redirect:/" + Pages.INFO;
+        if (null == usersEntiyDB) {
+            model.addAttribute("message", "wrong use id or password");
+            res = Pages.LOGIN;
+            return res;
+        }
+        if(!usersEntiy.getPassword().equals(usersEntiyDB.getPassword()))
+        {
+            model.addAttribute("message", "password error");
+            res = Pages.LOGIN;
+            return res;
+        }
+
+//        int cont = usersRepository.count().intValue();
+        model.addFlashAttribute("usersEntity from db", usersEntiyDB);
+        res = "redirect:/" + getRoleType(usersEntiyDB.getRoleId())+"/"+ Pages.MAIN_PAGE;
+        return res;
     }
 
     @RequestMapping(value = "info", method = RequestMethod.GET)
@@ -71,15 +77,19 @@ public class LoginController {
             @NotNull @Valid UsersEntity usersEntiy,
             Errors errors,
             Model model) {
+        String res;
         if (!model.containsAttribute("usersEntity")) {
-            return Pages.LOGIN;
+            res = Pages.LOGIN;
+        } else {
+            res = Pages.INFO;
         }
-        return Pages.INFO;
+        return res;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
-        return Pages.REGISTER;
+        String res = Pages.REGISTER;
+        return res;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -88,33 +98,36 @@ public class LoginController {
             Errors errors) {
         OUT.prt("register user", usersEntity);
         if (errors.hasErrors()) {
-            return Pages.REGISTER;
+            String res = Pages.REGISTER;
         }
 //        // TODO: 2017/4/12  save user profile to db
 //        usersRepository.save(usersEntity);
         usersEntity.setRoleId(Constant.STUDENT);
 
-        return "redirect:/" + getRoleType(usersEntity.getRoleId()) + "/" + Pages.INFO;
+        String res = "redirect:/" + getRoleType(usersEntity.getRoleId()) + "/" + Pages.INFO;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.FORGET_PASSWORD, method = RequestMethod.GET)
     public String forgetPassword() {
         OUT.prt("request", Pages.FORGET_PASSWORD);
-        return Pages.FORGET_PASSWORD;
+        String res = Pages.FORGET_PASSWORD;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.SUCCESS, method = RequestMethod.GET)
     public String showSuccess() {
         OUT.prt("request", Pages.SUCCESS);
-        return Pages.SUCCESS;
+        String res = Pages.SUCCESS;
+        return res;
     }
 
 
-    private String getRoleType(int role_id) {
+    private String getRoleType(int roleId) {
         String res;
-        if (role_id == Constant.ADMIN) {
+        if (roleId == Constant.ADMIN) {
             res = Pages.ADMIN;
-        } else if (role_id == Constant.TEACHER) {
+        } else if (roleId == Constant.TEACHER) {
             res = Pages.TEACHER;
         } else {
             res = Pages.STUDENT;
