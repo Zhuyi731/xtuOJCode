@@ -64,7 +64,7 @@ public class ProblemController {
 
         // TODO: 2017/4/20 ajust
         problemsRepository.save(problemsEntity);
-        String res = Pages.TEACHER + "/" + Pages.ADD_PROBLEM;
+        String res = Pages.PROBLEM + "/" + Pages.ADD_PROBLEM;
         return res;
     }
 
