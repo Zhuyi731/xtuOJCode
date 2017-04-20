@@ -22,7 +22,7 @@
                     <br>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Username</span>
-                        <input type="text" class="form-control" id="username"  name="username" placeholder="Enter your username">
+                        <input type="text" class="form-control" id="id"  name="id" placeholder="Enter your username">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Password</span>
@@ -33,11 +33,11 @@
                             <input type="checkbox" name="remember"> Remember me
                         </label>
                         <span class="pull-right">
-                            <a href="forgetPassword.jsp">Forget password ? </a>
+                            <a href="forgetPassword">Forget password ? </a>
                         </span>
                     </div>
 
-                    <a href="index.html" class="btn btn-primary ">Login Now</a>
+                    <input type="submit" class="btn btn-primary">Login Now</input>
                     <hr>
                     Not register ? <a href="register">click here </a>
                 </form>
