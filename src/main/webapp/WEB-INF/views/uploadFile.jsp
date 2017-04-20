@@ -61,7 +61,7 @@
     </div>
     <div>
         <label>profile zip</label>
-        <input id="zip" name="picture" type="file" accept="application/zip"/>
+        <input id="zip" name="zip" type="file" accept="application/zip"/>
         <input type="submit" value="上传"/>
     </div>
 </form>

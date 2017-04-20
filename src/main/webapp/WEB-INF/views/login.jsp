@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,11 +19,11 @@
                 <strong> Please Login First </strong>
             </div>
             <div class="panel-body">
-                <form role="form">
+                <sf:form commandName="usersEntity" role="form">
                     <br>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Username</span>
-                        <input type="text" class="form-control" id="username"  name="username" placeholder="Enter your username">
+                        <input type="text" class="form-control" id="id"  name="id" placeholder="Enter your username">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Password</span>
@@ -30,17 +31,18 @@
                     </div>
                     <div class="form-group">
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="remember"> Remember me
+                            <%--<input type="checkbox" name="remember"> Remember me--%>
                         </label>
                         <span class="pull-right">
                             <a href="forgetPassword.jsp">Forget password ? </a>
                         </span>
                     </div>
 
-                    <a href="index.html" class="btn btn-primary ">Login Now</a>
+                    <%--<a href="index.html" class="btn btn-primary ">Login Now</a>--%>
+                    <input type="submit" class="btn btn-primary"/>
                     <hr>
                     Not register ? <a href="register">click here </a>
-                </form>
+                </sf:form>
             </div>
 
         </div>
