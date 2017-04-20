@@ -40,8 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <span class="caret"></span>
        </button>
        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
-        <li role="presentation"><a href="/showStudent">查看自己所有学生</a></li>
-        <li role="presentation"><a href="/addStudent">添加学生</a></li>
+        <li role="presentation"><a href="common/showStudent">查看自己所有学生</a></li>
+        <li role="presentation"><a href="common/addStudent">添加学生</a></li>
        </ul>
       </div>
       <div class="dropdown" >

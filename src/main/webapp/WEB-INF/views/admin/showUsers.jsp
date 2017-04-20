@@ -21,6 +21,30 @@
     </style>
 </head>
 <body>
+<div class="searchDiv">
+    <form class="" method="get" role="form">
+        <div class="form-group">
+        <select name="roleID" class="col-md-2">
+            <option value="0">所有</option>
+            <option value="1">老师</option>
+            <option value="2">学生</option>
+        </select>
+        </div>
+        <div class="form-group">
+            <label role="label" class="control-label col-md-1" for="userId">学号:</label>
+            <div class="col-md-2">
+            <input type="text" name="userId" id="userId" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label role="label" class="control-label col-md-1" for="classId">班级:</label>
+            <div class="col-md-2">
+                <input type="text" name="classId" id="classId" class="form-control">
+            </div>
+        </div>
+    </form>
+
+</div>
 <div class="container">
     <table class="table table-hover table-bordered" >
         <thead>

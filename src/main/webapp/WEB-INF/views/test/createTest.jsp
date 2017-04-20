@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
       </div>
       <div class="item form-group">
-          <div class="col-md-6 col-sm-6 col-xs-12">
-          <input typ="submit" class="btn btn-primary" value="创建">
+          <div class="col-md-2 col-sm-2 col-xs-4" align="center">
+          <input type="submit" class="btn btn-primary btn-lg" value="创建">
           </div>
       </div>
   </form>
