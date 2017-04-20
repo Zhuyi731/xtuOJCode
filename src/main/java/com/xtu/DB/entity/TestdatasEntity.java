@@ -29,7 +29,7 @@ public class TestdatasEntity {
      */
     @Min(0)
     @Max(100)
-    private byte score = 0;
+    private byte score = 10;
     /**
      * 输入数据
      */

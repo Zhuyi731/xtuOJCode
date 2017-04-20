@@ -55,9 +55,55 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ProblemsEntity save(ProblemsEntity problemsEntity) {
-        return null;
+    public ProblemsEntity add(ProblemsEntity problemsEntity) {
+        String sql = "insert into " +
+                Tables.PROBLEMS +
+                "(`problem_id`, `title`, `status`" +
+                ",`validator_id`, `time_limit`, `memory_limit`" +
+                ", `author`, `source`, `owner`, `context`)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcOperations.update(sql,
+                problemsEntity.getProblemId(),
+                problemsEntity.getTitle(),
+                problemsEntity.getStatus(),
+                problemsEntity.getValidatorId(),
+                problemsEntity.getTimeLimit(),
+                problemsEntity.getMemoryLimit(),
+                problemsEntity.getAuthor(),
+                problemsEntity.getSource(),
+                problemsEntity.getOwner(),
+                problemsEntity.getContext());
+        return problemsEntity;
     }
+
+    @Override
+    public ProblemsEntity update(ProblemsEntity problemsEntity) {
+        String sql = "UPDATE " +
+                Tables.PROBLEMS +
+                " set `title` = ?," +
+                " `status` = ?," +
+                " `validator_id` = ?," +
+                " `time_limit` = ?," +
+                " `memory_limit` = ?," +
+                " `author` = ?," +
+                " `source` = ?," +
+                " `owner` = ?," +
+                " `context` = ?" +
+                " where problem_id = ?";
+        jdbcOperations.update(sql,
+                problemsEntity.getTitle(),
+                problemsEntity.getStatus(),
+                problemsEntity.getValidatorId(),
+                problemsEntity.getTimeLimit(),
+                problemsEntity.getMemoryLimit(),
+                problemsEntity.getAuthor(),
+                problemsEntity.getSource(),
+                problemsEntity.getOwner(),
+                problemsEntity.getContext(),
+                problemsEntity.getProblemId());
+        return problemsEntity;
+    }
+
 
     @Override
     public void delete(long id) {

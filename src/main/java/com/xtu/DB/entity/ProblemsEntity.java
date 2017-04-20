@@ -2,10 +2,7 @@ package com.xtu.DB.entity;
 
 import lombok.Data;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 /**
@@ -74,9 +71,11 @@ public class ProblemsEntity {
     /**
      * 建立时间
      */
+    @Null
     private Timestamp createTime;
     /**
      * 最后更新时间
      */
+    @Null
     private Timestamp lastUpdateTime;
 }

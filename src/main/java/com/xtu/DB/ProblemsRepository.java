@@ -16,7 +16,9 @@ public interface ProblemsRepository {
 
     List<ProblemsEntity> find(ProblemsDTO problemsDTO);
 
-    ProblemsEntity save(ProblemsEntity problemsEntity);
+    ProblemsEntity add(ProblemsEntity problemsEntity);
+
+    ProblemsEntity update(ProblemsEntity problemsEntity);
 
     void delete(long id);
 }

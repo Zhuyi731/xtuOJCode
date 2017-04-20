@@ -65,16 +65,16 @@ public class UsersRepositoryImp implements UsersRepository {
         } else {
             sql = "update " +
                     Tables.USERS +
-                    " set role_id = ? " +
-                    " nickname = ?" +
-                    " class_id = ?" +
-                    " password = ?" +
-                    " status = ?" +
-                    " email = ?" +
-                    " email_open = ?" +
-                    " QQ = ?" +
-                    " QQ_open = ?" +
-                    " phone = ?" +
+                    " set role_id = ?," +
+                    " nickname = ?," +
+                    " class_id = ?," +
+                    " password = ?," +
+                    " status = ?," +
+                    " email = ?," +
+                    " email_open = ?," +
+                    " QQ = ?," +
+                    " QQ_open = ?," +
+                    " phone = ?," +
                     " phone_open = ?" +
                     " where `id` = ?";
             jdbcOperations.update(sql,

@@ -8,7 +8,9 @@ import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,17 +57,63 @@ public class ProblemController {
         return res;
     }
 
+    @Transactional
     @RequestMapping(value = "/" + Pages.ADD_PROBLEM, method = RequestMethod.POST)
     public String addProblemPost(
-            @com.sun.istack.internal.NotNull @Valid ProblemsEntity problemsEntity,
-            Error error,
+            @RequestPart("uploadFile") MultipartFile uploadFile,
+            @NotNull @Valid ProblemsEntity problemsEntity,
+            Errors errors,
             Model model) {
         OUT.prt("post", Pages.ADD_PROBLEM);
+        if (errors.hasErrors()) {
+            String res = Pages.ERROR;
+            return res;
+        }
 
         // TODO: 2017/4/20 ajust
-        problemsRepository.save(problemsEntity);
+        problemsRepository.add(problemsEntity);
+        TestdatasEntity testdatasEntity = new TestdatasEntity();
+
+        testdatasEntity.setProblemId(problemsEntity.getProblemId());
+        testdatasEntity.setOwner(problemsEntity.getOwner());
+        addTestdatas(uploadFile, testdatasEntity);
+
         String res = Pages.PROBLEM + "/" + Pages.ADD_PROBLEM;
         return res;
+    }
+
+    private void addTestdatas(
+            @RequestPart("uploadFile") MultipartFile uploadFile,
+            TestdatasEntity testdatasEntity) {
+        try (InputStream is = uploadFile.getInputStream();
+             ZipInputStream zis = new ZipInputStream(is)) {
+            int size = 0;
+            short order = 1;
+            boolean mark = false;
+            for (ZipEntry ze = zis.getNextEntry(); null != ze; ze = zis.getNextEntry(), mark ^= mark, order++) {
+                OUT.prt("zip entry name", ze.getName());
+                if (ze.isDirectory()) {
+                    continue;
+                }
+                size = (int) ze.getSize();
+                byte[] tmpByte = new byte[size];
+                OUT.prt("size", size);
+                if (size < 0) {
+                    continue;
+                }
+                // TODO: 2017/4/20 add bufferReader
+                zis.read(tmpByte, 0, size);
+                if (mark) {
+                    testdatasEntity.setOutput(tmpByte);
+                    testdatasEntity.setNo(order);
+                    testdatasRepository.save(testdatasEntity);
+                } else {
+                    testdatasEntity.setInput(tmpByte);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping(value = "/" + Pages.PROBLEM_DETAIL + "/{id}", method = RequestMethod.GET)
@@ -94,9 +142,9 @@ public class ProblemController {
 
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.POST)
     public String managerProblemPost(
-            @com.sun.istack.internal.NotNull @Valid TestdatasEntity testdatasEntity,
+            @NotNull @Valid TestdatasEntity testdatasEntity,
             Error error,
-            @RequestPart("uploadFile") @com.sun.istack.internal.NotNull MultipartFile uploadFile,
+            @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
             Model model) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         int size = 0;
@@ -136,7 +184,7 @@ public class ProblemController {
 
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
-            @PathVariable("id") @javax.validation.constraints.NotNull int id,
+            @PathVariable("id") @NotNull int id,
             Model model) {
         OUT.prt("requst", Pages.SUBMIT);
         model.addAttribute("id", id);

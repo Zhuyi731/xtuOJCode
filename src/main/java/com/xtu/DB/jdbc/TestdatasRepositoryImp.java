@@ -87,9 +87,9 @@ public class TestdatasRepositoryImp implements TestdatasRepository {
         {
             sql = "update " +
                     Tables.TESTDATAS +
-                    " set `score` = ?" +
-                    " `input` = ?" +
-                    " `output` = ?" +
+                    " set `score` = ?," +
+                    " `input` = ?," +
+                    " `output` = ?," +
                     " `owner` = ?" +
                     " where `problem_id` = ?" +
                     " and `no` = ?";
