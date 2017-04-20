@@ -35,7 +35,7 @@ public class ProblemController {
     @Autowired
     TestdatasRepository testdatasRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX, method = RequestMethod.GET)
     public String showTotalProblems() {
         OUT.prt("request", Pages.PROBLEMS_INDEX);
         // TODO: 2017/4/17 select problems from db 

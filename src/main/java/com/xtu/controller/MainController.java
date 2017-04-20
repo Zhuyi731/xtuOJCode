@@ -26,11 +26,17 @@ public class MainController {
         return Pages.INDEX;
     }
 
-
     @RequestMapping(value = "/" + Pages.NAVIGATION)
     public String showNavigation() {
         OUT.prt("request:", Pages.NAVIGATION);
         String res = Pages.NAVIGATION;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.NAVIGATION_SECOND)
+    public String showNavigationSecond() {
+        OUT.prt("request:", Pages.NAVIGATION_SECOND);
+        String res = Pages.NAVIGATION_SECOND;
         return res;
     }
 
@@ -51,7 +57,6 @@ public class MainController {
         String res = Pages.STATUS;
         return res;
     }
-
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
     public String uploadsFiles(
