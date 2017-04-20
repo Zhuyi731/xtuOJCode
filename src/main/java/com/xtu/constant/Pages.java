@@ -9,6 +9,10 @@ public class Pages {
      */
     public static final String COPYRIGHT = "copyright";
     /**
+     * 错误页面
+     */
+    public static final String ERROR = "error";
+    /**
      * 404错误处理页面
      */
     public static final String NOT_FOUND_ERROR = "error404";
@@ -25,6 +29,10 @@ public class Pages {
      */
     public static final String FORGET_PASSWORD = "forgetPassword";
     /**
+     * 修改用户信息
+     */
+    public static final String MODIFY_USER_INFO = "modifyUserInfo";
+    /**
      * 主页
      */
     public static final String INDEX = "index";
@@ -37,6 +45,14 @@ public class Pages {
      */
     public static final String NAVIGATION = "navigation";
     /**
+     * 导航栏II
+     */
+    public static final String NAVIGATION_SECOND = "navigationSecond";
+    /**
+     * 题库目录
+     */
+    public static final String PROBLEM = "problem";
+    /**
      * 题库主页
      */
     public static final String PROBLEMS_INDEX = "problems";
@@ -44,6 +60,10 @@ public class Pages {
      * 题目详细信息
      */
     public static final String PROBLEM_DETAIL = "proDetail";
+    /**
+     * 添加题目数据
+     */
+    public static final String ADD_PROBLEM_FILE = "addProblemFile";
     /**
      * 做题排行榜界面
      */
@@ -147,4 +167,8 @@ public class Pages {
      * 查看公告
      */
     public static final String SHOW_NOTICE = "showNews";
+    /**
+     * 老师和管理员通用目录
+     */
+    public static final String COMMON = "common";
 }

@@ -20,11 +20,38 @@ import java.io.IOException;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/" + Pages.INDEX}, method = RequestMethod.GET)
     public String index() {
-        OUT.prt("request:", "index");
+        OUT.prt("request:", Pages.INDEX);
         return Pages.INDEX;
     }
+
+
+    @RequestMapping(value = "/" + Pages.NAVIGATION)
+    public String showNavigation() {
+        OUT.prt("request:", Pages.NAVIGATION);
+        String res = Pages.NAVIGATION;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.RANK_LIST, method = RequestMethod.GET)
+    public String showRankList() {
+        OUT.prt("request", Pages.RANK_LIST);
+        // TODO: 2017/4/17 add pagination
+        String res = Pages.RANK_LIST;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.STATUS, method = RequestMethod.GET)
+    public String showStatus(
+            Model model) {
+        OUT.prt("request", Pages.STATUS);
+        // TODO: 2017/4/17 add filter condition
+        // TODO: 2017/4/17 add pagination
+        String res = Pages.STATUS;
+        return res;
+    }
+
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
     public String uploadsFiles(
@@ -51,5 +78,18 @@ public class MainController {
         }
         model.addAttribute("usersEntity", new UsersEntity());
         return "uploadFile";
+    }
+
+    @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
+    public String managerProblem() {
+        OUT.prt("request", Pages.PROBLEM_MANAGER);
+        String res = Pages.TEACHER + "/" + Pages.PROBLEM_MANAGER;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.SHOW_TEST_PAGE, method = RequestMethod.GET)
+    public String showTest() {
+        String res = Pages.TEACHER + "/" + Pages.SHOW_TEST_PAGE;
+        return res;
     }
 }

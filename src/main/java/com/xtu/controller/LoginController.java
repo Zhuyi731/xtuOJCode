@@ -25,15 +25,15 @@ public class LoginController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.LOGIN, method = RequestMethod.GET)
     public String login(Model model) {
-        OUT.prt("login get", "");
+        OUT.prt("login get", Pages.LOGIN);
         model.addAttribute(new UsersEntity());
         String res = Pages.LOGIN;
         return res;
     }
 
-    @RequestMapping(value = {"/login", "/info"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/" + Pages.LOGIN, "/" + Pages.INFO}, method = RequestMethod.POST)
     public String loginPost(
             @NotNull @Valid UsersEntity usersEntiy,
             Errors errors,
@@ -59,8 +59,7 @@ public class LoginController {
             res = Pages.LOGIN;
             return res;
         }
-        if(!usersEntiy.getPassword().equals(usersEntiyDB.getPassword()))
-        {
+        if (!usersEntiy.getPassword().equals(usersEntiyDB.getPassword())) {
             model.addAttribute("message", "password error");
             res = Pages.LOGIN;
             return res;
@@ -68,15 +67,16 @@ public class LoginController {
 
 //        int cont = usersRepository.count().intValue();
         model.addFlashAttribute("usersEntity from db", usersEntiyDB);
-        res = "redirect:/" + getRoleType(usersEntiyDB.getRoleId())+"/"+ Pages.MAIN_PAGE;
+        res = "redirect:/" + getRoleType(usersEntiyDB.getRoleId()) + "/" + Pages.MAIN_PAGE;
         return res;
     }
 
-    @RequestMapping(value = "info", method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.INFO, method = RequestMethod.GET)
     public String showUsersInfo(
             @NotNull @Valid UsersEntity usersEntiy,
             Errors errors,
             Model model) {
+        OUT.prt("request", Pages.INFO);
         String res;
         if (!model.containsAttribute("usersEntity")) {
             res = Pages.LOGIN;
@@ -86,25 +86,29 @@ public class LoginController {
         return res;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.REGISTER, method = RequestMethod.GET)
     public String register() {
+        OUT.prt("request", Pages.REGISTER);
         String res = Pages.REGISTER;
         return res;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/" + Pages.REGISTER, method = RequestMethod.POST)
     public String processRegistration(
             @NotNull @Valid UsersEntity usersEntity,
             Errors errors) {
+        OUT.prt("request", Pages.REGISTER);
         OUT.prt("register user", usersEntity);
+        String res;
         if (errors.hasErrors()) {
-            String res = Pages.REGISTER;
+            res = Pages.REGISTER;
+            return res;
         }
 //        // TODO: 2017/4/12  save user profile to db
 //        usersRepository.save(usersEntity);
         usersEntity.setRoleId(Constant.STUDENT);
 
-        String res = "redirect:/" + getRoleType(usersEntity.getRoleId()) + "/" + Pages.INFO;
+        res = "redirect:/" + Pages.INFO;
         return res;
     }
 
@@ -115,13 +119,19 @@ public class LoginController {
         return res;
     }
 
-    @RequestMapping(value = "/" + Pages.SUCCESS, method = RequestMethod.GET)
-    public String showSuccess() {
-        OUT.prt("request", Pages.SUCCESS);
-        String res = Pages.SUCCESS;
+    @RequestMapping(value = "/" + Pages.MODIFY_PASSWORD, method = RequestMethod.GET)
+    public String modifyPassword() {
+        OUT.prt("request", Pages.MODIFY_PASSWORD);
+        String res = Pages.MODIFY_PASSWORD;
         return res;
     }
 
+    @RequestMapping(value = "/" + Pages.MODIFY_USER_INFO, method = RequestMethod.GET)
+    public String modifyUserInfo() {
+        OUT.prt("request", Pages.MODIFY_USER_INFO);
+        String res = Pages.MODIFY_USER_INFO;
+        return res;
+    }
 
     private String getRoleType(int roleId) {
         String res;

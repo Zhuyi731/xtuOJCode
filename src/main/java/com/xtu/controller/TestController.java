@@ -18,14 +18,16 @@ public class TestController {
     public String showTest() {
         OUT.prt("request", Pages.TEST);
         // TODO: 2017/4/18 select from db
-        return Pages.TEST + "/" + Pages.TEST;
+        String res = Pages.TEST + "/" + Pages.TEST;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.TOTAL_TEST, method = RequestMethod.GET)
     public String showTotalTest() {
         OUT.prt("request", Pages.TOTAL_TEST);
         // TODO: 2017/4/18 select from db
-        return Pages.TEST + "/" + Pages.TOTAL_TEST;
+        String res = Pages.TEST + "/" + Pages.TOTAL_TEST;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.CREATE_TEST, method = RequestMethod.GET)
@@ -34,7 +36,8 @@ public class TestController {
             Model model) {
         OUT.prt("post", Pages.CREATE_TEST);
         // TODO: 2017/4/18 insert into db
-        return Pages.TEST + "/" + Pages.CREATE_TEST;
+        String res = Pages.TEST + "/" + Pages.CREATE_TEST;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.JOIN_TEST, method = RequestMethod.GET)
@@ -43,6 +46,7 @@ public class TestController {
             Model model){
         OUT.prt("request", Pages.JOIN_TEST);
         // TODO: 2017/4/18 insert into db
-        return Pages.TEST + "/" + Pages.JOIN_TEST;
+        String res = Pages.TEST + "/" + Pages.JOIN_TEST;
+        return res;
     }
 }

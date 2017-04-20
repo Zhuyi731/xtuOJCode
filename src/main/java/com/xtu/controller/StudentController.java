@@ -16,31 +16,15 @@ public class StudentController {
     @RequestMapping(value = "/" + Pages.MAIN_PAGE, method = RequestMethod.GET)
     public String showMain() {
         OUT.prt("request", Pages.MAIN_PAGE);
-        return Pages.STUDENT + "/" + Pages.MAIN_PAGE;
-    }
-
-    @RequestMapping(value = "/" + Pages.NAVIGATION, method = RequestMethod.GET)
-    public String showNavigation(){
-        OUT.prt("request", Pages.NAVIGATION);
-        return Pages.STUDENT + "/" + Pages.NAVIGATION;
+        String res = Pages.STUDENT + "/" + Pages.MAIN_PAGE;
+        return res;
     }
 
     @RequestMapping(value = "/" + Pages.MENU, method = RequestMethod.GET)
     public String showMenu(){
         OUT.prt("request", Pages.MENU);
-        return Pages.STUDENT + "/" + Pages.MENU;
-    }
-
-    @RequestMapping(value = "/" + Pages.MODIFY_PASSWORD, method = RequestMethod.GET)
-    public String modifyPassword(){
-        OUT.prt("request", Pages.MODIFY_PASSWORD);
-        return Pages.MODIFY_PASSWORD;
-    }
-
-    @RequestMapping(value = "/" + Pages.STUDENT_INFO, method = RequestMethod.GET)
-    public String modifyInfo(){
-        OUT.prt("request", Pages.STUDENT_INFO);
-        return Pages.STUDENT + "/" + Pages.STUDENT_INFO;
+        String res = Pages.STUDENT + "/" + Pages.MENU;
+        return res;
     }
 
 }
