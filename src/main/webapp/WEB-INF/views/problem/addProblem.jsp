@@ -19,27 +19,10 @@
    </style>
 </head>
 <body>
-<div class="container" align="center">
-   <form role="form" class="form-horizontal" method="post"  >
-      <div class="form-group">
-         <label for="inputFile" class="control-label col-md-3 ">请选择标准输入文件</label>
-         <div class="col-md-2">
-         <input type="file" id="inputFile" >
-         </div>
-      </div>
-      <div class="form-group">
-         <label for="outputFile" class="control-label col-md-3 ">请选择标准输出文件</label>
-         <div class="col-md-2">
-         <input type="file" id="outputFile" >
-         </div>
-      </div>
-      <div class="form-group">
-         <input type="submit" class="btn btn-primary ">
-      </div>
-   </form>
+<div class="head">
+
 </div>
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-
 </html>

@@ -29,22 +29,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>
   <body style="background-color:DCDCDC">
-   <div class="menuBar"  style="padding-left:30px;" >
-    <table class="table table-hover table-border"  >
-     <thead >
-      <tr >
-     	<td id="menuTitle1" onclick="showSubmenu(1)"><span class="title">个人信息管理</span><td>
-     </tr>
-     </thead>
-     <tbody id="subMenu1" style="display:;">
-     <tr><td >
-     	<a href="student/modifyPassword">修改密码</a>
-     	</td></tr>
-     	<tr><td>
-     	<a href="student/stuInfo">修改个人信息</a>
-     	</td></tr>
-     </tbody></table>
-     	
-        </div>
-   </body>
+  <div class="head" align="center">
+      <p size="5px" class="text-muted">xxx同学，你好！</p>
+  </div>
+  <div class="dropdown" >
+      <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
+          个人信息管理
+          <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation"><a href="/modifyPassword">修改密码</a></li>
+          <li role="presentation"><a href="/userInfo">修改个人信息</a></li>
+      </ul>
+  </div>
+  <div >
+      <button class="btn btn-danger form-control" type="button">退出登录</button>
+  </div>
+  </body>
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </html>
