@@ -59,10 +59,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <span class="caret"></span>
        </button>
        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4" >
-        <li role="presentation"><a href="test/allTest">所有比赛</a></li>
-        <li role="presentation"><a href="test/createTest">创建比赛</a></li>
+        <li role="presentation"><a href="test/allTest" target="_top">所有比赛</a></li>
+        <li role="presentation"><a href="test/createTest" target="_top">创建比赛</a></li>
        </ul>
       </div>
+
+      <div class="dropdown" >
+          <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu5" data-toggle="dropdown">
+              用户管理
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5" >
+              <li role="presentation"><a href="admin/showUsers">用户列表</a></li>
+              <li role="presentation"><a href="admin/createNewUsers">添加用户</a></li>
+          </ul>
+      </div>
+
       <div class="dropdown">
        <a class="btn btn-danger form-control" type="button" href="#">退出登录</a>
       </div>

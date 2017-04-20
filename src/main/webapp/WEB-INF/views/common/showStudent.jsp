@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
 	<link rel="stylesheet" href="css/bootstrap.css">
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
     <style type="text/css">
     .container{

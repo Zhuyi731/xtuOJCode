@@ -62,7 +62,7 @@
     <p>
 </div>
 <div class="tail" align="center">
-    <a class="btn btn-info btn-lg " style="width:150px;" href="/submit/10001">Submit code</a>
+    <a class="btn btn-info btn-lg " style="width:150px;" href="problem/submit/10001">Submit code</a>
     <a class="btn btn-info btn-lg" style="width:150px; margin-left:40px;" href="/discuss/10001">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
