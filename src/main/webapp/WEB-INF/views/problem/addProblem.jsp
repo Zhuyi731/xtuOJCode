@@ -3,7 +3,6 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -34,8 +33,8 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">题目状态:
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12" id="status">
-            <input type="radio" name="status" class="form-control col-md-7 col-xs-12" value="0" checked="checked">0
-            <input type="radio" name="status" class="form-control col-md-7 col-xs-12" value="1">1
+            <input type="radio" name="status"  value="0" checked="checked">0
+            <input type="radio" name="status" class="col-md-offset-2" value="1">1
         </div>
     </div>
     <div class="form-group">
@@ -55,11 +54,11 @@
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="context">题目内容:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="context" name="context" class="form-control col-md-7 col-xs-12" cols="60" rows="8">
+            <textarea id="context" name="context" class="form-control col-md-7 col-xs-12" cols="60" rows="8"></textarea>
         </div>
     </div>
-    <div class="form-group">
-        <input type="submit" class="pull-right" value="下一步">
+    <div class="form-group" align="center">
+        <input type="submit" class="btn btn-lg btn-primary" value="确定">
     </div>
 </form>
 </body>

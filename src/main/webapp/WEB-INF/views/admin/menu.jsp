@@ -1,84 +1,91 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+<head>
     <base target="contentFrame" href="<%=basePath%>">
     <title>后台管理</title>
-	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
-   <link rel="stylesheet" href="css/style.min.css">
-	<style type="text/css">
-	div{
-	 margin-top:20px;
-    }
-	</style>
-	</head>
-  <body style="background-color:DCDCDC">
-	  <div class="head" align="center">
-	     	<p size="5px" class="text-muted">管理员后台管理</p>
-	  </div>
-      <div class="dropdown" >
-       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    <META content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style type="text/css">
+        div {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="background-color:DCDCDC">
+<div class="head" align="center">
+    <p size="5px" class="text-muted">管理员后台管理</p>
+</div>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu1"
+            data-toggle="dropdown">
         个人信息管理
         <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a href="/info">个人信息</a></li>
         <li role="presentation"><a href="/modifyPassword">修改密码</a></li>
-        </ul>
-      </div>
-      <div class="dropdown" >
-       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <li role="presentation"><a href="/modifyUserInfo">修改个人信息</a></li>
+    </ul>
+</div>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu2"
+            data-toggle="dropdown">
         前台管理
         <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
         <li role="presentation"><a href="/status">查看Status</a></li>
         <li role="presentation"><a href="news/showNews">查看公告</a></li>
         <li role="presentation"><a href="news/addNews">添加公告</a></li>
-       </ul>
-      </div>
-      <div class="dropdown" >
-       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu3" data-toggle="dropdown">
+    </ul>
+</div>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu3"
+            data-toggle="dropdown">
         题库管理
         <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3" >
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
         <li role="presentation"><a href="problem/proManager">查看题库</a></li>
         <li role="presentation"><a href="problem/addProblem">添加题目</a></li>
-       </ul>
-      </div>
+    </ul>
+</div>
 
-      <div class="dropdown" >
-       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu4" data-toggle="dropdown">
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu4"
+            data-toggle="dropdown">
         比赛管理
         <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4" >
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
         <li role="presentation"><a href="test/allTest" target="_top">所有比赛</a></li>
         <li role="presentation"><a href="test/createTest" target="_top">创建比赛</a></li>
-       </ul>
-      </div>
+    </ul>
+</div>
 
-      <div class="dropdown" >
-          <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu5" data-toggle="dropdown">
-              用户管理
-              <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5" >
-              <li role="presentation"><a href="admin/showUsers">用户列表</a></li>
-              <li role="presentation"><a href="admin/createNewUsers">添加用户</a></li>
-          </ul>
-      </div>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu5"
+            data-toggle="dropdown">
+        用户管理
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5">
+        <li role="presentation"><a href="admin/showUsers">用户列表</a></li>
+        <li role="presentation"><a href="admin/createNewUsers">添加用户</a></li>
+    </ul>
+</div>
 
-      <div class="dropdown">
-       <a class="btn btn-danger form-control" type="button" href="#">退出登录</a>
-      </div>
-      <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  </body>
+<div class="dropdown">
+    <a class="btn btn-danger form-control" type="button" href="#">退出登录</a>
+</div>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
 </html>

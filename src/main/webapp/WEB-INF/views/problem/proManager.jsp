@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	   <td>20/23</td>
   	   <td>86.96%</td>
   	   <td><a href="#">进入修改</a></td>
-	   <td><a href="addProblemFile">添加数据文件</a></td>
+	   <td><input type="file" name="uploadFile" >添加数据文件</a></td>
 	   <td><input type="checkbox" name="select"></td></tr>
   	   <tr><td>10002</td>
 		   <td>A+B 2</td>
@@ -52,14 +52,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <td>30/50</td>
 		   <td>60%</td>
 		   <td><a href="#">进入修改</a></td>
-		   <td><a href="addProblemFile">添加数据文件</a></td>
-		   <td><input></td>
+		   <td><input type="file" name="uploadFile">添加数据文件</td>
 		   <td><input type="checkbox" name="select"></td></tr>
   	   </tbody>
   	   </table>
   	   <div class="function">
-  	   <a class="btn btn-lg btn-primary " href="teacher/addProblem.jsp">添加题目</a>
-  	   <a class="btn btn-lg btn-primary " href="deleteProServlet">删除选中</a>
+  	   <a class="btn btn-lg btn-primary pull-right" href="problem/addProblem.jsp">添加题目</a>
   	   </div>
   	   </div>
   	   <script type="text/javascript">
