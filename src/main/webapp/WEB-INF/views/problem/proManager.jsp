@@ -28,10 +28,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	   <tr><td class="col-md-1">ID</td>
   	   <td class="col-md-1">Title</td>
   	   <td class="col-md-1">autority</td>
-  	   <td class="col-md-4">description</td>
+  	   <td class="col-md-2">description</td>
   	   <td class="col-md-1">accept/submit</td>
   	   <td class="col-md-1">ratio</td>
   	   <td class="col-md-2">点击进入修改</td>
+	   <td class="col-md-2">点击添加数据文件</td>
   	   <td class="col-md-1"><input type="checkbox" value="1" id="checkAll" onclick="checkAll()">全选</td>
   	   </tr></thead>
   	   <tbody>
@@ -42,7 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	   <td>20/23</td>
   	   <td>86.96%</td>
   	   <td><a href="#">进入修改</a></td>
-  	   <td><input type="checkbox" name="select"></td></tr>
+	   <td><a href="addProblemFile">添加数据文件</a></td>
+	   <td><input type="checkbox" name="select"></td></tr>
   	   <tr><td>10002</td>
   	   <td>A+B 2</td>
   	   <td>私有</td>
@@ -50,7 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	   <td>30/50</td>
   	   <td>60%</td>
   	   <td><a href="#">进入修改</a></td>
-  	   <td><input type="checkbox" name="select"></td></tr>
+	   <td><a href="addProblemFile">添加数据文件</a></td>
+	   <td><input type="checkbox" name="select"></td></tr>
   	   </tbody>
   	   </table>
   	   <div class="function">

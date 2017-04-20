@@ -34,12 +34,11 @@
                             <%--<input type="checkbox" name="remember"> Remember me--%>
                         </label>
                         <span class="pull-right">
-                            <a href="forgetPassword.jsp">Forget password ? </a>
+                            <a href="forgetPassword">Forget password ? </a>
                         </span>
                     </div>
 
-                    <%--<a href="index.html" class="btn btn-primary ">Login Now</a>--%>
-                    <input type="submit" class="btn btn-primary"/>
+                    <input type="submit" class="btn btn-primary">Login Now</input>
                     <hr>
                     Not register ? <a href="register">click here </a>
                 </sf:form>

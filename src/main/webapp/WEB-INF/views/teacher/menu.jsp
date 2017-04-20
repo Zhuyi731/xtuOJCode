@@ -22,76 +22,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
   <body style="background-color:DCDCDC">
 	  <div class="head" align="center">
-	     	<p size="5px" color="0099CC">教师后台管理</p>
+	     	<p size="5px" class="text-muted">教师后台管理</p>
 	  </div>
-
-   <div class="menuBar"  style="padding-left:30px;" >
-    <table class="table table-hover table-border table-condensed" >
-     <thead >
-      <tr>
-     	<td id="menuTitle1"><button class="btn btn-primary btn-sm col-md-2" onclick="showSubmenu(1)">个人信息管理</button><td>
-     </tr></thead>
-     <tbody id="subMenu1" style="display:none;">
-     <tr><td ><a href="teacher/modifyPassword">修改密码</a>
-     	</td></tr>
-     <tr><td ><a href="teacher/teacherInfo">修改个人信息</a>
-     </td></tr>
-     <tr><td><a href="logoutServlet">退出登录</a>
-     	</td></tr></tbody></table>
-     	
-     <table class="table table-hover table-border table-condensed" >
-     <thead>
-     <tr><td id="menuTitle2"><button class="btn btn-primary btn-sm col-md-2" onclick="showSubmenu(2)">学生管理</button>
-     </td></tr></thead>
-     <tbody id="subMenu2" style="display:none;">
-     <tr><td><a href="teacher/showStudent">查看学生列表</a>
-     </td></tr>
-     <tr><td><a href="teacher/showStudent">添加学生</a>
-     </td></tr>
-     </tbody>
-     </table>
-    
-    <table class="table table-hover table-border table-condensed" >
-     <thead>
-     <tr><td id="menuTitle3" ><button class="btn btn-primary btn-sm "  onclick="showSubmenu(3)">题库管理</button>
-     </td></tr></thead>
-     <tbody id="subMenu3" style="display:none;">
-     <tr><td><a href="teacher/proManager">查看自己所有题库</a>
-     </td></tr>
-     <tr><td><a href="teacher/addProblem">添加题目</a>
-     </td></tr>
-     </tbody>
-     </table>
-    
-    
-    <table class="table table-hover table-border table-condensed" >
-     <thead>
-     <tr><td id="menuTitle4" ><button class="btn btn-primary btn-sm " onclick="showSubmenu(4)">考试管理</button>
-     </td></tr></thead>
-     <tbody id="subMenu4" style="display:none;">
-     <tr><td><a href="teacher/showTest">查看所有考试</a>
-     </td></tr>
-     <tr><td><a href="/test/createTest" target="_top">创建考试</a>
-     </td></tr>
-     <tr><td><a href="/test/pastTest" target="_top">过往考试</a>
-     </td></tr>
-     <tr><td><a href="/test/joinTest" target="_top">正在进行</a>
-     </td></tr>
-     </tbody>
-     </table>
-    
-    </div>
-      <script  language=javascript1.2>
-          function showSubmenu(sid){
-              var ss="subMenu"+sid;
-              var whichEL=document.getElementById(ss);
-              if(whichEL.style.display=="none"){
-                  eval("subMenu" + sid + ".style.display=\"inline\";")
-              }else{
-                  eval("subMenu"+ sid + ".style.display=\"none\";")
-              }
-          }
-      </script>
-
+      <div class="dropdown" >
+       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
+        个人信息管理
+        <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a href="/modifyPassword">修改密码</a></li>
+        <li role="presentation"><a href="/userInfo">修改个人信息</a></li>
+        </ul>
+      </div>
+      <div class="dropdown" >
+       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu2" data-toggle="dropdown">
+        学生管理
+        <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
+        <li role="presentation"><a href="/showStudent">查看自己所有学生</a></li>
+        <li role="presentation"><a href="/addStudent">添加学生</a></li>
+       </ul>
+      </div>
+      <div class="dropdown" >
+       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu3" data-toggle="dropdown">
+        题库管理
+        <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3" >
+        <li role="presentation"><a href="problem/proManager">查看题库</a></li>
+        <li role="presentation"><a href="problem/addProblem">添加题目</a></li>
+       </ul>
+      </div>
+      <div class="dropdown" >
+       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu4" data-toggle="dropdown">
+        比赛管理
+        <span class="caret"></span>
+       </button>
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4" >
+        <li role="presentation"><a href="test/allTest">所有比赛</a></li>
+        <li role="presentation"><a href="test/createTest">创建比赛</a></li>
+       </ul>
+      </div>
+      <div >
+       <button class="btn btn-danger form-control" type="button">退出登录</button>
+      </div>
   </body>
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </html>

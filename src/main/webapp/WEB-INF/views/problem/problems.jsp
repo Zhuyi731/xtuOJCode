@@ -7,14 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <title>题库</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
-	  <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link href="/css/style.css" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+  	<link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<link href="/css/style.css" rel="stylesheet" />
   </head>
   <body>
 	<%@ include file="/WEB-INF/views/navigation.jsp"%>
-	
 	<div class="container" width="60%" style="margin:50px">
 		<div class="page">
 		<ul class="pager" style="padding: 0px 150px">
@@ -34,15 +33,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</thead>
 			<tbody>
 			  <tr>
-			    <th><a href="proDetail/10001">10001</a></th>
-			    <th><a  href="proDetail/10001">A+B</a></th>
+			    <th><a href="proDetail?pid=10001">10001</a></th>
+			    <th><a  href="proDetail?pid=10001">A+B</a></th>
 			    <th>9/11</th>
 			    <th>81.82%</th>
 			</tbody>
 		</table>
 		</div>
 	</div>
-	
+
     <%@ include file="/WEB-INF/views/copyright.html" %>
   </body>
 </html>

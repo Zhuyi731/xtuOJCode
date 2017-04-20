@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/style.css">
   </head>
    <frameset rows="15%,*" cols="*" frameborder="0">
-   <frame src="/student/navigation" name="topFrame" scrolling="no" marginheight="0" noresize frameborder="0">
+   <frame src="navigationSecond" name="topFrame" scrolling="no" marginheight="0" noresize frameborder="0">
    <frameset cols="13%,*" rows="*" >
    <frame src="/student/menu"  name="menuFrame" frameborder="0"  bordercolor="#006699" scrolling="auto">
    <frame src="/info"  name="contentFrame"  scrolling="auto" frameborder="1" bordercolor="#006699">
