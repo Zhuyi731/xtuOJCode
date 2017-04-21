@@ -47,8 +47,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     public ProblemsEntity findOne(int problemId) {
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
-                " WHERE problem_id = ? " +
-                " Limit ?,?";
+                " WHERE problem_id = ? ";
         return jdbcOperations.queryForObject(
                 finduserSql,
                 new ProblemsEntityRowMapper(),
