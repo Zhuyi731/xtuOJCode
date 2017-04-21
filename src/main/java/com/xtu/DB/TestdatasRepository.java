@@ -16,7 +16,13 @@ public interface TestdatasRepository {
 
     TestdatasEntity findOne(int problemId, short no);
 
+    TestdatasEntity queryOne(int problemId, short no);
+
     List<TestdatasEntity> find(ProblemsDTO problemsDTO);
+
+    TestdatasEntity inset(TestdatasEntity testdatasEntity);
+
+    TestdatasEntity update(TestdatasEntity testdatasEntity);
 
     TestdatasEntity save(TestdatasEntity testdatasEntity);
 

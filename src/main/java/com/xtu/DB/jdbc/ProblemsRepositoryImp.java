@@ -31,20 +31,9 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ProblemsEntity findOne(String problemId) {
-        String finduserSql = "SELECT * FROM " + Tables.PROBLEMS
-                + " WHERE problem_id = ?";
-        return jdbcOperations.queryForObject(
-                finduserSql,
-                new ProblemsEntityRowMapper(),
-                problemId);
-    }
-
-    @Override
-    public List<ProblemsEntity> find(ProblemsDTO problemsDTO) {
-        String finduserSql = "SELECT * FROM "
-                + Tables.PROBLEMS +
-//                + " WHERE problem_id = ? " +
+    public List<ProblemsEntity> queryPage(ProblemsDTO problemsDTO) {
+        String finduserSql = "SELECT * FROM " +
+                Tables.PROBLEMS +
                 " Limit ?,?";
         return jdbcOperations.query(
                 finduserSql,
@@ -55,7 +44,34 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ProblemsEntity add(ProblemsEntity problemsEntity) {
+    public ProblemsEntity findOne(int problemId) {
+        String finduserSql = "SELECT * FROM " +
+                Tables.PROBLEMS +
+                " WHERE problem_id = ? " +
+                " Limit ?,?";
+        return jdbcOperations.queryForObject(
+                finduserSql,
+                new ProblemsEntityRowMapper(),
+                problemId);
+    }
+
+    @Override
+    public ProblemsEntity queryOne(int problem_id) {
+        String finduserSql = "SELECT * FROM " +
+                Tables.PROBLEMS +
+                " WHERE problem_id = ? ";
+        List<ProblemsEntity> problemsEntityList = jdbcOperations.query(
+                finduserSql,
+                new ProblemsEntityRowMapper(),
+                problem_id);
+        if (null == problemsEntityList || problemsEntityList.size() == 0) {
+            return null;
+        }
+        return problemsEntityList.get(0);
+    }
+
+    @Override
+    public ProblemsEntity insert(ProblemsEntity problemsEntity) {
         String sql = "insert into " +
                 Tables.PROBLEMS +
                 "(`problem_id`, `title`, `status`" +
@@ -101,6 +117,17 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 problemsEntity.getOwner(),
                 problemsEntity.getContext(),
                 problemsEntity.getProblemId());
+        return problemsEntity;
+    }
+
+    @Override
+    public ProblemsEntity save(ProblemsEntity problemsEntity) {
+        ProblemsEntity entity = queryOne(problemsEntity.getProblemId());
+        if (null == entity) {
+            insert(problemsEntity);
+        } else {
+            update(problemsEntity);
+        }
         return problemsEntity;
     }
 

@@ -45,11 +45,28 @@ public class TestdatasRepositoryImp implements TestdatasRepository {
         String finduserSql = "SELECT * FROM " + Tables.TESTDATAS
                 + " WHERE problem_id = ?" +
                 " and no = ?";
-        return jdbcOperations.queryForObject(
+
+        TestdatasEntity entity = jdbcOperations.queryForObject(
                 finduserSql,
                 new ProblemSetsEntityRowMapper(),
                 problemId,
                 no);
+        return entity;
+    }
+
+    @Override
+    public TestdatasEntity queryOne(int problemId, short no) {
+        String finduserSql = "SELECT * FROM " + Tables.TESTDATAS
+                + " WHERE problem_id = ?" +
+                " and no = ?";
+        List<TestdatasEntity> testdatasEntityList = jdbcOperations.query(finduserSql,
+                new ProblemSetsEntityRowMapper(),
+                problemId,
+                no);
+        if (null == testdatasEntityList || 0 == testdatasEntityList.size()) {
+            return null;
+        }
+        return testdatasEntityList.get(0);
     }
 
     @Override
@@ -67,39 +84,48 @@ public class TestdatasRepositoryImp implements TestdatasRepository {
     }
 
     @Override
+    public TestdatasEntity inset(TestdatasEntity testdatasEntity) {
+        String sql = "insert into " +
+                Tables.TESTDATAS +
+                "(`problem_id`, `no`, `score`, `input`, `output`,`owner`)" +
+                " values(?, ?, ?, ?, ?, ?)";
+        jdbcOperations.update(sql,
+                testdatasEntity.getProblemId(),
+                testdatasEntity.getNo(),
+                testdatasEntity.getScore(),
+                testdatasEntity.getInput(),
+                testdatasEntity.getOutput(),
+                testdatasEntity.getOwner());
+        return testdatasEntity;
+    }
+
+    @Override
+    public TestdatasEntity update(TestdatasEntity testdatasEntity) {
+        String sql = "update " +
+                Tables.TESTDATAS +
+                " set `score` = ?," +
+                " `input` = ?," +
+                " `output` = ?," +
+                " `owner` = ?" +
+                " where `problem_id` = ?" +
+                " and `no` = ?";
+        jdbcOperations.update(sql,
+                testdatasEntity.getScore(),
+                testdatasEntity.getInput(),
+                testdatasEntity.getOutput(),
+                testdatasEntity.getOwner(),
+                testdatasEntity.getProblemId(),
+                testdatasEntity.getNo());
+        return testdatasEntity;
+    }
+
+    @Override
     public TestdatasEntity save(TestdatasEntity testdatasEntity) {
-        TestdatasEntity entity = findOne(testdatasEntity.getProblemId(), testdatasEntity.getNo());
-        String sql = null;
+        TestdatasEntity entity = queryOne(testdatasEntity.getProblemId(), testdatasEntity.getNo());
         if (null == entity) {
-            sql = "insert into " +
-                    Tables.TESTDATAS +
-                    "(`problem_id`, `no`, `score`, `input`, `output`,`owner`)" +
-                    " values(?, ?, ?, ?, ?, ?)";
-            jdbcOperations.update(sql,
-                    testdatasEntity.getProblemId(),
-                    testdatasEntity.getNo(),
-                    testdatasEntity.getScore(),
-                    testdatasEntity.getInput(),
-                    testdatasEntity.getOutput(),
-                    testdatasEntity.getOwner());
-        }
-        else
-        {
-            sql = "update " +
-                    Tables.TESTDATAS +
-                    " set `score` = ?," +
-                    " `input` = ?," +
-                    " `output` = ?," +
-                    " `owner` = ?" +
-                    " where `problem_id` = ?" +
-                    " and `no` = ?";
-            jdbcOperations.update(sql,
-                    testdatasEntity.getScore(),
-                    testdatasEntity.getInput(),
-                    testdatasEntity.getOutput(),
-                    testdatasEntity.getOwner(),
-                    testdatasEntity.getProblemId(),
-                    testdatasEntity.getNo());
+           inset(testdatasEntity);
+        } else {
+            update(testdatasEntity);
         }
         return testdatasEntity;
     }

@@ -2,6 +2,7 @@ package com.xtu.controller;
 
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.TestdatasRepository;
+import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
 import com.xtu.constant.Pages;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -57,10 +59,19 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 添加题目
+     *
+     * @param uploadFile
+     * @param problemsEntity
+     * @param errors
+     * @param model
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/" + Pages.ADD_PROBLEM, method = RequestMethod.POST)
     public String addProblemPost(
-            @RequestPart("uploadFile") MultipartFile uploadFile,
+            @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
             @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
             Model model) {
@@ -71,7 +82,7 @@ public class ProblemController {
         }
 
         // TODO: 2017/4/20 ajust
-        problemsRepository.add(problemsEntity);
+        problemsRepository.save(problemsEntity);
         TestdatasEntity testdatasEntity = new TestdatasEntity();
 
         testdatasEntity.setProblemId(problemsEntity.getProblemId());
@@ -82,6 +93,50 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 修改题目
+     * @param id
+     * @param uploadFile
+     * @param problemsEntity
+     * @param errors
+     * @param model
+     * @return
+     */
+    @Transactional
+    @RequestMapping(value = "/" + Pages.MODIFY_PROBLEM + "/{id}", method = RequestMethod.POST)
+    public String modifyProblemPost(
+            @PathVariable("id") int id,
+            @RequestPart("uploadFile") MultipartFile uploadFile,
+            @NotNull @Valid ProblemsEntity problemsEntity,
+            Errors errors,
+            RedirectAttributes model) {
+        OUT.prt("post", Pages.ADD_PROBLEM);
+        if (errors.hasErrors()) {
+            String res = Pages.ERROR;
+            return res;
+        }
+
+        problemsRepository.save(problemsEntity);
+        if (null != uploadFile|| !uploadFile.isEmpty()) {
+            TestdatasEntity testdatasEntity = new TestdatasEntity();
+
+            testdatasEntity.setProblemId(problemsEntity.getProblemId());
+            testdatasEntity.setOwner(problemsEntity.getOwner());
+            addTestdatas(uploadFile, testdatasEntity);
+        }
+
+        ProblemsEntity entity = problemsRepository.findOne(problemsEntity.getProblemId());
+        model.addFlashAttribute("entity", entity);
+        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL + "/{id}";
+        return res;
+    }
+
+    /**
+     * 将上传的zip解压并且添加到testdatas数据库里面
+     *
+     * @param uploadFile
+     * @param testdatasEntity
+     */
     private void addTestdatas(
             @RequestPart("uploadFile") MultipartFile uploadFile,
             TestdatasEntity testdatasEntity) {
@@ -90,7 +145,7 @@ public class ProblemController {
             int size = 0;
             short order = 1;
             boolean mark = false;
-            for (ZipEntry ze = zis.getNextEntry(); null != ze; ze = zis.getNextEntry(), mark ^= mark, order++) {
+            for (ZipEntry ze = zis.getNextEntry(); null != ze; ze = zis.getNextEntry(), mark = !mark) {
                 OUT.prt("zip entry name", ze.getName());
                 if (ze.isDirectory()) {
                     continue;
@@ -103,9 +158,10 @@ public class ProblemController {
                 }
                 // TODO: 2017/4/20 add bufferReader
                 zis.read(tmpByte, 0, size);
+                OUT.prt(ze.getName(), new String(tmpByte));
                 if (mark) {
                     testdatasEntity.setOutput(tmpByte);
-                    testdatasEntity.setNo(order);
+                    testdatasEntity.setNo(order++);
                     testdatasRepository.save(testdatasEntity);
                 } else {
                     testdatasEntity.setInput(tmpByte);
@@ -116,26 +172,29 @@ public class ProblemController {
         }
     }
 
-    @RequestMapping(value = "/" + Pages.PROBLEM_DETAIL + "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = {"/" + Pages.PROBLEM_DETAIL + "/{id}", "/" + Pages.MODIFY_PROBLEM + "/{id}",}, method = RequestMethod.GET)
     public String showProblemDetails(
-            @PathVariable("id") @Min(1) @NotNull int id,
+            @PathVariable("id") int id,
             Model model) {
-        OUT.prt("request", Pages.PROBLEM_DETAIL);
-        OUT.prt("id", id);
-        OUT.prt("model", model);
-        model.addAttribute("id", id);
+        OUT.prt("request", Pages.PROBLEM_DETAIL + Pages.MODIFY_PROBLEM );
 
         // TODO: 2017/4/17 select from db
+        ProblemsEntity entity = problemsRepository.findOne(id);
+        model.addAttribute("entity", entity);
+
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL;
         return res;
     }
 
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
-    public String problemManage() {
+    public String problemManage(
+            ProblemsDTO problemsDTO,
+            Model model) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         // TODO: 2017/4/17 select problems from db
         // TODO: 2017/4/17 add pagination
-
+        List<ProblemsEntity> entityList = problemsRepository.queryPage(problemsDTO);
+        model.addAttribute("entityList", entityList);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
         return res;
     }

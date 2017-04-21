@@ -12,13 +12,17 @@ import java.util.List;
 public interface ProblemsRepository {
     Long count();
 
-    ProblemsEntity findOne(String problemId);
+    List<ProblemsEntity> queryPage(ProblemsDTO problemsDTO);
 
-    List<ProblemsEntity> find(ProblemsDTO problemsDTO);
+    ProblemsEntity findOne(int problemId);
 
-    ProblemsEntity add(ProblemsEntity problemsEntity);
+    ProblemsEntity queryOne(int problem_id);
+
+    ProblemsEntity insert(ProblemsEntity problemsEntity);
 
     ProblemsEntity update(ProblemsEntity problemsEntity);
+
+    ProblemsEntity save(ProblemsEntity problemsEntity);
 
     void delete(long id);
 }

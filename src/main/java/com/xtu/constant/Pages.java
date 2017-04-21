@@ -61,10 +61,6 @@ public class Pages {
      */
     public static final String PROBLEM_DETAIL = "proDetail";
     /**
-     * 添加题目数据
-     */
-    public static final String ADD_PROBLEM_FILE = "addProblemFile";
-    /**
      * 做题排行榜界面
      */
     public static final String RANK_LIST = "ranklist";
@@ -118,6 +114,10 @@ public class Pages {
      * 添加题目
      */
     public static final String ADD_PROBLEM = "addProblem";
+    /**
+     * 修改题目
+     */
+    public static final String MODIFY_PROBLEM = "modifyProblem";
     /**
      * 题目管理
      */
