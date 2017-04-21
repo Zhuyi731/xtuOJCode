@@ -3,7 +3,6 @@ package com.xtu.controller;
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.dto.ProblemsDTO;
-import com.xtu.DB.dto.ProblemsEntityDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
 import com.xtu.constant.Pages;
@@ -64,7 +63,7 @@ public class ProblemController {
      * 添加题目
      *
      * @param uploadFile
-     * @param problemsEntityDTO
+     * @param problemsEntity
      * @param errors
      * @param model
      * @return
@@ -73,7 +72,7 @@ public class ProblemController {
     @RequestMapping(value = "/" + Pages.ADD_PROBLEM, method = RequestMethod.POST)
     public String addProblemPost(
             @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
-            @NotNull @Valid ProblemsEntityDTO problemsEntityDTO,
+            @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
             Model model) {
         OUT.prt("post", Pages.ADD_PROBLEM);
@@ -82,17 +81,17 @@ public class ProblemController {
             return res;
         }
 
-        String context = problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes();
-        problemsEntityDTO.setContext(context);
-        problemsRepository.save(problemsEntityDTO);
+        String context = problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getInputDes();
+        problemsEntity.setContext(context);
+        problemsRepository.save(problemsEntity);
         TestdatasEntity testdatasEntity = new TestdatasEntity();
 
-        testdatasEntity.setProblemId(problemsEntityDTO.getProblemId());
-        testdatasEntity.setOwner(problemsEntityDTO.getOwner());
+        testdatasEntity.setProblemId(problemsEntity.getProblemId());
+        testdatasEntity.setOwner(problemsEntity.getOwner());
         addTestdatas(uploadFile, testdatasEntity);
 
         String res = Pages.PROBLEM + "/" + Pages.ADD_PROBLEM;
@@ -104,7 +103,7 @@ public class ProblemController {
      *
      * @param id
      * @param uploadFile
-     * @param problemsEntityDTO
+     * @param problemsEntity
      * @param errors
      * @param model
      * @return
@@ -114,7 +113,7 @@ public class ProblemController {
     public String modifyProblemPost(
             @PathVariable("id") int id,
             @RequestPart("uploadFile") MultipartFile uploadFile,
-            @NotNull @Valid ProblemsEntityDTO problemsEntityDTO,
+            @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
             RedirectAttributes model) {
         OUT.prt("post", Pages.ADD_PROBLEM);
@@ -123,22 +122,22 @@ public class ProblemController {
             return res;
         }
 
-        String context = problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntityDTO.getInputDes();
-        problemsEntityDTO.setContext(context);
-        problemsRepository.save(problemsEntityDTO);
+        String context = problemsEntity.getProblemDes() + "{{{(>_<)}}}" +
+                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getOutputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getSampleInput() + "{{{(>_<)}}}" +
+                problemsEntity.getSampleOutput();
+        problemsEntity.setContext(context);
+        problemsRepository.save(problemsEntity);
         if (null != uploadFile || !uploadFile.isEmpty()) {
             TestdatasEntity testdatasEntity = new TestdatasEntity();
 
-            testdatasEntity.setProblemId(problemsEntityDTO.getProblemId());
-            testdatasEntity.setOwner(problemsEntityDTO.getOwner());
+            testdatasEntity.setProblemId(problemsEntity.getProblemId());
+            testdatasEntity.setOwner(problemsEntity.getOwner());
             addTestdatas(uploadFile, testdatasEntity);
         }
 
-        ProblemsEntity entity = problemsRepository.findOne(problemsEntityDTO.getProblemId());
+        ProblemsEntity entity = problemsRepository.findOne(problemsEntity.getProblemId());
         model.addFlashAttribute("entity", entity);
         String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL + "/{id}";
         return res;
@@ -192,8 +191,14 @@ public class ProblemController {
         OUT.prt("request", Pages.PROBLEM_DETAIL);
 
         ProblemsEntity entity = problemsRepository.findOne(id);
+        String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
+        entity.setProblemDes(contexts[0]);
+        entity.setInputDes(contexts[1]);
+        entity.setOutputDes(contexts[2]);
+        entity.setSampleInput(contexts[3]);
+        entity.setSampleOutput(contexts[4]);
         model.addAttribute("entity", entity);
-
+        OUT.prt("entity", entity);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL;
         return res;
     }
@@ -205,9 +210,14 @@ public class ProblemController {
         OUT.prt("request", Pages.MODIFY_PROBLEM);
 
         ProblemsEntity entity = problemsRepository.findOne(id);
-//        ProblemsEntityDTO entity = (ProblemsEntityDTO) problemsRepository.findOne(id);
+        String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
+        entity.setProblemDes(contexts[0]);
+        entity.setInputDes(contexts[1]);
+        entity.setOutputDes(contexts[2]);
+        entity.setSampleInput(contexts[3]);
+        entity.setSampleOutput(contexts[4]);
         model.addAttribute("entity", entity);
-
+        OUT.prt("entity", entity);
         String res = Pages.PROBLEM + "/" + Pages.MODIFY_PROBLEM;
         return res;
     }

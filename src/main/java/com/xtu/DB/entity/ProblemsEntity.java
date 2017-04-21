@@ -78,4 +78,27 @@ public class ProblemsEntity {
      */
     @Null
     private Timestamp lastUpdateTime;
+    /**
+     * 题目描述
+     */
+    @NotNull
+    private String problemDes;
+    /**
+     * 输入描述
+     */
+    @NotNull
+    private String inputDes;
+    /**
+     * 输出描述
+     */
+    @NotNull
+    private String outputDes;
+    /**
+     * 输入样例
+     */
+    private String sampleInput;
+    /**
+     * 输出样例
+     */
+    private String sampleOutput;
 }
