@@ -17,13 +17,13 @@
     <div class="col-md-3" style="float:right;top:0px;">
      <c:if test="${student eq null}">
      <c:if test="${teachers eq null }">
-     <a class="btn btn-primary btn-lg" href="login" style="width:150px;float:right;">Login</a>
+     <a class="btn btn-primary btn-lg" href="/login" style="width:150px;float:right;">Login</a>
      </c:if>
      <c:if test="${teachers ne null }">
-     <a class="btn btn-primary btn-lg" href="teacher/main"  style="width:150px;float:right;">${teachers.tID}</a></c:if>
+     <a class="btn btn-primary btn-lg" href="/teacher/main"  style="width:150px;float:right;">${teachers.tID}</a></c:if>
      </c:if>
      <c:if test="${student ne null}">
-     <a class="btn btn-primary btn-lg" href="student/main"  style="width:150px;float:right;">${student.stuID}</a>
+     <a class="btn btn-primary btn-lg" href="/student/main"  style="width:150px;float:right;">${student.stuID}</a>
      </c:if>
      </div>
    <!-- 搜索按钮 -->

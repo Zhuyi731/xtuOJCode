@@ -63,31 +63,31 @@
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="problemDes">题目描述:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="problemDes" name="problemDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4"></textarea>
+            <textarea id="problemDes" name="problemDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4">${entity.problemDes}</textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inputDes">输入描述:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="inputDes" name="inputDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4"></textarea>
+            <textarea id="inputDes" name="inputDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4">${entity.inputDes}</textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="outputDes">输出描述:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="outputDes" name="outputDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4"></textarea>
+            <textarea id="outputDes" name="outputDes" class="context form-control col-md-7 col-xs-12" cols="60" rows="4">${entity.outputDes}</textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sampleInput">Sample Input:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="sampleInput" name="sampleInput" class="context form-control col-md-7 col-xs-12" cols="60" rows="4"></textarea>
+            <textarea id="sampleInput" name="sampleInput" class="context form-control col-md-7 col-xs-12" cols="60" rows="4">${entity.sampleInput}</textarea>
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sampleOutput">Sample Output:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea id="sampleOutput" name="sampleOutput" class="context form-control col-md-7 col-xs-12" cols="60" rows="4"></textarea>
+            <textarea id="sampleOutput" name="sampleOutput" class="context form-control col-md-7 col-xs-12" cols="60" rows="4">${entity.sampleOutput}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -100,15 +100,15 @@
         <input type="submit" class="btn btn-lg btn-primary" value="确定">
     </div>
 </form>
-<script language="JavaScript">
-    var context="1{{{(>_<)}}}2{{{(>_<)}}}3{{{(>_<)}}}4{{{(>_<)}}}5";
-    var des=new Array();
-    des=context.split("{{{(>_<)}}}");
-    var out=document.getElementsByClassName("context");
-    alert(out.length)
-    for(var i=0;i<des.length;i++){
-        out[i].innerHTML=des[i];
-    }
-</script>
+<%--<script language="JavaScript">--%>
+    <%--var context="1{{{(>_<)}}}2{{{(>_<)}}}3{{{(>_<)}}}4{{{(>_<)}}}5";--%>
+    <%--var des=new Array();--%>
+    <%--des=context.split("{{{(>_<)}}}");--%>
+    <%--var out=document.getElementsByClassName("context");--%>
+    <%--alert(out.length)--%>
+    <%--for(var i=0;i<des.length;i++){--%>
+        <%--out[i].innerHTML=des[i];--%>
+    <%--}--%>
+<%--</script>--%>
 </body>
 </html>
