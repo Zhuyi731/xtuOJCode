@@ -32,25 +32,31 @@
   <%@ include file="/WEB-INF/views/navigation.jsp"%>
     <h1 >Online Status</h1>
     <div class="search" >
-        <form role="form" method="get" action="statusSearch" class="form-horizontal" >
+        <form role="form" method="get" class="form-inline" >
             <div class="form-group">
-                <label  for="proID" class="control-label col-md-offset-1 col-md-1">Pro.ID</label>
-                <div class="col-md-1">
+                <label  for="proID" class="control-label col-md-1 col-sm-1">Pro.ID</label>
+                <div class="col-md-offset-1 col-sm-offset-1">
                     <input type="text" class="form-control" name="proID" id="proID" placeholder="题目编号" >
                 </div>
-                <label  for="username" class="control-label  col-md-1">username</label>
-                <div class="col-md-1">
+            </div>
+            <div class="form-group">
+                <label  for="username" class="control-label  col-md-1 col-sm-1">username</label>
+                <div class="col-md-offset-2 col-sm-offset-2">
                     <input type="text" class="form-control" name="username" id="username" placeholder="用户名" >
                 </div>
-                <label for="language" class="control-label col-md-1">Language</label>
-                <select id="language" name="language" class="col-md-1">
+            </div>
+            <div class="form-group">
+                <label for="language" class="control-label ">Language</label>
+                <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                     <option value="0">All</option>
                     <option value="1">C</option>
                     <option value="2">C++</option>
                     <option value="3">Java</option>
                 </select>
-                <label for="result" class="control-label col-md-1">Result</label>
-                <select id="result" name="result" class="col-md-1">
+            </div>
+            <div class="form-group">
+                <label for="result" class="control-label ">Result</label>
+                <select id="result" name="result" class="form-control col-md-offset-1 col-sm-offset-1">
                     <option value="0">All</option>
                     <option value="1">Accept</option>
                     <option value="2">Presentation Error</option>
@@ -64,9 +70,10 @@
                     <option value="10">Waiting</option>
                     <option value="11">Running and Judging</option>
                 </select>
-                <input type="submit"  value="Search" class="btn btn-info col-md-offset-1 col-md-1">
             </div>
-
+        <div class="form-group">
+                <input type="submit"  value="Search" class="btn btn-info col-md-offset-1 col-sm-offset-1">
+        </div>
         </form>
     </div>
 

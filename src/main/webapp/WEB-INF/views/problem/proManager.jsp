@@ -1,79 +1,105 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>"> 
+<head>
+    <base href="<%=basePath%>">
     <title>题库管理</title>
-	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
-	<style type="text/css">
-	.container{
-      margin-top:50;
+    <META content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style type="text/css">
+        .container {
+            margin-top: 50;
+        }
+
+        .search {
+            margin-top: 50;
+        }
+    </style>
+</head>
+<body>
+<div class="search" align="center">
+    <form class="form-inline" method="get" role="form">
+        <div class="form-group">
+            <label class="control-label col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2" for="problemId">Pro.ID</label>
+            <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-2">
+                <input type="text" class="form-control" name="problemId" id="problemId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-1 col-sm-1 col-xs-2" for="title">Title</label>
+            <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-2">
+                <input type="text" class="form-control" name="title" id="title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-1 col-sm-1 col-xs-2" for="author">Author</label>
+            <div class="col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2">
+                <input type="text" class="form-control" name="author" id="author">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="search" value="search" class="btn btn-primary btn-sm">
+        </div>
+    </form>
+</div>
+<div class="container">
+    <table class="table table-hover  table-bordered">
+        <thead>
+        <tr>
+            <td class="col-md-1">ID</td>
+            <td class="col-md-1 col-xs-1">Title</td>
+            <td class="col-md-1 col-xs-1">authority</td>
+            <td class="col-md-1 col-xs-1">Time Limit(ms)</td>
+            <td class="col-md-1 col-xs-1">Memory Limit(MB)</td>
+            <td class="col-md-1 col-xs-1">Author</td>
+            <td class="col-md-1 col-xs-1">AC/SUBMIT</td>
+            <td class="col-md-1 col-xs-1">ratio</td>
+            <td class="col-md-2 col-xs-2">点击进入修改</td>
+            <td class="col-md-1 col-xs-1"><input type="checkbox" id="checkAll" onclick="checkAll()">全选</td>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${entityList}" var="pro">
+            <tr>
+                <td><c:out value="${pro.problemId}"></c:out></td>
+                <td><c:out value="${pro.title}"></c:out></td>
+                <td><c:out value="${pro.status}"></c:out></td>
+                <td><c:out value="${pro.timeLimit}"></c:out></td>
+                <td><c:out value="${pro.memoryLimit}"></c:out></td>
+                <td><c:out value="${pro.author}"></c:out></td>
+                <td></td>
+                <td></td>
+                <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
+                <td><input type="checkbox" name="select"></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <div class="function">
+        <a class="btn btn-lg btn-primary pull-right" href="problem/addProblem">添加题目</a>
+    </div>
+</div>
+<script type="text/javascript">
+    function checkAll() {
+        var a = document.getElementById("checkAll");
+        var b = document.getElementsByName("select");
+        if (a.checked == true) {
+            for (var i = 0; i < b.length; i++) {
+                b[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < b.length; i++) {
+                b[i].checked = false;
+            }
+        }
     }
-    .function a{
-     margin:0 20;
-    }
-	</style>
-  </head>
-  <body>
-	  <div class="container">
-  	   <table class="table table-hover  table-bordered" >
-  	   <thead>
-  	   <tr><td class="col-md-1">ID</td>
-  	   <td class="col-md-1">Title</td>
-  	   <td class="col-md-1">autority</td>
-  	   <td class="col-md-2">description</td>
-  	   <td class="col-md-1">accept/submit</td>
-  	   <td class="col-md-1">ratio</td>
-  	   <td class="col-md-2">点击进入修改</td>
-	   <td class="col-md-2">点击添加数据文件</td>
-  	   <td class="col-md-1"><input type="checkbox" value="1" id="checkAll" onclick="checkAll()">全选</td>
-  	   </tr></thead>
-  	   <tbody>
-  	   <tr><td>10001</td>
-  	   <td>A+B</td>
-  	   <td>公有</td>
-  	   <td>caculate A+B</td>
-  	   <td>20/23</td>
-  	   <td>86.96%</td>
-  	   <td><a href="#">进入修改</a></td>
-	   <td><input type="file" name="uploadFile" >添加数据文件</a></td>
-	   <td><input type="checkbox" name="select"></td></tr>
-  	   <tr><td>10002</td>
-		   <td>A+B 2</td>
-		   <td>私有</td>
-		   <td>caulate Big integer A+B</td>
-		   <td>30/50</td>
-		   <td>60%</td>
-		   <td><a href="#">进入修改</a></td>
-		   <td><input type="file" name="uploadFile">添加数据文件</td>
-		   <td><input type="checkbox" name="select"></td></tr>
-  	   </tbody>
-  	   </table>
-  	   <div class="function">
-  	   <a class="btn btn-lg btn-primary pull-right" href="problem/addProblem.jsp">添加题目</a>
-  	   </div>
-  	   </div>
-  	   <script type="text/javascript">
-  	    function checkAll(){
-  	      var a=document.getElementById("checkAll");
-  	      var b=document.getElementsByName("select");
-  	      if(a.checked==true){
-  	         for(var i=0;i<b.length;i++){
-  	           b[i].checked=true;
-  	         }
-  	      }else{
-  	       for(var i=0;i<b.length;i++){
-  	          b[i].checked=false;
-  	       }
-  	      }
-  	    }
-  	   </script>
-  </body>
+</script>
+</body>
 </html>
