@@ -49,15 +49,18 @@ public class ProblemController {
         // TODO: 2017/4/17 select problems from db 
         // TODO: 2017/4/17 add pagination
         List<ProblemsEntity> entityList = problemsRepository.queryPage(problemsDTO);
-        List<TotalProblemsVO> volist = new ArrayList<>();
+        List<TotalProblemsVO> voList = new ArrayList<>();
         for(ProblemsEntity entity: entityList){
             TotalProblemsVO vo = new TotalProblemsVO();
             vo.setProblemId(entity.getProblemId());
             vo.setTitle(entity.getTitle());
-            vo.setAcCount(100);
-            vo.setSubmitCount(101);
+            vo.setAcProblemsNum(100);
+            vo.setSubmitProblemsNum(101);
+            vo.setRatio(100*100/101);
+            voList.add(vo);
         }
-        model.addAttribute("entityList", volist);
+        model.addAttribute("entityList", voList);
+        OUT.prt("entitylist", voList);
 
         String res = Pages.PROBLEM + "/" + Pages.PROBLEMS_INDEX;
         return res;
