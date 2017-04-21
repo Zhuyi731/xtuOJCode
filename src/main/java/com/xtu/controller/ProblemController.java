@@ -5,6 +5,7 @@ import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
+import com.xtu.DB.vo.TotalProblemsVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import javax.validation.constraints.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -40,10 +42,22 @@ public class ProblemController {
     TestdatasRepository testdatasRepository;
 
     @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX, method = RequestMethod.GET)
-    public String showTotalProblems() {
+    public String showTotalProblems(
+            ProblemsDTO problemsDTO,
+            Model model) {
         OUT.prt("request", Pages.PROBLEMS_INDEX);
         // TODO: 2017/4/17 select problems from db 
         // TODO: 2017/4/17 add pagination
+        List<ProblemsEntity> entityList = problemsRepository.queryPage(problemsDTO);
+        List<TotalProblemsVO> volist = new ArrayList<>();
+        for(ProblemsEntity entity: entityList){
+            TotalProblemsVO vo = new TotalProblemsVO();
+            vo.setProblemId(entity.getProblemId());
+            vo.setTitle(entity.getTitle());
+            vo.setAcCount(100);
+            vo.setSubmitCount(101);
+        }
+        model.addAttribute("entityList", volist);
 
         String res = Pages.PROBLEM + "/" + Pages.PROBLEMS_INDEX;
         return res;

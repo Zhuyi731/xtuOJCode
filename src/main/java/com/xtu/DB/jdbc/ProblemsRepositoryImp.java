@@ -29,6 +29,13 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return jdbcOperations.queryForObject(selctCountSql,
                 Long.class);
     }
+    public Long queryMaxId(){
+        String sql = "select max(`problem_id`) from " +
+                Tables.PROBLEMS;
+        Long id = jdbcOperations.queryForObject(sql,
+                Long.class);
+        return id;
+    }
 
     @Override
     public List<ProblemsEntity> queryPage(ProblemsDTO problemsDTO) {
@@ -88,6 +95,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 problemsEntity.getSource(),
                 problemsEntity.getOwner(),
                 problemsEntity.getContext());
+        problemsEntity.setProblemId(queryMaxId().byteValue());
         return problemsEntity;
     }
 
