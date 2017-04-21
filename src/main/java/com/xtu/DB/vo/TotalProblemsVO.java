@@ -18,9 +18,13 @@ public class TotalProblemsVO {
     /**
      * AC的题目数量
      */
-    private int acCount;
+    private int acProblemsNum;
     /**
      * 提交的题目数量
      */
-    private int submitCount;
+    private int submitProblemsNum;
+    /**
+     * 通过率
+     */
+    private int ratio;
 }
