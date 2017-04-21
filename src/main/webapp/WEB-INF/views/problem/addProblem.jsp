@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
@@ -20,7 +21,7 @@
 <body>
 <div class="head">
 </div>
-<form class="form-horizontal form-label-left" role="form" enctype="multipart/form-data">
+<sf:form class="form-horizontal form-label-left" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">题目名称:<span class="required">*</span>
         </label>
@@ -28,7 +29,7 @@
             <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12" name="name"
                    placeholder="Enter Problem Title">
         </div>
-    </div>
+</div>
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">题目状态:
         </label>
@@ -90,6 +91,6 @@
     <div class="form-group" align="center">
         <input type="submit" class="btn btn-lg btn-primary" value="确定">
     </div>
-</form>
+</sf:form>
 </body>
 </html>
