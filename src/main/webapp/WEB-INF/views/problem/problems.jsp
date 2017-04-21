@@ -33,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</thead>
 			<tbody>
 			  <tr>
-			    <th><a href="proDetail?pid=10001">10001</a></th>
-			    <th><a  href="proDetail?pid=10001">A+B</a></th>
+			    <th><a href="/problem/proDetail/10001">10001</a></th>
+			    <th><a  href="/problem/proDetail/10001">A+B</a></th>
 			    <th>9/11</th>
 			    <th>81.82%</th>
 			</tbody>
