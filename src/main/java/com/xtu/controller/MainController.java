@@ -1,24 +1,31 @@
 package com.xtu.controller;
 
 import com.sun.istack.internal.NotNull;
+import com.xtu.DB.RunsRepository;
 import com.xtu.DB.entity.UsersEntity;
+import com.xtu.DB.vo.RankListVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.FileUtils;
 import com.xtu.tools.OUT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Ilovezilian on 2017/4/13.
  */
 @Controller
 public class MainController {
+    @Autowired
+    RunsRepository runsRepository;
 
     @RequestMapping(value = {"/", "/" + Pages.INDEX}, method = RequestMethod.GET)
     public String index() {
@@ -40,10 +47,22 @@ public class MainController {
         return res;
     }
 
-    @RequestMapping(value = "/" + Pages.RANK_LIST, method = RequestMethod.GET)
-    public String showRankList() {
+    @RequestMapping(value = {"/" + Pages.RANK_LIST, "/" + Pages.RANK_LIST + "/{start}"}, method = RequestMethod.GET)
+    public String showRankList(
+            @PathVariable("start") int start,
+            Model model) {
         OUT.prt("request", Pages.RANK_LIST);
         // TODO: 2017/4/17 add pagination
+
+        List<RankListVO> entityList = runsRepository.queryRankList(start);
+        for (int i = 0; i < entityList.size(); i++) {
+            RankListVO vo = entityList.get(i);
+            vo.setRank(i + 1);
+            vo.setRatio(vo.getAcProblemsNum() * 100 / vo.getSubmitProblemsNum());
+        }
+        model.addAttribute("entityList", entityList);
+        OUT.prt("entityList", entityList);
+
         String res = Pages.RANK_LIST;
         return res;
     }
