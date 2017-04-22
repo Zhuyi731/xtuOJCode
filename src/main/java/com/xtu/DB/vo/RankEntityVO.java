@@ -6,7 +6,7 @@ import lombok.Data;
  * Created by Ilovezilian on 2017/4/21.
  */
 @Data
-public class RankListVO {
+public class RankVO {
     /**
      * 排名
      */
