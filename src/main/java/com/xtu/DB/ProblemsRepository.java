@@ -2,6 +2,7 @@ package com.xtu.DB;
 
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
+import com.xtu.DB.vo.ModifyProblemsVO;
 import com.xtu.DB.vo.ProblemsVO;
 
 /**
@@ -14,6 +15,10 @@ public interface ProblemsRepository {
     ProblemsVO queryPage(int start, int size);
 
     ProblemsVO queryPage(int start);
+
+    ModifyProblemsVO queryPage(int start, int size, String id);
+
+    ModifyProblemsVO queryPage(int start, String id);
 
     ProblemsEntity findOne(ProblemsDTO problemsDTO);
 

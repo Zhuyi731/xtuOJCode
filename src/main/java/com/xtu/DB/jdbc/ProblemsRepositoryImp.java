@@ -3,6 +3,8 @@ package com.xtu.DB.jdbc;
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
+import com.xtu.DB.vo.ModifyProblemsEntityVO;
+import com.xtu.DB.vo.ModifyProblemsVO;
 import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Constant;
@@ -71,6 +73,34 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
+    public ModifyProblemsVO queryPage(int start, int size, String id) {
+        String finduserSql = "SELECT * FROM " +
+                Tables.PROBLEMS +
+                " Limit ?,?";
+        List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
+                new ProblemsEntityRowMapper(), start * size, size);
+
+        ModifyProblemsVO vo = new ModifyProblemsVO();
+        List<ModifyProblemsEntityVO> voList = new ArrayList<>();
+        for (ProblemsEntity entity : entityList) {
+            ModifyProblemsEntityVO entityVO = new ModifyProblemsEntityVO();
+            entityVO.setProblemId(entity.getProblemId());
+            entityVO.setTitle(entity.getTitle());
+            entityVO.setAcProblemsNum(100);
+            entityVO.setSubmitProblemsNum(101);
+            entityVO.setRatio(100 * 100 / 101);
+            voList.add(entityVO);
+        }
+        vo.setEntityList(voList);
+        return null;
+    }
+
+    @Override
+    public ModifyProblemsVO queryPage(int start, String id) {
+        return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE), id);
+    }
+
+    @Override
     public ProblemsEntity findOne(ProblemsDTO problemsDTO) {
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
@@ -78,8 +108,8 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return jdbcOperations.queryForObject(
                 finduserSql,
                 new ProblemsEntityRowMapper(),
-                problemsDTO.getProblemId(),
-                problemsDTO.getTitle());
+                problemsDTO.getTitle(),
+                problemsDTO.getProblemId());
     }
 
     @Override
@@ -166,6 +196,26 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     private static final class ProblemsEntityRowMapper implements RowMapper<ProblemsEntity> {
+        @Override
+        public ProblemsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+            ProblemsEntity entity = new ProblemsEntity();
+            entity.setProblemId(rs.getInt("problem_id"));
+            entity.setTitle(rs.getString("title"));
+            entity.setStatus(rs.getByte("status"));
+            entity.setValidatorId(rs.getShort("validator_id"));
+            entity.setTimeLimit(rs.getShort("time_limit"));
+            entity.setMemoryLimit(rs.getShort("memory_limit"));
+            entity.setAuthor(rs.getString("author"));
+            entity.setSource(rs.getString("source"));
+            entity.setOwner(rs.getInt("owner"));
+            entity.setContext(rs.getString("context"));
+            entity.setCreateTime(rs.getTimestamp("create_time"));
+            entity.setLastUpdateTime(rs.getTimestamp("last_update_time"));
+            return entity;
+        }
+    }
+
+    private static final class EntitysRowMapper implements RowMapper<ProblemsEntity> {
         @Override
         public ProblemsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             ProblemsEntity entity = new ProblemsEntity();
