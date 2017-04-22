@@ -64,8 +64,8 @@ public class MainController {
             vo.setRank(i + 1);
             vo.setRatio(vo.getAcProblemsNum() * 100 / vo.getSubmitProblemsNum());
         }
-        model.addAttribute("entityList", rankVO);
-        OUT.prt("entityList", rankVO);
+        model.addAttribute("vo", rankVO);
+        OUT.prt("vo", rankVO);
 
         String res = Pages.RANK_LIST;
         return res;

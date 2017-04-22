@@ -87,11 +87,11 @@ public class ProblemController {
             return res;
         }
 
-        String context = problemsEntity.getInputDes() + "{{{(>_<)}}}" +
+        String context = problemsEntity.getProblemDes() + "{{{(>_<)}}}" +
                 problemsEntity.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntity.getInputDes() + "{{{(>_<)}}}" +
-                problemsEntity.getInputDes();
+                problemsEntity.getOutputDes() + "{{{(>_<)}}}" +
+                problemsEntity.getSampleInput() + "{{{(>_<)}}}" +
+                problemsEntity.getSampleOutput();
         problemsEntity.setContext(context);
         problemsRepository.save(problemsEntity);
         TestdatasEntity testdatasEntity = new TestdatasEntity();
@@ -100,7 +100,7 @@ public class ProblemController {
         testdatasEntity.setOwner(problemsEntity.getOwner());
         addTestdatas(uploadFile, testdatasEntity);
 
-        String res = Pages.PROBLEM + "/" + Pages.ADD_PROBLEM;
+        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
         return res;
     }
 
@@ -123,6 +123,7 @@ public class ProblemController {
             Errors errors,
             RedirectAttributes model) {
         OUT.prt("post", Pages.ADD_PROBLEM);
+        OUT.prt("problemsEntity", problemsEntity);
         if (errors.hasErrors()) {
             String res = Pages.ERROR;
             return res;
@@ -135,6 +136,7 @@ public class ProblemController {
                 problemsEntity.getSampleOutput();
         problemsEntity.setContext(context);
         problemsRepository.save(problemsEntity);
+        OUT.prt("problemsEntity", problemsEntity);
         if (null != uploadFile || !uploadFile.isEmpty()) {
             TestdatasEntity testdatasEntity = new TestdatasEntity();
 
@@ -147,7 +149,7 @@ public class ProblemController {
         dto.setProblemId(problemsEntity.getProblemId());
         ProblemsEntity entity = problemsRepository.findOne(dto);
         model.addFlashAttribute("entity", entity);
-        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL + "/{id}";
+        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
         return res;
     }
 
@@ -200,6 +202,7 @@ public class ProblemController {
 
         ProblemsDTO dto = new ProblemsDTO();
         dto.setProblemId(id);
+        dto.setTitle("^_^");
         ProblemsEntity entity = problemsRepository.findOne(dto);
         String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
         entity.setProblemDes(contexts[0]);
@@ -221,6 +224,7 @@ public class ProblemController {
 
         ProblemsDTO dto = new ProblemsDTO();
         dto.setProblemId(id);
+        dto.setTitle("^_^");
         ProblemsEntity entity = problemsRepository.findOne(dto);
         String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
         entity.setProblemDes(contexts[0]);
@@ -242,6 +246,7 @@ public class ProblemController {
         // TODO: 2017/4/22 adjust
         ProblemsVO vo = problemsRepository.queryPage(0);
         model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
         return res;
     }
