@@ -1,5 +1,6 @@
 package com.xtu.DB;
 
+import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.vo.RankVO;
 import com.xtu.DB.vo.StatusVO;
 
@@ -22,5 +23,10 @@ public interface RunsRepository {
 
     StatusVO queryStatusList(int start, int size);
 
+
     StatusVO queryStatusList(int start);
+
+    StatusVO queryStatusList(int start, int size, StatusDTO statusDTO);
+
+    StatusVO queryStatusList(int start, StatusDTO statusDTO);
 }

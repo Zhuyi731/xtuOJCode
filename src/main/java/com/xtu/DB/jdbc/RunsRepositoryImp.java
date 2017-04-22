@@ -1,6 +1,7 @@
 package com.xtu.DB.jdbc;
 
 import com.xtu.DB.RunsRepository;
+import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.entity.RunsUsersEntity;
 import com.xtu.DB.vo.RankEntityVO;
 import com.xtu.DB.vo.RankVO;
@@ -94,6 +95,51 @@ public class RunsRepositoryImp implements RunsRepository {
     @Override
     public StatusVO queryStatusList(int start) {
         return queryStatusList(start, Integer.parseInt(Constant.PAGE_SIZE));
+    }
+
+    @Override
+    public StatusVO queryStatusList(int start, int size, StatusDTO statusDTO) {
+        String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`, " +
+                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, LENGTH(`runs`.`code`) code_length," +
+                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`," +
+                "`users`.`name`, `users`.`id`" +
+                " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
+                " WHERE run_id != 0";
+        if (statusDTO.getResultCode() != 0) {
+            sql += " AND `result_code` = ?";
+        } else {
+            sql += " AND `result_code` != ?";
+        }
+        if (null != statusDTO.getLanguage() && "".equals(statusDTO.getLanguage())) {
+            sql += " AND `language` = ?";
+        } else {
+            sql += " AND `language` != ?";
+            statusDTO.setLanguage("(^_^)");
+        }
+        if (null != statusDTO.getId() && "".equals(statusDTO.getId()))
+        {
+            sql += " AND `id` = ?";
+        } else {
+            sql += " AND `id` != ?";
+            statusDTO.setId("(^_^)");
+        }
+        sql += " ORDER BY `runs`.`submit_time` DESC" +
+                " LIMIT ?, ?;";
+        List<StatusEntityVO> entityList = jdbcOperations.query(sql,
+                new StatusEntityVORowMapper(),
+                statusDTO.getResultCode(),
+                statusDTO.getLanguage(),
+                statusDTO.getId(),
+                start * size, size);
+        StatusVO vo = new StatusVO();
+        vo.setEntityList(entityList);
+        vo.setTotal(statusListCount());
+        return vo;
+    }
+
+    @Override
+    public StatusVO queryStatusList(int start, StatusDTO statusDTO) {
+        return queryStatusList(start,Integer.parseInt(Constant.PAGE_SIZE), statusDTO);
     }
 
     private static final class RunsEntityRowMapper implements RowMapper<RunsUsersEntity> {
