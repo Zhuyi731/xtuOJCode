@@ -7,9 +7,9 @@
 	  　</div>
     <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
         <li><a href="/index" style="color:white; ">Home</a></li>
-      	<li><a href="/problem/problems/1" style="color:white;">Problem Set</a></li>
-      	<li><a href="/ranklist" style="color:white;">Ranklist</a></li>
-        <li><a href="/status/1" style="color:white;">Status</a></li>
+      	<li><a href="/problem/problems/0" style="color:white;">Problem Set</a></li>
+      	<li><a href="/ranklist/0" style="color:white;">Ranklist</a></li>
+        <li><a href="/status/0" style="color:white;">Status</a></li>
       	<li><a href="/test/test"style="color:white;">Contest</a></li>
 
     </ul>
@@ -17,7 +17,7 @@
     <div class="col-md-3" style="float:right;top:0px;">
      <c:if test="${student eq null}">
      <c:if test="${teachers eq null }">
-     <a class="btn btn-primary btn-lg" href="/login" style="width:150px;float:right;">Login</a>
+     <a class="btn btn-primary btn-lg" href="/login" style="width:150px;float:right; margin-top:20px; ">Login</a>
      </c:if>
      <c:if test="${teachers ne null }">
      <a class="btn btn-primary btn-lg" href="/teacher/main"  style="width:150px;float:right;">${teachers.tID}</a></c:if>
