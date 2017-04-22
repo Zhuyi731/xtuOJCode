@@ -24,9 +24,9 @@
 	  　</div>
     <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
         <li><a href="index" style="color:white; ">Home</a></li>
-      	<li><a href="problem/problems" style="color:white;">Problem Set</a></li>
+      	<li><a href="problem/problems/1" style="color:white;">Problem Set</a></li>
       	<li><a href="ranklist" style="color:white;">Ranklist</a></li>
-        <li><a href="status" style="color:white;">Status</a></li>
+        <li><a href="status/1" style="color:white;">Status</a></li>
       	<li class="dropdown"><a href="test/test"style="color:white;">Contest</a></li>
 
     </ul>
