@@ -29,8 +29,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="container"  >
 		<div class="page">
 		<ul class="pager" >
-		  <li class="previous"><a href="#">&laquo;上一页</a></li>
-		  <li class="next"><a href="#">下一页&raquo;</a></li>
+			<li class="previous"><a href="/ranklist/0">&laquo;&laquo;第一页</a></li>
+			<li class="previous"><a href="/ranklist/${pageNo-1}">&laquo;上一页</a></li>
+			<li class="next"><a href="/ranklist/${total}">最后一页&raquo;&raquo;</a></li>
+			<li class="next"><a href="/ranklist/${pageNo+1}">下一页&raquo;</a></li>
 		</ul>
 	</div>
 		<div class="ranklist">
@@ -40,19 +42,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <th class="col-md-1">Rank</th>
 				<th class="col-md-1">User.ID</th>
 				<th class="col-md-2">User.name</th>
-				<th class="col-md-5" >Motto</th>
-				<th class="col-md-1">AC</th>
-				<th class="col-md-2">Ratio(accept/submit)</th>
+				<th class="col-md-1">Accept/Submit</th>
+				<th class="col-md-1">Ratio</th>
 			  </tr>
 			</thead>
 			<tbody>
-			  <tr>
-			  	<th>1</th>
-			    <th>10001</th>
-			    <th>zhy731</th>
-			    <th>hard working is a virtual</th>
-			    <th>13</th>
-			    <th>10% 133/1330</th>
+			<c:forEach items="${vo.entityList}" var="entity">
+			<tr>
+			  	<th>${entity.rank}</th>
+			    <th>${entity.id}</th>
+			    <th>${entity.name}</th>
+			    <th>${entity.acProblemsNum}/${entity.submitProblemsNum}</th>
+			    <th>${entity.ratio}</th>
+			</tr></c:forEach>
 			</tbody>
 		</table>
 		</div>

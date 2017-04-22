@@ -11,7 +11,6 @@
     <title>Online Status</title>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="type/css"/>
-    <link href="/css/style.css" rel="stylesheet" />
     <style type="text/css">
         h1{
             text-align: center;
@@ -23,18 +22,24 @@
             text-align: center;
         }
         thead{
-            background-color: #4cae4c;
+            background-color: #2C333D;
             color:white;
+        }
+        .status{
+            width: 1040px;
+        }
+        .status> table{
+            margin-left: 160px;
         }
     </style>
 </head>
 <body>
   <%@ include file="/WEB-INF/views/navigation.jsp"%>
     <h1 >Online Status</h1>
-    <div class="search" style="line-height: 15px;">
+    <div class="search" style="line-height:15px;">
         <form role="form" method="get" class="form-inline" >
             <div class="form-group">
-                <label  for="proID" class="control-label col-md-1 col-sm-1">Pro.ID</label>
+                <label for="proID"class="control-label col-md-1 col-sm-1">Pro.ID</label>
                 <div class="col-md-offset-1 col-sm-offset-1">
                     <input type="text" class="form-control" name="proID" id="proID" placeholder="题目编号" >
                 </div>
@@ -71,70 +76,48 @@
                     <option value="11">Running and Judging</option>
                 </select>
             </div>
-        <div class="form-group" style="padding-top: 15px;">
+        <div class="form-group" style="padding-top:15px;">
                 <input type="submit" value="Search" class="btn bg-primary  col-md-offset-1 col-sm-offset-1">
         </div>
         </form>
     </div>
-
-    <div class="status">
+      <div class="page" style="margin:0px 160px;">
+          <ul class="pager" >
+              <li class="previous"><a href="/status/0">&laquo;&laquo;The First Page</a></li>
+              <li class="previous"><a href="/status/">&laquo;Previous Page</a></li>
+              <li class="next"><a href="/status/">The Last Page&raquo;&raquo;</a></li>
+              <li class="next"><a href="/status/">Next Page&raquo;</a></li>
+          </ul>
+      </div>
+    <div class="status" >
         <table class="table table-bordered table-hover">
             <thead >
-            <tr><td class="col-md-offset-1 col-md-1">运行编号</td>
-                <td class="col-md-1">用户</td>
-                <td class="col-md-1">问题编号</td>
-                <td class="col-md-1">结果</td>
-                <td class="col-md-1">内存</td>
-                <td class="col-md-1">耗时</td>
-                <td class="col-md-1">语言</td>
-                <td class="col-md-1">代码长度</td>
-                <td class="col-md-2">提交时间</td>
-                <td class="col-md-1">判题机</td></tr>
+            <tr><td class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1">Run.ID</td>
+                  <td class="col-md-1 col-sm-1">Pro.ID</td>
+                <td class="col-md-1 col-sm-1">Author</td>
+                <td class="col-md-1 col-sm-1">Result</td>
+                <td class="col-md-1 col-sm-1">Memory</td>
+                <td class="col-md-1 col-sm-1">Time</td>
+                <td class="col-md-1 col-sm-1">Language</td>
+                <td class="col-md-1 col-sm-1">Code.Len</td>
+                <td class="col-md-2 col-sm-1">Submit Time</td>
             </thead>
             <tbody>
-            <tr><td>1013</td>
-                <td>admin</td>
-                <td>panshuai</td>
-                <td><span class="accept">accept</span></td>
-                <td>0</td>
-                <td>0</td>
-                <td>C</td>
-                <td>120B</td>
-                <td>2016-12-23 10:51:55</td>
-                <td>admin</td></tr>
-            <tr><td>1013</td>
-                <td>admin</td>
-                <td>panshuai</td>
-                <td><span class="accept">AC</span></td>
-                <td>0</td>
-                <td>0</td>
-                <td>C</td>
-                <td>120B</td>
-                <td>2016-12-23 10:51:55</td>
-                <td>admin</td></tr>
-            <tr><td>1013</td>
-                <td>admin</td>
-                <td>panshuai</td>
-                <td><span class="accept">WA</span></td>
-                <td>0</td>
-                <td>0</td>
-                <td>C</td>
-                <td>120B</td>
-                <td>2016-12-23 10:51:55</td>
-                <td>admin</td></tr>
-            <tr><td>1013</td>
-                <td>admin</td>
-                <td>panshuai</td>
-                <td><span class="accept">TLE</span></td>
-                <td>0</td>
-                <td>0</td>
-                <td>C</td>
-                <td>120B</td>
-                <td>2016-12-23 10:51:55</td>
-                <td>admin</td></tr>
+            <c:forEach items="${vo.entityList}" var="entity">
+                <tr>
+                    <td>${entity.runId}</td>
+                    <td>${entity.problemId}</td>
+                    <td>${entity.id}</td>
+                    <td>${entity.resultCode}</td>
+                    <td>${entity.runMemory}</td>
+                    <td>${entity.runTime}</td>
+                    <td>${entity.language}</td>
+                    <td>${entity.codeLength}</td>
+                    <td>${entity.submitTime}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
-
     </div>
 </body>
 </html>
