@@ -3,6 +3,9 @@ package com.xtu.DB.jdbc;
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
+import com.xtu.DB.vo.ProblemsEntityVO;
+import com.xtu.DB.vo.ProblemsVO;
+import com.xtu.constant.Constant;
 import com.xtu.constant.Tables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +33,8 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return jdbcOperations.queryForObject(selctCountSql,
                 Long.class);
     }
-    public Long queryMaxId(){
+
+    public Long queryMaxId() {
         String sql = "select max(`problem_id`) from " +
                 Tables.PROBLEMS;
         Long id = jdbcOperations.queryForObject(sql,
@@ -38,27 +43,43 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public List<ProblemsEntity> queryPage(ProblemsDTO problemsDTO) {
+    public ProblemsVO queryPage(int start, int size) {
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
                 " Limit ?,?";
-        return jdbcOperations.query(
-                finduserSql,
-                new ProblemsEntityRowMapper(),
-//                problemsDTO.getProblemId(),
-                problemsDTO.getStart(),
-                problemsDTO.getSize());
+        List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
+                new ProblemsEntityRowMapper(), start, size);
+
+        ProblemsVO vo = new ProblemsVO();
+        List<ProblemsEntityVO> voList = new ArrayList<>();
+        for (ProblemsEntity entity : entityList) {
+            ProblemsEntityVO entityVO = new ProblemsEntityVO();
+            entityVO.setProblemId(entity.getProblemId());
+            entityVO.setTitle(entity.getTitle());
+            entityVO.setAcProblemsNum(100);
+            entityVO.setSubmitProblemsNum(101);
+            entityVO.setRatio(100 * 100 / 101);
+            voList.add(entityVO);
+        }
+        vo.setEntityList(voList);
+        return vo;
     }
 
     @Override
-    public ProblemsEntity findOne(int problemId) {
+    public ProblemsVO queryPage(int start) {
+        return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE));
+    }
+
+    @Override
+    public ProblemsEntity findOne(ProblemsDTO problemsDTO) {
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
-                " WHERE problem_id = ? ";
+                " WHERE `title` = ? OR `problem_id` = ?";
         return jdbcOperations.queryForObject(
                 finduserSql,
                 new ProblemsEntityRowMapper(),
-                problemId);
+                problemsDTO.getProblemId(),
+                problemsDTO.getTitle());
     }
 
     @Override
