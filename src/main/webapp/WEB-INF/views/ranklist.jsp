@@ -11,18 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />   
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<style type="text/css">
-	.ranklist{
-		position:relative;height:auto;min-height:100%;padding-bottom:60px;
-	}
-	.pager{
-		padding:0px 150px
-	}
-	.container{
-		margin:50px;
-	}
-</style>
-  </head>
+<link href="css/custom.css" rel="stylesheet" type="text/css"/>
+ </head>
   <body>
    <%@ include file="/WEB-INF/views/navigation.jsp"%>
 	<!-- 翻页功能 -->
@@ -30,9 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="page">
 		<ul class="pager" >
 			<li class="previous"><a href="/ranklist/0">&laquo;&laquo;第一页</a></li>
-			<li class="previous"><a href="/ranklist/${pageNo-1}">&laquo;上一页</a></li>
+			<li class="previous"><a href="/ranklist/${start-1}">&laquo;上一页</a></li>
 			<li class="next"><a href="/ranklist/${total}">最后一页&raquo;&raquo;</a></li>
-			<li class="next"><a href="/ranklist/${pageNo+1}">下一页&raquo;</a></li>
+			<li class="next"><a href="/ranklist/${start+1}">下一页&raquo;</a></li>
 		</ul>
 	</div>
 		<div class="ranklist">
