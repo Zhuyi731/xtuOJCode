@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML >
 <html>
 <head>
     <base href="<%=basePath%>">
@@ -13,15 +13,7 @@
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style type="text/css">
-        .container {
-            margin-top: 50;
-        }
-
-        .search {
-            margin-top: 50;
-        }
-    </style>
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
 <div class="search" align="center">
@@ -66,15 +58,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${entityList}" var="pro">
+        <c:forEach items="${vo.entityList}" var="pro">
             <tr>
                 <td><c:out value="${pro.problemId}"></c:out></td>
                 <td><c:out value="${pro.title}"></c:out></td>
-                <td><c:out value="${pro.status}"></c:out></td>
-                <td><c:out value="${pro.timeLimit}"></c:out></td>
-                <td><c:out value="${pro.memoryLimit}"></c:out></td>
-                <td><c:out value="${pro.author}"></c:out></td>
-                <td></td>
+                <%--<td><c:out value="${pro.status}"></c:out></td>--%>
+                <%--<td><c:out value="${pro.timeLimit}"></c:out></td>--%>
+                <%--<td><c:out value="${pro.memoryLimit}"></c:out></td>--%>
+                <%--<td><c:out value="${pro.author}"></c:out></td>--%>
+                <%--<td></td>--%>
                 <td></td>
                 <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
                 <td><input type="checkbox" name="select"></td>

@@ -13,7 +13,7 @@
     margin-top: 20px;
 }
 .container{
-    margin:50px;
+    margin-top:50px;
 }
 .pager{
     padding: 0px 150px;
@@ -22,10 +22,18 @@
     padding:0px 30px;
     margin:20px 0px;
 }
-.search{
-    text-align:center;
-    margin-right:60px ;
-}
 .tailSubmit > a{
     width:150px;
+}
+.container {
+    margin:20px 10px;
+}
+.search{
+    text-align: right;
+    margin-right: 20px;
+    padding-right:200px;
+}
+.search >form{
+    line-height: 25px;
+    padding-right: 20px;
 }
