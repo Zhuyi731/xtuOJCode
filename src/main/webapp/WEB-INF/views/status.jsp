@@ -31,7 +31,7 @@
 <body>
   <%@ include file="/WEB-INF/views/navigation.jsp"%>
     <h1 >Online Status</h1>
-    <div class="search" >
+    <div class="search" style="line-height: 15px;">
         <form role="form" method="get" class="form-inline" >
             <div class="form-group">
                 <label  for="proID" class="control-label col-md-1 col-sm-1">Pro.ID</label>
@@ -55,7 +55,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="result" class="control-label ">Result</label>
+                <label for="result" class="control-label">Result</label>
                 <select id="result" name="result" class="form-control col-md-offset-1 col-sm-offset-1">
                     <option value="0">All</option>
                     <option value="1">Accept</option>
@@ -71,8 +71,8 @@
                     <option value="11">Running and Judging</option>
                 </select>
             </div>
-        <div class="form-group">
-                <input type="submit"  value="Search" class="btn btn-info col-md-offset-1 col-sm-offset-1">
+        <div class="form-group" style="padding-top: 15px;">
+                <input type="submit" value="Search" class="btn bg-primary  col-md-offset-1 col-sm-offset-1">
         </div>
         </form>
     </div>

@@ -10,28 +10,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <style type="text/css">
-        .proDetail {
-            font-family: Times New Roman;
-            margin: 10px 30px;
-            padding: 20px 250px;
-            background-color: white;
-        }
-        .proDetail > p {
-            font-family: Times New Roman;
-            font-size: 20px;
-            background-color: #FFF093;
-        }
-        .proDetail > h3 {
-            margin-top: 20px;
-        }
-    </style>
+    <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navigation.jsp" %>
 <div class="head">
 </div>
-<h1 class="title" align="middle">A+B</h1>
+<h1 class="title" align="middle">${entity.title}</h1>
 <div class="proDetail">
     <h3>Problem Description</h3>
     <p width="800px" height="auto">
@@ -54,9 +39,9 @@
         ${entity.sampleOutput}
     <p>
 </div>
-<div class="tail" align="center">
-    <a class="btn btn-info btn-lg " style="width:150px;" href="problem/submit/${entity.problemId}">Submit code</a>
-    <a class="btn btn-info btn-lg" style="width:150px; margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
+<div class="tailSubmit" align="center">
+    <a class="btn btn-info btn-lg " href="problem/submit/${entity.problemId}">Submit code</a>
+    <a class="btn btn-info btn-lg" style="margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
 </body>

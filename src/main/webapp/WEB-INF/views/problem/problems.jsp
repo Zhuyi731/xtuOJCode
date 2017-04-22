@@ -10,22 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <style type="text/css">
-        .container{
-            margin:50px;
-        }
-        .pager{
-            padding: 0px 150px;
-        }
-        .pageNo{
-            padding:0px 30px;
-            margin:20px 0px;
-        }
-        .search{
-            text-align:center;
-            margin-right:60px ;
-        }
-    </style>
+    <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navigation.jsp" %>
@@ -34,13 +19,7 @@
             <div class="form-group">
                 <label  for="proID" class="control-label col-md-2 col-sm-2">Pro.ID</label>
                 <div class="col-md-offset-1 col-sm-offset-1">
-                    <input type="text" class="form-control" name="proID" id="proID" placeholder="题目编号" >
-                </div>
-            </div>
-            <div class="form-group">
-                <label  for="title" class="control-label  col-md-2 col-sm-2">Title</label>
-                <div class="col-md-offset-2 col-sm-offset-2">
-                    <input type="text" class="form-control" name="title" id="title" placeholder="题目名" >
+                    <input type="text" class="form-control" name="proID" id="proID" placeholder="题目或编号" >
                 </div>
             </div>
             <div class="form-group">
@@ -50,16 +29,17 @@
             </div>
         </form>
     </div>
-<div class="container" >
+<div class="container">
     <div class="page">
         <ul class="pager">
-            <li class="previous"><a href="#">&laquo;上一页</a></li>
-            <li class="pageNo" ><a href="#">1</a></li>
-            <li class="pageNo"><a href="#">2</a></li>
-            <li class="pageNo"><a href="#">3</a></li>
-            <li class="pageNo"><a href="#">4</a></li>
-            <li class="pageNo"><a href="#">5</a></li>
-            <li class="next"><a href="#">下一页&raquo;</a></li>
+            <li class="previous"><a href="/problem/problems/${entity.pageNo-1}">&laquo;上一页</a></li>
+            <li class="pageNo" ><a href="/problem/problems/${entity.pageNo}">${entity.pageNo}</a></li>
+            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+1}">${entity.pageNo+1}</a></li>
+            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+2}">${entity.pageNo+2}</a></li>
+            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+3}">${entity.pageNo+3}</a></li>
+            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+4}">${entity.pageNo+4}</a></li>
+            <li class="pageNo">${entity.pageNo}/${entity.total}页</li>
+            <li class="next"><a href="/problem/problems/${entity.pageNo+1}">下一页&raquo;</a></li>
         </ul>
     </div>
     <div class="problems">
@@ -73,12 +53,14 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${vo.entityList}" var="entity">
             <tr>
                 <th><a href="/problem/proDetail/${entity.problemId}">${entity.problemId}</a></th>
                 <th><a href="/problem/proDetail/${entity.problemId}">${entity.title}</a></th>
                 <th>${entity.ACTotal}/${entity.SubmitTotal}</th>
-                <th>...</th>
-            </tbody>
+                <th>${entity.ACTotal/entity.SubmitTotal*100}%</th>
+            </c:forEach>
+                </tbody>
         </table>
     </div>
 </div>
