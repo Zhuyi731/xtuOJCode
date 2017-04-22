@@ -5,7 +5,7 @@ import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
-import com.xtu.DB.vo.TotalProblemsVO;
+import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,6 @@ import javax.validation.constraints.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -41,26 +39,17 @@ public class ProblemController {
     @Autowired
     TestdatasRepository testdatasRepository;
 
-    @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX + "/{start}", method = RequestMethod.GET)
     public String showTotalProblems(
+            @PathVariable("start") int start,
             ProblemsDTO problemsDTO,
             Model model) {
         OUT.prt("request", Pages.PROBLEMS_INDEX);
         // TODO: 2017/4/17 select problems from db 
         // TODO: 2017/4/17 add pagination
-        List<ProblemsEntity> entityList = problemsRepository.queryPage(problemsDTO);
-        List<TotalProblemsVO> voList = new ArrayList<>();
-        for(ProblemsEntity entity: entityList){
-            TotalProblemsVO vo = new TotalProblemsVO();
-            vo.setProblemId(entity.getProblemId());
-            vo.setTitle(entity.getTitle());
-            vo.setAcProblemsNum(100);
-            vo.setSubmitProblemsNum(101);
-            vo.setRatio(100*100/101);
-            voList.add(vo);
-        }
-        model.addAttribute("entityList", voList);
-        OUT.prt("entitylist", voList);
+        ProblemsVO vo = problemsRepository.queryPage(start);
+        model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
 
         String res = Pages.PROBLEM + "/" + Pages.PROBLEMS_INDEX;
         return res;
@@ -154,7 +143,9 @@ public class ProblemController {
             addTestdatas(uploadFile, testdatasEntity);
         }
 
-        ProblemsEntity entity = problemsRepository.findOne(problemsEntity.getProblemId());
+        ProblemsDTO dto = new ProblemsDTO();
+        dto.setProblemId(problemsEntity.getProblemId());
+        ProblemsEntity entity = problemsRepository.findOne(dto);
         model.addFlashAttribute("entity", entity);
         String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_DETAIL + "/{id}";
         return res;
@@ -207,7 +198,9 @@ public class ProblemController {
             Model model) {
         OUT.prt("request", Pages.PROBLEM_DETAIL);
 
-        ProblemsEntity entity = problemsRepository.findOne(id);
+        ProblemsDTO dto = new ProblemsDTO();
+        dto.setProblemId(id);
+        ProblemsEntity entity = problemsRepository.findOne(dto);
         String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
         entity.setProblemDes(contexts[0]);
         entity.setInputDes(contexts[1]);
@@ -226,7 +219,9 @@ public class ProblemController {
             Model model) {
         OUT.prt("request", Pages.MODIFY_PROBLEM);
 
-        ProblemsEntity entity = problemsRepository.findOne(id);
+        ProblemsDTO dto = new ProblemsDTO();
+        dto.setProblemId(id);
+        ProblemsEntity entity = problemsRepository.findOne(dto);
         String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
         entity.setProblemDes(contexts[0]);
         entity.setInputDes(contexts[1]);
@@ -244,10 +239,9 @@ public class ProblemController {
             ProblemsDTO problemsDTO,
             Model model) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
-        // TODO: 2017/4/17 select problems from db
-        // TODO: 2017/4/17 add pagination
-        List<ProblemsEntity> entityList = problemsRepository.queryPage(problemsDTO);
-        model.addAttribute("entityList", entityList);
+        // TODO: 2017/4/22 adjust
+        ProblemsVO vo = problemsRepository.queryPage(0);
+        model.addAttribute("vo", vo);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
         return res;
     }

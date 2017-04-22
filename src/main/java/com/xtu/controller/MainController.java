@@ -3,7 +3,9 @@ package com.xtu.controller;
 import com.sun.istack.internal.NotNull;
 import com.xtu.DB.RunsRepository;
 import com.xtu.DB.entity.UsersEntity;
-import com.xtu.DB.vo.RankListVO;
+import com.xtu.DB.vo.RankEntityVO;
+import com.xtu.DB.vo.RankVO;
+import com.xtu.DB.vo.StatusVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.FileUtils;
 import com.xtu.tools.OUT;
@@ -54,25 +56,31 @@ public class MainController {
         OUT.prt("request", Pages.RANK_LIST);
         // TODO: 2017/4/17 add pagination
 
-        List<RankListVO> entityList = runsRepository.queryRankList(start);
+        RankVO rankVO = runsRepository.queryRankList(start);
+        List<RankEntityVO> entityList = rankVO.getEntityList();
         for (int i = 0; i < entityList.size(); i++) {
-            RankListVO vo = entityList.get(i);
+            RankEntityVO vo = entityList.get(i);
             vo.setRank(i + 1);
             vo.setRatio(vo.getAcProblemsNum() * 100 / vo.getSubmitProblemsNum());
         }
-        model.addAttribute("entityList", entityList);
-        OUT.prt("entityList", entityList);
+        model.addAttribute("entityList", rankVO);
+        OUT.prt("entityList", rankVO);
 
         String res = Pages.RANK_LIST;
         return res;
     }
 
-    @RequestMapping(value = "/" + Pages.STATUS, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.STATUS + "/{start}", method = RequestMethod.GET)
     public String showStatus(
+            @PathVariable("start") int start,
             Model model) {
         OUT.prt("request", Pages.STATUS);
         // TODO: 2017/4/17 add filter condition
         // TODO: 2017/4/17 add pagination
+        StatusVO vo= runsRepository.queryStatusList(start);
+        model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
+
         String res = Pages.STATUS;
         return res;
     }
