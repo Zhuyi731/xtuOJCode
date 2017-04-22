@@ -2,6 +2,7 @@ package com.xtu.controller;
 
 import com.sun.istack.internal.NotNull;
 import com.xtu.DB.RunsRepository;
+import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.RankEntityVO;
 import com.xtu.DB.vo.RankVO;
@@ -73,11 +74,14 @@ public class MainController {
     @RequestMapping(value = "/" + Pages.STATUS + "/{start}", method = RequestMethod.GET)
     public String showStatus(
             @PathVariable("start") int start,
+            StatusDTO statusDTO,
             Model model) {
         OUT.prt("request", Pages.STATUS);
+        OUT.prt("statusDTO", statusDTO);
         // TODO: 2017/4/17 add filter condition
         // TODO: 2017/4/17 add pagination
-        StatusVO vo= runsRepository.queryStatusList(start);
+//        StatusVO vo= runsRepository.queryStatusList(start);
+        StatusVO vo = runsRepository.queryStatusList(start, statusDTO);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
 
