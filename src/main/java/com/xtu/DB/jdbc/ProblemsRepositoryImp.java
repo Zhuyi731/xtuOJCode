@@ -63,6 +63,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             entityVO.setRatio(100 * 100 / 101);
             voList.add(entityVO);
         }
+        vo.setStart(start);
         vo.setEntityList(voList);
         return vo;
     }
@@ -91,6 +92,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             entityVO.setRatio(100 * 100 / 101);
             voList.add(entityVO);
         }
+        vo.setStart(start);
         vo.setEntityList(voList);
         return null;
     }

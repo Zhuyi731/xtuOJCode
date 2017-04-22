@@ -11,4 +11,5 @@ import java.util.List;
 public class ModifyProblemsVO {
     private List<ModifyProblemsEntityVO> entityList;
     private Long total;
+    private int start;
 }

@@ -11,4 +11,5 @@ import java.util.List;
 public class RankVO {
     private List<RankEntityVO> entityList;
     private long total;
+    private int start;
 }

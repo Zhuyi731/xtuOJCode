@@ -48,6 +48,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 new RankEntityVORowMapper(), start * size, size);
         RankVO vo = new RankVO();
         vo.setEntityList(entityList);
+        vo.setStart(start);
         vo.setTotal(rankListCount());
         return vo;
     }
@@ -88,6 +89,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 new StatusEntityVORowMapper(), start * size, size);
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
+        vo.setStart(start);
         vo.setTotal(statusListCount());
         return vo;
     }
@@ -134,6 +136,7 @@ public class RunsRepositoryImp implements RunsRepository {
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
         vo.setTotal(statusListCount());
+        vo.setStart(start);
         return vo;
     }
 

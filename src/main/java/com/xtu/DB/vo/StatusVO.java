@@ -14,4 +14,5 @@ public class StatusVO {
      * 总数
      */
     private long total;
+    private int start;
 }
