@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="search" value="search" class="btn btn-primary btn-sm">
+            <input type="submit" value="search" class="btn btn-primary btn-sm">
         </div>
     </form>
 </div>
@@ -53,7 +53,7 @@
     <table class="table table-hover  table-bordered">
         <thead>
         <tr>
-            <td class="col-md-1">ID</td>
+            <td class="col-md-1">Pro.ID</td>
             <td class="col-md-1 col-xs-1">Title</td>
             <td class="col-md-1 col-xs-1">authority</td>
             <td class="col-md-1 col-xs-1">Time Limit(ms)</td>
