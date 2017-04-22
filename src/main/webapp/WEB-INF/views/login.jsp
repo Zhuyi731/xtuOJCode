@@ -37,8 +37,7 @@
                             <a href="forgetPassword">Forget password ? </a>
                         </span>
                     </div>
-
-                    <input type="submit" class="btn btn-primary">Login Now</input>
+                    <input type="submit" class="btn btn-primary" value="Login Now">
                     <hr>
                     Not register ? <a href="register">click here </a>
                 </sf:form>
