@@ -48,7 +48,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 Tables.PROBLEMS +
                 " Limit ?,?";
         List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
-                new ProblemsEntityRowMapper(), start, size);
+                new ProblemsEntityRowMapper(), start * size, size);
 
         ProblemsVO vo = new ProblemsVO();
         List<ProblemsEntityVO> voList = new ArrayList<>();
