@@ -30,16 +30,16 @@
     </form>
 </div>
 <div class="container">
-    <div class="page">
-        <ul class="pager">
-            <li class="previous"><a href="/problem/problems/${entity.pageNo-1}">&laquo;上一页</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo}">${entity.pageNo}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+1}">${entity.pageNo+1}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+2}">${entity.pageNo+2}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+3}">${entity.pageNo+3}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+4}">${entity.pageNo+4}</a></li>
-            <li class="pageNo">共${entity.pageNo}/${entity.total}页</li>
-            <li class="next"><a href="/problem/problems/${entity.pageNo+1}">下一页&raquo;</a></li>
+    <div class="page" align="justify">
+        <ul class="pager" >
+            <li class="previous"><a href="/problem/problems/${entity.start-1}">&laquo;上一页</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+0}">${entity.start+1}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+1}">${entity.start+2}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+2}">${entity.start+3}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+3}">${entity.start+4}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+4}">${entity.start+5}</a></li>
+            <li class="start">共${entity.start+1}/${entity.total+1}页</li>
+            <li class="next"><a href="/problem/problems/${entity.start+1}">下一页&raquo;</a></li>
         </ul>
     </div>
     <div class="problems">
@@ -67,14 +67,14 @@
 <div class="container">
     <div class="page">
         <ul class="pager">
-            <li class="previous"><a href="/problem/problems/${entity.pageNo-1}">&laquo;上一页</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo}">${entity.pageNo}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+1}">${entity.pageNo+1}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+2}">${entity.pageNo+2}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+3}">${entity.pageNo+3}</a></li>
-            <li class="pageNo"><a href="/problem/problems/${entity.pageNo+4}">${entity.pageNo+4}</a></li>
-            <li class="pageNo">共${entity.pageNo}/${entity.total}页</li>
-            <li class="next"><a href="/problem/problems/${entity.pageNo+1}">下一页&raquo;</a></li>
+            <li class="previous"><a href="/problem/problems/${entity.start-1}">&laquo;上一页</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start}">${entity.start}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+1}">${entity.start+1}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+2}">${entity.start+2}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+3}">${entity.start+3}</a></li>
+            <li class="start"><a href="/problem/problems/${entity.start+4}">${entity.start+4}</a></li>
+            <li class="start">共${entity.start}/${entity.total}页</li>
+            <li class="next"><a href="/problem/problems/${entity.start+1}">下一页&raquo;</a></li>
         </ul>
     </div>
     <div class="pageGo">
