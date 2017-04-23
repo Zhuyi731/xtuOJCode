@@ -2,9 +2,12 @@ package com.xtu.controller;
 
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.TestdatasRepository;
+import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
+import com.xtu.DB.entity.UsersEntity;
+import com.xtu.DB.vo.ModifyProblemsVO;
 import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
@@ -34,6 +37,8 @@ import java.util.zip.ZipInputStream;
 @Controller
 @RequestMapping(value = "/" + Pages.PROBLEM)
 public class ProblemController {
+    @Autowired
+    UsersRepository usersRepository;
     @Autowired
     ProblemsRepository problemsRepository;
     @Autowired
@@ -240,11 +245,13 @@ public class ProblemController {
 
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
     public String problemManage(
-            ProblemsDTO problemsDTO,
+            String id,
             Model model) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         // TODO: 2017/4/22 adjust
-        ProblemsVO vo = problemsRepository.queryPage(0);
+        id = "2013551830";
+        UsersEntity usersEntity = usersRepository.findOne(id);
+        ModifyProblemsVO vo = problemsRepository.queryModifyPage(0, usersEntity.getUserId());
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
