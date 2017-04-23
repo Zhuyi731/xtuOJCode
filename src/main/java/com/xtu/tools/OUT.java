@@ -5,7 +5,11 @@ package com.xtu.tools;
  */
 public class OUT {
     public static final void prt(String agrs, Object printString){
-        System.out.println(agrs+ " = " + printString.toString());
+        if (null == printString) {
+            System.out.println(agrs + " = null");
+        }else {
+            System.out.println(agrs + " = " + printString.toString());
+        }
     }
 
 }
