@@ -16,9 +16,9 @@
 <!-- 表单 -->
 <form role="form" method="post" class="form-horizontal" align="middle">
     <div class="form-group">
-        <label for="stuID" class="col-sm-2 col-sm-offset-2 control-label">账号：</label>
+        <label for="id" class="col-sm-2 col-sm-offset-2 control-label">账号：</label>
         <div class="col-sm-3">
-            <input type="text" id="stuID" name="stuID" class="form-control " value="" disabled>
+            <input type="text" id="id" name="id" class="form-control " value="${vo.entity.id}" disabled>
         </div>
     </div>
     <div class="form-group">
@@ -46,15 +46,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="nickname" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
+        <label for="nickName" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="nickname" id="nickname" value="">
+            <input type="text" class="form-control" name="nickName" id="nickName" value="">
         </div>
     </div>
     <div class="form-group">
-        <label for="phone" class="col-sm-2 col-sm-offset-2 control-label">phone：</label>
+        <label for="QQ" class="col-sm-2 col-sm-offset-2 control-label">QQ：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="phone" name="phone" value="">
+            <input type="text" class="form-control" id="QQ" name="QQ" value="">
         </div>
     </div>
     <div class="form-group">
@@ -64,9 +64,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="display" class="col-sm-2 col-sm-offset-2 control-label">是否展示个人信息：</label>
+        <label for="status" class="col-sm-2 col-sm-offset-2 control-label">是否展示个人信息：</label>
         <div class="col-sm-3 " style="padding-left:0;">
-            <input type="radio" id="display" name="display" value="1" checked="checked">是
+            <input type="radio" id="status" name="status" value="1" checked="checked">是
             <input type="radio" name="display" value="0">否
         </div>
     </div>

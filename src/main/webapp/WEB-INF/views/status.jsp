@@ -1,4 +1,4 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/4/18
@@ -38,7 +38,18 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navigation.jsp" %>
+<%
+    String url = request.getHeader("referer");
+    String backGroud = "http://localhost:8080/admin/menu";
+    if (backGroud.equals(url)) {
+        pageContext.setAttribute("nav", 0);
+    } else {
+        pageContext.setAttribute("nav", 1);
+    }
+%>
+<c:if test="${nav eq 1}">
+    <%@ include file="/WEB-INF/views/navigation.jsp"%>
+</c:if>
 <h1>Online Status</h1>
 <div class="search" style="line-height:15px;">
     <form role="form" method="get" class="form-inline">
