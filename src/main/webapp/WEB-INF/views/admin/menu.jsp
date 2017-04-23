@@ -83,7 +83,7 @@
 </div>
 
 <div class="dropdown">
-    <a class="btn btn-danger form-control" type="button" href="#">退出登录</a>
+    <a class="btn btn-danger form-control" type="button" href="/logout">退出登录</a>
 </div>
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

@@ -36,7 +36,7 @@
             <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
             </c:if>
-                <c:if test="${vo.start > 3 }">
+                <c:if test="${vo.start > 1 }">
                 <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
                 <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
             </c:if>
@@ -81,7 +81,7 @@
             <c:if test="${vo.start != 0}">
                 <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
             </c:if>
-            <c:if test="${vo.start > 3 }">
+            <c:if test="${vo.start > 1 }">
                 <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
                 <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
             </c:if>

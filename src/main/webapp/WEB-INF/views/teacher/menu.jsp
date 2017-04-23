@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        </ul>
       </div>
       <div >
-       <button class="btn btn-danger form-control" type="button">退出登录</button>
+       <a class="btn btn-danger form-control" href="/logout">退出登录</a>
       </div>
   </body>
   <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
