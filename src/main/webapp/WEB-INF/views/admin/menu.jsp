@@ -41,7 +41,7 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-        <li role="presentation"><a href="/status">查看Status</a></li>
+        <li role="presentation"><a href="/status/0">查看Status</a></li>
         <li role="presentation"><a href="news/showNews">查看公告</a></li>
         <li role="presentation"><a href="news/addNews">添加公告</a></li>
     </ul>
@@ -83,7 +83,7 @@
 </div>
 
 <div class="dropdown">
-    <a class="btn btn-danger form-control" type="button" href="#">退出登录</a>
+    <a class="btn btn-danger form-control" type="button" href="/logout">退出登录</a>
 </div>
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

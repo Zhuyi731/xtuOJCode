@@ -16,7 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/navigation.jsp"%>
-    <%@ include file="/WEB-INF/views/copyright.html" %>
+    <div align="center">
+	<iframe src="/news/newsDetail" frameborder="0" height="600px" width="1000px" name="news" marginheight="50px" scrolling="auto" ></iframe>
+	</div>
+	<%@ include file="/WEB-INF/views/copyright.html" %>
 	
 </body>
 </html>

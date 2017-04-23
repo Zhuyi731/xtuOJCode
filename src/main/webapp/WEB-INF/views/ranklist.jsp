@@ -18,12 +18,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 翻页功能 -->
 	<div class="container"  >
 		<div class="page">
-		<ul class="pager" >
-			<li class="previous"><a href="/ranklist/0">&laquo;&laquo;第一页</a></li>
-			<li class="previous"><a href="/ranklist/${start-1}">&laquo;上一页</a></li>
-			<li class="next"><a href="/ranklist/${total}">最后一页&raquo;&raquo;</a></li>
-			<li class="next"><a href="/ranklist/${start+1}">下一页&raquo;</a></li>
-		</ul>
+			<ul class="pager">
+				<li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
+				<c:if test="${vo.start != 0}">
+					<li class="previous"><a href="/ranklist/${vo.start-1}">&laquo;Previous Page</a></li>
+				</c:if>
+				<li>共${vo.total}页</li>
+				<li class="next"><a href="/ranklist/${vo.total-1}">The Last Page&raquo;&raquo;</a></li>
+				<c:if test="${vo.start < vo.total-1}">
+					<li class="next"><a href="/rsnklist/${vo.start+1}">Next Page&raquo;</a></li>
+				</c:if>
+			</ul>
 	</div>
 		<div class="ranklist">
 		<table class="table table-hover" style="width:1000px;margin:30px 100px; ">

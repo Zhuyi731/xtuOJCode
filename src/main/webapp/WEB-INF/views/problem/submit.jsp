@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
    <head>
-    <title>10001 题目</title>
+    <title>${entity.problemId}&nbsp;&nbsp;${entity.title}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -22,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="container" align="center">
           <form role="form" method="post" class="form-horizontal" action="submitServlet">
           <div class="form-group">
-         	<label for="proID" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
+         	<label for="problemId" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
             <div class="col-md-4">
-            <input id="proID" name="proID" type="text" class="form-control" width="60px;"></input>
+            <input id="problemId" name="problemId" type="text" class="form-control" width="60px;" value="${entity.problemId}" readonly="readonly">
            	</div>
           </div>
           

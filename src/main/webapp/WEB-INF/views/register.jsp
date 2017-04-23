@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	</form>
 	<div id="other" style="text-align:center">
-	<p>已经有账户？<a href=<%=basePath+"login.jsp"%>>点这里登录</a></p>
+	<p>已经有账户？<a href="/login">点这里登录</a></p>
 	</div>
 	
     <%@ include file="/WEB-INF/views/copyright.html" %>
