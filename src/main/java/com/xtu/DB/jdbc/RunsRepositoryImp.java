@@ -16,7 +16,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ilovezilian on 2017/4/21.
@@ -27,11 +29,25 @@ public class RunsRepositoryImp implements RunsRepository {
     JdbcOperations jdbcOperations;
 
     @Override
+    public Map<String, Integer> queryNum(int problemId) {
+        String sql = "SELECT IF(COUNT(`run_id`) = 0, 0,SUM(IF(`result_code` = 1,1,0)))acProblemsNum," +
+                " COUNT(`run_id`) submitProblemsNum FROM " +
+                Tables.RUNS +
+                " WHERE `problem_id` = ?";
+                Map<String, Object> map = jdbcOperations.queryForMap(sql, problemId);
+        Map<String, Integer> resMap = new HashMap<>();
+        resMap.put("acProblemsNum", Integer.parseInt(map.get("acProblemsNum").toString()));
+        resMap.put("submitProblemsNum", Integer.parseInt(map.get("submitProblemsNum").toString()));
+        return resMap;
+    }
+
+    @Override
     public Long rankListCount() {
         String sql = "SELECT COUNT( DISTINCT `user_id`) FROM " +
                 Tables.RUNS;
         return jdbcOperations.queryForObject(sql, Long.class);
     }
+
 
     @Override
     public RankVO queryRankList(int start, int size) {
@@ -118,8 +134,7 @@ public class RunsRepositoryImp implements RunsRepository {
             sql += " AND `language` != ?";
             statusDTO.setLanguage("(^_^)");
         }
-        if (null != statusDTO.getId() && "".equals(statusDTO.getId()))
-        {
+        if (null != statusDTO.getId() && "".equals(statusDTO.getId())) {
             sql += " AND `id` = ?";
         } else {
             sql += " AND `id` != ?";
@@ -142,7 +157,7 @@ public class RunsRepositoryImp implements RunsRepository {
 
     @Override
     public StatusVO queryStatusList(int start, StatusDTO statusDTO) {
-        return queryStatusList(start,Integer.parseInt(Constant.PAGE_SIZE), statusDTO);
+        return queryStatusList(start, Integer.parseInt(Constant.PAGE_SIZE), statusDTO);
     }
 
     private static final class RunsEntityRowMapper implements RowMapper<RunsUsersEntity> {
