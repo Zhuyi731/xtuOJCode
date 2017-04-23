@@ -3,7 +3,7 @@
 <div class="navbar  navbar-default" role="navigation" style="margin-bottom:50px;background-color:#2c333d; ">
 	<div class="col-md-9" >
 	<div class="navbar-header">
-	<a href="index"  class="navbar-brand">XTUOJ</a>
+	<a href="/index"  class="navbar-brand">XTUOJ</a>
 	  　</div>
     <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;style="color:white;">
         <li><a href="/index" style="color:white; ">Home</a></li>

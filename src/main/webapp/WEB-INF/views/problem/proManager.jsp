@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
-<body>
-<div class="search" align="center">
+<body style="padding-left: 100px;">
+<div  style="margin-top:50px;">
     <form class="form-inline" method="get" role="form">
         <div class="form-group">
             <label class="control-label col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2" for="problemId">Pro.ID</label>
@@ -37,9 +37,24 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="submit" value="search" class="btn btn-primary btn-sm">
+            <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1">
+                <input type="submit" value="search" class="btn btn-primary btn-sm">
+            </div>
         </div>
     </form>
+</div>
+<div class="page" style="margin:0px 160px;">
+    <ul class="pager">
+        <li class="previous"><a href="/problem/proManager/0">&laquo;&laquo;The First Page</a></li>
+        <c:if test="${vo.start != 0}">
+            <li class="previous"><a href="/problem/proManager/${vo.start-1}">&laquo;Previous Page</a></li>
+        </c:if>
+        <li>共${vo.total}页</li>
+        <li class="next"><a href="/problem/proManager/${vo.total+0}">The Last Page&raquo;&raquo;</a></li>
+        <c:if test="${vo.start < vo.total-1}">
+            <li class="next"><a href="/problem/proManager/${vo.start+1}">Next Page&raquo;</a></li>
+        </c:if>
+    </ul>
 </div>
 <div class="container">
     <table class="table table-hover  table-bordered">
@@ -62,11 +77,11 @@
             <tr>
                 <td><c:out value="${pro.problemId}"></c:out></td>
                 <td><c:out value="${pro.title}"></c:out></td>
-                <%--<td><c:out value="${pro.status}"></c:out></td>--%>
-                <%--<td><c:out value="${pro.timeLimit}"></c:out></td>--%>
-                <%--<td><c:out value="${pro.memoryLimit}"></c:out></td>--%>
-                <%--<td><c:out value="${pro.author}"></c:out></td>--%>
-                <%--<td></td>--%>
+                    <%--<td><c:out value="${pro.status}"></c:out></td>--%>
+                    <%--<td><c:out value="${pro.timeLimit}"></c:out></td>--%>
+                    <%--<td><c:out value="${pro.memoryLimit}"></c:out></td>--%>
+                    <%--<td><c:out value="${pro.author}"></c:out></td>--%>
+                <td></td>
                 <td></td>
                 <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
                 <td><input type="checkbox" name="select"></td>

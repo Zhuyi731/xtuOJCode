@@ -41,7 +41,7 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-        <li role="presentation"><a href="/status">查看Status</a></li>
+        <li role="presentation"><a href="/status/0">查看Status</a></li>
         <li role="presentation"><a href="news/showNews">查看公告</a></li>
         <li role="presentation"><a href="news/addNews">添加公告</a></li>
     </ul>

@@ -11,22 +11,17 @@
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style type="text/css">
-        .container {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-<div class="head">
+<div class="container">
 </div>
 <form class="form-horizontal form-label-left" role="form" method="post" enctype="multipart/form-data">
     <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="problemId">Pro.ID:<span class="required">*</span>
-        </label>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="problemId">Pro.ID:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" class="form-control col-md-7 col-xs-12"
-                   value="${entity.problemId}" readonly="readonly">
+                   value="${entity.problemId}" disabled="disabled">
         </div>
     </div>
     <div class="form-group">

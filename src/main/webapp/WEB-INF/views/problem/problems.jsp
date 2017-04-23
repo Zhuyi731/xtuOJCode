@@ -31,15 +31,25 @@
 </div>
 <div class="container">
     <div class="page" align="justify">
-        <ul class="pager" >
-            <li class="previous"><a href="/problem/problems/${entity.start-1}">&laquo;上一页</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+0}">${entity.start+1}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+1}">${entity.start+2}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+2}">${entity.start+3}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+3}">${entity.start+4}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+4}">${entity.start+5}</a></li>
-            <li class="start">共${entity.start+1}/${entity.total+1}页</li>
-            <li class="next"><a href="/problem/problems/${entity.start+1}">下一页&raquo;</a></li>
+        <ul class="pager">
+            <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
+            <c:if test="${vo.start != 0}">
+            <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
+            </c:if>
+                <c:if test="${vo.start > 3 }">
+                <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
+                <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
+            </c:if>
+            <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
+            <c:if test="${vo.start < vo.total-2 }">
+                <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
+                <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
+            </c:if>
+            <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Page</li>
+            <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
+            <%--<c:if test="${vo.start+1 < vo.total}">--%>
+            <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
+            <%--</c:if>--%>
         </ul>
     </div>
     <div class="problems">
@@ -67,29 +77,41 @@
 <div class="container">
     <div class="page">
         <ul class="pager">
-            <li class="previous"><a href="/problem/problems/${entity.start-1}">&laquo;上一页</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start}">${entity.start}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+1}">${entity.start+1}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+2}">${entity.start+2}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+3}">${entity.start+3}</a></li>
-            <li class="start"><a href="/problem/problems/${entity.start+4}">${entity.start+4}</a></li>
-            <li class="start">共${entity.start}/${entity.total}页</li>
-            <li class="next"><a href="/problem/problems/${entity.start+1}">下一页&raquo;</a></li>
+            <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
+            <c:if test="${vo.start != 0}">
+                <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
+            </c:if>
+            <c:if test="${vo.start > 3 }">
+                <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
+                <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
+            </c:if>
+            <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
+            <c:if test="${vo.start < vo.total-2 }">
+                <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
+                <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
+            </c:if>
+            <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Pages</li>
+            <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
+            <%--<c:if test="${vo.start+1 < vo.total}">--%>
+            <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
+            <%--</c:if>--%>
         </ul>
     </div>
+</div>
     <div class="pageGo">
         <form role="form" method="post" class="form-inline" style="line-height: 30px;">
             <div class="form-group">
-            <label for="pageGo" class="col-md-2 col-sm-2">页码:</label>
+                <label for="pageGo" class="control-label col-md-2 col-sm-2">页码:</label>
             </div>
             <div class="form-group">
                 <div class=col-md-2">
-                    <input type="text" class="form-control "  style="width: 60px;height: 30px;" name="pageGo" id="pageGo" placeholder="页码">/100
+                    <input type="text" class="form-control " style="width: 60px;height: 25px;" name="pageGo" id="pageGo"
+                           placeholder="页码">/${vo.total}100
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-2">
-                    <input type="submit" class="btn btn-primary submit"  value="GO">
+                    <input type="submit" class="btn btn-primary submit" value="GO">
                 </div>
             </div>
         </form>
