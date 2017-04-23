@@ -1,6 +1,7 @@
 package com.xtu.DB.jdbc;
 
 import com.xtu.DB.ProblemsRepository;
+import com.xtu.DB.RunsRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.vo.ModifyProblemsEntityVO;
@@ -18,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ilovezilian on 2017/4/18.
@@ -27,6 +29,8 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
 
     @Autowired
     private JdbcOperations jdbcOperations;
+    @Autowired
+    RunsRepository runsRepository;
 
     @Override
     public Long count() {
@@ -58,9 +62,16 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             ProblemsEntityVO entityVO = new ProblemsEntityVO();
             entityVO.setProblemId(entity.getProblemId());
             entityVO.setTitle(entity.getTitle());
-            entityVO.setAcProblemsNum(100);
-            entityVO.setSubmitProblemsNum(101);
-            entityVO.setRatio(100 * 100 / 101);
+            Map<String, Integer> map = runsRepository.queryNum(entity.getProblemId());
+            int acProblemsNum = map.get("acProblemsNum");
+            entityVO.setAcProblemsNum(acProblemsNum);
+            int submitProblemsNum = map.get("submitProblemsNum");
+            entityVO.setSubmitProblemsNum(submitProblemsNum);
+            if (submitProblemsNum == 0){
+                entityVO.setRatio(0);
+            } else {
+                entityVO.setRatio(acProblemsNum * 100 / submitProblemsNum);
+            }
             voList.add(entityVO);
         }
         vo.setStart(start);
@@ -74,12 +85,15 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ModifyProblemsVO queryPage(int start, int size, String id) {
+    public ModifyProblemsVO queryModifyPage(int start, int size, int userId) {
+        // TODO: 2017/4/23 about admin query
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
+                " WHERE `owner` = ?" +
                 " Limit ?,?";
         List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
-                new ProblemsEntityRowMapper(), start * size, size);
+                new ProblemsEntityRowMapper(),
+                userId, start * size, size);
 
         ModifyProblemsVO vo = new ModifyProblemsVO();
         List<ModifyProblemsEntityVO> voList = new ArrayList<>();
@@ -87,19 +101,29 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             ModifyProblemsEntityVO entityVO = new ModifyProblemsEntityVO();
             entityVO.setProblemId(entity.getProblemId());
             entityVO.setTitle(entity.getTitle());
-            entityVO.setAcProblemsNum(100);
-            entityVO.setSubmitProblemsNum(101);
-            entityVO.setRatio(100 * 100 / 101);
+            entityVO.setTimeLimit(entity.getTimeLimit());
+            entityVO.setMemoryLimit(entity.getMemoryLimit());
+            entityVO.setAuthor(entity.getAuthor());
+            Map<String, Integer> map = runsRepository.queryNum(entity.getProblemId());
+            int acProblemsNum = map.get("acProblemsNum");
+            entityVO.setAcProblemsNum(acProblemsNum);
+            int submitProblemsNum = map.get("submitProblemsNum");
+            entityVO.setSubmitProblemsNum(submitProblemsNum);
+            if (submitProblemsNum == 0){
+                entityVO.setRatio(0);
+            } else {
+                entityVO.setRatio(acProblemsNum * 100 / submitProblemsNum);
+            }
             voList.add(entityVO);
         }
         vo.setStart(start);
         vo.setEntityList(voList);
-        return null;
+        return vo;
     }
 
     @Override
-    public ModifyProblemsVO queryPage(int start, String id) {
-        return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE), id);
+    public ModifyProblemsVO queryModifyPage(int start, int userId) {
+        return queryModifyPage(start, Integer.parseInt(Constant.PAGE_SIZE), userId);
     }
 
     @Override
@@ -161,9 +185,9 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 " `validator_id` = ?," +
                 " `time_limit` = ?," +
                 " `memory_limit` = ?," +
-                " `author` = ?," +
+//                " `author` = ?," +
                 " `source` = ?," +
-                " `owner` = ?," +
+//                " `owner` = ?," +
                 " `context` = ?" +
                 " where problem_id = ?";
         jdbcOperations.update(sql,
@@ -172,9 +196,9 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 problemsEntity.getValidatorId(),
                 problemsEntity.getTimeLimit(),
                 problemsEntity.getMemoryLimit(),
-                problemsEntity.getAuthor(),
+//                problemsEntity.getAuthor(),
                 problemsEntity.getSource(),
-                problemsEntity.getOwner(),
+//                problemsEntity.getOwner(),
                 problemsEntity.getContext(),
                 problemsEntity.getProblemId());
         return problemsEntity;
@@ -198,26 +222,6 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     private static final class ProblemsEntityRowMapper implements RowMapper<ProblemsEntity> {
-        @Override
-        public ProblemsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-            ProblemsEntity entity = new ProblemsEntity();
-            entity.setProblemId(rs.getInt("problem_id"));
-            entity.setTitle(rs.getString("title"));
-            entity.setStatus(rs.getByte("status"));
-            entity.setValidatorId(rs.getShort("validator_id"));
-            entity.setTimeLimit(rs.getShort("time_limit"));
-            entity.setMemoryLimit(rs.getShort("memory_limit"));
-            entity.setAuthor(rs.getString("author"));
-            entity.setSource(rs.getString("source"));
-            entity.setOwner(rs.getInt("owner"));
-            entity.setContext(rs.getString("context"));
-            entity.setCreateTime(rs.getTimestamp("create_time"));
-            entity.setLastUpdateTime(rs.getTimestamp("last_update_time"));
-            return entity;
-        }
-    }
-
-    private static final class EntitysRowMapper implements RowMapper<ProblemsEntity> {
         @Override
         public ProblemsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             ProblemsEntity entity = new ProblemsEntity();

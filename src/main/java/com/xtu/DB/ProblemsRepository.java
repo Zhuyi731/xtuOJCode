@@ -16,9 +16,9 @@ public interface ProblemsRepository {
 
     ProblemsVO queryPage(int start);
 
-    ModifyProblemsVO queryPage(int start, int size, String id);
+    ModifyProblemsVO queryModifyPage(int start, int size, int userId);
 
-    ModifyProblemsVO queryPage(int start, String id);
+    ModifyProblemsVO queryModifyPage(int start, int userId);
 
     ProblemsEntity findOne(ProblemsDTO problemsDTO);
 
