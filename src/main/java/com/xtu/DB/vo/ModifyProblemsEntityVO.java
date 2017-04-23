@@ -18,6 +18,10 @@ public class ModifyProblemsEntityVO {
      */
     private String title;
     /**
+     * 题目状态（0不可见，1可见）
+     */
+    private byte status = 1;
+    /**
      * 判题验证器ID，0为默认验证器
      */
     private short validatorId;
