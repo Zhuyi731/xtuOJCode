@@ -6,7 +6,7 @@
         <div class="navbar-header">
             <a href="/index" class="navbar-brand">XTUOJ</a>
         </div>
-        <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;color:white;">
+        <ul class="nav navbar-nav" style="font-size:18px;margin:20px auto;text-align:center;">
             <li><a href="/index" style="color:white;">Home</a></li>
             <li><a href="/problem/problems/0" style="color:white;">Problem Set</a></li>
             <li><a href="/ranklist/0" style="color:white;">Ranklist</a></li>
@@ -21,9 +21,9 @@
                 <a href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
                    style="width: 160px;">${userId} zhuyi<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Self Info</a></li>
+                    <li><a href="/main">Self Info</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </li>
         </c:if>

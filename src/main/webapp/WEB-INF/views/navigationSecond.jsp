@@ -4,7 +4,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>Navigation</title>
@@ -38,9 +38,9 @@
                 <a href="#" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
                    style="width: 160px;">${userId} zhuyi<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Self Info</a></li>
+                    <li><a href="/main">Self Info</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </li>
         </c:if>
@@ -50,7 +50,6 @@
             </a>
         </c:if>
     </div>
-
 </div>
 </div>
 </body>
