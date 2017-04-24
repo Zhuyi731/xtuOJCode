@@ -117,7 +117,7 @@ public class RunsRepositoryImp implements RunsRepository {
     @Override
     public StatusVO queryStatusList(int start, int size) {
         String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`, " +
-                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, LENGTH(`runs`.`code`) code_length," +
+                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, `runs`.`code`, LENGTH(`runs`.`code`) code_length," +
                 " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`,`runs`.`open`," +
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
@@ -125,6 +125,9 @@ public class RunsRepositoryImp implements RunsRepository {
                 " LIMIT ?, ?;";
         List<StatusEntityVO> entityList = jdbcOperations.query(sql,
                 new StatusEntityVORowMapper(), start * size, size);
+
+        hideCode(entityList);
+
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
         vo.setStart(start);
@@ -140,7 +143,7 @@ public class RunsRepositoryImp implements RunsRepository {
     @Override
     public StatusVO queryStatusList(int start, int size, StatusDTO statusDTO) {
         String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`, " +
-                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, LENGTH(`runs`.`code`) code_length," +
+                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`,`runs`.`code`,LENGTH(`runs`.`code`) code_length," +
                 " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`, `runs`.`open`," +
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
@@ -170,11 +173,20 @@ public class RunsRepositoryImp implements RunsRepository {
                 statusDTO.getLanguage(),
                 statusDTO.getId(),
                 start * size, size);
+
+        hideCode(entityList);
+
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
         vo.setTotal(statusListCount());
         vo.setStart(start);
         return vo;
+    }
+
+    private void hideCode(List<StatusEntityVO> entityList) {
+        for (StatusEntityVO vo : entityList) {
+            vo.setCode("");
+        }
     }
 
     @Override
