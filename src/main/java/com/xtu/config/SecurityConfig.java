@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/teacher/**").hasAuthority("" + Constant.TEACHER)
                 .antMatchers("/student/**").hasAuthority("" + Constant.STUDENT)
                 .antMatchers("/info/**", "/info").authenticated()
+                .antMatchers("**/submit", "**/code").authenticated()
                 .anyRequest().permitAll()
 //                .and() .requiresChannel() .antMatchers("/login", "/login/**").requiresSecure()
 //                .and().csrf().disable();
