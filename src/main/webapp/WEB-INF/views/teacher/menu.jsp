@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      }
 	</style>
 	</head>
-  <body style="background-color:DCDCDC">
+  <body style="background-color:#DCDCDC">
 	  <div class="head" align="center">
 	     	<p size="5px" class="text-muted">教师后台管理</p>
 	  </div>

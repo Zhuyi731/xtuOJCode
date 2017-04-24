@@ -1,19 +1,20 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<!DOCTYPE HTML >
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>题库</title>
+    <base href="<%=basePath%>">
+    <title>Problem Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
-    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navigation.jsp" %>
+<%@ include file="/WEB-INF/views/navigation.jsp"%>
 <div class="search">
     <form role="form" method="post" class="form-inline">
         <div class="form-group">

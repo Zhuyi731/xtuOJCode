@@ -1,33 +1,29 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/4/18
-  Time: 16:03
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<!DOCTYPE  HTML>
 <html>
 <head>
+    <base href="<%=basePath%>">
     <title>Online Status</title>
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="type/css"/>
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <style type="text/css">
         h1 {
             text-align: center;
             color: blue;
             size: 30px;
         }
-
         .search {
             margin-top: 20px;
             text-align: center;
         }
-
         thead {
             background-color: #2C333D;
             color: white;
         }
-
         .status {
             width: 1040px;
         }

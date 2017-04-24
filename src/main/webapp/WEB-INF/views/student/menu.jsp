@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</script>
   </head>
-  <body style="background-color:DCDCDC">
+  <body style="background-color:#DCDCDC">
   <div class="head" align="center">
       <p size="5px" class="text-muted">xxx同学，你好！</p>
   </div>

@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body style="background-color:DCDCDC">
+<body style="background-color:#DCDCDC">
 <div class="head" align="center">
     <p size="5px" class="text-muted">管理员后台管理</p>
 </div>
