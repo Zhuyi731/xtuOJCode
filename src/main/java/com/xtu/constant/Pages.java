@@ -175,4 +175,8 @@ public class Pages {
      * 老师和管理员通用目录
      */
     public static final String COMMON = "common";
+    /**
+     * 显示提交详情
+     */
+    public static final String CODE_PAGE = "Code";
 }
