@@ -254,7 +254,7 @@ public class ProblemController {
             Model model) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         // TODO: 2017/4/22 adjust
-        id = "2013551830";
+        id = "123";
         UsersEntity usersEntity = usersRepository.findOne(id);
         ModifyProblemsVO vo = problemsRepository.queryModifyPage(0, usersEntity.getUserId());
         model.addAttribute("vo", vo);

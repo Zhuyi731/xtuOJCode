@@ -43,8 +43,8 @@
         </div>
     </form>
 </div>
-<div class="page" style="margin:0px 160px;">
-    <ul class="pager">
+<div class="page" align="justify" style="margin:0px 160px; text-align: justify" >
+    <ul class="pager" >
         <li class="previous"><a href="/problem/proManager/0">&laquo;&laquo;The First Page</a></li>
         <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/problem/proManager/${vo.start-1}">&laquo;Previous Page</a></li>
@@ -62,12 +62,13 @@
         <tr>
             <td class="col-md-1">Pro.ID</td>
             <td class="col-md-1 col-xs-1">Title</td>
-            <td class="col-md-1 col-xs-1">authority</td>
+            <td class="col-md-1 col-xs-1">Status</td>
             <td class="col-md-1 col-xs-1">Time Limit(ms)</td>
             <td class="col-md-1 col-xs-1">Memory Limit(MB)</td>
             <td class="col-md-1 col-xs-1">Author</td>
             <td class="col-md-1 col-xs-1">AC/SUBMIT</td>
             <td class="col-md-1 col-xs-1">ratio</td>
+            <td class="col-md-1 col-xs-1">最后更新时间</td>
             <td class="col-md-2 col-xs-2">点击进入修改</td>
             <td class="col-md-1 col-xs-1"><input type="checkbox" id="checkAll" onclick="checkAll()">全选</td>
         </tr>
@@ -75,14 +76,15 @@
         <tbody>
         <c:forEach items="${vo.entityList}" var="pro">
             <tr>
-                <td><c:out value="${pro.problemId}"></c:out></td>
-                <td><c:out value="${pro.title}"></c:out></td>
-                    <%--<td><c:out value="${pro.status}"></c:out></td>--%>
-                    <%--<td><c:out value="${pro.timeLimit}"></c:out></td>--%>
-                    <%--<td><c:out value="${pro.memoryLimit}"></c:out></td>--%>
-                    <%--<td><c:out value="${pro.author}"></c:out></td>--%>
-                <td></td>
-                <td></td>
+                <td>${pro.problemId}</td>
+                <td>${pro.title}</td>
+                <td>${pro.status}</td>
+                <td>${pro.timeLimit}</td>
+                <td>${pro.memoryLimit}</td>
+                <td>${pro.author}</td>
+                <td>${pro.acProblemsNum}/${pro.submitProblemsNum}</td>
+                <td>${pro.ratio}</td>
+                <td>${lastUpdateTime}</td>
                 <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
                 <td><input type="checkbox" name="select"></td>
             </tr>
