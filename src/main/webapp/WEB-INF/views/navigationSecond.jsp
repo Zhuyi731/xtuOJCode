@@ -9,7 +9,6 @@
 <head>
     <title>Navigation</title>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,5 +51,7 @@
     </div>
 </div>
 </div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
