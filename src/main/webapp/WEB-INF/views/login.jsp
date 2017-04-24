@@ -19,11 +19,11 @@
                 <strong> Please Login First </strong>
             </div>
             <div class="panel-body">
-                <sf:form commandName="usersEntity" role="form">
+                <sf:form commandName="usersEntity" role="form" method="post">
                     <br>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Username</span>
-                        <input type="text" class="form-control" id="id"  name="id" placeholder="Enter your username">
+                        <input type="text" class="form-control" id="username"  name="username" placeholder="Enter your username">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Password</span>
