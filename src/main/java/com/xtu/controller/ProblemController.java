@@ -1,13 +1,16 @@
 package com.xtu.controller;
 
 import com.xtu.DB.ProblemsRepository;
+import com.xtu.DB.RunsRepository;
 import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.ProblemsDTO;
+import com.xtu.DB.dto.SubmitDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
 import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.ModifyProblemsVO;
+import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
@@ -43,6 +46,8 @@ public class ProblemController {
     ProblemsRepository problemsRepository;
     @Autowired
     TestdatasRepository testdatasRepository;
+    @Autowired
+    RunsRepository runsRepository;
 
     @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX + "/{start}", method = RequestMethod.GET)
     public String showTotalProblems(
@@ -305,9 +310,23 @@ public class ProblemController {
             @PathVariable("id") @NotNull int id,
             Model model) {
         OUT.prt("requst", Pages.SUBMIT);
-        model.addAttribute("id", id);
+        ProblemsEntityVO entity = new ProblemsEntityVO();
+        entity.setProblemId(id);
+        model.addAttribute("entity", entity);
+        OUT.prt("entity", entity);
         // TODO: 2017/4/17 select from DB
         String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.POST)
+    public String submitPost(
+            @NotNull @Valid SubmitDTO submitDTO,
+            Model model) {
+        OUT.prt("post", Pages.SUBMIT);
+        OUT.prt("submitDTO", submitDTO);
+        runsRepository.save(submitDTO);
+        String res = "redirect:/" + Pages.STATUS;
         return res;
     }
 }
