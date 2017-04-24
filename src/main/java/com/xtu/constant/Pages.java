@@ -168,6 +168,10 @@ public class Pages {
      */
     public static final String SHOW_NOTICE = "showNews";
     /**
+     * 查看公告详情
+     */
+    public static final String SHOW_NOTICE_DETAIL = "newsDetail";
+    /**
      * 老师和管理员通用目录
      */
     public static final String COMMON = "common";
