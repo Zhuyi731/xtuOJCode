@@ -4,11 +4,16 @@ import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.vo.RankVO;
 import com.xtu.DB.vo.StatusVO;
 
+import java.util.Map;
+
 /**
  * Created by Ilovezilian on 2017/4/12.
  */
 
 public interface RunsRepository {
+
+    Map<String, Integer> queryNum(int problemId);
+
     Long rankListCount();
 
     RankVO queryRankList(int start, int size);
@@ -22,7 +27,6 @@ public interface RunsRepository {
     Long statusListCount();
 
     StatusVO queryStatusList(int start, int size);
-
 
     StatusVO queryStatusList(int start);
 

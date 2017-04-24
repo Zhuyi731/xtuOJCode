@@ -82,23 +82,23 @@ public class ProblemsEntity {
      * 题目描述
      */
     @NotNull
-    private String problemDes;
+    private String problemDes = " ";
     /**
      * 输入描述
      */
     @NotNull
-    private String inputDes;
+    private String inputDes = " ";
     /**
      * 输出描述
      */
     @NotNull
-    private String outputDes;
+    private String outputDes = " ";
     /**
      * 输入样例
      */
-    private String sampleInput;
+    private String sampleInput = " ";
     /**
      * 输出样例
      */
-    private String sampleOutput;
+    private String sampleOutput = " ";
 }

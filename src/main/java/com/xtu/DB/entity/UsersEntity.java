@@ -22,7 +22,7 @@ public class UsersEntity {
     @NotNull
     @Size(min = 5, max = 10)
     private String id;
-    @NotNull
+//    @NotNull
     @Size(min = 2, max = 20)
     private String name;
     @Size(min = 0, max = 50)
