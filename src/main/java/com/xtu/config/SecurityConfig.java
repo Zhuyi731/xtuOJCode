@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by Ilovezilian on 2017/4/18.
@@ -26,13 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/login")
+//                .and().rememberMe().tokenValiditySeconds(2419200).key("haha")
                 .and()
-//                .rememberMe()
-//                .tokenValiditySeconds(2419200)
-//                .key("haha")
-//                .and()
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) //don't contain this will use post method to logout
+                .logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/test/createTest").hasAnyAuthority("" + Constant.ADMIN, "" + Constant.TEACHER)
@@ -43,8 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/info/**", "/info").authenticated()
                 .anyRequest().permitAll()
 //                .and() .requiresChannel() .antMatchers("/login", "/login/**").requiresSecure()
+//                .and().csrf().disable();
                 .and()
-                .headers().frameOptions().sameOrigin(); //setting X-Frame-Options from DENY to SAMEORIGIN
+                .headers().frameOptions().sameOrigin();  //setting X-Frame-Options from DENY to SAMEORIGIN
         // TODO: 2017/4/23 remove below
 //                .and().csrf().disable();
     }

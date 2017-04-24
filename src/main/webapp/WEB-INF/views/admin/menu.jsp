@@ -86,7 +86,7 @@
 </div>
 
 <div class="dropdown">
-    <a class="btn btn-danger form-control" type="button" href="/logout">退出登录</a>
+    <a class="btn btn-danger form-control" type="button" href="/logout" target="_top">退出登录</a>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
