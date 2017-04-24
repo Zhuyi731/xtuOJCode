@@ -1,8 +1,12 @@
 package com.xtu.DB.jdbc;
 
 import com.xtu.DB.RunsRepository;
+import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.StatusDTO;
+import com.xtu.DB.dto.SubmitContestDTO;
+import com.xtu.DB.dto.SubmitDTO;
 import com.xtu.DB.entity.RunsUsersEntity;
+import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.RankEntityVO;
 import com.xtu.DB.vo.RankVO;
 import com.xtu.DB.vo.StatusEntityVO;
@@ -27,6 +31,24 @@ import java.util.Map;
 public class RunsRepositoryImp implements RunsRepository {
     @Autowired
     JdbcOperations jdbcOperations;
+    @Autowired
+    UsersRepository usersRepository;
+
+    @Override
+    public StatusEntityVO queryCode(int runsId, String id) {
+        String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`,  " +
+                "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`,`runs`.`code`, " +
+                " LENGTH(`runs`.`code`) code_length, `runs`.`open`," +
+                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`, " +
+                " `users`.`name`, `users`.`id` " +
+                " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id` " +
+                " WHERE `run_id` = ?";
+        StatusEntityVO entity = jdbcOperations.queryForObject(sql, new StatusEntityVORowMapper(), runsId);
+        if (entity.getId().equals(id) || entity.getOpen() == 1) {
+            return entity;
+        }
+        return null;
+    }
 
     @Override
     public Map<String, Integer> queryNum(int problemId) {
@@ -34,7 +56,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 " COUNT(`run_id`) submitProblemsNum FROM " +
                 Tables.RUNS +
                 " WHERE `problem_id` = ?";
-                Map<String, Object> map = jdbcOperations.queryForMap(sql, problemId);
+        Map<String, Object> map = jdbcOperations.queryForMap(sql, problemId);
         Map<String, Integer> resMap = new HashMap<>();
         resMap.put("acProblemsNum", Integer.parseInt(map.get("acProblemsNum").toString()));
         resMap.put("submitProblemsNum", Integer.parseInt(map.get("submitProblemsNum").toString()));
@@ -96,7 +118,7 @@ public class RunsRepositoryImp implements RunsRepository {
     public StatusVO queryStatusList(int start, int size) {
         String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`, " +
                 "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, LENGTH(`runs`.`code`) code_length," +
-                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`," +
+                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`,`runs`.`open`," +
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
                 " ORDER BY `runs`.`submit_time` DESC" +
@@ -119,7 +141,7 @@ public class RunsRepositoryImp implements RunsRepository {
     public StatusVO queryStatusList(int start, int size, StatusDTO statusDTO) {
         String sql = "SELECT `runs`.`run_id`, `runs`.`problem_id`, `runs`.`result_code`, " +
                 "`runs`.`run_time`, `runs`.`run_memory`, `runs`.`language`, LENGTH(`runs`.`code`) code_length," +
-                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`," +
+                " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`, `runs`.`open`," +
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
                 " WHERE run_id != 0";
@@ -158,6 +180,37 @@ public class RunsRepositoryImp implements RunsRepository {
     @Override
     public StatusVO queryStatusList(int start, StatusDTO statusDTO) {
         return queryStatusList(start, Integer.parseInt(Constant.PAGE_SIZE), statusDTO);
+    }
+
+    @Override
+    public void save(SubmitDTO submitDTO) {
+        UsersEntity usersEntity = usersRepository.findOne(submitDTO.getId());
+        String sql = "INSERT INTO " +
+                Tables.RUNS +
+                " (`user_id`, `problem_id`, `code`, `language`,`open`) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        jdbcOperations.update(sql,
+                usersEntity.getUserId(),
+                submitDTO.getProblemId(),
+                submitDTO.getCode(),
+                submitDTO.getLanguage(),
+                submitDTO.getOpen());
+    }
+
+    @Override
+    public void save(SubmitContestDTO submitContestDTO) {
+        String sql = "INSERT INTO " +
+                Tables.RUNS +
+                " (`user_id`, `problem_id`, `contest_id`, `no`, `code`, `language`,`open`)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcOperations.update(sql,
+                submitContestDTO.getUserId(),
+                submitContestDTO.getProblemId(),
+                submitContestDTO.getContestId(),
+                submitContestDTO.getNo(),
+                submitContestDTO.getCode(),
+                submitContestDTO.getLanguage(),
+                submitContestDTO.getOpen());
     }
 
     private static final class RunsEntityRowMapper implements RowMapper<RunsUsersEntity> {
@@ -221,7 +274,7 @@ public class RunsRepositoryImp implements RunsRepository {
             entity.setProblemId(rs.getInt("problem_id"));
             entity.setContestId(rs.getInt("contest_id"));
             entity.setNo(rs.getByte("no"));
-//            entity.setCode(rs.getString("code"));
+            entity.setCode(rs.getString("code"));
             entity.setCodeLength(rs.getLong("code_length"));
             entity.setLanguage(rs.getString("language"));
             entity.setRunTime(rs.getInt("run_time"));
@@ -229,6 +282,7 @@ public class RunsRepositoryImp implements RunsRepository {
             entity.setResultCode(rs.getByte("result_code"));
             entity.setResultMsg(rs.getString("result_msg"));
             entity.setSubmitTime(rs.getTimestamp("submit_time"));
+            entity.setOpen(rs.getByte("open"));
 
             entity.setId(rs.getString("id"));
             entity.setName(rs.getString("name"));

@@ -1,7 +1,10 @@
 package com.xtu.DB;
 
 import com.xtu.DB.dto.StatusDTO;
+import com.xtu.DB.dto.SubmitContestDTO;
+import com.xtu.DB.dto.SubmitDTO;
 import com.xtu.DB.vo.RankVO;
+import com.xtu.DB.vo.StatusEntityVO;
 import com.xtu.DB.vo.StatusVO;
 
 import java.util.Map;
@@ -11,6 +14,7 @@ import java.util.Map;
  */
 
 public interface RunsRepository {
+    StatusEntityVO queryCode(int runsId, String id);
 
     Map<String, Integer> queryNum(int problemId);
 
@@ -33,4 +37,8 @@ public interface RunsRepository {
     StatusVO queryStatusList(int start, int size, StatusDTO statusDTO);
 
     StatusVO queryStatusList(int start, StatusDTO statusDTO);
+
+    void save(SubmitDTO submitDTO);
+
+    void save(SubmitContestDTO submitContestDTO);
 }
