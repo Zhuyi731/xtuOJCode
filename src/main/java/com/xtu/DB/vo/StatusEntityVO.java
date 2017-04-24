@@ -57,6 +57,10 @@ public class StatusEntityVO {
      * 提交时间
      */
     private Timestamp submitTime;
+    /**
+     * 代码公开（0不公开1公开）
+     */
+    private byte open;
 
     /**
      * ID
