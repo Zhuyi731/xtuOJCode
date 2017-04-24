@@ -34,4 +34,11 @@ public class NoticeController {
         String res = Pages.NOTICE + "/" + Pages.SHOW_NOTICE;
         return res;
     }
+
+    @RequestMapping(value = {"/" + Pages.SHOW_NOTICE_DETAIL, "/" + Pages.SHOW_NOTICE + "/{id}"}, method = RequestMethod.GET)
+    public String showNoticeDetail() {
+        OUT.prt("request", Pages.SHOW_NOTICE_DETAIL);
+        String res = Pages.NOTICE + "/" + Pages.SHOW_NOTICE_DETAIL;
+        return res;
+    }
 }
