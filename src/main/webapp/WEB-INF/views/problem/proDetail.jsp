@@ -14,9 +14,13 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/navigation.jsp" %>
-<div class="head">
+<div class="head" align="middle">
+<h1 class="title" >${entity.title}</h1>
+<small >Time Limit:${entity.timeLimit}</small>
+<small >Memory Limit:${entity.memoryLimit}</small><br>
+<%--<small >Accept:${entity.acProblemsNum}</small>--%>
+<%--<small >Submit:${entity.submitProblemsNum}</small>--%>
 </div>
-<h1 class="title" align="middle">${entity.title}</h1>
 <div class="proDetail">
     <h3>Problem Description</h3>
     <p width="800px" height="auto">

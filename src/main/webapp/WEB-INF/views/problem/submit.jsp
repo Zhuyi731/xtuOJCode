@@ -38,6 +38,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	</select> 
           </div>
           </div>
+              <div class="form-group">
+                  <label for="open" class="col-md-2 col-md-offset-2 control-label">是否公开代码:</label>
+                  <div class="col-md-4">
+                      <select id="open" name="open" class="form-control">
+                          <option value="0" selected="selected">否</option>
+                          <option value="1" >是</option>
+                      </select>
+                  </div>
+              </div>
           <div class="form-group">
            <label for="code" class="col-md-2 col-md-offset-2 control-label">Source code:</label>
             <div class="col-md-6 " >

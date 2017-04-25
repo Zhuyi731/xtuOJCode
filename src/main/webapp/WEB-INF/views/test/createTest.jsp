@@ -15,20 +15,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body>
   <%@include file="/WEB-INF/views/navigation.jsp"%>
-  <form class="form-horizontal form-label-left" role="form">
+  <form class="form-horizontal form-label-left" role="form" method="post">
       <div class="item form-group bad">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">比赛名称<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="title" name="title" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Enter Contest Title" required="required" type="text">
-          </div>
-          <div class="alert">input is not complete</div></div>
+              <input id="title" name="title" class="form-control col-md-7 col-xs-12" placeholder="Enter Contest Title" required="required" type="text">
+          </div></div>
       <div class="item form-group bad">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="startTime">开始时间</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="datetime-local" id="startTime" name="startTime" required="required" class="form-control col-md-7 col-xs-12">
-          </div>
-          <div class="alert">Start Time is invalid</div></div>
+          </div></div>
       <div class="item form-group bad">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="frozenStartTime">封榜时间</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -40,7 +38,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="datetime-local" id="endTime" name="endTime"required="required" class="form-control col-md-7 col-xs-12">
           </div>
-          <div class="alert">End Time is invalid</div>
       </div>
       <div class="item form-group bad">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endTime">比赛类型</label>
@@ -73,10 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <textarea id="anouncement"  name="anouncement"  cols="60" rows="5"></textarea>
           </div>
       </div>
-      <div class="item form-group">
-          <div class="col-md-2 col-sm-2 col-xs-4" align="center">
-          <input type="submit" class="btn btn-primary btn-lg" value="创建">
-          </div>
+      <div class="item form-group" align="right" style="margin-right: 50px">
+          <input type="submit" class="btn btn-primary btn-lg" value="创建" style="width:120px;">
       </div>
   </form>
   </body>

@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML >
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="search">
     <form role="form" method="post" class="form-inline">
       <div class="form-group">
-        <label for="proID" class="control-label col-md-2 col-sm-2">Pro.ID:</label>
+        <label for="title" class="control-label col-md-2 col-sm-2">Title:</label>
         <div class=col-md-2">
           <input type="text" class="form-control" name="title" id="title" placeholder="考试名称">
         </div>
@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </form>
   </div>
   <div class="container">
-    <div class="page">
+    <div class="page" align="justify">
       <ul class="pager">
         <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
         <c:if test="${vo.start != 0}">
@@ -49,14 +49,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </c:if>
         <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Pages</li>
         <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
-        <%--<c:if test="${vo.start+1 < vo.total}">--%>
+        <c:if test="${vo.start+1 < vo.total}">
         <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
-        <%--</c:if>--%>
+        </c:if>
       </ul>
     </div>
   </div>
-  <div class="contest">
-    <table class="table table-hover" style="width: 1000px;margin: 30px 100px ">
+  <div class="contest" style="padding:0px 100px;">
+    <table class="table table-hover" style="width: 1000px;margin:60px 100px ">
       <thead>
       <tr>
         <th class="col-md-2">Contest.ID</th>

@@ -55,3 +55,7 @@
 .logBtn>ul>li{
     width:160px;
 }
+.private{
+    font-color:RED;
+    font-size:larger;
+}
