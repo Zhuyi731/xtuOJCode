@@ -2,87 +2,59 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/4/20
-  Time: 16:43
+  Time: 16:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
+<html>
 <head>
-    <title>createNewUsers</title>
+    <title>add Student</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="../../../css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="../../../css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<form method="post" class="form-horizontal">
-    <div class="form-group">
-        <label for="userId" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">账号:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" id="userId" name="userId" class="form-control ">
+<div class="container" align="center">
+    <div class="panel panel-default panel-primary" style="width: 1000px;">
+        <div class="panel panel-heading">添加用户</div>
+        <div class="panel panel-body" >
+            <form method="post" role="form" class="form-horizontal" align="center">
+                <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-1" for="username">Username</label>
+                    <div class="col-md-2 col-sm-2">
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-1" for="password">Password</label>
+                    <div class="col-md-2 col-sm-2">
+                        <input type="text" class="form-control" id="password" name="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-1" for="authority">Authority</label>
+                    <div class="col-md-2 col-sm-2">
+                        <select id="authority" name="authority" class="form-control">
+                            <option value="0">管理员</option>
+                            <option value="1">老师</option>
+                            <option value="2">学生</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-1" for="status">Status</label>
+                    <div class="col-md-2 col-sm-2">
+                        <input type="text" class="form-control" id="status" name="status">
+                    </div>
+                </div>
+            <div class="panel panel-footer">
+                <input type="submit" value="Confirm" class="btn btn-primary" style="width: 150px;">
+            </div>
+            </form>
         </div>
     </div>
-    <div class="form-group">
-        <label for="password" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">密码:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" id="password" name="password" class="form-control ">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="name" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">姓名:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" id="name" name="name" class="form-control ">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="college" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">院系：</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" id="college" name="college" class="form-control " value=${student.major} disabled>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="sex" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">性别：</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" id="sex" name="sex" class="form-control " value="" disabled>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="motto" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">motto:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" class="form-control" id="motto" name="motto" value="">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="nickname" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">Nickname：</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" class="form-control" name="nickname" id="nickname">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="QQ" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">QQ:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" class="form-control" id="QQ" name="QQ">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="email" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">email:</label>
-        <div class="col-sm-3 col-md-3">
-            <input type="text" class="form-control" id="email" name="email" value="">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="status" class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 control-label">学生状态:</label>
-        <div class="col-sm-3 col-md-3" style="padding-left:0;" id="status">
-            <input type="radio" name="status" value="1" checked="checked">是
-            <input type="radio" name="status" value="0">否
-        </div>
-    </div>
-    <div class="form-group">
-    </div>
-    <div class="form-group" align="middle">
-        <div class="col-sm-1 col-sm-offset-4 col-md-1 col-md-offset-1">
-            <input type="submit" class="form-control" id="submit" value="修改">
-        </div>
-        <div class="col-sm-1 col-md-1">
-            <input type="reset" class="form-control" id="reset" value="重置">
-        </div>
-    </div>
-</form>
+</div>
 </body>
 </html>

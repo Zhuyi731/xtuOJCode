@@ -10,8 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>Teacher</title>  
 	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/custom.css">
   </head>
    <frameset rows="15%,*" cols="*" frameborder="0">
    <frame src="navigationSecond" name="topFrame" scrolling="no" marginheight="0" noresize frameborder="0">

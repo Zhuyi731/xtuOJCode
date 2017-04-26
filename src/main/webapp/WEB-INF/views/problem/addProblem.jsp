@@ -10,7 +10,6 @@
     <base href="<%=basePath%>">
     <title>添加题目</title>
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style type="text/css">
         .head{
