@@ -11,41 +11,11 @@
     <title>Create a contest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <script>
-        function showProblem() {
-            window.open('/contestAddProblems.jsp', 'newwindow', 'height=600, width=800, top=400, left=400, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
-        }
-        function next() {
-            var title = document.getElementById("title");
-            var part1 = document.getElementById("part1");
-            var part2 = document.getElementById("part2");
-            part1.style.display = 'none';
-            part2.style.display = '';
-        }
-        function back() {
-            var part1 = document.getElementById("part1");
-            var part2 = document.getElementById("part2");
-            part2.style.display = 'none';
-            part1.style.display = '';
-        }
-        function check(){
-            alert("in");
-            var title = document.getElementById("title");
-            var startTimeStr = document.getElementById("startTimeStr");
-            var endTimeStr = document.getElementById("endTimeStr");
-            if (title.value == "" || startTimeStr.value == "" || endTimeStr.value == "") {
-                alert("请将选项填写完整");
-                return false;
-            }else {
-            return true;
-            }
-        }
-    </script>
-</head>
+    </head>
 <body>
 <%@include file="/WEB-INF/views/navigation.jsp" %>
-<form role="form" class="form-horizontal" method="post" >
-    <div id="part1" style="width: 1000px;margin-left:200px" align="center">
+<sf:form role="form" class="form-horizontal" method="post" onsubmit="return check()">
+    <div id="part1" style="width:1000px;margin-left:200px;display:;" align="center">
         <div class="panel panel-default  panel-danger">
             <div class="panel panel-heading">比赛信息填写(*号为必填选项)</div>
             <div class="panel panel-body">
@@ -54,6 +24,7 @@
                             class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input id="problemList" type="hidden" name="problemList">
                         <input id="title" name="title" class="form-control col-md-7 col-xs-12"
                                placeholder="Enter Contest Title"
                                required="required" type="text">
@@ -124,23 +95,46 @@
             </div>
         </div>
     </div>
-    <div id="part2" style="display: none; width: 1000px;margin-left:200px;">
+    <div id="part2" style="display:none; width: 1000px;margin-left:200px;">
         <div class="panel panel-default panel-danger">
             <div class="panel panel-heading" align="center">添加题目</div>
-            <div class="panel panel-body">
+            <div class="panel panel-body" align="center">
+                <div  class="item form-group"   style="width:700px;">
+                    <table id="addProblemTable" class="table table-bordered ">
+                        <thead>
+                        <tr>
+                            <td class="col-md-2">考试题目序号</td>
+                            <td class="col-md-2">题目ID</td>
+                            <td class="col-md-2">分数</td>
+                            <td class="col-md-2">删除</td>
+                        </tr>
+                        </thead>
+                        <tbody id="problemSequence">
+                        <tr id="line1">
+                            <td id="No1">1</td>
+                            <td ><input id="problemId1" type="number"></td>
+                            <td ><input id="score1" type="number"></td>
+                            <td ><button class="btn btn-danger btn-sm" id="d1" onclick="deleteProblem(1)">删除</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="item form-group" align="center">
-                    <button type="button" class="btn btn-warning" onclick="showProblem()">添加题目</button>
+                    <button type="button" class="btn btn-warning" id="addButton" onclick="addProblem(1)" style="width:100px; "><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
             </div>
             <div class="panel panel-footer">
                 <div class="item form-group" align="center">
-                    <button type="button" class="btn btn-primary bnt-lg" style="width:120px;" onclick="back()">上一步
+                    <button type="button" class="btn btn-primary bnt-lg" id="deleteButton1" style="width:120px;" onclick="back()">上一步
                     </button>
-                    <input type="submit" class="btn btn-primary " value="创建" style="width:120px;" >
+                    <input type="submit" class="btn btn-primary " value="创建" onclick="check()" style="width:120px;" >
+                    <input type="reset" class="btn btn-primary " value="重置"  style="width:120px;" >
+
                 </div>
             </div>
         </div>
     </div>
-</form>
+</sf:form>
+<script src="/js/custom.js" rel="script" language="JavaScript"></script>
 </body>
 </html>
