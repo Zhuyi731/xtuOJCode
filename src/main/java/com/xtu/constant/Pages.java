@@ -144,6 +144,10 @@ public class Pages {
      */
     public static final String CREATE_TEST = "createTest";
     /**
+     * 编辑比赛
+     */
+    public static final String MODIFY_TEST = "modifyTest";
+    /**
      * 加入比赛
      */
     public static final String JOIN_TEST = "joinTest";
