@@ -8,13 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>所有学生</title>
+   <title>所有学生</title>
     
 	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-	<link rel="stylesheet" href="css/bootstrap.css">
   	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/custom.css">
     <style type="text/css">
     .container{
       margin-top:50;

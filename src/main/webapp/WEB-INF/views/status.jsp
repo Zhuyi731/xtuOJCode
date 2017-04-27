@@ -115,6 +115,7 @@
             <td class="col-md-1 col-sm-1">Result</td>
             <td class="col-md-1 col-sm-1">Memory</td>
             <td class="col-md-1 col-sm-1">Time</td>
+            <td class="col-md-1 col-sm-1">Code Status</td>
             <td class="col-md-1 col-sm-1">Language</td>
             <td class="col-md-1 col-sm-1">Code.Len</td>
             <td class="col-md-2 col-sm-1">Submit Time</td>
@@ -128,6 +129,12 @@
                 <td>${entity.resultCode}</td>
                 <td>${entity.runMemory}</td>
                 <td>${entity.runTime}</td>
+                <c:if test="${entity.open eq 0}">
+                    <td><span class="private">Private</span></td>
+                </c:if>
+                <c:if test="${entity.open eq 1}">
+                <td><span class="public"><a href="/codeDetail/${entity.runId}">${entity.language}>Public</a></span></td>
+                </c:if>
                 <td>${entity.language}</td>
                 <td>${entity.codeLength}</td>
                 <td>${entity.submitTime}</td>

@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>用户注册</title>    
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
 <%@ include file="/WEB-INF/views/navigation.jsp"%>

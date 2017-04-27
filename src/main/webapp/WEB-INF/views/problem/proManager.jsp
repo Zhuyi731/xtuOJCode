@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body style="padding-left: 100px;">
-<div  style="margin-top:50px;">
+<div style="margin-top:50px;">
     <form class="form-inline" method="get" role="form">
         <div class="form-group">
             <label class="control-label col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2" for="problemId">Pro.ID</label>
@@ -43,8 +43,8 @@
         </div>
     </form>
 </div>
-<div class="page" align="justify" style="margin:0px 160px; text-align: justify" >
-    <ul class="pager" >
+<div class="page" align="justify" style="margin:0px 160px; text-align: justify">
+    <ul class="pager">
         <li class="previous"><a href="/problem/proManager/0">&laquo;&laquo;The First Page</a></li>
         <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/problem/proManager/${vo.start-1}">&laquo;Previous Page</a></li>
@@ -66,9 +66,9 @@
             <td class="col-md-1 col-xs-1">Time Limit(ms)</td>
             <td class="col-md-1 col-xs-1">Memory Limit(MB)</td>
             <td class="col-md-1 col-xs-1">Author</td>
-            <td class="col-md-1 col-xs-1">AC/SUBMIT</td>
-            <td class="col-md-1 col-xs-1">ratio</td>
+            <td class="col-md-1 col-xs-1">AC/Total(ratio)</td>
             <td class="col-md-1 col-xs-1">最后更新时间</td>
+            <td class="col-md-1 col-xs-1">数据文件</td>
             <td class="col-md-2 col-xs-2">点击进入修改</td>
             <td class="col-md-1 col-xs-1"><input type="checkbox" id="checkAll" onclick="checkAll()">全选</td>
         </tr>
@@ -82,9 +82,9 @@
                 <td>${pro.timeLimit}</td>
                 <td>${pro.memoryLimit}</td>
                 <td>${pro.author}</td>
-                <td>${pro.acProblemsNum}/${pro.submitProblemsNum}</td>
-                <td>${pro.ratio}</td>
+                <td>${pro.acProblemsNum}/${pro.submitProblemsNum}（${pro.ratio}%）</td>
                 <td>${lastUpdateTime}</td>
+                <td><a href="/problem/problemData/${pro.problemId}">数据文件</a></td>
                 <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
                 <td><input type="checkbox" name="select"></td>
             </tr>

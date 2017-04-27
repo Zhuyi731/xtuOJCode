@@ -8,9 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>add Student</title>
+    <link src="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link src="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <div class="container">
+        <div class="panel panel-default panel-primary">
+            <div class="panel panel-heading">添加学生</div>
+            <div class="panel panel-body">
 
+            </div>
+        </div>
+    </div>
 </body>
 </html>
