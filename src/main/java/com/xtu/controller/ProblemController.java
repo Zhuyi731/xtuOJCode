@@ -31,6 +31,7 @@ import javax.validation.constraints.NotNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -250,11 +251,12 @@ public class ProblemController {
 
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
     public String problemManage(
-            String id,
-            Model model) {
+            Model model,
+            Principal principal) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         // TODO: 2017/4/22 adjust
-        id = "123";
+        String id = principal.getName();
+        OUT.prt("id", id);
         UsersEntity usersEntity = usersRepository.findOne(id);
         ModifyProblemsVO vo = problemsRepository.queryModifyPage(0, usersEntity.getUserId());
         model.addAttribute("vo", vo);
