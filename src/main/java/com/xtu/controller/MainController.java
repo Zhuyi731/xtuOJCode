@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Size;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -90,14 +90,15 @@ public class MainController {
         return res;
     }
 
-    @RequestMapping(value = "/" + Pages.CODE_PAGE + "/{runId}",method = RequestMethod.POST)
+    @RequestMapping(value = "/" + Pages.CODE_PAGE + "/{runId}", method = RequestMethod.POST)
     public String CodePost(
             @PathVariable("runId") int runId,
-            @NotNull @Size(min = 1, max = 10) String id,
-            Model model){
+            Model model,
+            Principal principal) {
         OUT.prt("Post", Pages.CODE_PAGE);
         OUT.prt("runId", runId);
-        OUT.prt("id",id);
+        String id = principal.getName();
+        OUT.prt("id", id);
         runsRepository.queryCode(runId, id);
         String res = Pages.CODE_PAGE;
         return res;
