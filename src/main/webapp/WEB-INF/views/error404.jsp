@@ -3,13 +3,13 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML >
 <html>
   <head>
     <base href="<%=basePath%>">
       <title>error!</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <script type="text/javascript">
     function goback(){
      history.go(-1);

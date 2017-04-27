@@ -10,23 +10,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>All contest</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+      <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
       <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
       <link href="css/custom.css" rel="stylesheet" />
   </head>
   <body>
-  <%@include file="/WEB-INF/views/navigation.jsp"%>
+  <%@ include file="/WEB-INF/views/navigation.jsp"%>
   <div class="search">
     <form role="form" method="post" class="form-inline">
       <div class="form-group">
         <label for="title" class="control-label col-md-2 col-sm-2">Title:</label>
         <div class=col-md-2">
-          <input type="text" class="form-control" name="title" id="title" placeholder="考试名称">
+          <input type="text" class="form-control" name="title" id="title" placeholder="Contest Title">
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-2">
-          <input type="submit" class="btn btn-primary submit" style="margin-top: 25px;" value="搜索">
+          <input type="submit" class="btn btn-primary submit" style="margin-top: 25px;" value="Search">
         </div>
       </div>
     </form>

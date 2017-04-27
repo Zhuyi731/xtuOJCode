@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Navigation</title>
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,7 +26,7 @@
             <li><a href="/problem/problems/0" style="color:white;">Problem Set</a></li>
             <li><a href="/ranklist/0" style="color:white;">Ranklist</a></li>
             <li><a href="/status/0" style="color:white;">Status</a></li>
-            <li><a href="/test/test" style="color:white;">Contest</a></li>
+            <li><a href="/test/allTest/0" style="color:white;">Contest</a></li>
         </ul>
     </div>
     <security:authorize access="isAuthenticated()">
@@ -57,8 +57,6 @@
 </div>
 </div>
 <script src="js/jquery.min.js"></script>
-
-
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

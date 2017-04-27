@@ -67,8 +67,8 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
-        <li role="presentation"><a href="test/allTest" target="_top">所有比赛</a></li>
-        <li role="presentation"><a href="test/createTest" target="_top">创建比赛</a></li>
+        <li role="presentation"><a href="test/test">所有比赛</a></li>
+        <li role="presentation"><a href="test/createTest" >创建比赛</a></li>
     </ul>
 </div>
 

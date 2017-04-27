@@ -7,55 +7,48 @@ function deleteProblem(sid) {
         alert("至少添加一个题目!");
         return;
     }
-    var nodeToDelete = "line" + sid;
     var tbody = document.getElementById("problemSequence");
-    var tr = document.getElementById(nodeToDelete);
+    var tr = document.getElementById( "line" + sid);
     tbody.removeChild(tr);
     tr.innerHTML = "";
-    total--;
-    for (var i = sid + 1; i <= total + 1; i++) {
+    for (var i = sid + 1; i <= total ; i++) {
         var c = i - 1;
-        var strId = "No" + i;
-        var newId = "No" + c;
-        //修改序号
-        var node = document.getElementById(strId);
-        node.innerHTML = c;
-        node.setAttribute("id", newId);
         //修改行<tr>ID
         var trNode = document.getElementById("line" + i);
         trNode.setAttribute("id", "line" + c);
-        var deleteNodeStr = "d" + i;
-        var newDeleteNodeStr = "d" + c;
-        var deleteNode = document.getElementById(deleteNodeStr);
-        //修改button ID
-        deleteNode.setAttribute("id", newDeleteNodeStr);
+        //修改序号
+        var node = document.getElementById("No" + i);
+        node.innerHTML = c;
+        node.setAttribute("id", "No" + c);
+        //修改button ID 和 onclick
+        var deleteNode = document.getElementById("d" + i);
+        deleteNode.setAttribute("id", "d" + c);
         deleteNode.setAttribute("onclick", "deleteProblem(" + c + ")");
         //修改input ID
         var input1 = document.getElementById("problemId" + i);
         input1.setAttribute("id", "problemId" + c);
         var input2 = document.getElementById("score" + i);
         input2.setAttribute("id", "score" + c);
-        //修改addButton  sid
-        var addNode = document.getElementById("addButton");
-        addNode.setAttribute("onclick", "addProblem(" + total + ")");
-    }
-
+       }
+    //修改addButton  sid
+    total--;
+    var addNode = document.getElementById("addButton");
+    addNode.setAttribute("onclick", "addProblem(" + total + ")");
 }
 function addProblem(sid) {
     total++;
-    if (sid >= 20) {
+    sid++;
+    if (sid > 20) {
         alert("每场考试最多添加20个题目!");
     } else {
 //        改变button onclick属性
-        sid++;
-        var str = "addProblem(" + sid + ")";
         var addbutton = document.getElementById("addButton");
-        addbutton.setAttribute("onclick", str);
+        addbutton.setAttribute("onclick", "addProblem(" + sid + ")");
 //        加入新的行
         var tbody = document.getElementById("problemSequence");
         var trId = "line" + sid;
         var newnode = document.createElement("tr");
-        newnode.setAttribute("id", trId);
+        newnode.setAttribute("id", "line"+sid);
         tbody.appendChild(newnode);
         var newtr = document.getElementById(trId);
 
@@ -84,12 +77,10 @@ function addProblem(sid) {
         //加入删除按钮
         var newnode4 = document.createElement("td");
         var newButton = document.createElement("button");
-        newButton.setAttribute("class", "btn btn-danger btn-sm");
-        var newDelete = "deleteProblem(" + sid + ")";
         newButton.innerHTML = "删除";
-        newButton.setAttribute("onclick", newDelete);
-        var newID = "d" + sid;
-        newButton.setAttribute("id", newID);
+        newButton.setAttribute("class", "btn btn-danger btn-sm");
+        newButton.setAttribute("onclick",  "deleteProblem(" + sid + ")");
+        newButton.setAttribute("id", "d" + sid);
         newnode4.appendChild(newButton);
         newtr.appendChild(newnode4);
     }
@@ -110,8 +101,18 @@ function back() {
 function check() {
     var requestStr="";
     var scoreSum=0;
+    var problemList=new Array();
     for (var i = 1; i <= total; i++) {
         var a = document.getElementById("problemId" + i).value;
+        problemList[i-1]=a;
+        if(i>1){
+            for(var j=0;j<i-1;j++){
+                if(problemList[j]==a){
+                    alert("有题目重复,请注意修改！");
+                    return false;
+                }
+            }
+        }
         var b = document.getElementById("score" + i).value;
         if(a==""||b==""){
             alert("请将输入填写完整");
