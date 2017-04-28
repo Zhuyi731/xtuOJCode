@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -152,17 +153,17 @@ public class ContestRepositoryImp implements ContestRepository {
         if (-1 != contestDTO.getType()) {
             sql += " AND `type` = ?";
         } else {
-            sql += "AND `type` != ?";
+            sql += " AND `type` != ?";
         }
         if (-1 != contestDTO.getType()) {
             sql += " AND `online` = ?";
         } else {
-            sql += "AND `online` != ?";
+            sql += " AND `online` != ?";
         }
         if (-1 != contestDTO.getType()) {
             sql += " AND `status` = ?";
         } else {
-            sql += "AND `status` != ?";
+            sql += " AND `status` != ?";
         }
         return jdbcOperations.queryForObject(sql, Long.class,
                 contestDTO.getContestId(),
@@ -189,17 +190,17 @@ public class ContestRepositoryImp implements ContestRepository {
         if (-1 != contestDTO.getType()) {
             sql += " AND `type` = ?";
         } else {
-            sql += "AND `type` != ?";
+            sql += " AND `type` != ?";
         }
         if (-1 != contestDTO.getType()) {
             sql += " AND `online` = ?";
         } else {
-            sql += "AND `online` != ?";
+            sql += " AND `online` != ?";
         }
         if (-1 != contestDTO.getType()) {
             sql += " AND `status` = ?";
         } else {
-            sql += "AND `status` != ?";
+            sql += " AND `status` != ?";
         }
         sql += " LIMIT ?,?";
         List<ContestsEntity> entityList = jdbcOperations.query(sql,
@@ -209,9 +210,9 @@ public class ContestRepositoryImp implements ContestRepository {
                 contestDTO.getType(),
                 contestDTO.getOnline(),
                 contestDTO.getStatus(),
-                start, size);
+                start * size, size);
         AllContestVO vo = new AllContestVO();
-        List<AllContestEntityVO> entityVOList = vo.getEntityList();
+        List<AllContestEntityVO> entityVOList = new ArrayList<>();
         for (ContestsEntity entity : entityList) {
             AllContestEntityVO entityVO = new AllContestEntityVO();
             BeanUtils.copyProperties(entity, entityVO);
@@ -221,6 +222,7 @@ public class ContestRepositoryImp implements ContestRepository {
             entityVO.setName(usersEntity.getName());
             entityVOList.add(entityVO);
         }
+        vo.setEntityList(entityVOList);
         vo.setStart(start);
         Long total = queryContestPagesTotal(contestDTO);
         vo.setTotal(total.intValue());
@@ -233,6 +235,40 @@ public class ContestRepositoryImp implements ContestRepository {
         return queryContestPages(start, Integer.parseInt(Constant.PAGE_SIZE), contestDTO);
     }
 
+    public Long queryAllContestPagesTotal(int userId) {
+        String sql = "SELECT count(`contest_id`) from " +
+                Tables.CONTESTS +
+                " WHERE `owner` = ?";
+        return jdbcOperations.queryForObject(sql, Long.class, userId);
+    }
+
+    @Override
+    public AllContestVO queryAllContestPages(int start, int size, int userId) {
+        String sql = "SELECT  * from " +
+                Tables.CONTESTS +
+                " WHERE `owner` = ? " +
+                " LIMIT ?, ?";
+        List<ContestsEntity> entityList =
+                jdbcOperations.query(sql, new ContestsEntityRowMapper(), userId, start * size, size);
+        AllContestVO vo = new AllContestVO();
+        List<AllContestEntityVO> entityListVO = new ArrayList<>();
+        AllContestEntityVO entityVO = new AllContestEntityVO();
+        for (ContestsEntity entity : entityList) {
+            BeanUtils.copyProperties(entity, entityVO);
+            entityListVO.add(entityVO);
+        }
+        vo.setEntityList(entityListVO);
+        Long total = queryAllContestPagesTotal(userId);
+        vo.setTotal(total.intValue());
+        vo.setStart(start);
+        return vo;
+    }
+
+    @Override
+    public AllContestVO queryAllContestPages(int start, int userId) {
+        return queryAllContestPages(start, Integer.parseInt(Constant.PAGE_SIZE), userId);
+    }
+
     private static final class ContestsEntityRowMapper implements RowMapper<ContestsEntity> {
         @Override
         public ContestsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -240,7 +276,7 @@ public class ContestRepositoryImp implements ContestRepository {
             entity.setContestId(rs.getInt("contest_id"));
             entity.setTitle(rs.getString("title"));
             entity.setStartTime(rs.getTimestamp("start_time"));
-            entity.setFrozenStartTime(rs.getTimestamp("frozen_start_timeA"));
+            entity.setFrozenStartTime(rs.getTimestamp("frozen_start_time"));
             entity.setEndTime(rs.getTimestamp("end_time"));
             entity.setType(rs.getByte("type"));
             entity.setOnline(rs.getByte("online"));
