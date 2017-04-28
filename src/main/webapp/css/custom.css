@@ -59,3 +59,12 @@
     font-color:RED;
     font-size:larger;
 }
+.headTitle{
+    margin-top:100px;
+}
+.functionNav{
+    width: 800px;
+    margin-left:250px;
+    margin-top:50px;
+    text-align: center;
+}

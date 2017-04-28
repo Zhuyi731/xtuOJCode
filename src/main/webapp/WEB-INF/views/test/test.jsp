@@ -17,10 +17,15 @@
 <%
     String url = request.getHeader("referer");
     String backgroud = "http://localhost:8080/admin/menu";
+    String backgroud2 = "http://localhost:8080/teacher/menu";
     if (backgroud.equals(url)) {
         pageContext.setAttribute("nav", 0);
     } else {
+        if(backgroud2.equals(url)){
+            pageContext.setAttribute("nav", 0);
+        }else{
         pageContext.setAttribute("nav", 1);
+        }
     }
 %>
 <c:if test="${nav eq 1}">
@@ -87,7 +92,6 @@
             </c:forEach>
         </tbody>
     </table>
-</div>
 </div>
 </body>
 </html>
