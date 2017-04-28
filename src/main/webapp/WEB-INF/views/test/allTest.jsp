@@ -10,9 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>All contest</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-      <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-      <link href="css/custom.css" rel="stylesheet" />
+      <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+      <link href="/css/custom.css" rel="stylesheet" />
   </head>
   <body>
   <%@ include file="/WEB-INF/views/navigation.jsp"%>
@@ -34,23 +33,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="container">
     <div class="page" align="justify">
       <ul class="pager">
-        <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
+        <li class="previous"><a href="/test/allTest/0">&laquo;&laquo;First Page</a></li>
         <c:if test="${vo.start != 0}">
-          <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
+          <li class="previous"><a href="/test/allTest/${vo.start-1}">&laquo;Previous Page</a></li>
         </c:if>
         <c:if test="${vo.start > 1 }">
-          <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
-          <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
+          <li class="start"><a href="/test/allTest/${vo.start-2}">${vo.start-1}</a></li>
+          <li class="start"><a href="/test/allTest/${vo.start-1}">${vo.start}</a></li>
         </c:if>
-        <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
+        <li class="start"><a href="/test/allTest/${vo.start}">${vo.start+1}</a></li>
         <c:if test="${vo.start < vo.total-2 }">
-          <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
-          <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
+          <li class="start"><a href="/test/allTest/${vo.start+1}">${vo.start+2}</a></li>
+          <li class="start"><a href="/test/allTest/${vo.start+2}">${vo.start+3}</a></li>
         </c:if>
         <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Pages</li>
-        <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
+        <li class="next"><a href="/test/allTest/${vo.total}">Last Page&raquo;&raquo;</a></li>
         <c:if test="${vo.start+1 < vo.total}">
-        <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
+        <li class="next"><a href="/test/allTest/${vo.start+1}">Next Page&raquo;</a></li>
         </c:if>
       </ul>
     </div>
@@ -68,8 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tbody>
       <c:forEach items="${vo.entityList}" var="entity">
       <tr>
-        <th><a href="/test/allTest/${entity.examId}">${entity.examId}</a></th>
-        <th><a href="/test/allTest/${entity.examId}">${entity.title}</a></th>
+        <th><a href="/test/testDetail/${entity.contestId}">${entity.contestId}</a></th>
+        <th><a href="/test/testDetail/${entity.contestId}">${entity.title}</a></th>
         <th>${entity.startTime}</th>
         <th>${entity.endTime}</th>
         </c:forEach>

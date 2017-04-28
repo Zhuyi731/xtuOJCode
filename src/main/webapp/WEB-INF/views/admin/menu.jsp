@@ -9,8 +9,8 @@
     <base target="contentFrame" href="<%=basePath%>">
     <title>后台管理</title>
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <style type="text/css">
         div {
             margin-top: 20px;
@@ -67,7 +67,7 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu4">
-        <li role="presentation"><a href="test/test">所有比赛</a></li>
+        <li role="presentation"><a href="test/test/0">所有比赛</a></li>
         <li role="presentation"><a href="test/createTest" >创建比赛</a></li>
     </ul>
 </div>

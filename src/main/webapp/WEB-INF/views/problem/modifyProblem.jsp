@@ -9,8 +9,8 @@
     <base href="<%=basePath%>">
     <title>修改题目</title>
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
 <div class="container">

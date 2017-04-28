@@ -10,20 +10,35 @@
 <html>
 <head>
     <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel="stylesheet"/>
 </head>
 <body>
-<%@include file="/WEB-INF/views/navigation.jsp" %>
+<%
+    String url = request.getHeader("referer");
+    String backgroud = "http://localhost:8080/admin/menu";
+    if (backgroud.equals(url)) {
+        pageContext.setAttribute("nav", 0);
+    } else {
+        pageContext.setAttribute("nav", 1);
+    }
+%>
+<c:if test="${nav eq 1}">
+    <%@ include file="/WEB-INF/views/navigation.jsp" %>
+</c:if>
 <div class="title">
     <h2>${entity.title}</h2><br>
     <small>Start Time:${entity.startTime}</small>
     <small>End Time:${entity.endTime}</small>
 </div>
+<div class="navPart"></div>
 <div class="container">
     <table class="table table-hover table-border">
         <thead>
         <tr>
             <td class="col-md-1">Pro.ID</td>
-            <td class="col-md-4"><a href="problem/proDetail/contestID/${entity.contestId}">Problem Title</a>></td>
+            <td class="col-md-4">Problem Title</td>
             <td class="col-md-2">Solved(Accept/Submit)</td>
             <td class="col-md-1">ratio</td>
         </tr>
@@ -32,7 +47,7 @@
         <c:forEach items="${vo.entityList}" var="entity">
             <tr>
                 <td>${entity.problemId}</td>
-                <td>${entity.title}</td>
+                <td><a href="problem/proDetail/contestID/${entity.contestId}">${entity.title}</a></td>
                 <td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>
                 <td>${entity.ratio}</td>
             </tr>
