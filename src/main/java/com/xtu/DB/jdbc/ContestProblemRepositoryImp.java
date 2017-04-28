@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class ContestProblemRepositoryImp implements ContestProblemsRepository {
         List<ContestProblemsEntity> entityList =
                 jdbcOperations.query(sql, new ContestProblemsEntityRowMapper(), contestId);
         AllContestProblemVO vo = new AllContestProblemVO();
-        List<AllContestProblemEntityVO> entityVO = vo.getEntityList();
+        List<AllContestProblemEntityVO> entityVO = new ArrayList<>();
         for (ContestProblemsEntity entity : entityList) {
             AllContestProblemEntityVO problemEntityVO = new AllContestProblemEntityVO();
             BeanUtils.copyProperties(entity, problemEntityVO);
@@ -60,6 +61,7 @@ public class ContestProblemRepositoryImp implements ContestProblemsRepository {
             problemEntityVO.setTitle(problemsEntity.getTitle());
             entityVO.add(problemEntityVO);
         }
+        vo.setEntityList(entityVO);
         vo.setStart(0);
         vo.setTotal(entityList.size());
         return vo;
