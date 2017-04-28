@@ -11,8 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <title>所有学生</title>
     
 	<META content="text/html; charset=utf-8" http-equiv=Content-Type>
-  	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/custom.css">
+  	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/custom.css">
     <style type="text/css">
     .container{
       margin-top:50;

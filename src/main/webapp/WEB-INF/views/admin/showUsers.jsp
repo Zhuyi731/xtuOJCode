@@ -9,8 +9,8 @@
     <base href="<%=basePath%>">
     <title>所有用户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="../../../css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <link href="../../../css/custom.css" rel="stylesheet" type="text/css"/>
+    <link href=./css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="searchDiv">

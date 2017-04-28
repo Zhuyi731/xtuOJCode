@@ -10,7 +10,7 @@
     <base href="<%=basePath%>">
     <title>Create a contest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     </head>
 <body>
 <sf:form role="form" class="form-horizontal" method="post" onsubmit="return check()">

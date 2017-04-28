@@ -9,14 +9,13 @@
 <html>
 <head>
     <title>Navigation</title>
-    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <base href="<%=basePath%>" target="_top">
 </head>
-<body>
-<div class="navbar  navbar-default" role="navigation" style="margin-bottom:50px;background-color:#2c333d; ">
+<body >
+<div class="navbar  navbar-default" role="navigation" style="height:100%;margin-bottom:50px;background-color:#2c333d; ">
     <div class="col-md-9">
         <div class="navbar-header">
             <a href="/index" class="navbar-brand">XTUOJ</a>

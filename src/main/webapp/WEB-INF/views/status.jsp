@@ -57,7 +57,7 @@
         </div>
         <div class="form-group">
             <label for="username" class="control-label  col-md-1 col-sm-1">username</label>
-            <div class="col-md-offset-2 col-sm-offset-2">
+            <div class="col-md-offset-1 col-sm-offset-1">
                 <input type="text" class="form-control" name="username" id="username" placeholder="用户名">
             </div>
         </div>

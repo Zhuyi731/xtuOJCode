@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>CodeDetail</title>
-    <link src="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link src="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <xmp style="font-size: 24px;font-family: 'Times New Roman';">
