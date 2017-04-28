@@ -49,13 +49,11 @@ public class SubmitContestDTO {
     /**
      * 比赛ID，非比赛提交为null
      */
-    @NotNull
     @Min(0)
     private Integer contestId;
     /**
      * 比赛题目序号，非比赛提交为null
      */
-    @NotNull
     @Min(0)
     private Byte no;
 }
