@@ -60,12 +60,13 @@
         </tr>
         </thead>
         <tbody>
+        <% int no=1;%>
         <c:forEach items="${vo.entityList}" var="entity">
             <tr>
-                <td>${entity.problemId}</td>
-                <td><a href="problem/proDetail/contestID/${entity.contestId}">${entity.title}</a></td>
-                <td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>
-                <td>${entity.ratio}</td>
+                <td><%=(no++)%></td>
+                <td><a href="test/testProDetail/${entity.contestId}?contestId=${entity.contestId}&no=${entity.no}">${entity.title}</a></td>
+                <%--<td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>--%>
+                <%--<td>${entity.ratio}</td>--%>
             </tr>
         </c:forEach>
         </tbody>

@@ -2,6 +2,10 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String contestId = request.getParameter("contestId");
+String no = request.getParameter("no");
+pageContext.setAttribute("contestId",contestId);
+pageContext.setAttribute("no",no);
 %>
 <!DOCTYPE HTML >
 <html>
@@ -23,12 +27,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="form-group">
          	<label for="contestId" class="col-md-2 col-md-offset-2 control-label">Contest.ID:</label>
             <div class="col-md-4">
-            <input id="contestId" name="contestId" type="text" class="form-control" width="60px;" value="${entity.contestId}" readonly="readonly">
+            <input id="contestId" name="contestId" type="text" class="form-control" width="60px;" value="${contestId}" readonly="readonly">
            	</div>
           </div> <div class="form-group">
          	<label for="no" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
             <div class="col-md-4">
-            <input id="no" name="no" type="text" class="form-control" width="60px;" value="${entity.no}" readonly="readonly">
+            <input id="no" name="no" type="text" class="form-control" width="60px;" value="${no}" readonly="readonly">
            	</div>
           </div> <div class="form-group">
          	<label for="problemId" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
