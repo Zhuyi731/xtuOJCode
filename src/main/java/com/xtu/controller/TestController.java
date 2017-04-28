@@ -37,15 +37,31 @@ public class TestController {
     @Autowired
     UsersRepository usersRepository;
 
-    @RequestMapping(value = {"/" + Pages.TEST, "/" + Pages.TEST + "/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/" + Pages.TEST, "/" + Pages.TEST + "/{start}"}, method = RequestMethod.GET)
     public String showTest(
+            @PathVariable("start") int start,
+            Model model,
+            Principal principal) {
+        OUT.prt("request", Pages.TEST);
+        // TODO: 2017/4/18 select from db
+        String id = principal.getName();
+        UsersEntity usersEntity = usersRepository.findOne(id);
+        AllContestVO vo = contestRepository.queryAllContestPages(start, usersEntity.getUserId());
+        model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
+        String res = Pages.TEST + "/" + Pages.TEST;
+        return res;
+    }
+
+    @RequestMapping(value = {"/" + Pages.TEST_DETAIL, "/" + Pages.TEST_DETAIL + "/{id}"}, method = RequestMethod.GET)
+    public String showTestDetail(
             @PathVariable("id") Integer contestId,
             Model model) {
-        OUT.prt("request", Pages.TEST);
+        OUT.prt("request", Pages.TEST_DETAIL);
         // TODO: 2017/4/18 select from db
         AllContestProblemVO vo = contestProblemsRepository.findList(contestId);
         model.addAttribute("vo", vo);
-        String res = Pages.TEST + "/" + Pages.TEST;
+        String res = Pages.TEST + "/" + Pages.TEST_DETAIL;
         return res;
     }
 
@@ -56,9 +72,11 @@ public class TestController {
             Model model,
             Principal principal) {
         OUT.prt("request", Pages.TOTAL_TEST);
+        OUT.prt("contestDTO", contestDTO);
         contestDTO.setId(principal.getName());
         AllContestVO vo = contestRepository.queryContestPages(start, contestDTO);
         model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
         String res = Pages.TEST + "/" + Pages.TOTAL_TEST;
         return res;
     }
@@ -70,8 +88,18 @@ public class TestController {
         return res;
     }
 
+    @RequestMapping(value = {Pages.MODIFY_TEST, "/" + Pages.MODIFY_TEST + "/{id}"}, method = RequestMethod.GET)
+    public String modifyTest(
+            @PathVariable("id") int id) {
+        OUT.prt("request", Pages.MODIFY_TEST);
+        String res = "/" + Pages.TEST + "/" + Pages.MODIFY_TEST;
+        return res;
+    }
+
     @Transactional
-    @RequestMapping(value = {"/" + Pages.CREATE_TEST, "/" + Pages.MODIFY_TEST}, method = RequestMethod.POST)
+    @RequestMapping(
+            value = {"/" + Pages.CREATE_TEST, "/" + Pages.MODIFY_TEST, "/" + Pages.MODIFY_TEST + "/{id}"},
+            method = RequestMethod.POST)
     public String createTestPost(
             CreateTestDTO createTestDTO,
             Model model,
