@@ -20,11 +20,11 @@
     <small>Memory Limit:${entity.memoryLimit}</small>
     <br>
 </div>
-<div align="center">
+<div class="functionNav" align="center">
     <table class="table table-hover text-info">
         <tbody>
         <tr>
-            <td class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2" onclick='window.history.go(-1)'>Go Back</td>
+            <td class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"><button type="button" class="btn btn-link" onclick='window.history.go(-1)'>Go Back</button></td>
             <td class="col-md-2 col-sm-2"><a href="/test/standing">Standing</a></td>
             <td class="col-md-2 col-sm-2"><a href="/status/0">Status</a></td>
         </tr>
@@ -54,7 +54,7 @@
     <p>
 </div>
 <div class="tailSubmit" align="center">
-    <a class="btn btn-info btn-lg " href="/test/testSubmit/${entity.problemId}">Submit code</a>
+    <a class="btn btn-info btn-lg " href="/test/testSubmit/${entity.problemId}?contestId=${entity.contestId}&no=${entity.no}">Submit code</a>
     <a class="btn btn-info btn-lg" style="margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
