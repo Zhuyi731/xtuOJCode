@@ -5,7 +5,7 @@ import com.xtu.DB.RunsRepository;
 import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.ProblemsDTO;
-import com.xtu.DB.dto.SubmitDTO;
+import com.xtu.DB.dto.SubmitContestDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
 import com.xtu.DB.entity.UsersEntity;
@@ -310,11 +310,15 @@ public class ProblemController {
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
             @PathVariable("id") @NotNull int id,
+            @RequestPart("contestId") int contestId,
+            @RequestPart("no") int no,
             Model model) {
         OUT.prt("requst", Pages.SUBMIT);
         ProblemsEntityVO entity = new ProblemsEntityVO();
         entity.setProblemId(id);
-        model.addAttribute("entity", entity);
+        model.addAttribute("id", id);
+        model.addAttribute("contestId", contestId);
+        model.addAttribute("no", no);
         OUT.prt("entity", entity);
         // TODO: 2017/4/17 select from DB
         String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
@@ -323,11 +327,16 @@ public class ProblemController {
 
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.POST)
     public String submitPost(
-            @NotNull @Valid SubmitDTO submitDTO,
-            Model model) {
+            @NotNull @Valid SubmitContestDTO submitContestDTO,
+            Model model,
+            Principal principal) {
         OUT.prt("post", Pages.SUBMIT);
-        OUT.prt("submitDTO", submitDTO);
-        runsRepository.save(submitDTO);
+        OUT.prt("submitContestDTO", submitContestDTO);
+        String id = principal.getName();
+        submitContestDTO.setId(id);
+        UsersEntity usersEntity = usersRepository.findOne(id);
+        submitContestDTO.setUserId(usersEntity.getUserId());
+        runsRepository.save(submitContestDTO);
         String res = "redirect:/" + Pages.STATUS;
         return res;
     }
