@@ -32,4 +32,7 @@ public interface ContestRepository {
 
     AllContestVO queryContestPages(int start, ContestDTO contestDTO);
 
+    AllContestVO queryAllContestPages(int start, int size, int userId);
+
+    AllContestVO queryAllContestPages(int start, int userId);
 }
