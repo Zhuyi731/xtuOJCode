@@ -1,8 +1,15 @@
+<%@ page import="com.xtu.DB.vo.RankEntityVO" %>
+<%@ page import="com.xtu.DB.vo.RankVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    RankVO vo= (RankVO) request.getAttribute("vo");
+    String currentPage=String.valueOf(vo.getStart()+1);
+    String totalPage=String.valueOf(vo.getTotal()/20+1);
+    pageContext.setAttribute("currentPage",currentPage);
+    pageContext.setAttribute("totalPage",totalPage);
 %>
 <!DOCTYPE HTML>
 <html>
@@ -20,13 +27,13 @@
     <div class="page">
         <ul class="pager">
             <li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
-            <c:if test="${vo.start != 0}">
-                <li class="previous"><a href="/ranklist/${vo.start-1}">&laquo;Previous Page</a></li>
+            <c:if test="${currentPage!=1}">
+                <li class="previous"><a href="/ranklist/${currentPage-2}">&laquo;Previous Page</a></li>
             </c:if>
-            <li>共${vo.total}页</li>
-            <li class="next"><a href="/ranklist/${vo.total-1}">The Last Page&raquo;&raquo;</a></li>
-            <c:if test="${vo.start < vo.total-1}">
-                <li class="next"><a href="/rsnklist/${vo.start+1}">Next Page&raquo;</a></li>
+            <li>The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
+            <li class="next"><a href="/ranklist/${totalPage}">The Last Page&raquo;&raquo;</a></li>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/ranklist/${currentPage}">Next Page&raquo;</a></li>
             </c:if>
         </ul>
     </div>
@@ -53,6 +60,19 @@
             </c:forEach>
             </tbody>
         </table>
+    </div>
+    <div class="page">
+        <ul class="pager">
+            <li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
+            <c:if test="${currentPage!=1}">
+                <li class="previous"><a href="/ranklist/${currentPage-2}">&laquo;Previous Page</a></li>
+            </c:if>
+            <li>The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
+            <li class="next"><a href="/ranklist/${totalPage}">The Last Page&raquo;&raquo;</a></li>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/ranklist/${currentPage}">Next Page&raquo;</a></li>
+            </c:if>
+        </ul>
     </div>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>

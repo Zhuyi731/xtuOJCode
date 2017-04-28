@@ -1,8 +1,11 @@
+<%@ page import="com.xtu.DB.vo.ProblemsVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    ProblemsVO vo= (ProblemsVO) request.getAttribute("vo");
 %>
 <!DOCTYPE HTML>
 <html>
@@ -16,19 +19,19 @@
 <body>
 <%@ include file="/WEB-INF/views/navigation.jsp"%>
 <div class="search">
-    <form role="form" method="post" class="form-inline">
+    <sf:form commandName="problemsDTO" role="form" method="post" class="form-inline">
         <div class="form-group">
-            <label for="proID" class="control-label col-md-2 col-sm-2">Pro.ID:</label>
+            <label for="title" class="control-label col-md-2 col-sm-2">Title:</label>
             <div class=col-md-2">
-                <input type="text" class="form-control" name="proID" id="proID" placeholder="题目或编号">
+                <input type="text" class="form-control" name="title" id="title" placeholder="Search by problem title">
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-2">
-                <input type="submit" class="btn btn-primary submit" style="margin-top: 25px;" value="搜索">
+                <input type="submit" class="btn btn-primary submit" style="margin-top: 25px;" value="search">
             </div>
         </div>
-    </form>
+    </sf:form>
 </div>
 <div class="container">
     <div class="page" align="justify">
@@ -46,7 +49,7 @@
                 <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
                 <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
             </c:if>
-            <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Page</li>
+            <li class="start">The&nbsp;${vo.start+1}/<%=vo.getTotal()/20+1%>&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records</li>
             <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
             <%--<c:if test="${vo.start+1 < vo.total}">--%>
             <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>

@@ -1,8 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.xtu.DB.vo.AllContestVO" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    AllContestVO vo=(AllContestVO) request.getAttribute("vo");
+    String currenPage=String.valueOf(vo.getStart()+1);
+    String totalPage=String.valueOf(vo.getTotal()/20+1);
+    pageContext.setAttribute("currentPage",currenPage);
+    pageContext.setAttribute("totalPage",totalPage);
 %>
 <!DOCTYPE HTML >
 <html>
@@ -62,7 +68,7 @@
                 <li class="start"><a href="/test/test/${vo.start+1}">${vo.start+2}</a></li>
                 <li class="start"><a href="/test/test/${vo.start+2}">${vo.start+3}</a></li>
             </c:if>
-            <li class="start">Total&nbsp;${vo.start+1}/${vo.total}&nbsp;Pages</li>
+            <li class="start">Total&nbsp;${currentPage}/${totalPage}&nbsp;Pages&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
             <li class="next"><a href="/test/test/${vo.total}">Last Page&raquo;&raquo;</a></li>
             <c:if test="${vo.start+1 < vo.total}">
                 <li class="next"><a href="/test/test/${vo.start+1}">Next Page&raquo;</a></li>

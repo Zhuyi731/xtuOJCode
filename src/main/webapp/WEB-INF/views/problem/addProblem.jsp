@@ -11,21 +11,17 @@
     <title>添加题目</title>
     <META content="text/html; charset=utf-8" http-equiv=Content-Type>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <style type="text/css">
-        .head{
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<div class="head">
+<div class="headTitle">
 </div>
 <sf:form class="form-horizontal form-label-left" role="form" enctype="multipart/form-data">
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">题目名称:<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12" name="name"
+            <input type="text" id="title" name="title" class="form-control col-md-7 col-xs-12"
                    placeholder="Enter Problem Title">
         </div>
 </div>

@@ -15,7 +15,6 @@
 </head>
 <body>
 <%
-
     String url = request.getHeader("referer");
     String backgroud = "http://localhost:8080/admin/menu";
     String backgroud2 = "http://localhost:8080/teacher/menu";
@@ -25,7 +24,7 @@
         if(backgroud2.equals(url)){
             pageContext.setAttribute("nav", 0);
         }else{
-            pageContext.setAttribute("nav", 1);
+        pageContext.setAttribute("nav", 1);
         }
     }
 %>
@@ -41,9 +40,9 @@
     <table class="table table-hover text-info">
         <tbody>
         <tr>
-            <td class="col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"><button type="button" class="btn btn-link" onclick='window.history.go(-1)'>Go Back</button></td>
-            <td class="col-md-2 col-sm-2"><a href="/test/standing">Standing</a></td>
-            <td class="col-md-2 col-sm-2"><a href="/status/0">Status</a></td>
+            <td class="col-md-2 col-sm-2 "><a  class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
+            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing">Standing</a></td>
+            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/status/0">Status</a></td>
         </tr>
         </tbody>
     </table>
@@ -72,8 +71,5 @@
         </tbody>
     </table>
 </div>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

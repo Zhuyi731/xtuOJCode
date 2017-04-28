@@ -1,8 +1,10 @@
+<%@ page import="com.xtu.DB.vo.StatusVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    StatusVO vo=(StatusVO) request.getAttribute("vo");
 %>
 <!DOCTYPE  HTML>
 <html>
@@ -98,7 +100,7 @@
         <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/status/${vo.start-1}">&laquo;Previous Page</a></li>
         </c:if>
-        <li>共${vo.total}页</li>
+        <li>The&nbsp;<%=vo.getStart()+1%>/<%=vo.getTotal()/20+1%>&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
         <li class="next"><a href="/status/${vo.total+0}">The Last Page&raquo;&raquo;</a></li>
         <c:if test="${vo.start < vo.total-1}">
             <li class="next"><a href="/status/${vo.start+1}">Next Page&raquo;</a></li>

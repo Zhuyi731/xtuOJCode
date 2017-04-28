@@ -16,7 +16,7 @@
 
 <body>
 <div align="center" style="margin-top:40px;">
-    <form role="form" class="form-horizontal" method="post" onSubmit="return check()">
+    <form role="form" class="form-horizontal" method="post" onSubmit="return checkPassword()">
         <div class="form-group">
             <label for="password" class="col-md-2 col-md-offset-2 control-label">密码：</label>
             <div class="col-md-3">
@@ -44,27 +44,6 @@
         </div>
     </form>
 </div>
-<script type="text/javascript" language="javascript">
-    function check() {
-        var s = document.getElementById("alert");
-        var ss = document.getElementById("alert0");
-        var p1 = document.getElementById("password");
-        var p2 = document.getElementById("passwordRep");
-        if (p1.value.length < 6) {
-            ss.style.display = "";
-            return false;
-        } else {
-            ss.style.display = "none";
-        }
-
-        if (p1.value != p2.value) {
-            s.style.display = "";
-            return false;
-        } else {
-            s.style.display = "none";
-            return true;
-        }
-    }
-</script>
+<script type="text/javascript" language="javascript" src="/js/custom.js"/>
 </body>
 </html>
