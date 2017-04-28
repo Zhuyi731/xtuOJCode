@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML >
 <html>
    <head>
     <title>${entity.problemId}&nbsp;&nbsp;${entity.title}</title>
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 	 <%@ include file="/WEB-INF/views/navigation.jsp" %>
         <div class="container" align="center">
-          <form role="form" method="post" class="form-horizontal" action="submitServlet">
+          <form role="form" method="post" class="form-horizontal" >
           <div class="form-group">
          	<label for="problemId" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
             <div class="col-md-4">

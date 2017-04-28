@@ -13,9 +13,8 @@
     <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     </head>
 <body>
-<%@include file="/WEB-INF/views/navigation.jsp" %>
 <sf:form role="form" class="form-horizontal" method="post" onsubmit="return check()">
-    <div id="part1" style="width:1000px;margin-left:200px;display:;" align="center">
+    <div id="part1" style="width:800px;margin-left:150px;display:;" align="center">
         <div class="panel panel-default  panel-danger">
             <div class="panel panel-heading">比赛信息填写(*号为必填选项)</div>
             <div class="panel panel-body">
@@ -34,7 +33,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="startTimeStr">开始时间<span
                             class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="datetime-local" id="startTimeStr" name="startTimeStr " required="required"
+                        <input type="datetime-local" id="startTimeStr" name="startTimeStr" required="required"
                                class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
@@ -95,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div id="part2" style="display:none; width: 1000px;margin-left:200px;">
+    <div id="part2" style="display:none; width: 800px;margin-left:150px;">
         <div class="panel panel-default panel-danger">
             <div class="panel panel-heading" align="center">添加题目</div>
             <div class="panel panel-body" align="center">
@@ -127,9 +126,8 @@
                 <div class="item form-group" align="center">
                     <button type="button" class="btn btn-primary bnt-lg" id="deleteButton1" style="width:120px;" onclick="back()">上一步
                     </button>
-                    <input type="submit" class="btn btn-primary " value="创建" onclick="check()" style="width:120px;" >
+                    <input type="submit" class="btn btn-primary " value="创建"  style="width:120px;" >
                     <input type="reset" class="btn btn-primary " value="重置"  style="width:120px;" >
-
                 </div>
             </div>
         </div>

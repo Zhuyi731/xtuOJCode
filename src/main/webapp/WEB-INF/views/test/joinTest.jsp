@@ -9,7 +9,7 @@
     <base href="<%=basePath%>">
     <title>All contest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
     <link href="css/custom.css" rel="stylesheet" />
 </head>
@@ -41,7 +41,7 @@
                 <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
                 <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
             </c:if>
-            <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
+            li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
             <c:if test="${vo.start < vo.total-2 }">
                 <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
                 <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>

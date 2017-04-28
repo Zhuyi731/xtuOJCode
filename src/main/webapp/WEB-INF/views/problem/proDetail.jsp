@@ -8,7 +8,7 @@
 <head>
     <title>${entity.problemId} ${entity.title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -44,7 +44,7 @@
     <p>
 </div>
 <div class="tailSubmit" align="center">
-    <a class="btn btn-info btn-lg " href="problem/submit/${entity.problemId}">Submit code</a>
+    <a class="btn btn-info btn-lg " href="/problem/submit/${entity.problemId}?contestId=${entity.contestId}">Submit code</a>
     <a class="btn btn-info btn-lg" style="margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
