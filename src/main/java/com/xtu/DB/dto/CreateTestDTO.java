@@ -82,7 +82,7 @@ public class CreateTestDTO {
     /**
      * 比赛公告
      */
-    private String anouncement;
+    private String announcement;
     /**
      * 比赛建立者
      */
@@ -98,7 +98,7 @@ public class CreateTestDTO {
     @Null
     private Timestamp lastUpdateTime;
 
-    private String problemsList;
+    private String problemList;
     /**
      * 问题列表
      */
