@@ -56,12 +56,13 @@ public class ProblemController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX + "/{start}", method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX + "/{start}")
     public String showTotalProblems(
             @PathVariable("start") int start,
             ProblemsDTO problemsDTO,
             Model model) {
         OUT.prt("request", Pages.PROBLEMS_INDEX);
+        OUT.prt("problemsDTO", problemsDTO);
         ProblemsVO vo = problemsRepository.queryPage(start, problemsDTO);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);

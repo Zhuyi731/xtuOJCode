@@ -12,12 +12,12 @@ import javax.validation.constraints.Size;
 @Data
 public class ProblemsDTO {
     @Min(0)
-    public int problemId = 0;
+    private int problemId = 0;
     @Size(max = 50)
-    public String title;
+    private String title = "";
     @Min(0)
-    public int start = 0;
+    private int start = 0;
     @Min(0)
     @Max(1000)
-    public int size = 50;
+    private int size = 50;
 }

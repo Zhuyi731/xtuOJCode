@@ -102,7 +102,7 @@ public class MainController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/" + Pages.STATUS + "/{start}", method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.STATUS + "/{start}")
     public String showStatus(
             @PathVariable("start") int start,
             StatusDTO statusDTO,

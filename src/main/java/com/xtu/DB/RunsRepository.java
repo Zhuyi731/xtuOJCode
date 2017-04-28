@@ -36,6 +36,8 @@ public interface RunsRepository {
 
     StatusVO queryStatusList(int start, int size, StatusDTO statusDTO);
 
+    Long queryStatusListTotal(StatusDTO statusDTO);
+
     StatusVO queryStatusList(int start, StatusDTO statusDTO);
 
     void save(SubmitDTO submitDTO);
