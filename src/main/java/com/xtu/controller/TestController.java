@@ -61,6 +61,7 @@ public class TestController {
         // TODO: 2017/4/18 select from db
         AllContestProblemVO vo = contestProblemsRepository.findList(contestId);
         model.addAttribute("vo", vo);
+        OUT.prt("vo", vo);
         String res = Pages.TEST + "/" + Pages.TEST_DETAIL;
         return res;
     }
