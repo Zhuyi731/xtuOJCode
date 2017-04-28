@@ -12,6 +12,10 @@ max(problems.problem_id) + ? or auto increase of the field.
 5. don't have to save standard source code of each problem?
 6. users table only contains class_id there is no need to add specialities?
 
+### function
+1. 是否需要注册？
+2. 判题验证器ID这是用来干什么的？
+
 ### web pages relation solve by zhuyi
 1. submit must add a field open choose options
 2. add a page about cat code details!
