@@ -1,6 +1,6 @@
 package com.xtu.constant;
 
-/**
+/** 页面常量
  * Created by Ilovezilian on 2017/4/17.
  */
 public class Pages {
@@ -60,6 +60,10 @@ public class Pages {
      * 题目详细信息
      */
     public static final String PROBLEM_DETAIL = "proDetail";
+    /**
+     * 竞赛题库题目详情
+     */
+    public static final String TEST_PROBLEM_DETAIL = "testProDetail";
     /**
      * 做题排行榜界面
      */

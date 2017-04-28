@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
+ * spring security 配置
  * Created by Ilovezilian on 2017/4/18.
  */
 @Configuration
@@ -23,6 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    DataSource basicDataSource;
 
 
+    /**
+     * 配置http请求
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -50,6 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and().csrf().disable();
     }
 
+    /**
+     * 配置登录校验
+     *
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")

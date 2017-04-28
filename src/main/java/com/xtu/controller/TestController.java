@@ -2,14 +2,18 @@ package com.xtu.controller;
 
 import com.xtu.DB.ContestProblemsRepository;
 import com.xtu.DB.ContestRepository;
+import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.ContestDTO;
 import com.xtu.DB.dto.CreateTestDTO;
+import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestProblemsEntity;
 import com.xtu.DB.entity.ContestsEntity;
+import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.AllContestProblemVO;
 import com.xtu.DB.vo.AllContestVO;
+import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.DateUtil;
 import com.xtu.tools.OUT;
@@ -18,10 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 /**
@@ -36,6 +39,50 @@ public class TestController {
     ContestProblemsRepository contestProblemsRepository;
     @Autowired
     UsersRepository usersRepository;
+    @Autowired
+    ProblemsRepository problemsRepository;
+
+    @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.GET)
+    public String submit(
+            @PathVariable("id") @NotNull int id,
+            @RequestParam("contestId") int contestId,
+            @RequestParam("no") int no,
+            Model model) {
+        OUT.prt("requst", Pages.TEST_SUBMIT);
+        ProblemsEntityVO entity = new ProblemsEntityVO();
+        entity.setProblemId(id);
+        model.addAttribute("id", id);
+        model.addAttribute("contestId", contestId);
+        model.addAttribute("no", no);
+        OUT.prt("entity", entity);
+        // TODO: 2017/4/17 select from DB
+        String res = Pages.TEST + "/" + Pages.TEST_SUBMIT;
+        return res;
+    }
+
+    @RequestMapping(value = {"/" + Pages.TEST_PROBLEM_DETAIL + "/{id}"}, method = RequestMethod.GET)
+    public String showTestProblemDetails(
+            @PathVariable("id") int id,
+            @RequestParam("contestId") int contestId,
+            @RequestParam("no") int no,
+            Model model) {
+        OUT.prt("request", Pages.TEST_PROBLEM_DETAIL);
+
+        ProblemsDTO dto = new ProblemsDTO();
+        dto.setProblemId(id);
+        dto.setTitle("^_^");
+        ProblemsEntity entity = problemsRepository.findOne(dto);
+        String[] contexts = entity.getContext().split("\\{\\{\\{\\(>_<\\)\\}\\}\\}");
+        entity.setProblemDes(contexts[0]);
+        entity.setInputDes(contexts[1]);
+        entity.setOutputDes(contexts[2]);
+        entity.setSampleInput(contexts[3]);
+        entity.setSampleOutput(contexts[4]);
+        model.addAttribute("entity", entity);
+        OUT.prt("entity", entity);
+        String res = Pages.TEST + "/" + Pages.TEST_PROBLEM_DETAIL;
+        return res;
+    }
 
     @RequestMapping(value = {"/" + Pages.TEST, "/" + Pages.TEST + "/{start}"}, method = RequestMethod.GET)
     public String showTest(

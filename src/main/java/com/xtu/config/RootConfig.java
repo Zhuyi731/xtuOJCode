@@ -3,7 +3,7 @@ package com.xtu.config;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-/**
+/** 根上下文配置
  * Created by Ilovezilian on 2017/4/11.
  */
 @Configuration

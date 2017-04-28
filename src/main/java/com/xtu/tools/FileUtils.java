@@ -4,10 +4,15 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-/**
+/** 文件处理工具类
  * Created by Ilovezilian on 2017/4/19.
  */
 public class FileUtils {
+    /**
+     * 解压zip文件
+     * @param file
+     * @return
+     */
     public static String unzipFile(File file) {
         String res = null;
         try {
@@ -24,6 +29,11 @@ public class FileUtils {
         return res;
     }
 
+    /**
+     * 解压输入流zip文件
+     * @param is
+     * @return
+     */
     public static String unzipFile(InputStream is) {
         String res = null;
         int size = 0;
@@ -54,12 +64,6 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
-        return res;
-    }
-
-    public static String readFileEntity(ZipEntry ze) {
-        String res = null;
-//        BufferedReader br = new BufferedReader(new InputStreamReader(ze));
         return res;
     }
 }

@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
-/**
+/** 主页界面
  * Created by Ilovezilian on 2017/4/13.
  */
 @Controller
@@ -31,12 +31,20 @@ public class MainController {
     @Autowired
     RunsRepository runsRepository;
 
+    /**
+     * 导航页
+     * @return
+     */
     @RequestMapping(value = {"/", "/" + Pages.INDEX}, method = RequestMethod.GET)
     public String index() {
         OUT.prt("request:", Pages.INDEX);
         return Pages.INDEX;
     }
 
+    /**
+     * 导航栏
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.NAVIGATION)
     public String showNavigation() {
         OUT.prt("request:", Pages.NAVIGATION);
@@ -44,6 +52,10 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 导航栏II
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.NAVIGATION_SECOND)
     public String showNavigationSecond() {
         OUT.prt("request:", Pages.NAVIGATION_SECOND);
@@ -51,6 +63,12 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 排行榜界面
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping(value = {"/" + Pages.RANK_LIST, "/" + Pages.RANK_LIST + "/{start}"}, method = RequestMethod.GET)
     public String showRankList(
             @PathVariable("start") int start,
@@ -72,6 +90,13 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 显示运行结果状态
+     * @param start
+     * @param statusDTO
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.STATUS + "/{start}", method = RequestMethod.GET)
     public String showStatus(
             @PathVariable("start") int start,
@@ -90,6 +115,13 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 提交代码界面
+     * @param runId
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.CODE_PAGE + "/{runId}", method = RequestMethod.POST)
     public String CodePost(
             @PathVariable("runId") int runId,
@@ -104,6 +136,11 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 上传文件界面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.GET)
     public String uploadsFiles(
             Model model) {
@@ -112,6 +149,13 @@ public class MainController {
         return "uploadFile";
     }
 
+    /**
+     * 上传文件请求
+     * @param zip
+     * @param error
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadsFilesPost(
 //            @RequestPart("picture") byte[] picture,
@@ -131,6 +175,10 @@ public class MainController {
         return "uploadFile";
     }
 
+    /**
+     * 管理问题界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
     public String managerProblem() {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
@@ -138,6 +186,10 @@ public class MainController {
         return res;
     }
 
+    /**
+     * 显示题库
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.SHOW_TEST_PAGE, method = RequestMethod.GET)
     public String showTest() {
         String res = Pages.TEACHER + "/" + Pages.SHOW_TEST_PAGE;

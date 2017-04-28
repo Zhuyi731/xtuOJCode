@@ -17,13 +17,17 @@ import org.springframework.web.servlet.view.JstlView;
 
 import java.io.IOException;
 
-/**
+/** 配置web服务
  * Created by Ilovezilian on 2017/4/12.
  */
 @Configuration
 @EnableWebMvc
 @ComponentScan({"com.xtu.controller","com.xtu.exception"})
 public class WebConfig extends WebMvcConfigurerAdapter {
+    /**
+     * 配置视图
+     * @return
+     */
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -33,17 +37,29 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    /**
+     * 配置servlet处理
+     * @param configurer
+     */
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
+    /**
+     * 配置资源处理
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // TODO Auto-generated method stub
         super.addResourceHandlers(registry);
     }
 
+    /**
+     * 配置信息源
+     * @return
+     */
     @Bean
     public MessageSource messageSource() {
 //        ReloadableResourceBundleMessageSource messageSource =
@@ -55,6 +71,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
+    /**
+     * 配置multipart 处理功能
+     * @return
+     * @throws IOException
+     */
     @Bean
     public MultipartResolver multipartResolver() throws IOException {
         return new StandardServletMultipartResolver();

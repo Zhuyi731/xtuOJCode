@@ -33,6 +33,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
+ * 题目控制器
  * Created by Ilovezilian on 2017/4/17.
  */
 @Controller
@@ -47,6 +48,14 @@ public class ProblemController {
     @Autowired
     RunsRepository runsRepository;
 
+    /**
+     * 显示所有题目
+     *
+     * @param start
+     * @param problemsDTO
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.PROBLEMS_INDEX + "/{start}", method = RequestMethod.GET)
     public String showTotalProblems(
             @PathVariable("start") int start,
@@ -63,6 +72,11 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 添加题目界面
+     *
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.ADD_PROBLEM, method = RequestMethod.GET)
     public String AddProblem() {
         OUT.prt("request", Pages.ADD_PROBLEM);
@@ -74,7 +88,7 @@ public class ProblemController {
     }
 
     /**
-     * 添加题目
+     * 添加题目请求
      *
      * @param uploadFile
      * @param problemsEntity
@@ -113,7 +127,7 @@ public class ProblemController {
     }
 
     /**
-     * 修改题目
+     * 修改题目请求
      *
      * @param id
      * @param uploadFile
@@ -202,6 +216,12 @@ public class ProblemController {
         }
     }
 
+    /**
+     * 显示题目详情
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = {"/" + Pages.PROBLEM_DETAIL + "/{id}"}, method = RequestMethod.GET)
     public String showProblemDetails(
             @PathVariable("id") int id,
@@ -224,6 +244,13 @@ public class ProblemController {
         return res;
     }
 
+
+    /**
+     * 修改题目界面
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = {"/" + Pages.MODIFY_PROBLEM + "/{id}"}, method = RequestMethod.GET)
     public String showModifyProblem(
             @PathVariable("id") int id,
@@ -246,6 +273,12 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 题目管理界面
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
     public String problemManage(
             Model model,
@@ -262,6 +295,14 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 题目管理请求
+     * @param testdatasEntity
+     * @param error
+     * @param uploadFile
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.POST)
     public String managerProblemPost(
             @NotNull @Valid TestdatasEntity testdatasEntity,
@@ -304,6 +345,12 @@ public class ProblemController {
         return res;
     }
 
+    /**
+     * 提交代码界面
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
             @PathVariable("id") @NotNull int id,
@@ -317,24 +364,15 @@ public class ProblemController {
         String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
         return res;
     }
-    @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.GET)
-    public String submit(
-            @PathVariable("id") @NotNull int id,
-            @RequestAttribute("contestId") int contestId,
-            @RequestAttribute("no") int no,
-            Model model) {
-        OUT.prt("requst", Pages.TEST_SUBMIT);
-        ProblemsEntityVO entity = new ProblemsEntityVO();
-        entity.setProblemId(id);
-        model.addAttribute("id", id);
-        model.addAttribute("contestId", contestId);
-        model.addAttribute("no", no);
-        OUT.prt("entity", entity);
-        // TODO: 2017/4/17 select from DB
-        String res = Pages.PROBLEM + "/" + Pages.TEST_SUBMIT;
-        return res;
-    }
 
+
+    /**
+     * 提交代码请求
+     * @param submitContestDTO
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.POST)
     public String submitPost(
             @NotNull @Valid SubmitContestDTO submitContestDTO,

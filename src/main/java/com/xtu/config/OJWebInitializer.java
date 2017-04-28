@@ -6,11 +6,11 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 /**
+ * 配置 DispatcherServlet
  * Created by Ilovezilian on 2017/4/12.
  */
 
 /**
- * config DispatcherServlet
  */
 public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     /**

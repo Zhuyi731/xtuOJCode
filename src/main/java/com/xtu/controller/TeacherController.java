@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
+/** 教师控制器
  * Created by Ilovezilian on 2017/4/18.
  */
 @Controller
@@ -21,6 +21,10 @@ public class TeacherController {
     @Autowired
     TestdatasRepository testdatasRepository;
 
+    /**
+     * 主框架界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.MAIN_PAGE, method = RequestMethod.GET)
     public String showMain() {
         OUT.prt("request", Pages.MAIN_PAGE);
@@ -28,6 +32,10 @@ public class TeacherController {
         return res;
     }
 
+    /**
+     * 显示老师按钮界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.MENU, method = RequestMethod.GET)
     public String showMenu() {
         OUT.prt("request", Pages.MENU);

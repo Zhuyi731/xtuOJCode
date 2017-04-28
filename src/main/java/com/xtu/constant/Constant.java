@@ -1,6 +1,6 @@
 package com.xtu.constant;
 
-/**
+/** 通用常量类
  * Created by Ilovezilian on 2017/4/12.
  */
 public class Constant {

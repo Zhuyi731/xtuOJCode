@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-/**
+/** 登录控制器
  * Created by Ilovezilian on 2017/4/13.
  */
 @Controller
@@ -25,6 +25,11 @@ public class LoginController {
     @Autowired
     private UsersRepository usersRepository;
 
+    /**
+     * 登录界面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.LOGIN, method = RequestMethod.GET)
     public String login(Model model) {
         OUT.prt("login get", Pages.LOGIN);
@@ -33,6 +38,13 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 登录界面提交
+     * @param usersEntiy
+     * @param errors
+     * @param model
+     * @return
+     */
     @RequestMapping(value = {"/" + Pages.LOGIN, "/" + Pages.INFO}, method = RequestMethod.POST)
     public String loginPost(
             @NotNull @Valid UsersEntity usersEntiy,
@@ -71,6 +83,13 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 显示用户信息界面
+     * @param usersEntiy
+     * @param errors
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.INFO, method = RequestMethod.GET)
     public String showUsersInfo(
             @NotNull @Valid UsersEntity usersEntiy,
@@ -86,6 +105,10 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 注册界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.REGISTER, method = RequestMethod.GET)
     public String register() {
         OUT.prt("request", Pages.REGISTER);
@@ -93,6 +116,12 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 注册界面提交
+     * @param usersEntity
+     * @param errors
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.REGISTER, method = RequestMethod.POST)
     public String processRegistration(
             @NotNull @Valid UsersEntity usersEntity,
@@ -112,6 +141,10 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 忘记密码界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.FORGET_PASSWORD, method = RequestMethod.GET)
     public String forgetPassword() {
         OUT.prt("request", Pages.FORGET_PASSWORD);
@@ -119,6 +152,10 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 修改密码界面
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.MODIFY_PASSWORD, method = RequestMethod.GET)
     public String modifyPassword() {
         OUT.prt("request", Pages.MODIFY_PASSWORD);
@@ -126,6 +163,10 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 修改用户信息
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.MODIFY_USER_INFO, method = RequestMethod.GET)
     public String modifyUserInfo() {
         OUT.prt("request", Pages.MODIFY_USER_INFO);
@@ -133,6 +174,11 @@ public class LoginController {
         return res;
     }
 
+    /**
+     * 获取用户类型
+     * @param roleId
+     * @return
+     */
     private String getRoleType(int roleId) {
         String res;
         if (roleId == Constant.ADMIN) {
