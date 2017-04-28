@@ -26,7 +26,7 @@ public class ContestsEntity {
     @Size(min = 1, max = 50)
     private String title;
     /**
-     * 封榜时间
+     * 开始时间
      */
     @NotNull
     private Timestamp startTime;
