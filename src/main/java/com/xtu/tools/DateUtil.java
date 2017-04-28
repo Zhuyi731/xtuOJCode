@@ -9,4 +9,7 @@ public class DateUtil {
     public static Timestamp getTimestamp(String dateStr){
         return Timestamp.valueOf( dateStr.replace('T',' ') + ":00");
     }
+    public static Timestamp getCurrentTimestamp(){
+        return new Timestamp(System.currentTimeMillis());
+    }
 }
