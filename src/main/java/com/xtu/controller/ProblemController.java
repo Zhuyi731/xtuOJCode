@@ -19,10 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -310,10 +307,23 @@ public class ProblemController {
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
             @PathVariable("id") @NotNull int id,
-            @RequestPart("contestId") int contestId,
-            @RequestPart("no") int no,
             Model model) {
         OUT.prt("requst", Pages.SUBMIT);
+        ProblemsEntityVO entity = new ProblemsEntityVO();
+        entity.setProblemId(id);
+        model.addAttribute("id", id);
+        OUT.prt("entity", entity);
+        // TODO: 2017/4/17 select from DB
+        String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
+        return res;
+    }
+    @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.GET)
+    public String submit(
+            @PathVariable("id") @NotNull int id,
+            @RequestAttribute("contestId") int contestId,
+            @RequestAttribute("no") int no,
+            Model model) {
+        OUT.prt("requst", Pages.TEST_SUBMIT);
         ProblemsEntityVO entity = new ProblemsEntityVO();
         entity.setProblemId(id);
         model.addAttribute("id", id);
@@ -321,7 +331,7 @@ public class ProblemController {
         model.addAttribute("no", no);
         OUT.prt("entity", entity);
         // TODO: 2017/4/17 select from DB
-        String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
+        String res = Pages.PROBLEM + "/" + Pages.TEST_SUBMIT;
         return res;
     }
 
