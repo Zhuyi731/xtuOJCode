@@ -73,6 +73,10 @@ public class Pages {
      */
     public static final String SUBMIT = "submit";
     /**
+     *
+     */
+    public static final String TEST_SUBMIT = "testSubmit";
+    /**
      * 框架页面
      */
     public static final String MAIN_PAGE = "main";
@@ -139,6 +143,10 @@ public class Pages {
      * 查看比赛，题库
      */
     public static final String SHOW_TEST_PAGE = "showTest";
+    /**
+     * 查看比赛题目详情
+     */
+    public static final String TEST_DETAIL = "testDetail";
     /**
      * 创建比赛
      */
