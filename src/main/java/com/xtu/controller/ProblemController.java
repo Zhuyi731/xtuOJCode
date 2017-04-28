@@ -62,9 +62,7 @@ public class ProblemController {
             ProblemsDTO problemsDTO,
             Model model) {
         OUT.prt("request", Pages.PROBLEMS_INDEX);
-        // TODO: 2017/4/17 select problems from db 
-        // TODO: 2017/4/17 add pagination
-        ProblemsVO vo = problemsRepository.queryPage(start);
+        ProblemsVO vo = problemsRepository.queryPage(start, problemsDTO);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
 
@@ -80,9 +78,6 @@ public class ProblemController {
     @RequestMapping(value = "/" + Pages.ADD_PROBLEM, method = RequestMethod.GET)
     public String AddProblem() {
         OUT.prt("request", Pages.ADD_PROBLEM);
-        // TODO: 2017/4/17 select problems from db
-        // TODO: 2017/4/17 add pagination
-
         String res = Pages.PROBLEM + "/" + Pages.ADD_PROBLEM;
         return res;
     }
@@ -218,6 +213,7 @@ public class ProblemController {
 
     /**
      * 显示题目详情
+     *
      * @param id
      * @param model
      * @return
@@ -247,6 +243,7 @@ public class ProblemController {
 
     /**
      * 修改题目界面
+     *
      * @param id
      * @param model
      * @return
@@ -275,6 +272,7 @@ public class ProblemController {
 
     /**
      * 题目管理界面
+     *
      * @param model
      * @param principal
      * @return
@@ -284,7 +282,6 @@ public class ProblemController {
             Model model,
             Principal principal) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
-        // TODO: 2017/4/22 adjust
         String id = principal.getName();
         OUT.prt("id", id);
         UsersEntity usersEntity = usersRepository.findOne(id);
@@ -297,6 +294,7 @@ public class ProblemController {
 
     /**
      * 题目管理请求
+     *
      * @param testdatasEntity
      * @param error
      * @param uploadFile
@@ -347,6 +345,7 @@ public class ProblemController {
 
     /**
      * 提交代码界面
+     *
      * @param id
      * @param model
      * @return
@@ -360,7 +359,6 @@ public class ProblemController {
         entity.setProblemId(id);
         model.addAttribute("id", id);
         OUT.prt("entity", entity);
-        // TODO: 2017/4/17 select from DB
         String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
         return res;
     }
@@ -368,6 +366,7 @@ public class ProblemController {
 
     /**
      * 提交代码请求
+     *
      * @param submitContestDTO
      * @param model
      * @param principal

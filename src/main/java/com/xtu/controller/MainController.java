@@ -23,7 +23,8 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
-/** 主页界面
+/**
+ * 主页界面
  * Created by Ilovezilian on 2017/4/13.
  */
 @Controller
@@ -33,6 +34,7 @@ public class MainController {
 
     /**
      * 导航页
+     *
      * @return
      */
     @RequestMapping(value = {"/", "/" + Pages.INDEX}, method = RequestMethod.GET)
@@ -43,6 +45,7 @@ public class MainController {
 
     /**
      * 导航栏
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.NAVIGATION)
@@ -54,6 +57,7 @@ public class MainController {
 
     /**
      * 导航栏II
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.NAVIGATION_SECOND)
@@ -65,6 +69,7 @@ public class MainController {
 
     /**
      * 排行榜界面
+     *
      * @param start
      * @param model
      * @return
@@ -74,7 +79,6 @@ public class MainController {
             @PathVariable("start") int start,
             Model model) {
         OUT.prt("request", Pages.RANK_LIST);
-        // TODO: 2017/4/17 add pagination
 
         RankVO rankVO = runsRepository.queryRankList(start);
         List<RankEntityVO> entityList = rankVO.getEntityList();
@@ -92,6 +96,7 @@ public class MainController {
 
     /**
      * 显示运行结果状态
+     *
      * @param start
      * @param statusDTO
      * @param model
@@ -104,9 +109,6 @@ public class MainController {
             Model model) {
         OUT.prt("request", Pages.STATUS);
         OUT.prt("statusDTO", statusDTO);
-        // TODO: 2017/4/17 add filter condition
-        // TODO: 2017/4/17 add pagination
-//        StatusVO vo= runsRepository.queryStatusList(start);
         StatusVO vo = runsRepository.queryStatusList(start, statusDTO);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
@@ -117,6 +119,7 @@ public class MainController {
 
     /**
      * 提交代码界面
+     *
      * @param runId
      * @param model
      * @param principal
@@ -138,6 +141,7 @@ public class MainController {
 
     /**
      * 上传文件界面
+     *
      * @param model
      * @return
      */
@@ -151,6 +155,7 @@ public class MainController {
 
     /**
      * 上传文件请求
+     *
      * @param zip
      * @param error
      * @param model
@@ -177,6 +182,7 @@ public class MainController {
 
     /**
      * 管理问题界面
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
@@ -188,6 +194,7 @@ public class MainController {
 
     /**
      * 显示题库
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.SHOW_TEST_PAGE, method = RequestMethod.GET)

@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and().csrf().disable();
                 .and()
                 .headers().frameOptions().sameOrigin();  //setting X-Frame-Options from DENY to SAMEORIGIN
-        // TODO: 2017/4/23 remove below
 //                .and().csrf().disable();
     }
 

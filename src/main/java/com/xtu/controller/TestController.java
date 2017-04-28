@@ -55,7 +55,6 @@ public class TestController {
         model.addAttribute("contestId", contestId);
         model.addAttribute("no", no);
         OUT.prt("entity", entity);
-        // TODO: 2017/4/17 select from DB
         String res = Pages.TEST + "/" + Pages.TEST_SUBMIT;
         return res;
     }
@@ -90,7 +89,6 @@ public class TestController {
             Model model,
             Principal principal) {
         OUT.prt("request", Pages.TEST);
-        // TODO: 2017/4/18 select from db
         String id = principal.getName();
         UsersEntity usersEntity = usersRepository.findOne(id);
         AllContestVO vo = contestRepository.queryAllContestPages(start, usersEntity.getUserId());
@@ -105,7 +103,6 @@ public class TestController {
             @PathVariable("id") Integer contestId,
             Model model) {
         OUT.prt("request", Pages.TEST_DETAIL);
-        // TODO: 2017/4/18 select from db
         AllContestProblemVO vo = contestProblemsRepository.findList(contestId);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
@@ -160,7 +157,6 @@ public class TestController {
         createTestDTO.setStartTime(DateUtil.getTimestamp(createTestDTO.getStartTimeStr()));
         createTestDTO.setFrozenStartTime(DateUtil.getTimestamp(createTestDTO.getFrozenStartTimeStr()));
         createTestDTO.setEndTime(DateUtil.getTimestamp(createTestDTO.getEndTimeStr()));
-        // TODO: 2017/4/18 insert into db
         ContestsEntity contestsEntity = new ContestsEntity();
         BeanUtils.copyProperties(createTestDTO, contestsEntity);
 
@@ -192,10 +188,8 @@ public class TestController {
 
     @RequestMapping(value = "/" + Pages.JOIN_TEST, method = RequestMethod.GET)
     public String joinTest(
-            // TODO: 2017/4/18 create entity
             Model model) {
         OUT.prt("request", Pages.JOIN_TEST);
-        // TODO: 2017/4/18 insert into db
         String res = Pages.TEST + "/" + Pages.JOIN_TEST;
         return res;
     }

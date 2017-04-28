@@ -12,9 +12,9 @@ import com.xtu.DB.vo.ProblemsVO;
 public interface ProblemsRepository {
     Long count();
 
-    ProblemsVO queryPage(int start, int size);
+    ProblemsVO queryPage(int start, int size, ProblemsDTO problemsDTO);
 
-    ProblemsVO queryPage(int start);
+    ProblemsVO queryPage(int start, ProblemsDTO problemsDTO);
 
     ModifyProblemsVO queryModifyPage(int start, int size, int userId);
 

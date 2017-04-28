@@ -49,12 +49,16 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ProblemsVO queryPage(int start, int size) {
+    public ProblemsVO queryPage(int start, int size, ProblemsDTO problemsDTO) {
         String finduserSql = "SELECT * FROM " +
                 Tables.PROBLEMS +
+                " WHERE `title` = ? OR `problem_id` = ? " +
                 " Limit ?,?";
         List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
-                new ProblemsEntityRowMapper(), start * size, size);
+                new ProblemsEntityRowMapper(),
+                problemsDTO.getTitle(),
+                problemsDTO.getProblemId(),
+                start * size, size);
 
         ProblemsVO vo = new ProblemsVO();
         List<ProblemsEntityVO> voList = new ArrayList<>();
@@ -67,7 +71,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             entityVO.setAcProblemsNum(acProblemsNum);
             int submitProblemsNum = map.get("submitProblemsNum");
             entityVO.setSubmitProblemsNum(submitProblemsNum);
-            if (submitProblemsNum == 0){
+            if (submitProblemsNum == 0) {
                 entityVO.setRatio(0);
             } else {
                 entityVO.setRatio(acProblemsNum * 100 / submitProblemsNum);
@@ -80,8 +84,8 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
     }
 
     @Override
-    public ProblemsVO queryPage(int start) {
-        return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE));
+    public ProblemsVO queryPage(int start, ProblemsDTO problemsDTO) {
+        return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE), problemsDTO);
     }
 
     @Override
@@ -109,7 +113,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             entityVO.setAcProblemsNum(acProblemsNum);
             int submitProblemsNum = map.get("submitProblemsNum");
             entityVO.setSubmitProblemsNum(submitProblemsNum);
-            if (submitProblemsNum == 0){
+            if (submitProblemsNum == 0) {
                 entityVO.setRatio(0);
             } else {
                 entityVO.setRatio(acProblemsNum * 100 / submitProblemsNum);

@@ -63,23 +63,22 @@ public class LoginController {
             res = Pages.INFO;
             return res;
         }
-        // TODO: 2017/4/13 select form DB
-        UsersEntity usersEntiyDB = usersRepository.findOne(usersEntiy.getId());
+        UsersEntity usersEntityDB = usersRepository.findOne(usersEntiy.getId());
 
-        if (null == usersEntiyDB) {
+        if (null == usersEntityDB) {
             model.addAttribute("message", "wrong use id or password");
             res = Pages.LOGIN;
             return res;
         }
-        if (!usersEntiy.getPassword().equals(usersEntiyDB.getPassword())) {
+        if (!usersEntiy.getPassword().equals(usersEntityDB.getPassword())) {
             model.addAttribute("message", "password error");
             res = Pages.LOGIN;
             return res;
         }
 
 //        int cont = usersRepository.count().intValue();
-        model.addFlashAttribute("usersEntity from db", usersEntiyDB);
-        res = "redirect:/" + getRoleType(usersEntiyDB.getRoleId()) + "/" + Pages.MAIN_PAGE;
+        model.addFlashAttribute("usersEntity from db", usersEntityDB);
+        res = "redirect:/" + getRoleType(usersEntityDB.getRoleId()) + "/" + Pages.MAIN_PAGE;
         return res;
     }
 
