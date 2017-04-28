@@ -148,39 +148,83 @@ public class RunsRepositoryImp implements RunsRepository {
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
                 " WHERE run_id != 0";
+        if (null != statusDTO.getId() && !"".equals(statusDTO.getId())) {
+            sql += " AND `id` = ?";
+        } else {
+            sql += " AND `id` != ?";
+//            statusDTO.setId("(^_^)");
+        }
+        if (statusDTO.getProblemId() != 0) {
+            sql += " AND `problem_id` = ?";
+        } else {
+            sql += " AND `problem_id` != ?";
+        }
         if (statusDTO.getResultCode() != 0) {
             sql += " AND `result_code` = ?";
         } else {
             sql += " AND `result_code` != ?";
         }
-        if (null != statusDTO.getLanguage() && "".equals(statusDTO.getLanguage())) {
+        if (null != statusDTO.getLanguage()
+                && !"".equals(statusDTO.getLanguage())
+                && !"0".equals(statusDTO.getLanguage())) {
             sql += " AND `language` = ?";
         } else {
             sql += " AND `language` != ?";
-            statusDTO.setLanguage("(^_^)");
+//            statusDTO.setLanguage("(^_^)");
         }
-        if (null != statusDTO.getId() && "".equals(statusDTO.getId())) {
-            sql += " AND `id` = ?";
-        } else {
-            sql += " AND `id` != ?";
-            statusDTO.setId("(^_^)");
-        }
+
         sql += " ORDER BY `runs`.`submit_time` DESC" +
-                " LIMIT ?, ?;";
+                " LIMIT ?, ?";
         List<StatusEntityVO> entityList = jdbcOperations.query(sql,
                 new StatusEntityVORowMapper(),
+                statusDTO.getId(),
+                statusDTO.getProblemId(),
                 statusDTO.getResultCode(),
                 statusDTO.getLanguage(),
-                statusDTO.getId(),
                 start * size, size);
 
         hideCode(entityList);
 
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
-        vo.setTotal(statusListCount());
+        vo.setTotal(queryStatusListTotal(statusDTO));
         vo.setStart(start);
         return vo;
+    }
+
+    @Override
+    public Long queryStatusListTotal(StatusDTO statusDTO) {
+        String sql = "SELECT COUNT(`run_id`) " +
+                " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
+                " WHERE run_id != 0";
+        if (null != statusDTO.getId() && !"".equals(statusDTO.getId())) {
+            sql += " AND `id` = ?";
+        } else {
+            sql += " AND `id` != ?";
+//            statusDTO.setId("(^_^)");
+        }
+        if (statusDTO.getProblemId() != 0) {
+            sql += " AND `problem_id` = ?";
+        } else {
+            sql += " AND `problem_id` != ?";
+        }
+        if (statusDTO.getResultCode() != 0) {
+            sql += " AND `result_code` = ?";
+        } else {
+            sql += " AND `result_code` != ?";
+        }
+        if (null != statusDTO.getLanguage() && !"".equals(statusDTO.getLanguage())) {
+            sql += " AND `language` = ?";
+        } else {
+            sql += " AND `language` != ?";
+//            statusDTO.setLanguage("(^_^)");
+        }
+        return jdbcOperations.queryForObject(sql,
+                Long.class,
+                statusDTO.getId(),
+                statusDTO.getProblemId(),
+                statusDTO.getResultCode(),
+                statusDTO.getLanguage());
     }
 
     private void hideCode(List<StatusEntityVO> entityList) {
