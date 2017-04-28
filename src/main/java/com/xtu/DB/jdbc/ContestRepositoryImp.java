@@ -1,9 +1,17 @@
 package com.xtu.DB.jdbc;
 
 import com.xtu.DB.ContestRepository;
+import com.xtu.DB.UsersRepository;
+import com.xtu.DB.dto.ContestDTO;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestsEntity;
+import com.xtu.DB.entity.UsersEntity;
+import com.xtu.DB.vo.AllContestEntityVO;
+import com.xtu.DB.vo.AllContestVO;
+import com.xtu.constant.Constant;
 import com.xtu.constant.Tables;
+import com.xtu.tools.DateUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,6 +29,8 @@ import java.util.Map;
 public class ContestRepositoryImp implements ContestRepository {
     @Autowired
     JdbcOperations jdbcOperations;
+    @Autowired
+    UsersRepository usersRepository;
 
     @Override
     public Long count() {
@@ -29,11 +39,10 @@ public class ContestRepositoryImp implements ContestRepository {
 
     @Override
     public ContestsEntity findOne(int contestId) {
-        String sql = "select * from "+
+        String sql = "select * from " +
                 Tables.CONTESTS +
                 " from where `contest_id` = ?";
-        jdbcOperations.queryForObject(sql, new ContestsEntityRowMapper(), contestId);
-        return null;
+        return jdbcOperations.queryForObject(sql, new ContestsEntityRowMapper(), contestId);
     }
 
     @Override
@@ -66,7 +75,7 @@ public class ContestRepositoryImp implements ContestRepository {
     public ContestsEntity insert(ContestsEntity contestsEntity) {
         String sql = "INSERT INTO `contests` (`title`, `start_time`, `frozen_start_time`, `end_time`,  " +
                 "`type`,`online`,`status`,`register_start_time`, `register_end_time`, " +
-                "`description`,`anouncement`, `owner`)  " +
+                "`description`,`announcement`, `owner`)  " +
                 "VALUES (?,?,?,?," +
                 "?,?,?,?,?," +
                 "?,?,?)";
@@ -90,38 +99,138 @@ public class ContestRepositoryImp implements ContestRepository {
 
     @Override
     public ContestsEntity update(ContestsEntity contestsEntity) {
-        String sql = "UPDATE `contests` SET" +
-                "`title` = ?," +
-                "`start_time` = ?," +
-                "`frozen_start_time` = ?," +
-                "`end_time` = ?,  " +
-                "`type` = ?," +
-                "`online` = ?," +
-                "`status` = ?," +
-                "`register_start_time` = ?," +
-                "`register_end_time` = ?, " +
-                "`description` = ?," +
-                "`anouncement` = ? " +
-                " WHERE `contest_id` = ?";
-        jdbcOperations.update(sql,
-                contestsEntity.getTitle(),
-                contestsEntity.getStartTime(),
-                contestsEntity.getFrozenStartTime(),
-                contestsEntity.getEndTime(),
-                contestsEntity.getType(),
-                contestsEntity.getOnline(),
-                contestsEntity.getStatus(),
-                contestsEntity.getRegisterStartTime(),
-                contestsEntity.getRegisterEndTime(),
-                contestsEntity.getDescription(),
-                contestsEntity.getAnnouncement(),
-                contestsEntity.getContestId());
+        ContestsEntity entity = findOne(contestsEntity.getContestId());
+        if (entity.getStartTime().after(DateUtil.getCurrentTimestamp())) {
+            String sql = "UPDATE `contests` SET" +
+                    "`title` = ?," +
+                    "`start_time` = ?," +
+                    "`frozen_start_time` = ?," +
+                    "`end_time` = ?,  " +
+                    "`type` = ?," +
+                    "`online` = ?," +
+                    "`status` = ?," +
+                    "`register_start_time` = ?," +
+                    "`register_end_time` = ?, " +
+                    "`description` = ?," +
+                    "`announcement` = ? " +
+                    " WHERE `contest_id` = ?";
+            jdbcOperations.update(sql,
+                    contestsEntity.getTitle(),
+                    contestsEntity.getStartTime(),
+                    contestsEntity.getFrozenStartTime(),
+                    contestsEntity.getEndTime(),
+                    contestsEntity.getType(),
+                    contestsEntity.getOnline(),
+                    contestsEntity.getStatus(),
+                    contestsEntity.getRegisterStartTime(),
+                    contestsEntity.getRegisterEndTime(),
+                    contestsEntity.getDescription(),
+                    contestsEntity.getAnnouncement(),
+                    contestsEntity.getContestId());
+        }
         return contestsEntity;
     }
 
     @Override
     public void delete(long id) {
 
+    }
+
+    public Long queryContestPagesTotal(ContestDTO contestDTO) {
+        String sql = "SELECT COUNT(`contest_id`) FROM " +
+                Tables.CONTESTS + " WHERE `contest_id` != 0";
+        if (contestDTO.getContestId() != 0) {
+            sql = sql + " AND `contest_id` = ?";
+        } else {
+            sql = sql + " AND `contest_id` != ?";
+        }
+        if ("".equals(contestDTO.getTitle())) {
+            sql += " AND `title` = ?";
+        } else {
+            sql += " AND `title` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `type` = ?";
+        } else {
+            sql += "AND `type` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `online` = ?";
+        } else {
+            sql += "AND `online` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `status` = ?";
+        } else {
+            sql += "AND `status` != ?";
+        }
+        return jdbcOperations.queryForObject(sql, Long.class,
+                contestDTO.getContestId(),
+                contestDTO.getTitle(),
+                contestDTO.getType(),
+                contestDTO.getOnline(),
+                contestDTO.getStatus());
+    }
+
+    @Override
+    public AllContestVO queryContestPages(int start, int size, ContestDTO contestDTO) {
+        String sql = "SELECT * from " +
+                Tables.CONTESTS + " WHERE `contest_id` != 0";
+        if (contestDTO.getContestId() != 0) {
+            sql = sql + " AND `contest_id` = ?";
+        } else {
+            sql = sql + " AND `contest_id` != ?";
+        }
+        if ("".equals(contestDTO.getTitle())) {
+            sql += " AND `title` = ?";
+        } else {
+            sql += " AND `title` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `type` = ?";
+        } else {
+            sql += "AND `type` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `online` = ?";
+        } else {
+            sql += "AND `online` != ?";
+        }
+        if (-1 != contestDTO.getType()) {
+            sql += " AND `status` = ?";
+        } else {
+            sql += "AND `status` != ?";
+        }
+        sql += " LIMIT ?,?";
+        List<ContestsEntity> entityList = jdbcOperations.query(sql,
+                new ContestsEntityRowMapper(),
+                contestDTO.getContestId(),
+                contestDTO.getTitle(),
+                contestDTO.getType(),
+                contestDTO.getOnline(),
+                contestDTO.getStatus(),
+                start, size);
+        AllContestVO vo = new AllContestVO();
+        List<AllContestEntityVO> entityVOList = vo.getEntityList();
+        for (ContestsEntity entity : entityList) {
+            AllContestEntityVO entityVO = new AllContestEntityVO();
+            BeanUtils.copyProperties(entity, entityVO);
+
+            UsersEntity usersEntity = usersRepository.findOne(contestDTO.getId());
+            entityVO.setId(contestDTO.getId());
+            entityVO.setName(usersEntity.getName());
+            entityVOList.add(entityVO);
+        }
+        vo.setStart(start);
+        Long total = queryContestPagesTotal(contestDTO);
+        vo.setTotal(total.intValue());
+        return vo;
+    }
+
+    @Override
+    public AllContestVO queryContestPages(int start, ContestDTO contestDTO) {
+
+        return queryContestPages(start, Integer.parseInt(Constant.PAGE_SIZE), contestDTO);
     }
 
     private static final class ContestsEntityRowMapper implements RowMapper<ContestsEntity> {
@@ -145,4 +254,5 @@ public class ContestRepositoryImp implements ContestRepository {
             return entity;
         }
     }
+
 }
