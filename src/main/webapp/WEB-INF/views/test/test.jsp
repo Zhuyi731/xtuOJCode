@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
     String path = request.getContextPath();
@@ -67,7 +68,7 @@
         <c:forEach items="${vo.entityList}" var="entity">
         <tr>
             <th><a href="/test/allTest/${entity.examId}">${entity.examId}</a></th>
-            <th><a href="/test/allTest/${entity.examId}">${entity.title}</a></th>
+            <th><a href="/test/allTest/${entity.examId}"><a href="">${entity.title}</a></th>
             <th>${entity.startTime}</th>
             <th>${entity.endTime}</th>
             <th><a href="/test/modifyTest.jsp">进入修改</a></th>

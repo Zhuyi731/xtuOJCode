@@ -44,7 +44,7 @@
     <p>
 </div>
 <div class="tailSubmit" align="center">
-    <a class="btn btn-info btn-lg " href="problem/submit/${entity.problemId}">Submit code</a>
+    <a class="btn btn-info btn-lg " href="/problem/submit/${entity.problemId}?contestId=${entity.contestId}">Submit code</a>
     <a class="btn btn-info btn-lg" style="margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
