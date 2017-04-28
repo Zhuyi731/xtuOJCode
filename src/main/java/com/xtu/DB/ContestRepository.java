@@ -1,7 +1,9 @@
 package com.xtu.DB;
 
+import com.xtu.DB.dto.ContestDTO;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestsEntity;
+import com.xtu.DB.vo.AllContestVO;
 
 import java.util.List;
 
@@ -23,5 +25,11 @@ public interface ContestRepository {
     ContestsEntity update(ContestsEntity problemSetDetailEntity);
 
     void delete(long id);
+
+    Long queryContestPagesTotal(ContestDTO contestDTO);
+
+    AllContestVO queryContestPages(int start, int size, ContestDTO contestDTO);
+
+    AllContestVO queryContestPages(int start, ContestDTO contestDTO);
 
 }
