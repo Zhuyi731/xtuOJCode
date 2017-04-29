@@ -135,8 +135,11 @@ public class TestController {
 
     @RequestMapping(value = {Pages.MODIFY_TEST, "/" + Pages.MODIFY_TEST + "/{id}"}, method = RequestMethod.GET)
     public String modifyTest(
-            @PathVariable("id") int id) {
+            @PathVariable("id") int id,
+            Model model) {
         OUT.prt("request", Pages.MODIFY_TEST);
+        ContestsEntity contestsEntity = contestRepository.findOne(id);
+        model.addAttribute("entity", contestsEntity);
         String res = "/" + Pages.TEST + "/" + Pages.MODIFY_TEST;
         return res;
     }
