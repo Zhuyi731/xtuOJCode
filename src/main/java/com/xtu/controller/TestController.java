@@ -182,7 +182,7 @@ public class TestController {
             contestProblemsRepository.insert(entity);
         }
 
-        String res = Pages.TEST + "/" + Pages.TOTAL_TEST;
+        String res = Pages.TEST + "/" + Pages.TEST;
         return res;
     }
 

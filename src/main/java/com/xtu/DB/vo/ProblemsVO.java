@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 public class ProblemsVO {
     private List<ProblemsEntityVO> entityList;
-    private Long total;
+    private long total;
     private int start;
 }

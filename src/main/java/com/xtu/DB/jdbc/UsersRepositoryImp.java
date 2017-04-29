@@ -39,7 +39,7 @@ public class UsersRepositoryImp implements UsersRepository {
     public UsersEntity save(UsersEntity usersEntity) {
         Integer userId = usersEntity.getUserId();
         String sql = null;
-        if (null != userId) {
+        if (null == userId) {
             sql = "INSERT INTO "
                     + Tables.USERS
                     + "(`role_id`,`id`, `name`, `class_id`," +
