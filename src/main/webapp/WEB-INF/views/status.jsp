@@ -50,17 +50,17 @@
 </c:if>
 <h1>Online Status</h1>
 <div class="search" style="line-height:15px;">
-    <form role="form" method="get" class="form-inline">
+    <sf:form commandName="statusDTO" role="form" method="get" class="form-inline">
         <div class="form-group">
-            <label for="proID" class="control-label col-md-1 col-sm-1">Pro.ID</label>
+            <label for="problemId" class="control-label col-md-1 col-sm-1">Pro.ID</label>
             <div class="col-md-offset-1 col-sm-offset-1">
-                <input type="text" class="form-control" name="proID" id="proID" placeholder="题目编号">
+                <input type="text" class="form-control" name="problemId" id="problemId" placeholder="题目编号">
             </div>
         </div>
         <div class="form-group">
-            <label for="username" class="control-label  col-md-1 col-sm-1">username</label>
+            <label for="id" class="control-label  col-md-1 col-sm-1">username</label>
             <div class="col-md-offset-1 col-sm-offset-1">
-                <input type="text" class="form-control" name="username" id="username" placeholder="用户名">
+                <input type="text" class="form-control" name="id" id="id" placeholder="用户名">
             </div>
         </div>
         <div class="form-group">
@@ -92,7 +92,7 @@
         <div class="form-group" style="padding-top:15px;">
             <input type="submit" value="Search" class="btn bg-primary  col-md-offset-1 col-sm-offset-1">
         </div>
-    </form>
+    </sf:form>
 </div>
 <div class="page" style="margin:0px 160px;">
     <ul class="pager">

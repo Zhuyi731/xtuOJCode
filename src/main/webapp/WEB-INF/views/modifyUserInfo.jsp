@@ -19,7 +19,7 @@
     <div class="form-group">
         <label for="name" class="col-sm-2 col-sm-offset-2 control-label">姓名:</label>
         <div class="col-sm-3">
-            <input type="text" id="name" name="name" class="form-control " value="${entity.name}">
+            <input type="text" id="name" name="name" class="form-control " value="${entity.name}" readonly="readonly">
         </div>
     </div>
     <div class="form-group">
@@ -29,9 +29,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="nickName" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
+        <label for="nickname" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="nickName" id="nickName" value=${entity.nickName}>
+            <input type="text" class="form-control" name="nickname" id="nickname" value=${entity.nickName}>
         </div>
     </div>
     <div class="form-group">
@@ -41,18 +41,39 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="qqOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开QQ：</label>
+        <div class="col-sm-3 " style="padding-left:0;">
+            <input type="radio" id="qqOpen" name="qqOpen" value="1" checked="checked">是
+            <input type="radio" name="qqOpen" value="0">否
+        </div>
+    </div>
+    <div class="form-group">
         <label for="email" class="col-sm-2 col-sm-offset-2 control-label">Email：</label>
         <div class="col-sm-3">
             <input type="text" class="form-control" id="email" name="email" value="${entity.Email}">
         </div>
     </div>
     <div class="form-group">
-        <label for="status" class="col-sm-2 col-sm-offset-2 control-label">是否展示个人信息：</label>
+        <label for="emailOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开Email：</label>
         <div class="col-sm-3 " style="padding-left:0;">
-            <input type="radio" id="status" name="status" value="1" checked="checked">是
-            <input type="radio" name="display" value="0">否
+            <input type="radio" id="emailOpen" name="emailOpen" value="1" checked="checked">是
+            <input type="radio" name="emailOpen" value="0">否
         </div>
     </div>
+    <div class="form-group">
+        <label for="phone" class="col-sm-2 col-sm-offset-2 control-label">Phone：</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="phone" name="phone" value="${entity.phone}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phoneOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开Email：</label>
+        <div class="col-sm-3 " style="padding-left:0;">
+            <input type="radio" id="phoneOpen" name="phoneOpen" value="1" checked="checked">是
+            <input type="radio" name="phoneOpen" value="0">否
+        </div>
+    </div>
+
     <div class="form-group">
     </div>
     <div class="form-group" align="middle">

@@ -11,8 +11,10 @@
     <title>Create a contest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
     </head>
 <body>
+<div class="top50">
 <sf:form role="form" class="form-horizontal" method="post" onsubmit="return check()">
     <div id="part1" style="width:800px;margin-left:150px;display:;" align="center">
         <div class="panel panel-default  panel-danger">
@@ -133,6 +135,7 @@
         </div>
     </div>
 </sf:form>
+</div>
 <script src="/js/custom.js" rel="script" language="JavaScript"></script>
 </body>
 </html>

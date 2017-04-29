@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 <%@ include file="/WEB-INF/views/navigation.jsp"%>
 	<!-- 表单 -->
-	<form role="form" method="post" class="form-horizontal" action="registerServlet"  align="middle" >
+	<form role="form" method="post" class="form-horizontal"   align="middle" >
 	<div class="form-group">
 		<label for="accountReg" class="col-sm-2 col-sm-offset-2 control-label" >账号：</label>
 		<div class="col-sm-3" >

@@ -7,8 +7,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     RankVO vo= (RankVO) request.getAttribute("vo");
     String currentPage=String.valueOf(vo.getStart()+1);
-    String totalPage=String.valueOf(vo.getTotal()/20+1);
     pageContext.setAttribute("currentPage",currentPage);
+    String totalPage=String.valueOf(vo.getTotal()/20+1);
     pageContext.setAttribute("totalPage",totalPage);
 %>
 <!DOCTYPE HTML>

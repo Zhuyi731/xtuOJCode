@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<div class="headTitle">
+<div class="top50">
 </div>
 <sf:form class="form-horizontal form-label-left" role="form" enctype="multipart/form-data">
     <div class="form-group">
