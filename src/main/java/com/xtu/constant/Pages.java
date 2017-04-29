@@ -29,6 +29,10 @@ public class Pages {
      */
     public static final String FORGET_PASSWORD = "forgetPassword";
     /**
+     * 展示用户信息
+     */
+    public static final String USER_INFO = "userInfo";
+    /**
      * 修改用户信息
      */
     public static final String MODIFY_USER_INFO = "modifyUserInfo";
