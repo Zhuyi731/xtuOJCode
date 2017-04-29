@@ -15,6 +15,7 @@ max(problems.problem_id) + ? or auto increase of the field.
 ### function
 1. 是否需要注册？
 2. 判题验证器ID这是用来干什么的？
+3. 公告不用单独存入一个数据库表里面么？
 
 ### web pages relation solve by zhuyi
 1. submit must add a field open choose options
@@ -22,4 +23,5 @@ max(problems.problem_id) + ? or auto increase of the field.
 
 ### web java relation solve by panshuai
 1. cat source code must consider situation in period of contest. do a condition filter.
+2. status result vo change the output.
 
