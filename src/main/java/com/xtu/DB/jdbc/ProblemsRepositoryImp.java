@@ -48,6 +48,28 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return id;
     }
 
+
+    @Override
+    public Long queryPageTotal(ProblemsDTO problemsDTO) {
+        String sql = "SELECT  FROM " +
+                Tables.PROBLEMS +
+                " WHERE ";
+        if ("".equals(problemsDTO.getTitle()) || null == problemsDTO.getTitle()) {
+            sql += " `title` != ? ";
+        } else {
+            sql += " `title` = ?";
+        }
+        if (0 == problemsDTO.getProblemId()) {
+            sql += " AND `problem_id` != ? ";
+        } else {
+            sql += " AND `problem_id` = ?";
+        }
+        return jdbcOperations.queryForObject(sql,
+                Long.class,
+                problemsDTO.getTitle(),
+                problemsDTO.getProblemId());
+    }
+
     @Override
     public ProblemsVO queryPage(int start, int size, ProblemsDTO problemsDTO) {
         String sql = "SELECT * FROM " +
@@ -58,7 +80,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         } else {
             sql += " `title` = ?";
         }
-        if ( 0 == problemsDTO.getProblemId()) {
+        if (0 == problemsDTO.getProblemId()) {
             sql += " AND `problem_id` != ? ";
         } else {
             sql += " AND `problem_id` = ?";
@@ -89,6 +111,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             voList.add(entityVO);
         }
         vo.setStart(start);
+        vo.setTotal(queryPageTotal(problemsDTO));
         vo.setEntityList(voList);
         return vo;
     }
