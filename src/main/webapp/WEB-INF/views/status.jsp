@@ -67,9 +67,9 @@
             <label for="language" class="control-label ">Language</label>
             <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                 <option value="0">All</option>
-                <option value="1">C</option>
-                <option value="2">C++</option>
-                <option value="3">Java</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="Java">Java</option>
             </select>
         </div>
         <div class="form-group">

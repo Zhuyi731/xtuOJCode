@@ -140,8 +140,6 @@ function check() {
         return true;
     }
 }
-
-
 //检查密码是否合法
 function checkPassword() {
     var s = document.getElementById("alert");

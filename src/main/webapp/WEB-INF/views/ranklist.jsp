@@ -65,12 +65,12 @@
         <ul class="pager">
             <li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
             <c:if test="${currentPage!=1}">
-                <li class="previous"><a href="/ranklist/${currentPage-2}">&laquo;Previous Page</a></li>
+                <li class="previous"><a href="/ranklist/${vo.start-1}">&laquo;Previous Page</a></li>
             </c:if>
             <li>The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
             <li class="next"><a href="/ranklist/${totalPage}">The Last Page&raquo;&raquo;</a></li>
             <c:if test="${currentPage < totalPage}">
-                <li class="next"><a href="/ranklist/${currentPage}">Next Page&raquo;</a></li>
+                <li class="next"><a href="/ranklist/${vo.start+1}">Next Page&raquo;</a></li>
             </c:if>
         </ul>
     </div>

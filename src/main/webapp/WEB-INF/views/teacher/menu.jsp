@@ -35,16 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </ul>
       </div>
       <div class="dropdown" >
-       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu2" data-toggle="dropdown">
-        学生管理
-        <span class="caret"></span>
-       </button>
-       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" >
-        <li role="presentation"><a href="common/showStudent">查看自己所有学生</a></li>
-        <li role="presentation"><a href="common/addStudent">添加学生</a></li>
-       </ul>
-      </div>
-      <div class="dropdown" >
        <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu3" data-toggle="dropdown">
         题库管理
         <span class="caret"></span>

@@ -14,53 +14,36 @@
 </head>
 <body>
 <!-- 表单 -->
+<div style="margin-top: 50px;">
 <form role="form" method="post" class="form-horizontal" align="middle">
     <div class="form-group">
-        <label for="id" class="col-sm-2 col-sm-offset-2 control-label">账号：</label>
+        <label for="name" class="col-sm-2 col-sm-offset-2 control-label">姓名:</label>
         <div class="col-sm-3">
-            <input type="text" id="id" name="id" class="form-control " value="${vo.entity.id}" disabled>
+            <input type="text" id="name" name="name" class="form-control " value="${entity.name}">
         </div>
     </div>
     <div class="form-group">
-        <label for="name" class="col-sm-2 col-sm-offset-2 control-label">姓名：</label>
+        <label for="college" class="col-sm-2 col-sm-offset-2 control-label">班级:</label>
         <div class="col-sm-3">
-            <input type="text" id="name" name="name" class="form-control " value="" disabled>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="college" class="col-sm-2 col-sm-offset-2 control-label">院系：</label>
-        <div class="col-sm-3">
-            <input type="text" id="college" name="college" class="form-control " value=${student.major} disabled>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="sex" class="col-sm-2 col-sm-offset-2 control-label">性别：</label>
-        <div class="col-sm-3">
-            <input type="text" id="sex" name="sex" class="form-control " value="" disabled>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="motto" class="col-sm-2 col-sm-offset-2 control-label">motto：</label>
-        <div class="col-sm-3">
-            <input type="text" class="form-control" id="motto" name="motto" value="">
+            <input type="text" id="college" name="college" class="form-control " value="" readonly="readonly">
         </div>
     </div>
     <div class="form-group">
         <label for="nickName" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="nickName" id="nickName" value="">
+            <input type="text" class="form-control" name="nickName" id="nickName" value=${entity.nickName}>
         </div>
     </div>
     <div class="form-group">
         <label for="QQ" class="col-sm-2 col-sm-offset-2 control-label">QQ：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="QQ" name="QQ" value="">
+            <input type="text" class="form-control" id="QQ" name="QQ" value=${entity.QQ}>
         </div>
     </div>
     <div class="form-group">
-        <label for="email" class="col-sm-2 col-sm-offset-2 control-label">email：</label>
+        <label for="email" class="col-sm-2 col-sm-offset-2 control-label">Email：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="email" name="email" value="">
+            <input type="text" class="form-control" id="email" name="email" value="${entity.Email}">
         </div>
     </div>
     <div class="form-group">
@@ -74,10 +57,10 @@
     </div>
     <div class="form-group" align="middle">
         <div class="col-sm-1 col-sm-offset-4">
-            <input type="submit" class="form-control" id="submit" value="修改">
+            <input type="submit" class="form-control btn btn-warning" id="submit" value="修改">
         </div>
         <div class="col-sm-1 ">
-            <input type="reset" class="form-control" id="reset" value="重置">
+            <input type="reset" class="form-control btn btn-primary" id="reset" value="重置">
         </div>
 
     </div>
@@ -87,8 +70,8 @@
 </div>
 <div id="other" style="text-align:center">
     <br>
-    <p style="font-size:18px;color:red">若有错误，请联系谢勇老师</p>
+    <p style="font-size:18px;color:red">若姓名、班级信息有错误，请联系谢勇老师</p>
 </div>
-
+</div>
 </body>
 </html>
