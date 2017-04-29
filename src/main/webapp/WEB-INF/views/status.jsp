@@ -38,8 +38,8 @@
 <body>
 <%
     String url = request.getHeader("referer");
-    String backGroud = "http://localhost:8080/admin/menu";
-    if (backGroud.equals(url)) {
+    String backgroud = "http://localhost:8080/admin/menu";
+    if (backgroud.equals(url)) {
         pageContext.setAttribute("nav", 0);
     } else {
         pageContext.setAttribute("nav", 1);
