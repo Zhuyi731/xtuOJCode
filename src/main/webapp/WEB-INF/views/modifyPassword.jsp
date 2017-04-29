@@ -15,27 +15,27 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<div align="center" style="margin-top:40px;">
-    <sf:form role="form" class="form-horizontal" method="post" onSubmit="return checkPassword()">
+<div align="center" class="top50">
+    <sf:form commandName="dto" role="form" class="form-horizontal" method="post" onSubmit="return checkPassword()">
         <div class="form-group">
             <label for="oldPassword" class="col-md-2 col-md-offset-2 control-label">旧密码：</label>
             <div class="col-md-3">
                 <input type="password" class="form-control col-md-4" id="oldPassword" name="oldPassword"
-                       placeholder="请输入之前的密码" maxlength="10">
+                       placeholder="请输入之前的密码" maxlength="32">
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-md-2 col-md-offset-2 control-label">新密码：</label>
             <div class="col-md-3">
                 <input type="password" class="form-control col-md-4" id="password" name="password"
-                       placeholder="请输入6~10位新密码" maxlength="10">
+                       placeholder="请输入6~32位新密码" maxlength="32">
             </div>
             <div class="col-md-3"><p id="alert0" style="color:red;display:none">密码长度过短!</p></div>
         </div>
         <div class="form-group">
-            <label for="passwordRep" class="col-md-2 col-md-offset-2 control-label">密码确认：</label>
+            <label for="repPassword" class="col-md-2 col-md-offset-2 control-label">密码确认：</label>
             <div class="col-md-3">
-                <input type="password" class="form-control col-md-4" id="passwordRep" name="repPassword"
+                <input type="password" class="form-control col-md-4" id="repPassword" name="repPassword"
                        placeholder="请再输入一次密码">
             </div>
             <div class="col-md-3"><p id="alert" style="color:red;display:none">两次输入密码不一致!</p></div>

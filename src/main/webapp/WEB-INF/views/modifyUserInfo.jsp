@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
@@ -15,7 +16,7 @@
 <body>
 <!-- 表单 -->
 <div style="margin-top: 50px;">
-<form role="form" method="post" class="form-horizontal" align="middle">
+<sf:form  role="form" method="post" class="form-horizontal" align="center">
     <div class="form-group">
         <label for="name" class="col-sm-2 col-sm-offset-2 control-label">姓名:</label>
         <div class="col-sm-3">
@@ -31,7 +32,7 @@
     <div class="form-group">
         <label for="nickname" class="col-sm-2 col-sm-offset-2 control-label">Nickname：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" name="nickname" id="nickname" value=${entity.nickName}>
+            <input type="text" class="form-control" name="nickname" id="nickname" value=${entity.nickname}>
         </div>
     </div>
     <div class="form-group">
@@ -43,8 +44,8 @@
     <div class="form-group">
         <label for="qqOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开QQ：</label>
         <div class="col-sm-3 " style="padding-left:0;">
-            <input type="radio" id="qqOpen" name="qqOpen" value="1" checked="checked">是
-            <input type="radio" name="qqOpen" value="0">否
+            <input type="radio" id="qqOpen" name="qqOpen" value="Y" checked="checked">是
+            <input type="radio" name="qqOpen" value="N">否
         </div>
     </div>
     <div class="form-group">
@@ -56,8 +57,8 @@
     <div class="form-group">
         <label for="emailOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开Email：</label>
         <div class="col-sm-3 " style="padding-left:0;">
-            <input type="radio" id="emailOpen" name="emailOpen" value="1" checked="checked">是
-            <input type="radio" name="emailOpen" value="0">否
+            <input type="radio" id="emailOpen" name="emailOpen" value="Y" checked="checked">是
+            <input type="radio" name="emailOpen" value="N">否
         </div>
     </div>
     <div class="form-group">
@@ -69,8 +70,8 @@
     <div class="form-group">
         <label for="phoneOpen" class="col-sm-2 col-sm-offset-2 control-label">是否公开Email：</label>
         <div class="col-sm-3 " style="padding-left:0;">
-            <input type="radio" id="phoneOpen" name="phoneOpen" value="1" checked="checked">是
-            <input type="radio" name="phoneOpen" value="0">否
+            <input type="radio" id="phoneOpen" name="phoneOpen" value="Y" checked="checked">是
+            <input type="radio" name="phoneOpen" value="N">否
         </div>
     </div>
 
@@ -85,7 +86,7 @@
         </div>
 
     </div>
-</form>
+</sf:form>
 
 <div align="center">
 </div>

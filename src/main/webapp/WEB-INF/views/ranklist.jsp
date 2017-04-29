@@ -52,8 +52,8 @@
             <c:forEach items="${vo.entityList}" var="entity">
                 <tr>
                     <th>${entity.rank}</th>
-                    <th>${entity.id}</th>
-                    <th>${entity.name}</th>
+                    <th><a href="/userInfo/${entity.id}">${entity.id}</a></th>
+                    <th><a href="/userInfo/${entity.id}">${entity.name}</a></th>
                     <th>${entity.acProblemsNum}/${entity.submitProblemsNum}</th>
                     <th>${entity.ratio}</th>
                 </tr>
