@@ -36,14 +36,14 @@
     <div class="col-md-3 logBtn" style="width:200px;float:right;">
         <c:if test="${userId ne null}">
             <c:if test="${roleId eq '[0]'}">
-                <a href="admin/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
+                <a href="/admin/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
                    style="width: 160px;margin-top: 20px;">${userId}</a>
             </c:if>
             <c:if test="${roleId eq '[1]'}">
-                <a href="teacher/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
+                <a href="/teacher/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
                    style="width: 160px;margin-top: 20px;">${userId}</a>
             </c:if><c:if test="${roleId eq '[2]'}">
-            <a href="student/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
+            <a href="/student/main" class="dropdown-toggle btn btn-primary" data-toggle="dropdown"
                style="width: 160px;margin-top: 20px;">${userId}</a>
         </c:if>
         </c:if>

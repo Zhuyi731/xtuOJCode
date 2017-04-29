@@ -25,13 +25,13 @@
                    style="width: 160px;">${userId}<b class="caret"></b></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                     <c:if test="${roleId eq '[0]'}">
-                        <li><a href="admin/main">Self Info</a></li>
+                        <li><a href="/admin/main">Self Info</a></li>
                     </c:if>
                     <c:if test="${roleId eq '[1]'}">
-                        <li><a href="teacher/main">Self Info</a></li>
+                        <li><a href="/teacher/main">Self Info</a></li>
                     </c:if>
                     <c:if test="${roleId eq '[2]'}">
-                        <li><a href="student/main">Self Info</a></li>
+                        <li><a href="/student/main">Self Info</a></li>
                     </c:if>
                     <li class="divider"></li>
                     <li><a href="/logout">Logout</a></li>
