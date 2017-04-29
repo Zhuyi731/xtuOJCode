@@ -1,7 +1,9 @@
 package com.xtu.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -56,9 +58,17 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
      * set filter
      * @return
      */
+    @Override
+    protected Filter[] getServletFilters(){
+        return new Filter[]{new CharacterEncodingFilter("UTF-8", true)};
+    }
+
 //    @Override
-//    protected Filter[] getServletFilters(){
-//        return new Filter[]{new MyFilter()};
+//    public void onStartup(ServletContext servletContext) throws ServletException {
+//         TODO Auto-generated method stub
+//        super.onStartup(servletContext);
+//        servletContext.addFilter("name", new CharacterEncodingFilter("UTF-8", true))
+//                .addMappingForUrlPatterns(null, false, "/*");
 //    }
 
 }
