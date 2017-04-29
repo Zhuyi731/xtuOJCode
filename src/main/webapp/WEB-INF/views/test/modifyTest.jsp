@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Modify Test</title>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
 </head>
 <body>
 <div class="container">
@@ -98,8 +99,7 @@
                 </div>
                 <div class="panel panel-footer ">
                     <div class="item form-group" align="center">
-                        <button type="button" class="btn btn-primary " onclick="next()" style="width:120px;">下一步
-                        </button>
+                       <input type="submit" class="btn btn-primary" style="width: 120px;" value="修改">
                     </div>
                 </div>
             </div>

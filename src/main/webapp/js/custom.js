@@ -140,3 +140,24 @@ function check() {
         return true;
     }
 }
+//检查密码是否合法
+function checkPassword() {
+    var s = document.getElementById("alert");
+    var ss = document.getElementById("alert0");
+    var p1 = document.getElementById("password");
+    var p2 = document.getElementById("passwordRep");
+    if (p1.value.length < 6) {
+        ss.style.display = "";
+        return false;
+    } else {
+        ss.style.display = "none";
+    }
+
+    if (p1.value != p2.value) {
+        s.style.display = "";
+        return false;
+    } else {
+        s.style.display = "none";
+        return true;
+    }
+}

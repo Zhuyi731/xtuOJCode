@@ -1,8 +1,10 @@
+<%@ page import="com.xtu.DB.vo.StatusVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    StatusVO vo=(StatusVO) request.getAttribute("vo");
 %>
 <!DOCTYPE  HTML>
 <html>
@@ -48,26 +50,26 @@
 </c:if>
 <h1>Online Status</h1>
 <div class="search" style="line-height:15px;">
-    <form role="form" method="get" class="form-inline">
+    <sf:form commandName="statusDTO" role="form" method="get" class="form-inline">
         <div class="form-group">
-            <label for="proID" class="control-label col-md-1 col-sm-1">Pro.ID</label>
+            <label for="problemId" class="control-label col-md-1 col-sm-1">Pro.ID</label>
             <div class="col-md-offset-1 col-sm-offset-1">
-                <input type="text" class="form-control" name="proID" id="proID" placeholder="题目编号">
+                <input type="text" class="form-control" name="problemId" id="problemId" placeholder="题目编号">
             </div>
         </div>
         <div class="form-group">
-            <label for="username" class="control-label  col-md-1 col-sm-1">username</label>
+            <label for="id" class="control-label  col-md-1 col-sm-1">username</label>
             <div class="col-md-offset-1 col-sm-offset-1">
-                <input type="text" class="form-control" name="username" id="username" placeholder="用户名">
+                <input type="text" class="form-control" name="id" id="id" placeholder="用户名">
             </div>
         </div>
         <div class="form-group">
             <label for="language" class="control-label ">Language</label>
             <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                 <option value="0">All</option>
-                <option value="1">C</option>
-                <option value="2">C++</option>
-                <option value="3">Java</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
+                <option value="Java">Java</option>
             </select>
         </div>
         <div class="form-group">
@@ -90,7 +92,7 @@
         <div class="form-group" style="padding-top:15px;">
             <input type="submit" value="Search" class="btn bg-primary  col-md-offset-1 col-sm-offset-1">
         </div>
-    </form>
+    </sf:form>
 </div>
 <div class="page" style="margin:0px 160px;">
     <ul class="pager">
@@ -98,7 +100,7 @@
         <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/status/${vo.start-1}">&laquo;Previous Page</a></li>
         </c:if>
-        <li>共${vo.total}页</li>
+        <li>The&nbsp;<%=vo.getStart()+1%>/<%=vo.getTotal()/20+1%>&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
         <li class="next"><a href="/status/${vo.total+0}">The Last Page&raquo;&raquo;</a></li>
         <c:if test="${vo.start < vo.total-1}">
             <li class="next"><a href="/status/${vo.start+1}">Next Page&raquo;</a></li>

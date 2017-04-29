@@ -11,8 +11,10 @@
     <title>Create a contest</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
     </head>
 <body>
+<div class="top50">
 <sf:form role="form" class="form-horizontal" method="post" onsubmit="return check()">
     <div id="part1" style="width:800px;margin-left:150px;display:;" align="center">
         <div class="panel panel-default  panel-danger">
@@ -26,14 +28,14 @@
                     <input id="problemList" type="hidden" name="problemList">
                         <input id="title" name="title" class="form-control col-md-7 col-xs-12"
                                placeholder="Enter Contest Title"
-                               required="required" type="text">
+                              type="text">
                     </div>
                 </div>
                 <div class="item form-group bad">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="startTimeStr">开始时间<span
                             class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="datetime-local" id="startTimeStr" name="startTimeStr" required="required"
+                        <input type="datetime-local" id="startTimeStr" name="startTimeStr"
                                class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
@@ -48,7 +50,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="endTimeStr">结束时间<span
                             class="required">*</span></label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="datetime-local" id="endTimeStr" name="endTimeStr" required="required"
+                        <input type="datetime-local" id="endTimeStr" name="endTimeStr"
                                class="form-control col-md-7 col-xs-12">
                     </div>
                 </div>
@@ -80,9 +82,9 @@
                     </div>
                 </div>
                 <div class="item form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="anouncement">比赛公告</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="announcement">比赛公告</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <textarea id="anouncement" name="anouncement" cols="60" rows="5"></textarea>
+                        <textarea id="announcement" name="announcement" cols="60" rows="5"></textarea>
                     </div>
                 </div>
             </div>
@@ -113,7 +115,7 @@
                             <td id="No1">1</td>
                             <td ><input id="problemId1" type="number"></td>
                             <td ><input id="score1" type="number"></td>
-                            <td ><button class="btn btn-danger btn-sm" id="d1" onclick="deleteProblem(1)">删除</button></td>
+                            <td ><button type="button" class="btn btn-danger btn-sm" id="d1" onclick="deleteProblem(1)">删除</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -133,6 +135,7 @@
         </div>
     </div>
 </sf:form>
+</div>
 <script src="/js/custom.js" rel="script" language="JavaScript"></script>
 </body>
 </html>

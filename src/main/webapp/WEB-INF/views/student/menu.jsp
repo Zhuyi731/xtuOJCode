@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body style="background-color:#DCDCDC">
   <div class="head" align="center">
-      <p size="5px" class="text-muted">xxx同学，你好！</p>
+      <p size="5px" class="text-muted">  你好！</p>
   </div>
   <div class="dropdown" >
       <button class="btn btn-primary dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
