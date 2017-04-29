@@ -252,8 +252,8 @@ public class ContestRepositoryImp implements ContestRepository {
                 jdbcOperations.query(sql, new ContestsEntityRowMapper(), userId, start * size, size);
         AllContestVO vo = new AllContestVO();
         List<AllContestEntityVO> entityListVO = new ArrayList<>();
-        AllContestEntityVO entityVO = new AllContestEntityVO();
         for (ContestsEntity entity : entityList) {
+            AllContestEntityVO entityVO = new AllContestEntityVO();
             BeanUtils.copyProperties(entity, entityVO);
             entityListVO.add(entityVO);
         }
