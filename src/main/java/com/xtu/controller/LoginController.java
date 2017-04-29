@@ -198,7 +198,7 @@ public class LoginController {
             @NotNull @Valid ModifyPasswordDTO dto,
             Errors errors,
             Principal principal) {
-        OUT.prt("request", Pages.MODIFY_PASSWORD);
+        OUT.prt("post", Pages.MODIFY_PASSWORD);
         String res = Pages.MODIFY_PASSWORD;
         if (errors.hasErrors()) {
             return res;
@@ -211,6 +211,7 @@ public class LoginController {
         }
         UsersEntity usersEntity = usersRepository.findOne(principal.getName());
         if (usersEntity.getPassword().equals(dto.getOldPassword())) {
+            usersEntity.setPassword(dto.getPassword());
             usersRepository.save(usersEntity);
             res = Pages.SUCCESS;
         }

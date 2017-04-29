@@ -12,6 +12,8 @@ import com.xtu.DB.vo.ProblemsVO;
 public interface ProblemsRepository {
     Long count();
 
+    Long queryPageTotal(ProblemsDTO problemsDTO);
+
     ProblemsVO queryPage(int start, int size, ProblemsDTO problemsDTO);
 
     ProblemsVO queryPage(int start, ProblemsDTO problemsDTO);
