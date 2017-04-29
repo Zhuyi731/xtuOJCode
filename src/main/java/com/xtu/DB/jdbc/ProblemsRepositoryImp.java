@@ -51,7 +51,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
 
     @Override
     public Long queryPageTotal(ProblemsDTO problemsDTO) {
-        String sql = "SELECT  FROM " +
+        String sql = "SELECT COUNT(`problem_id`) FROM " +
                 Tables.PROBLEMS +
                 " WHERE ";
         if ("".equals(problemsDTO.getTitle()) || null == problemsDTO.getTitle()) {
