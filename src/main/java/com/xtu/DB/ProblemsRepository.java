@@ -1,6 +1,7 @@
 package com.xtu.DB;
 
 import com.xtu.DB.dto.ProblemsDTO;
+import com.xtu.DB.dto.ProblemsMangerDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.vo.ModifyProblemsVO;
 import com.xtu.DB.vo.ProblemsVO;
@@ -18,9 +19,17 @@ public interface ProblemsRepository {
 
     ProblemsVO queryPage(int start, ProblemsDTO problemsDTO);
 
+    Long queryModifyPageTotal(int userId);
+
     ModifyProblemsVO queryModifyPage(int start, int size, int userId);
 
     ModifyProblemsVO queryModifyPage(int start, int userId);
+
+    Long queryModifyPageTotal(ProblemsMangerDTO dto);
+
+    ModifyProblemsVO queryModifyPage(int start, int size, ProblemsMangerDTO dto);
+
+    ModifyProblemsVO queryModifyPage(int start, ProblemsMangerDTO dto);
 
     ProblemsEntity findOne(ProblemsDTO problemsDTO);
 
