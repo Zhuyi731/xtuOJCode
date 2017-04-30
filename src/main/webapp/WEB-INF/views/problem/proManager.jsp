@@ -10,7 +10,6 @@
 //    String totalPage=String.valueOf(vo.getTotal()/20+1);
 //    pageContext.setAttribute("totalPage",totalPage);
 %>
-
 <!DOCTYPE HTML >
 <html>
 <head>

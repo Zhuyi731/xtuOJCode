@@ -5,35 +5,39 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    StatusVO vo=(StatusVO) request.getAttribute("vo");
-    String currentPage=String.valueOf(vo.getStart()+1);
-    pageContext.setAttribute("currentPage",currentPage);
-    String totalPage=String.valueOf(vo.getTotal()/20+1);
-    pageContext.setAttribute("totalPage",totalPage);
+    StatusVO vo = (StatusVO) request.getAttribute("vo");
+    String currentPage = String.valueOf(vo.getStart() + 1);
+    pageContext.setAttribute("currentPage", currentPage);
+    String totalPage = String.valueOf(vo.getTotal() / 20 + 1);
+    pageContext.setAttribute("totalPage", totalPage);
 %>
-<!DOCTYPE  HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
     <base href="<%=basePath%>">
     <title>Online Status</title>
-    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <style type="text/css">
         h1 {
             text-align: center;
             color: blue;
             size: 30px;
         }
+
         .search {
             margin-top: 20px;
             text-align: center;
         }
+
         thead {
             background-color: #2C333D;
             color: white;
         }
+
         .status {
             width: 1040px;
         }
+
         .status > table {
             margin-left: 160px;
         }
@@ -50,8 +54,12 @@
     }
 %>
 <c:if test="${nav eq 1}">
-    <%@ include file="/WEB-INF/views/navigation.jsp"%>
+    <%@ include file="/WEB-INF/views/navigation.jsp" %>
 </c:if>
+<security:authorize access="isAuthenticated()">
+    <security:authentication property="principal.username" var="userId"/>
+    <security:authentication property="principal.authorities" var="roleId"/>
+</security:authorize>
 <h1>Online Status</h1>
 <div class="search" style="line-height:15px;">
     <sf:form commandName="statusDTO" role="form" method="post" class="form-inline">
@@ -154,13 +162,28 @@
                 <td>${entity.problemId}</td>
                 <td>${entity.id}</td>
                 <td>${entity.resultCode}</td>
-                <td>${entity.runMemory}</td>
-                <td>${entity.runTime}</td>
-                <c:if test="${entity.open eq 0}">
-                    <td><span class="private">Private</span></td>
+                <td>${entity.runMemory}&nbsp;KB</td>
+                <td>${entity.runTime}&nbsp;MS</td>
+                    <%--管理员--%>
+                <c:if test="${roleId eq '[0]'}">
+                    <td><a href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
                 </c:if>
-                <c:if test="${entity.open eq 1}">
-                <td><span class="public"><a href="/codeDetail/${entity.runId}">${entity.language}>Public</a></span></td>
+                    <%--不是管理员--%>
+                <c:if test="${roleId ne '[0]'}">
+                    <%--自己人--%>
+                    <c:if test="${userId eq entity.id}">
+                      <td><a href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
+                      </c:if>
+                    <%--别人--%>
+                     <c:if test="${userId ne entity.id}">
+                            <c:if test="${entity.open eq 0}">
+                             <td><span class="btn btn-danger" disabled="disabled">Private</span></td>
+                             </c:if>
+                              <c:if test="${entity.open eq 1}">
+                             <td><a
+                                href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
+                    </c:if>
+                </c:if>
                 </c:if>
                 <td>${entity.language}</td>
                 <td>${entity.codeLength}</td>

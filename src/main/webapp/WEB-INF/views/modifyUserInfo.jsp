@@ -43,7 +43,7 @@
     <div class="form-group">
         <label for="QQ" class="col-sm-2 col-sm-offset-2 control-label">QQ：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="QQ" name="QQ" value=${entity.QQ}>
+            <input type="text" class="form-control" id="QQ" name="QQ" value=${entity.qq}>
         </div>
     </div>
     <div class="form-group">
@@ -56,7 +56,7 @@
     <div class="form-group">
         <label for="email" class="col-sm-2 col-sm-offset-2 control-label">Email：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="email" name="email" value="${entity.Email}">
+            <input type="text" class="form-control" id="email" name="email" value="${entity.email}">
         </div>
     </div>
     <div class="form-group">
