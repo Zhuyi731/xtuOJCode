@@ -5,6 +5,7 @@ import com.xtu.DB.RunsRepository;
 import com.xtu.DB.TestdatasRepository;
 import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.ProblemsDTO;
+import com.xtu.DB.dto.ProblemsMangerDTO;
 import com.xtu.DB.dto.SubmitContestDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.entity.TestdatasEntity;
@@ -12,6 +13,7 @@ import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.ModifyProblemsVO;
 import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.DB.vo.ProblemsVO;
+import com.xtu.constant.Constant;
 import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -98,7 +103,8 @@ public class ProblemController {
             @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
             @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
-            Model model) {
+            Model model,
+            Principal principal) {
         OUT.prt("post", Pages.ADD_PROBLEM);
         if (errors.hasErrors()) {
             String res = Pages.ERROR;
@@ -111,6 +117,10 @@ public class ProblemController {
                 problemsEntity.getSampleInput() + "{{{(>_<)}}}" +
                 problemsEntity.getSampleOutput();
         problemsEntity.setContext(context);
+
+        UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+        problemsEntity.setOwner(usersEntity.getUserId());
+        problemsEntity.setAuthor(principal.getName());
         problemsRepository.save(problemsEntity);
         TestdatasEntity testdatasEntity = new TestdatasEntity();
 
@@ -139,7 +149,8 @@ public class ProblemController {
             @RequestPart("uploadFile") MultipartFile uploadFile,
             @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
-            RedirectAttributes model) {
+            RedirectAttributes model,
+            Principal principal) {
         OUT.prt("post", Pages.ADD_PROBLEM);
         OUT.prt("problemsEntity", problemsEntity);
         if (errors.hasErrors()) {
@@ -153,6 +164,10 @@ public class ProblemController {
                 problemsEntity.getSampleInput() + "{{{(>_<)}}}" +
                 problemsEntity.getSampleOutput();
         problemsEntity.setContext(context);
+
+        UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+        problemsEntity.setOwner(usersEntity.getUserId());
+        problemsEntity.setAuthor(principal.getName());
         problemsRepository.save(problemsEntity);
         OUT.prt("problemsEntity", problemsEntity);
         if (null != uploadFile || !uploadFile.isEmpty()) {
@@ -278,15 +293,21 @@ public class ProblemController {
      * @param principal
      * @return
      */
-    @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER + "/{start}", method = RequestMethod.GET)
     public String problemManage(
+            @PathVariable("start") @NotNull @Min(0) int start,
             Model model,
             Principal principal) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
         String id = principal.getName();
         OUT.prt("id", id);
         UsersEntity usersEntity = usersRepository.findOne(id);
-        ModifyProblemsVO vo = problemsRepository.queryModifyPage(0, usersEntity.getUserId());
+        ProblemsMangerDTO problemsMangerDTO = new ProblemsMangerDTO();
+        if (usersEntity.getRoleId() == Constant.TEACHER) {
+            problemsMangerDTO.setOwner(usersEntity.getUserId());
+        }
+
+        ModifyProblemsVO vo = problemsRepository.queryModifyPage(start, problemsMangerDTO);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
@@ -296,51 +317,34 @@ public class ProblemController {
     /**
      * 题目管理请求
      *
-     * @param testdatasEntity
-     * @param error
-     * @param uploadFile
+     * @param start
+     * @param problemsMangerDTO
      * @param model
      * @return
      */
-    @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER, method = RequestMethod.POST)
+    @RequestMapping(value = "/" + Pages.PROBLEM_MANAGER + "/{start}", method = RequestMethod.POST)
     public String managerProblemPost(
-            @NotNull @Valid TestdatasEntity testdatasEntity,
-            Error error,
-            @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
-            Model model) {
+            @PathVariable("start") int start,
+            @NotNull @Valid ProblemsMangerDTO problemsMangerDTO,
+            Model model,
+            Principal principal) {
         OUT.prt("request", Pages.PROBLEM_MANAGER);
-        int size = 0;
-        try (InputStream is = uploadFile.getInputStream();
-             ZipInputStream zis = new ZipInputStream(is)) {
-            boolean mark = false;
-            for (ZipEntry ze = zis.getNextEntry(); null != ze;
-                 ze = zis.getNextEntry(), mark ^= mark) {
-                OUT.prt("uploadFile", ze.getName());
-                if (ze.isDirectory()) {
-                    continue;
-                }
-                size = (int) ze.getSize();
-                byte[] tmpByte = new byte[size];
-                OUT.prt("size", size);
-                if (size < 0) {
-                    continue;
-                }
-                zis.read(tmpByte, 0, size);
-                // TODO: 2017/4/20 add bufferReader
-                OUT.prt("content", new String(tmpByte));
-                if (mark) {
-                    testdatasEntity.setOutput(tmpByte);
-                    testdatasRepository.save(testdatasEntity);
-                } else {
-                    testdatasEntity.setInput(tmpByte);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        OUT.prt("problemsMangerDTO", problemsMangerDTO);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
+
+        UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+        if (usersEntity.getRoleId() == Constant.ADMIN
+                && null != problemsMangerDTO.getAuthor()
+                && !"".equals(problemsMangerDTO.getAuthor())) {
+            UsersEntity user = usersRepository.findOne(problemsMangerDTO.getAuthor());
+            problemsMangerDTO.setOwner(user.getUserId());
+        } else if (usersEntity.getRoleId() == Constant.TEACHER) {
+            problemsMangerDTO.setOwner(usersEntity.getUserId());
+        }
+
+        ModifyProblemsVO vo = problemsRepository.queryModifyPage(start, problemsMangerDTO);
+        model.addAttribute("vo", vo);
+
         return res;
     }
 
