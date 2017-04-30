@@ -185,7 +185,7 @@ public class TestController {
             contestProblemsRepository.insert(entity);
         }
 
-        String res = Pages.TEST + "/" + Pages.TEST;
+        String res = Pages.TEST + "/" + Pages.TEST + "/0";
         return res;
     }
 
