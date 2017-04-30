@@ -27,14 +27,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="container">
     <div class="page" align="justify">
       <ul class="pager">
-        <li class="previous"><a href="/test/allTest/0">&laquo;&laquo;First Page</a></li>
         <c:if test="${currentPage != 1}">
-          <li class="previous"><a href="/test/allTest/${currentPage-1}">&laquo;Previous Page</a></li>
+          <li class="previous"><a href="/test/allTest/0">&laquo;&laquo;The First Page</a></li>
         </c:if>
-        <li class="start">Total&nbsp;${currentPage}/${totalPage}&nbsp;Pages&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
-        <li class="next"><a href="/test/allTest/${totalPage}">Last Page&raquo;&raquo;</a></li>
+        <c:if test="${currentPage > 1}">
+          <li class="previous"><a href="/test/allTest/${currentPage-2}">&laquo;Previous Page</a></li>
+        </c:if>
+        <c:if test="${currentPage > 2 }">
+          <li class="start"><a href="/test/allTest/${currentPage-3}">${currentPage-2}</a></li>
+        </c:if>
+        <c:if test="${currentPage > 1 }">
+          <li class="start"><a href="/test/allTest/${currentPage-2}">${currentPage-1}</a></li>
+        </c:if>
+
+        <li class="start"><a href="/test/allTest/${currentPage-1}" disabled="disabled">${currentPage}</a></li>
+
         <c:if test="${currentPage < totalPage}">
-        <li class="next"><a href="/test/allTest/${currentPage+1}">Next Page&raquo;</a></li>
+          <li class="start"><a href="/test/allTest/${currentPage}">${currentPage+1}</a></li>
+        </c:if>
+        <c:if test="${currentPage < totalPage-1}">
+          <li class="start"><a href="/test/allTest/${currentPage+1}">${currentPage+2}</a></li>
+        </c:if>
+        <li class="start">
+          The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records
+        </li>
+        <c:if test="${currentPage < totalPage}">
+          <li class="next"><a href="/test/allTest/${totalPage-1}">The Last Page&raquo;&raquo;</a></li>
+        </c:if>
+        <c:if test="${currentPage < totalPage}">
+          <li class="next"><a href="/test/allTest/${vo.start+1}">Next Page&raquo;</a></li>
         </c:if>
       </ul>
     </div>

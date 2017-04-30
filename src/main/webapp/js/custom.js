@@ -161,3 +161,28 @@ function checkPassword() {
         return true;
     }
 }
+// problem/proManager   全选按钮
+function checkAll() {
+    var a = document.getElementById("checkAll");
+    var b = document.getElementsByName("select");
+    if (a.checked == true) {
+        for (var i = 0; i < b.length; i++) {
+            b[i].checked = true;
+        }
+    } else {
+        for (var i = 0; i < b.length; i++) {
+            b[i].checked = false;
+        }
+    }
+}
+//problem/problem 页面跳转
+function  pageGo() {
+    var page=document.getElementById("pageGo").value;
+    if(page<=0||page>tPage){
+        alert("页码超出范围！");
+    }else{
+        page--;
+        var to='/problem/problems/'+page;
+        self.location=to;
+    }
+}

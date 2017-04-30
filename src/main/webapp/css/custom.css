@@ -31,10 +31,18 @@
 .ranklist{
     position:relative;height:auto;min-height:100%;padding-bottom:60px;
 }
+
+/*
+跳转按钮样式
+*/
+.pageGoContainer{
+  height:100px;width: 300px;
+    margin-right: 150px;
+}
 .pageGo{
-    text-align: right;
-    margin-right: 20px;
-    padding-right:100px;
+    text-align: center;
+    display: inline-block;
+    margin-left:0;
 }
 .search{
     text-align: right;

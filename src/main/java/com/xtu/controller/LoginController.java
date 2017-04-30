@@ -224,8 +224,13 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/" + Pages.MODIFY_USER_INFO, method = RequestMethod.GET)
-    public String modifyUserInfo() {
+    public String modifyUserInfo(
+            Model model,
+            Principal principal) {
         OUT.prt("request", Pages.MODIFY_USER_INFO);
+
+        UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+        model.addAttribute("entity", usersEntity);
         String res = Pages.MODIFY_USER_INFO;
         return res;
     }

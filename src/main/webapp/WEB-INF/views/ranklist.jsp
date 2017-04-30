@@ -26,14 +26,35 @@
 <div class="container">
     <div class="page">
         <ul class="pager">
-            <li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
-            <c:if test="${currentPage!=1}">
+            <c:if test="${currentPage != 1}">
+                <li class="previous"><a href="/ranklist/0">&laquo;&laquo;The First Page</a></li>
+            </c:if>
+            <c:if test="${currentPage > 1}">
                 <li class="previous"><a href="/ranklist/${currentPage-2}">&laquo;Previous Page</a></li>
             </c:if>
-            <li>The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;<%=vo.getTotal()%>&nbsp;Records</li>
-            <li class="next"><a href="/ranklist/${totalPage}">The Last Page&raquo;&raquo;</a></li>
+            <c:if test="${currentPage > 2 }">
+                <li class="start"><a href="/ranklist/${currentPage-3}">${currentPage-2}</a></li>
+            </c:if>
+            <c:if test="${currentPage > 1 }">
+                <li class="start"><a href="/ranklist/${currentPage-2}">${currentPage-1}</a></li>
+            </c:if>
+
+            <li class="start"><a href="/ranklist/${currentPage-1}" disabled="disabled">${currentPage}</a></li>
+
             <c:if test="${currentPage < totalPage}">
-                <li class="next"><a href="/ranklist/${currentPage}">Next Page&raquo;</a></li>
+                <li class="start"><a href="/ranklist/${currentPage}">${currentPage+1}</a></li>
+            </c:if>
+            <c:if test="${currentPage < totalPage-1}">
+                <li class="start"><a href="/ranklist/${currentPage+1}">${currentPage+2}</a></li>
+            </c:if>
+            <li class="start">
+                The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records
+            </li>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/ranklist/${totalPage-1}">The Last Page&raquo;&raquo;</a></li>
+            </c:if>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/ranklist/${vo.start+1}">Next Page&raquo;</a></li>
             </c:if>
         </ul>
     </div>
@@ -55,7 +76,7 @@
                     <th><a href="/userInfo/${entity.id}">${entity.id}</a></th>
                     <th><a href="/userInfo/${entity.id}">${entity.name}</a></th>
                     <th>${entity.acProblemsNum}/${entity.submitProblemsNum}</th>
-                    <th>${entity.ratio}</th>
+                    <th>${entity.ratio}%</th>
                 </tr>
             </c:forEach>
             </tbody>
