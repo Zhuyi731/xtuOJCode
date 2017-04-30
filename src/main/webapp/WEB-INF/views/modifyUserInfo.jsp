@@ -1,4 +1,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="securityrity" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
@@ -14,6 +16,9 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
+<security:authorize access="isAuthenticated()">
+    <securityrity:authentication property="principal.username" var="userId"/>
+</security:authorize>
 <!-- 表单 -->
 <div style="margin-top: 50px;">
 <sf:form  role="form" method="post" class="form-horizontal" align="center">
