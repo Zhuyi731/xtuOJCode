@@ -213,7 +213,9 @@ public class RunsRepositoryImp implements RunsRepository {
         } else {
             sql += " AND `result_code` != ?";
         }
-        if (null != statusDTO.getLanguage() && !"".equals(statusDTO.getLanguage())) {
+        if (null != statusDTO.getLanguage() &&
+                !"0".equals(statusDTO.getLanguage()) &&
+                !"".equals(statusDTO.getLanguage())) {
             sql += " AND `language` = ?";
         } else {
             sql += " AND `language` != ?";

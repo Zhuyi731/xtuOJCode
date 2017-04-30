@@ -6,6 +6,7 @@ import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.RankEntityVO;
 import com.xtu.DB.vo.RankVO;
+import com.xtu.DB.vo.StatusEntityVO;
 import com.xtu.DB.vo.StatusVO;
 import com.xtu.constant.Pages;
 import com.xtu.tools.FileUtils;
@@ -118,24 +119,25 @@ public class MainController {
     }
 
     /**
-     * 提交代码界面
+     * 代码详情界面
      *
      * @param runId
      * @param model
      * @param principal
      * @return
      */
-    @RequestMapping(value = "/" + Pages.CODE_PAGE + "/{runId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/" + Pages.CODE_DETAIL_PAGE + "/{runId}", method = RequestMethod.GET)
     public String CodePost(
             @PathVariable("runId") int runId,
             Model model,
             Principal principal) {
-        OUT.prt("Post", Pages.CODE_PAGE);
+        OUT.prt("request", Pages.CODE_DETAIL_PAGE);
         OUT.prt("runId", runId);
         String id = principal.getName();
         OUT.prt("id", id);
-        runsRepository.queryCode(runId, id);
-        String res = Pages.CODE_PAGE;
+        StatusEntityVO vo = runsRepository.queryCode(runId, id);
+        model.addAttribute("entity", vo);
+        String res = Pages.CODE_DETAIL_PAGE;
         return res;
     }
 

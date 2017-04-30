@@ -198,5 +198,5 @@ public class Pages {
     /**
      * 显示提交详情
      */
-    public static final String CODE_PAGE = "Code";
+    public static final String CODE_DETAIL_PAGE = "codeDetail";
 }

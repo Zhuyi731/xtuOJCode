@@ -3,6 +3,7 @@ package com.xtu.DB.jdbc;
 import com.xtu.DB.ProblemsRepository;
 import com.xtu.DB.RunsRepository;
 import com.xtu.DB.dto.ProblemsDTO;
+import com.xtu.DB.dto.ProblemsMangerDTO;
 import com.xtu.DB.entity.ProblemsEntity;
 import com.xtu.DB.vo.ModifyProblemsEntityVO;
 import com.xtu.DB.vo.ModifyProblemsVO;
@@ -121,14 +122,21 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return queryPage(start, Integer.parseInt(Constant.PAGE_SIZE), problemsDTO);
     }
 
+    public Long queryModifyPageTotal(int userId) {
+        String sql = "SELECT  COUNT(`problem_id`) FROM " +
+                Tables.PROBLEMS +
+                " WHERE `owner` = ?";
+        return jdbcOperations.queryForObject(sql, Long.class, userId);
+    }
+
     @Override
     public ModifyProblemsVO queryModifyPage(int start, int size, int userId) {
         // TODO: 2017/4/23 about admin query
-        String finduserSql = "SELECT * FROM " +
+        String sql = "SELECT * FROM " +
                 Tables.PROBLEMS +
                 " WHERE `owner` = ?" +
                 " Limit ?,?";
-        List<ProblemsEntity> entityList = jdbcOperations.query(finduserSql,
+        List<ProblemsEntity> entityList = jdbcOperations.query(sql,
                 new ProblemsEntityRowMapper(),
                 userId, start * size, size);
 
@@ -141,6 +149,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             entityVO.setTimeLimit(entity.getTimeLimit());
             entityVO.setMemoryLimit(entity.getMemoryLimit());
             entityVO.setAuthor(entity.getAuthor());
+            entityVO.setLastUpdateTime(entity.getLastUpdateTime());
             Map<String, Integer> map = runsRepository.queryNum(entity.getProblemId());
             int acProblemsNum = map.get("acProblemsNum");
             entityVO.setAcProblemsNum(acProblemsNum);
@@ -154,6 +163,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
             voList.add(entityVO);
         }
         vo.setStart(start);
+        vo.setTotal(queryModifyPageTotal(userId));
         vo.setEntityList(voList);
         return vo;
     }
@@ -163,13 +173,98 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
         return queryModifyPage(start, Integer.parseInt(Constant.PAGE_SIZE), userId);
     }
 
+    public Long queryModifyPageTotal(ProblemsMangerDTO dto) {
+        String sql = "SELECT  COUNT(`problem_id`) FROM " +
+                Tables.PROBLEMS;
+        if (dto.getOwner() != 0) {
+            sql += " WHERE `owner` = ?";
+        } else {
+            sql += " WHERE `owner` != ?";
+        }
+        if (0 == dto.getProblemId()) {
+            sql += " AND `problem_id` != ?";
+        } else {
+            sql += " AND `problem_id` = ?";
+        }
+        if (null == dto.getTitle() || "".equals(dto.getTitle())) {
+            sql += " AND `title` != ?";
+        } else {
+            sql += " AND `title` = ?";
+        }
+        return jdbcOperations.queryForObject(sql, Long.class,
+                dto.getOwner(),
+                dto.getProblemId(),
+                dto.getTitle());
+    }
+
+    @Override
+    public ModifyProblemsVO queryModifyPage(int start, int size, ProblemsMangerDTO dto) {
+
+        String sql = "SELECT * FROM " +
+                Tables.PROBLEMS;
+        if (dto.getOwner() != 0) {
+            sql += " WHERE `owner` = ?";
+        } else {
+            sql += " WHERE `owner` != ?";
+        }
+        if (0 == dto.getProblemId()) {
+            sql += " AND `problem_id` != ?";
+        } else {
+            sql += " AND `problem_id` = ?";
+        }
+        if (null == dto.getTitle() || "".equals(dto.getTitle())) {
+            sql += " AND `title` != ?";
+        } else {
+            sql += " AND `title` = ?";
+        }
+
+        sql += " Limit ?,?";
+        List<ProblemsEntity> entityList = jdbcOperations.query(sql,
+                new ProblemsEntityRowMapper(),
+                dto.getOwner(),
+                dto.getProblemId(),
+                dto.getTitle(),
+                start * size, size);
+
+        ModifyProblemsVO vo = new ModifyProblemsVO();
+        List<ModifyProblemsEntityVO> voList = new ArrayList<>();
+        for (ProblemsEntity entity : entityList) {
+            ModifyProblemsEntityVO entityVO = new ModifyProblemsEntityVO();
+            entityVO.setProblemId(entity.getProblemId());
+            entityVO.setTitle(entity.getTitle());
+            entityVO.setTimeLimit(entity.getTimeLimit());
+            entityVO.setMemoryLimit(entity.getMemoryLimit());
+            entityVO.setAuthor(entity.getAuthor());
+            entityVO.setLastUpdateTime(entity.getLastUpdateTime());
+            Map<String, Integer> map = runsRepository.queryNum(entity.getProblemId());
+            int acProblemsNum = map.get("acProblemsNum");
+            entityVO.setAcProblemsNum(acProblemsNum);
+            int submitProblemsNum = map.get("submitProblemsNum");
+            entityVO.setSubmitProblemsNum(submitProblemsNum);
+            if (submitProblemsNum == 0) {
+                entityVO.setRatio(0);
+            } else {
+                entityVO.setRatio(acProblemsNum * 100 / submitProblemsNum);
+            }
+            voList.add(entityVO);
+        }
+        vo.setStart(start);
+        vo.setTotal(queryModifyPageTotal(dto));
+        vo.setEntityList(voList);
+        return vo;
+    }
+
+    @Override
+    public ModifyProblemsVO queryModifyPage(int start, ProblemsMangerDTO dto) {
+        return queryModifyPage(start, Integer.parseInt(Constant.PAGE_SIZE), dto);
+    }
+
     @Override
     public ProblemsEntity findOne(ProblemsDTO problemsDTO) {
-        String finduserSql = "SELECT * FROM " +
+        String sql = "SELECT * FROM " +
                 Tables.PROBLEMS +
                 " WHERE `title` = ? OR `problem_id` = ?";
-        return jdbcOperations.queryForObject(
-                finduserSql,
+        return jdbcOperations.queryForObject(sql,
                 new ProblemsEntityRowMapper(),
                 problemsDTO.getTitle(),
                 problemsDTO.getProblemId());
