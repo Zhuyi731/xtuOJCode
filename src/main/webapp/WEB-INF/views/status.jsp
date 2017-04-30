@@ -1,4 +1,8 @@
 <%@ page import="com.xtu.DB.vo.StatusVO" %>
+<%@ page import="com.xtu.DB.vo.StatusEntityVO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,6 +14,14 @@
     pageContext.setAttribute("currentPage", currentPage);
     String totalPage = String.valueOf(vo.getTotal() / 20 + 1);
     pageContext.setAttribute("totalPage", totalPage);
+    List<StatusEntityVO>  list=vo.getEntityList();
+    Iterator it=list.iterator();
+    String []trans={"Accept","Wrong Answer","Compile Error","Runtime Error","Presentation Error","Time Limit Exceed","Memory Limit Exceed","Output Limit Exceed"};
+    ArrayList result=new ArrayList<String>();
+    for(int i=0;i<list.size();i++){
+            result.add(trans[list.get(i).getResultCode()]);
+    }
+   pageContext.setAttribute("result",result);
 %>
 <!DOCTYPE HTML>
 <html>
@@ -79,8 +91,10 @@
             <label for="language" class="control-label ">Language</label>
             <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                 <option value="0">All</option>
-                <option value="C">C</option>
-                <option value="C++">C++</option>
+                <option value="MS C">MS C</option>
+                <option value="MS C++">MS C++</option>
+                <option value="GUN C">GUN C</option>
+                <option value="GUN C++">GUN C++</option>
                 <option value="Java">Java</option>
             </select>
         </div>
@@ -89,16 +103,13 @@
             <select id="result" name="result" class="form-control col-md-offset-1 col-sm-offset-1">
                 <option value="0">All</option>
                 <option value="1">Accept</option>
-                <option value="2">Presentation Error</option>
-                <option value="3">Wrong Answer</option>
-                <option value="4">Time Limit Error</option>
-                <option value="5">Memory Exceed Error</option>
-                <option value="6">Output Error</option>
-                <option value="7">Runtime Error</option>
-                <option value="8">Compile Error</option>
-                <option value="9">Compiling</option>
-                <option value="10">Waiting</option>
-                <option value="11">Running and Judging</option>
+                <option value="2">Wrong Answer</option>
+                <option value="3">Compile Error</option>
+                <option value="4">Runtime Error</option>
+                <option value="5">Presentation Error</option>
+                <option value="6">Time Limit Exceed</option>
+                <option value="7">Memory Exceed Exceed</option>
+                <option value="8">Output Limit Exceed</option>
             </select>
         </div>
         <div class="form-group" style="padding-top:15px;">
@@ -157,11 +168,12 @@
         </thead>
         <tbody>
         <c:forEach items="${vo.entityList}" var="entity">
+        <c:forEach items="${result}" var="result">
             <tr>
                 <td>${entity.runId}</td>
                 <td>${entity.problemId}</td>
                 <td>${entity.id}</td>
-                <td>${entity.resultCode}</td>
+                <td>${result}</td>
                 <td>${entity.runMemory}&nbsp;KB</td>
                 <td>${entity.runTime}&nbsp;MS</td>
                     <%--管理员--%>
@@ -189,6 +201,7 @@
                 <td>${entity.codeLength}</td>
                 <td>${entity.submitTime}</td>
             </tr>
+        </c:forEach>
         </c:forEach>
         </tbody>
     </table>
