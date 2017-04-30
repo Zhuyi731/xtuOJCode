@@ -1,10 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page import="com.xtu.DB.vo.ProblemsVO" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+//    ProblemsVO vo= (ProblemsVO) request.getAttribute("vo");
+//    String currentPage=String.valueOf(vo.getStart()+1);
+//    pageContext.setAttribute("currentPage",currentPage);
+//    String totalPage=String.valueOf(vo.getTotal()/20+1);
+//    pageContext.setAttribute("totalPage",totalPage);
 %>
-
 <!DOCTYPE HTML >
 <html>
 <head>
@@ -48,7 +53,7 @@
         <c:if test="${vo.start != 0}">
             <li class="previous"><a href="/problem/proManager/${vo.start-1}">&laquo;Previous Page</a></li>
         </c:if>
-        <li>共${vo.total}页</li>
+        <li>第${currentPage}/${totalPage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共${vo.total}条记录</li>
         <li class="next"><a href="/problem/proManager/${vo.total+0}">The Last Page&raquo;&raquo;</a></li>
         <c:if test="${vo.start < vo.total-1}">
             <li class="next"><a href="/problem/proManager/${vo.start+1}">Next Page&raquo;</a></li>
@@ -66,10 +71,10 @@
             <td class="col-md-1 col-xs-1">Memory Limit(MB)</td>
             <td class="col-md-1 col-xs-1">Author</td>
             <td class="col-md-1 col-xs-1">AC/Total(ratio)</td>
-            <td class="col-md-1 col-xs-1">最后更新时间</td>
+            <td class="col-md-2 col-xs-2">最后更新时间</td>
             <td class="col-md-1 col-xs-1">数据文件</td>
-            <td class="col-md-2 col-xs-2">点击进入修改</td>
-            <td class="col-md-1 col-xs-1"><input type="checkbox" id="checkAll" onclick="checkAll()">全选</td>
+            <td class="col-md-1 col-xs-1">修改</td>
+            <%--<td class="col-md-1 col-xs-1"><input type="checkbox" id="checkAll" onclick="checkAll()">全选</td>--%>
         </tr>
         </thead>
         <tbody>
@@ -82,10 +87,10 @@
                 <td>${pro.memoryLimit}</td>
                 <td>${pro.author}</td>
                 <td>${pro.acProblemsNum}/${pro.submitProblemsNum}（${pro.ratio}%）</td>
-                <td>${lastUpdateTime}</td>
+                <td>${pro.lastUpdateTime}</td>
                 <td><a href="/problem/problemData/${pro.problemId}">数据文件</a></td>
                 <td><a href="problem/modifyProblem/${pro.problemId}">点击进入修改</a></td>
-                <td><input type="checkbox" name="select"></td>
+                <%--<td><input type="checkbox" name="select"></td>--%>
             </tr>
         </c:forEach>
         </tbody>
@@ -94,20 +99,8 @@
         <a class="btn btn-lg btn-primary pull-right" href="problem/addProblem">添加题目</a>
     </div>
 </div>
-<script type="text/javascript">
-    function checkAll() {
-        var a = document.getElementById("checkAll");
-        var b = document.getElementsByName("select");
-        if (a.checked == true) {
-            for (var i = 0; i < b.length; i++) {
-                b[i].checked = true;
-            }
-        } else {
-            for (var i = 0; i < b.length; i++) {
-                b[i].checked = false;
-            }
-        }
-    }
+<script type="text/javascript" src="/js/custom.js">
+
 </script>
 </body>
 </html>

@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div align="center">
-       <font color="red" size=16px>密码修改成功!</font><br>
-       <a onclick="window.history.go(-1);">点击返回</a>
+       <font color="red" size=16px>修改成功!</font><br>
+       <a class="btn btn-warning" onclick="window.history.go(-1);">点击返回</a>
     </div>
   </body>
 </html>

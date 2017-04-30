@@ -5,12 +5,16 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    ProblemsVO vo= (ProblemsVO) request.getAttribute("vo");
-    String currentPage=String.valueOf(vo.getStart()+1);
-    pageContext.setAttribute("currentPage",currentPage);
-    String totalPage=String.valueOf(vo.getTotal()/20+1);
-    pageContext.setAttribute("totalPage",totalPage);
+    ProblemsVO vo = (ProblemsVO) request.getAttribute("vo");
+    String currentPage = String.valueOf(vo.getStart() + 1);
+    pageContext.setAttribute("currentPage", currentPage);
+    String totalPage = String.valueOf(vo.getTotal() / 20 + 1);
+    pageContext.setAttribute("totalPage", totalPage);
 %>
+<c:set var="totalPage" value="${totalPage}"/>
+<script type="text/javascript">
+    var tPage = "${totalPage}";
+</script>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,7 +25,7 @@
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/navigation.jsp"%>
+<%@ include file="/WEB-INF/views/navigation.jsp" %>
 <div class="search">
     <sf:form commandName="problemsDTO" role="form" method="post" class="form-inline">
         <div class="form-group">
@@ -40,23 +44,35 @@
 <div class="container">
     <div class="page" align="justify">
         <ul class="pager">
-            <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
-            <c:if test="${vo.start != 0}">
-            <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
+            <c:if test="${currentPage != 1}">
+                <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
             </c:if>
-                <c:if test="${vo.start > 1 }">
-                <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
-                <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
+            <c:if test="${currentPage > 1}">
+                <li class="previous"><a href="/problem/problems/${currentPage-2}">&laquo;Previous Page</a></li>
             </c:if>
-            <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
-            <c:if test="${vo.start < vo.total-2 }">
-                <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
-                <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
+            <c:if test="${currentPage > 2 }">
+                <li class="start"><a href="/problem/problems/${currentPage-3}">${currentPage-2}</a></li>
             </c:if>
-            <li class="start">The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records</li>
-            <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
-            <c:if test="${vo.start+1 < vo.total}">
-            <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
+            <c:if test="${currentPage > 1 }">
+                <li class="start"><a href="/problem/problems/${currentPage-2}">${currentPage-1}</a></li>
+            </c:if>
+
+            <li class="start"><a href="/problem/problems/${currentPage-1}" disabled="disabled">${currentPage}</a></li>
+
+            <c:if test="${currentPage < totalPage}">
+                <li class="start"><a href="/problem/problems/${currentPage}">${currentPage+1}</a></li>
+            </c:if>
+            <c:if test="${currentPage < totalPage-1}">
+                <li class="start"><a href="/problem/problems/${currentPage+1}">${currentPage+2}</a></li>
+            </c:if>
+            <li class="start">
+                The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records
+            </li>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/problem/problems/${totalPage-1}">Last Page&raquo;&raquo;</a></li>
+            </c:if>
+            <c:if test="${currentPage < totalPage}">
+                <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
             </c:if>
         </ul>
     </div>
@@ -82,48 +98,53 @@
         </table>
     </div>
 </div>
-<div class="container">
-    <div class="page" align="justify">
-        <ul class="pager">
-            <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;First Page</a></li>
-            <c:if test="${vo.start != 0}">
-                <li class="previous"><a href="/problem/problems/${vo.start-1}">&laquo;Previous Page</a></li>
-            </c:if>
-            <c:if test="${vo.start > 1 }">
-                <li class="start"><a href="/problem/problems/${vo.start-2}">${vo.start-1}</a></li>
-                <li class="start"><a href="/problem/problems/${vo.start-1}">${vo.start}</a></li>
-            </c:if>
-            <li class="start"><a href="/problem/problems/${vo.start}">${vo.start+1}</a></li>
-            <c:if test="${vo.start < vo.total-2 }">
-                <li class="start"><a href="/problem/problems/${vo.start+1}">${vo.start+2}</a></li>
-                <li class="start"><a href="/problem/problems/${vo.start+2}">${vo.start+3}</a></li>
-            </c:if>
-            <li class="start">The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records</li>
-            <li class="next"><a href="/problem/problems/${vo.total}">Last Page&raquo;&raquo;</a></li>
-            <c:if test="${vo.start+1 < vo.total}">
-                <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
-            </c:if>
-        </ul>
+<div class="page" align="justify">
+    <ul class="pager">
+        <c:if test="${currentPage != 1}">
+            <li class="previous"><a href="/problem/problems/0">&laquo;&laquo;The First Page</a></li>
+        </c:if>
+        <c:if test="${currentPage > 1}">
+            <li class="previous"><a href="/problem/problems/${currentPage-2}">&laquo;Previous Page</a></li>
+        </c:if>
+        <c:if test="${currentPage > 2 }">
+            <li class="start"><a href="/problem/problems/${currentPage-3}">${currentPage-2}</a></li>
+        </c:if>
+        <c:if test="${currentPage > 1 }">
+            <li class="start"><a href="/problem/problems/${currentPage-2}">${currentPage-1}</a></li>
+        </c:if>
+
+        <li class="start"><a href="/problem/problems/${currentPage-1}" disabled="disabled">${currentPage}</a></li>
+
+        <c:if test="${currentPage < totalPage}">
+            <li class="start"><a href="/problem/problems/${currentPage}">${currentPage+1}</a></li>
+        </c:if>
+        <c:if test="${currentPage < totalPage-1}">
+            <li class="start"><a href="/problem/problems/${currentPage+1}">${currentPage+2}</a></li>
+        </c:if>
+        <li class="start">
+            The&nbsp;${currentPage}/${totalPage}&nbsp;Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;${vo.total}&nbsp;Records
+        </li>
+        <c:if test="${currentPage < totalPage}">
+            <li class="next"><a href="/problem/problems/${totalPage-1}">The Last Page&raquo;&raquo;</a></li>
+        </c:if>
+        <c:if test="${currentPage < totalPage}">
+            <li class="next"><a href="/problem/problems/${vo.start+1}">Next Page&raquo;</a></li>
+        </c:if>
+    </ul>
+</div>
+<div align="right">
+    <div class="pageGoContainer">
+        <label for="pageGo" class="pageGo">Jump To:</label>
+        <div class="pageGo">
+            <input type="text" class="form-control " style="width: 60px;height: 25px;" name="pageGo" id="pageGo"
+                   placeholder="页码">
+        </div>
+        <div class="pageGo">
+            <button type="button" onclick="pageGo()" class="btn btn-primary ">GO</button>
+        </div>
     </div>
 </div>
-    <div class="pageGo">
-        <form role="form" method="post" class="form-inline" style="line-height: 30px;">
-            <div class="form-group">
-                <label for="pageGo" class="control-label col-md-2 col-sm-2">页码:</label>
-            </div>
-            <div class="form-group">
-                <div class=col-md-2">
-                    <input type="text" class="form-control " style="width: 60px;height: 25px;" name="pageGo" id="pageGo"
-                           placeholder="页码">/${vo.total}
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <input type="submit" class="btn btn-primary submit" value="GO">
-                </div>
-            </div>
-        </form>
-    </div>
-    <%@ include file="/WEB-INF/views/copyright.html" %>
+<%@ include file="/WEB-INF/views/copyright.html" %>
+<script src="/js/custom.js" type="text/javascript" language="JavaScript"></script>
 </body>
 </html>
