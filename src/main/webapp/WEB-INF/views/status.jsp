@@ -28,32 +28,9 @@
 <head>
     <base href="<%=basePath%>">
     <title>Online Status</title>
-    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <style type="text/css">
-        h1 {
-            text-align: center;
-            color: blue;
-            size: 30px;
-        }
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
 
-        .search {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        thead {
-            background-color: #2C333D;
-            color: white;
-        }
-
-        .status {
-            width: 1040px;
-        }
-
-        .status > table {
-            margin-left: 160px;
-        }
-    </style>
 </head>
 <body>
 <%
@@ -72,8 +49,8 @@
     <security:authentication property="principal.username" var="userId"/>
     <security:authentication property="principal.authorities" var="roleId"/>
 </security:authorize>
-<h1>Online Status</h1>
-<div class="search" style="line-height:15px;">
+<h1 class="statusHead">Online Status</h1>
+<div class="statusSearch" style="line-height:15px;">
     <sf:form commandName="statusDTO" role="form" method="post" class="form-inline">
         <div class="form-group">
             <label for="problemId" class="control-label col-md-1 col-sm-1">Pro.ID</label>
@@ -152,19 +129,19 @@
     </ul>
 </div>
 <div class="status">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" >
         <thead>
-        <tr>
+        <tr >
             <td class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1">Run.ID</td>
             <td class="col-md-1 col-sm-1">Pro.ID</td>
             <td class="col-md-1 col-sm-1">Author</td>
-            <td class="col-md-1 col-sm-1">Result</td>
+            <td class="col-md-1 col-sm-1" >Result</td>
             <td class="col-md-1 col-sm-1">Memory</td>
             <td class="col-md-1 col-sm-1">Time</td>
             <td class="col-md-1 col-sm-1">Code Status</td>
             <td class="col-md-1 col-sm-1">Language</td>
             <td class="col-md-1 col-sm-1">Code.Len</td>
-            <td class="col-md-2 col-sm-1">Submit Time</td>
+            <td class="col-md-2 col-sm-2">Submit Time</td>
         </thead>
         <tbody>
 
@@ -174,7 +151,7 @@
                 <td>${entity.runId}</td>
                 <td>${entity.problemId}</td>
                 <td>${entity.id}</td>
-                <td>${result[loop.count-1]}</td>
+                <td  id="result${loop.count-1}" >${result[loop.count-1]}</td>
                 <td>${entity.runMemory}&nbsp;KB</td>
                 <td>${entity.runTime}&nbsp;MS</td>
                     <%--管理员--%>
@@ -206,5 +183,9 @@
         </tbody>
     </table>
 </div>
+<script src="/js/custom.js"></script>
+<script >
+    window.onload=setClass;
+</script>
 </body>
 </html>
