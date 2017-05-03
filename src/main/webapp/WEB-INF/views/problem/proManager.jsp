@@ -21,7 +21,7 @@
 </head>
 <body style="padding-left: 100px;">
 <div style="margin-top:50px;">
-    <form class="form-inline" method="get" role="form">
+    <sf:form class="form-inline" method=" post" role="form">
         <div class="form-group">
             <label class="control-label col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2" for="problemId">Pro.ID</label>
             <div class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-2">
@@ -45,7 +45,7 @@
                 <input type="submit" value="search" class="btn btn-primary btn-sm">
             </div>
         </div>
-    </form>
+    </sf:form>
 </div>
 <div class="page" align="justify" style="margin:0px 160px; text-align: justify">
     <ul class="pager">

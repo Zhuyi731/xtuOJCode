@@ -1,4 +1,8 @@
 <%@ page import="com.xtu.DB.vo.StatusVO" %>
+<%@ page import="com.xtu.DB.vo.StatusEntityVO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,38 +14,23 @@
     pageContext.setAttribute("currentPage", currentPage);
     String totalPage = String.valueOf(vo.getTotal() / 20 + 1);
     pageContext.setAttribute("totalPage", totalPage);
+    List<StatusEntityVO>  list=vo.getEntityList();
+    Iterator it=list.iterator();
+    String []trans={"Accept","Wrong Answer","Compile Error","Runtime Error","Presentation Error","Time Limit Exceed","Memory Limit Exceed","Output Limit Exceed"};
+    ArrayList result=new ArrayList<String>();
+    for(int i=0;i<list.size();i++){
+            result.add(trans[list.get(i).getResultCode()]);
+    }
+   pageContext.setAttribute("result",result);
 %>
 <!DOCTYPE HTML>
 <html>
 <head>
     <base href="<%=basePath%>">
     <title>Online Status</title>
-    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
-    <style type="text/css">
-        h1 {
-            text-align: center;
-            color: blue;
-            size: 30px;
-        }
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
 
-        .search {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        thead {
-            background-color: #2C333D;
-            color: white;
-        }
-
-        .status {
-            width: 1040px;
-        }
-
-        .status > table {
-            margin-left: 160px;
-        }
-    </style>
 </head>
 <body>
 <%
@@ -60,8 +49,8 @@
     <security:authentication property="principal.username" var="userId"/>
     <security:authentication property="principal.authorities" var="roleId"/>
 </security:authorize>
-<h1>Online Status</h1>
-<div class="search" style="line-height:15px;">
+<h1 class="statusHead">Online Status</h1>
+<div class="statusSearch" style="line-height:15px;">
     <sf:form commandName="statusDTO" role="form" method="post" class="form-inline">
         <div class="form-group">
             <label for="problemId" class="control-label col-md-1 col-sm-1">Pro.ID</label>
@@ -79,8 +68,10 @@
             <label for="language" class="control-label ">Language</label>
             <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                 <option value="0">All</option>
-                <option value="C">C</option>
-                <option value="C++">C++</option>
+                <option value="MS C">MS C</option>
+                <option value="MS C++">MS C++</option>
+                <option value="GUN C">GUN C</option>
+                <option value="GUN C++">GUN C++</option>
                 <option value="Java">Java</option>
             </select>
         </div>
@@ -89,16 +80,13 @@
             <select id="result" name="result" class="form-control col-md-offset-1 col-sm-offset-1">
                 <option value="0">All</option>
                 <option value="1">Accept</option>
-                <option value="2">Presentation Error</option>
-                <option value="3">Wrong Answer</option>
-                <option value="4">Time Limit Error</option>
-                <option value="5">Memory Exceed Error</option>
-                <option value="6">Output Error</option>
-                <option value="7">Runtime Error</option>
-                <option value="8">Compile Error</option>
-                <option value="9">Compiling</option>
-                <option value="10">Waiting</option>
-                <option value="11">Running and Judging</option>
+                <option value="2">Wrong Answer</option>
+                <option value="3">Compile Error</option>
+                <option value="4">Runtime Error</option>
+                <option value="5">Presentation Error</option>
+                <option value="6">Time Limit Exceed</option>
+                <option value="7">Memory Exceed Exceed</option>
+                <option value="8">Output Limit Exceed</option>
             </select>
         </div>
         <div class="form-group" style="padding-top:15px;">
@@ -141,27 +129,29 @@
     </ul>
 </div>
 <div class="status">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" >
         <thead>
-        <tr>
+        <tr >
             <td class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1">Run.ID</td>
             <td class="col-md-1 col-sm-1">Pro.ID</td>
             <td class="col-md-1 col-sm-1">Author</td>
-            <td class="col-md-1 col-sm-1">Result</td>
+            <td class="col-md-1 col-sm-1" >Result</td>
             <td class="col-md-1 col-sm-1">Memory</td>
             <td class="col-md-1 col-sm-1">Time</td>
             <td class="col-md-1 col-sm-1">Code Status</td>
             <td class="col-md-1 col-sm-1">Language</td>
             <td class="col-md-1 col-sm-1">Code.Len</td>
-            <td class="col-md-2 col-sm-1">Submit Time</td>
+            <td class="col-md-2 col-sm-2">Submit Time</td>
         </thead>
         <tbody>
-        <c:forEach items="${vo.entityList}" var="entity">
+
+
+            <c:forEach items="${vo.entityList}" var="entity" varStatus="loop">
             <tr>
                 <td>${entity.runId}</td>
                 <td>${entity.problemId}</td>
                 <td>${entity.id}</td>
-                <td>${entity.resultCode}</td>
+                <td  id="result${loop.count-1}" >${result[loop.count-1]}</td>
                 <td>${entity.runMemory}&nbsp;KB</td>
                 <td>${entity.runTime}&nbsp;MS</td>
                     <%--管理员--%>
@@ -193,5 +183,9 @@
         </tbody>
     </table>
 </div>
+<script src="/js/custom.js"></script>
+<script >
+    window.onload=setClass;
+</script>
 </body>
 </html>
