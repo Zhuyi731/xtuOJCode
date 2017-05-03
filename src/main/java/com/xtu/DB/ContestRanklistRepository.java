@@ -1,6 +1,5 @@
 package com.xtu.DB;
 
-import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestRanklistEntity;
 
 import java.util.List;
@@ -10,14 +9,7 @@ import java.util.List;
  */
 
 public interface ContestRanklistRepository {
-    Long count();
+    ContestRanklistEntity queryOne(int userId, int contestId);
 
-    ContestRanklistEntity findOne(String problemId);
-
-    List<ContestRanklistEntity> find(ProblemsDTO problemsDTO);
-
-    ContestRanklistEntity save(ContestRanklistEntity problemSetDetailEntity);
-
-    void delete(long id);
-
+    List<ContestRanklistEntity> queryList(int contestId);
 }

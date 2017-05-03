@@ -1,7 +1,6 @@
 package com.xtu.DB.jdbc;
 
 import com.xtu.DB.ContestRanklistRepository;
-import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestRanklistEntity;
 import com.xtu.constant.Tables;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,52 +22,42 @@ public class ContestRanklistRepositoryImp implements ContestRanklistRepository {
     private JdbcOperations jdbcOperations;
 
     @Override
-    public Long count() {
-        String selctCountSql = "SELECT count(user_id) FROM "
-                + Tables.CONTEST_RANKLIST;
-        return jdbcOperations.queryForObject(selctCountSql,
-                Long.class);
-    }
-
-    @Override
-    public ContestRanklistEntity findOne(String problemId) {
-        String finduserSql = "SELECT * FROM " + Tables.CONTEST_RANKLIST
-                + " WHERE problem_id = ?";
+    public ContestRanklistEntity queryOne(int userId, int contestId) {
+        String sql = "SELECT * FROM " + Tables.CONTEST_RANKLIST
+                + " WHERE `user_id` = ?" +
+                " AND `contest_id` = ?";
         return jdbcOperations.queryForObject(
-                finduserSql,
-                new ProblemSetsEntityRowMapper(),
-                problemId);
+                sql,
+                new ContestRanklistEntityRowMapper(),
+                userId,
+                contestId);
     }
 
     @Override
-    public List<ContestRanklistEntity> find(ProblemsDTO problemsDTO) {
-        String finduserSql = "SELECT * FROM "
-                + Tables.CONTEST_RANKLIST +
-
-//                + " WHERE problem_id = ? " +
-                " Limit ?,?";
-        return jdbcOperations.query(
-                finduserSql,
-                new ProblemSetsEntityRowMapper(),
-//                problemsDTO.getProblemId(),
-                problemsDTO.getStart(),
-                problemsDTO.getSize());
+    public List<ContestRanklistEntity> queryList(int contestId) {
+        String sql = "SELECT * FROM " +
+                Tables.CONTEST_RANKLIST +
+                " WHERE `contest_id` = ? ";
+//                " Limit ?,?";
+        return jdbcOperations.query(sql,
+                new ContestRanklistEntityRowMapper(),
+                contestId);
     }
 
-    @Override
-    public ContestRanklistEntity save(ContestRanklistEntity problemsEntity) {
-        return null;
-    }
 
-    @Override
-    public void delete(long id) {
-
-    }
-
-    private static final class ProblemSetsEntityRowMapper implements RowMapper<ContestRanklistEntity> {
+    private static final class ContestRanklistEntityRowMapper implements RowMapper<ContestRanklistEntity> {
         @Override
         public ContestRanklistEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             ContestRanklistEntity entity = new ContestRanklistEntity();
+            entity.setContestId(rs.getInt("contest_id"));
+            entity.setUserId(rs.getInt("user_id"));
+            entity.setSlotInformation(rs.getString("slot_information"));
+            entity.setRegisterTime(rs.getTimestamp("register_time"));
+            entity.setLastLoginTime(rs.getTimestamp("last_login_ip"));
+            entity.setLastLoginIp(rs.getString("last_login_ip"));
+            entity.setTotScore(rs.getShort("tot_score"));
+            entity.setAcProblemsNum(rs.getByte("ac_problems_num"));
+            entity.setPenalty(rs.getInt("penalty"));
             return entity;
         }
     }
