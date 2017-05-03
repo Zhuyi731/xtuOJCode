@@ -73,6 +73,10 @@ public class Pages {
      */
     public static final String RANK_LIST = "ranklist";
     /**
+     * 比赛排行榜界面
+     */
+    public static final String STANDING_PAGE = "standing";
+    /**
      * 注册用户页面
      */
     public static final String REGISTER = "register";
