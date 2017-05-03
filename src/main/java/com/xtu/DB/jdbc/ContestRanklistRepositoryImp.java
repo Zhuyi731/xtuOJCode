@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Ilovezilian on 2017/4/18.
  */
 @Repository
-public class ProblemSetDtailEntityRepositoryImp implements ContestRanklistRepository {
+public class ContestRanklistRepositoryImp implements ContestRanklistRepository {
 
     @Autowired
     private JdbcOperations jdbcOperations;
