@@ -31,4 +31,16 @@ public class AllContestProblemEntityVO {
      * 气球颜色，格式为22FF33
      */
     private String balloonColor;
+    /**
+     * AC的题目数量
+     */
+    private int acProblemsNum;
+    /**
+     * 提交的题目数量
+     */
+    private int submitProblemsNum;
+    /**
+     * 通过率
+     */
+    private int ratio;
 }
