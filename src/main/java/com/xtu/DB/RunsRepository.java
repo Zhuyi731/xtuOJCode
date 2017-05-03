@@ -18,6 +18,8 @@ public interface RunsRepository {
 
     Map<String, Integer> queryNum(int problemId);
 
+    Map<String, Integer> queryContestNum(int problemId, int contestId, byte no);
+
     Long rankListCount();
 
     RankVO queryRankList(int start, int size);

@@ -64,6 +64,20 @@ public class RunsRepositoryImp implements RunsRepository {
     }
 
     @Override
+    public Map<String, Integer> queryContestNum(int problemId, int contestId, byte no) {
+        String sql = "SELECT IF(COUNT(`run_id`) = 0, 0,SUM(IF(`result_code` = 1,1,0)))acProblemsNum," +
+                " COUNT(`run_id`) submitProblemsNum FROM " +
+                Tables.RUNS +
+                " WHERE `problem_id` = ? AND `contest_id` = ? AND `no` = ?";
+        Map<String, Object> map = jdbcOperations.queryForMap(sql, problemId, contestId, no);
+        Map<String, Integer> resMap = new HashMap<>();
+        resMap.put("no", (int)no);
+        resMap.put("acProblemsNum", Integer.parseInt(map.get("acProblemsNum").toString()));
+        resMap.put("submitProblemsNum", Integer.parseInt(map.get("submitProblemsNum").toString()));
+        return resMap;
+    }
+
+    @Override
     public Long rankListCount() {
         String sql = "SELECT COUNT( DISTINCT `user_id`) FROM " +
                 Tables.RUNS;
@@ -147,7 +161,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 " `runs`.`result_msg`, `runs`.`submit_time`, `runs`.`contest_id`, `runs`.`no`, `runs`.`open`," +
                 "`users`.`name`, `users`.`id`" +
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id`" +
-                " WHERE run_id != 0";
+                " WHERE run_id != 0 ";
         if (null != statusDTO.getId() && !"".equals(statusDTO.getId())) {
             sql += " AND `id` = ?";
         } else {
@@ -173,7 +187,7 @@ public class RunsRepositoryImp implements RunsRepository {
 //            statusDTO.setLanguage("(^_^)");
         }
 
-        sql += " ORDER BY `runs`.`submit_time` DESC" +
+        sql += " ORDER BY `runs`.`submit_time` DESC, `run_id` ASC " +
                 " LIMIT ?, ?";
         List<StatusEntityVO> entityList = jdbcOperations.query(sql,
                 new StatusEntityVORowMapper(),
