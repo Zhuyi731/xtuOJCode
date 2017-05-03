@@ -1,19 +1,11 @@
 package com.xtu.controller;
 
-import com.xtu.DB.ContestProblemsRepository;
-import com.xtu.DB.ContestRepository;
-import com.xtu.DB.ProblemsRepository;
-import com.xtu.DB.UsersRepository;
+import com.xtu.DB.*;
 import com.xtu.DB.dto.ContestDTO;
 import com.xtu.DB.dto.CreateTestDTO;
 import com.xtu.DB.dto.ProblemsDTO;
-import com.xtu.DB.entity.ContestProblemsEntity;
-import com.xtu.DB.entity.ContestsEntity;
-import com.xtu.DB.entity.ProblemsEntity;
-import com.xtu.DB.entity.UsersEntity;
-import com.xtu.DB.vo.AllContestProblemVO;
-import com.xtu.DB.vo.AllContestVO;
-import com.xtu.DB.vo.ProblemsEntityVO;
+import com.xtu.DB.entity.*;
+import com.xtu.DB.vo.*;
 import com.xtu.constant.Pages;
 import com.xtu.tools.DateUtil;
 import com.xtu.tools.OUT;
@@ -22,10 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Ilovezilian on 2017/4/18.
@@ -38,9 +36,15 @@ public class TestController {
     @Autowired
     ContestProblemsRepository contestProblemsRepository;
     @Autowired
+    ContestDetailRepository contestDetailRepository;
+    @Autowired
+    ContestRanklistRepository contestRanklistRepository;
+    @Autowired
     UsersRepository usersRepository;
     @Autowired
     ProblemsRepository problemsRepository;
+    @Autowired
+    RunsRepository runsRepository;
 
     @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
@@ -103,10 +107,65 @@ public class TestController {
             @PathVariable("id") Integer contestId,
             Model model) {
         OUT.prt("request", Pages.TEST_DETAIL);
-        AllContestProblemVO vo = contestProblemsRepository.findList(contestId);
+        List<ContestProblemsEntity> entityList = contestProblemsRepository.findList(contestId);
+        AllContestProblemVO vo = new AllContestProblemVO();
+        List<AllContestProblemEntityVO> entityVO = new ArrayList<>();
+        for (ContestProblemsEntity entity : entityList) {
+            AllContestProblemEntityVO problemEntityVO = new AllContestProblemEntityVO();
+            BeanUtils.copyProperties(entity, problemEntityVO);
+
+
+            Map<String, Integer> map = runsRepository.queryContestNum(entity.getProblemId(), entity.getContestId(), entity.getNo());
+            problemEntityVO.setAcProblemsNum(map.get("acProblemsNum"));
+            problemEntityVO.setSubmitProblemsNum(map.get("submitProblemsNum"));
+            if (map.get("acProblemsNum") == 0) {
+                problemEntityVO.setRatio(0);
+            } else {
+                problemEntityVO.setRatio(map.get("acProblemsNum") * 100 / map.get("submitProblemsNum"));
+            }
+
+            ProblemsEntity problemsEntity = problemsRepository.queryOne(entity.getProblemId());
+            problemEntityVO.setTitle(problemsEntity.getTitle());
+            entityVO.add(problemEntityVO);
+        }
+        vo.setEntityList(entityVO);
+        vo.setStart(0);
+        vo.setTotal(entityList.size());
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
+
         String res = Pages.TEST + "/" + Pages.TEST_DETAIL;
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.STANDING_PAGE + "/{id}", method = RequestMethod.GET)
+    public String showStandingPage(
+            @PathVariable("id") int contestId,
+            Model model) {
+        OUT.prt("request", Pages.STANDING_PAGE);
+        OUT.prt("contestId", contestId);
+        StandingVO vo = new StandingVO();
+        List<StandingEntityVO> entityList = new ArrayList<>();
+        List<ContestRanklistEntity> contestRanklistEntityList = contestRanklistRepository.queryList(contestId);
+        for (ContestRanklistEntity rank : contestRanklistEntityList) {
+            StandingEntityVO entity = new StandingEntityVO();
+            List<ContestDetailEntity> contestDetailList = contestDetailRepository.queryList(rank.getUserId(), rank.getContestId());
+            entity.setEntity(rank);
+            entity.setEntityList(contestDetailList);
+            entityList.add(entity);
+        }
+        List<ContestProblemsEntity> entities = contestProblemsRepository.findList(contestId);
+        List<Map<String, Integer>> mapList = new ArrayList<>();
+        for (ContestProblemsEntity entity : entities) {
+            Map<String, Integer> map = runsRepository.queryContestNum(entity.getProblemId(), entity.getContestId(), entity.getNo());
+            mapList.add(map);
+        }
+        vo.setEntityList(entityList);
+        vo.setTotal(entityList.size());
+        vo.setMapList(mapList);
+        OUT.prt("vo", vo);
+        model.addAttribute("vo", vo);
+        String res = Pages.TEST + "/" + Pages.STANDING_PAGE;
         return res;
     }
 
