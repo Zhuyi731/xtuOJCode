@@ -2,13 +2,10 @@ package com.xtu.DB.jdbc;
 
 import com.xtu.DB.ContestProblemsRepository;
 import com.xtu.DB.ProblemsRepository;
+import com.xtu.DB.RunsRepository;
 import com.xtu.DB.dto.ProblemsDTO;
 import com.xtu.DB.entity.ContestProblemsEntity;
-import com.xtu.DB.entity.ProblemsEntity;
-import com.xtu.DB.vo.AllContestProblemEntityVO;
-import com.xtu.DB.vo.AllContestProblemVO;
 import com.xtu.constant.Tables;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +24,8 @@ public class ContestProblemRepositoryImp implements ContestProblemsRepository {
     JdbcOperations jdbcOperations;
     @Autowired
     ProblemsRepository problemsRepository;
+    @Autowired
+    RunsRepository runsRepository;
 
     @Override
     public Long count() {
@@ -45,26 +43,12 @@ public class ContestProblemRepositoryImp implements ContestProblemsRepository {
     }
 
     @Override
-    public AllContestProblemVO findList(int contestId) {
+    public List<ContestProblemsEntity> findList(int contestId) {
         String sql = " SELECT * FROM "
                 + Tables.CONTEST_PROBLEMS
-                + " WHERE `contest_id` = ?";
-        List<ContestProblemsEntity> entityList =
-                jdbcOperations.query(sql, new ContestProblemsEntityRowMapper(), contestId);
-        AllContestProblemVO vo = new AllContestProblemVO();
-        List<AllContestProblemEntityVO> entityVO = new ArrayList<>();
-        for (ContestProblemsEntity entity : entityList) {
-            AllContestProblemEntityVO problemEntityVO = new AllContestProblemEntityVO();
-            BeanUtils.copyProperties(entity, problemEntityVO);
-
-            ProblemsEntity problemsEntity = problemsRepository.queryOne(entity.getProblemId());
-            problemEntityVO.setTitle(problemsEntity.getTitle());
-            entityVO.add(problemEntityVO);
-        }
-        vo.setEntityList(entityVO);
-        vo.setStart(0);
-        vo.setTotal(entityList.size());
-        return vo;
+                + " WHERE `contest_id` = ? " +
+                " ORDER BY `no` ASC ";
+        return jdbcOperations.query(sql, new ContestProblemsEntityRowMapper(), contestId);
     }
 
     @Override
