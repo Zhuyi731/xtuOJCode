@@ -156,3 +156,7 @@ result样式设计
     background-color: #122b40;
     border-color: #2b669a;
 }
+
+.statusTr td{
+    text-align: center; vertical-align: middle; width: 80px;
+}

@@ -14,6 +14,7 @@
     <link href="/css/custom.css" rel="stylesheet"/>
 </head>
 <body>
+<%--判断是否后台进入--%>
 <%
     String url = request.getHeader("referer");
     String backgroud = "http://localhost:8080/admin/menu";
@@ -41,7 +42,7 @@
         <tbody>
         <tr>
             <td class="col-md-2 col-sm-2 "><a  class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing">Standing</a></td>
+            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing/${vo.entityList[0].contestId}">Standing</a></td>
             <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/status/0">Status</a></td>
         </tr>
         </tbody>
@@ -64,8 +65,8 @@
             <tr>
                 <td><%=(no++)%></td>
                 <td><a href="/test/testProDetail/${entity.contestId}?contestId=${entity.contestId}&no=${entity.no}">${entity.title}</a></td>
-                <%--<td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>--%>
-                <%--<td>${entity.ratio}</td>--%>
+                <td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>
+                <td>${entity.ratio}</td>
             </tr>
         </c:forEach>
         </tbody>

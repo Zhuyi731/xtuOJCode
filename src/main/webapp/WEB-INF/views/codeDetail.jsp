@@ -1,56 +1,61 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2017/4/25
-  Time: 10:59
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>CodeDetail</title>
-    <link src="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
+    <script src="/js/run_prettify.js?autoLoad=true&amp;skin=sunburst" defer=""></script>
+
 </head>
 <body>
-<xmp style="font-size: 24px;font-family: 'Times New Roman';">
-#include<iostream>
-#include<cstdio>
-#include<cstring>
-using namespace std;
-int day[102];
-int sum[102];
-int main()
-{
-    int n,k,T;
-    cin>>T;
-    while(T--)
-    {
-        cin>>n>>k;
-        for(int i=1;i<=n;i++)
-           cin>>day[i];
-         day[0]=0;day[n+1]=100;
-        if(k>=n)
-          cout<<100<<endl;
-        else
-        {
-            for(int i=0;i<=n;i++)
-            sum[i]=day[i+1]-day[i]-1;
-            int max=0;
-            for(int i=0;i<=n-k;i++)
-              {int tp=0;
-                  for(int j=0;j<=k;j++)
-                     tp+=sum[i+j];
-                 if(tp>max)
-                     max=tp;
-              }
-              cout<<max+k<<endl;
-
-
-
-        }
+<div class="top50" align="center">
+<div class="panel panel-default panel-primary " style="width:800px;">
+    <div class="panel panel-heading" align="center">
+        <strong style="color:Black">Source Code</strong>
+        <p>**********************************************************************<br/>
+            Problem: ${entity.problemId}<br/>
+            User: ${entity.id}<br/>
+            Language: ${entity.language}<br/>
+            Result: ${entity.resultCode}<br/>
+            Time:${entity.runTime} ms<br/>
+            Memory:${entity.runMemory} kb<br/>
+            **********************************************************************
+        </p>
+    </div>
+    <div class="panel panel-body" align="left" >
+        <pre class="prettyprint linenums">
+            <xmp>
+            ${entity.code}
+            </xmp>
+        </pre>
+    </div>
+    <div class="panel panel-footer"></div>
+</div></div>
+<script type="text/javascript">//<![CDATA[
+window.onload=
+(function () {
+    function htmlEscape(s) {
+        return s
+//            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
-return 0;
-}
-</xmp>
+
+    // this page's own source code
+    var quineHtml = htmlEscape(
+        document.getElementById("quine").innerHTML );
+    // Highlight the operative parts:
+//    quineHtml = quineHtml.replace(
+//        /&lt;script src[\s\S]*?&gt;&lt;\/script&gt;|&lt;!--\?[\s\S]*?--&gt;|&lt;pre\b[\s\S]*?&lt;\/pre&gt;/g,
+//        '<span class="operative">$&<\/span>');
+
+    // insert into PRE
+    document.getElementById("quine").innerHTML = quineHtml;
+})();
+//]]>
+</script>
 </body>
 </html>

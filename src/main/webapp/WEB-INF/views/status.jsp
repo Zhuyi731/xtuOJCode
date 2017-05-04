@@ -144,14 +144,12 @@
             <td class="col-md-2 col-sm-2">Submit Time</td>
         </thead>
         <tbody>
-
-
             <c:forEach items="${vo.entityList}" var="entity" varStatus="loop">
-            <tr>
-                <td>${entity.runId}</td>
+            <tr class="statusTr">
+                <td >${entity.runId}</td>
                 <td>${entity.problemId}</td>
                 <td>${entity.id}</td>
-                <td  id="result${loop.count-1}" >${result[loop.count-1]}</td>
+                <td  id="result${loop.count-1}" style="width: 120px;">${result[loop.count-1]}</td>
                 <td>${entity.runMemory}&nbsp;KB</td>
                 <td>${entity.runTime}&nbsp;MS</td>
                     <%--管理员--%>
@@ -177,7 +175,7 @@
                 </c:if>
                 <td>${entity.language}</td>
                 <td>${entity.codeLength}</td>
-                <td>${entity.submitTime}</td>
+                <td style="width: 160px;">${entity.submitTime}</td>
             </tr>
         </c:forEach>
         </tbody>
