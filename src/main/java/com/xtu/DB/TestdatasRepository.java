@@ -14,6 +14,8 @@ public interface TestdatasRepository {
 
     TestdatasEntity findOne(int problemId);
 
+    List<TestdatasEntity> queryList(int problemId);
+
     TestdatasEntity findOne(int problemId, short no);
 
     TestdatasEntity queryOne(int problemId, short no);

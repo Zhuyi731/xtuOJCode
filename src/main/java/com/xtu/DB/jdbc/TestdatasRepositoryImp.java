@@ -41,6 +41,16 @@ public class TestdatasRepositoryImp implements TestdatasRepository {
     }
 
     @Override
+    public List<TestdatasEntity> queryList(int problemId) {
+        String finduserSql = "SELECT * FROM " + Tables.TESTDATAS
+                + " WHERE problem_id = ?";
+        return jdbcOperations.query(
+                finduserSql,
+                new ProblemSetsEntityRowMapper(),
+                problemId);
+    }
+
+    @Override
     public TestdatasEntity findOne(int problemId, short no) {
         String finduserSql = "SELECT * FROM " + Tables.TESTDATAS
                 + " WHERE problem_id = ?" +
@@ -123,7 +133,7 @@ public class TestdatasRepositoryImp implements TestdatasRepository {
     public TestdatasEntity save(TestdatasEntity testdatasEntity) {
         TestdatasEntity entity = queryOne(testdatasEntity.getProblemId(), testdatasEntity.getNo());
         if (null == entity) {
-           inset(testdatasEntity);
+            inset(testdatasEntity);
         } else {
             update(testdatasEntity);
         }
