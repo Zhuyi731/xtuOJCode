@@ -1,15 +1,21 @@
 package com.xtu.tools;
 
+import com.xtu.DB.entity.TestdatasEntity;
+
 import java.io.*;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
-/** 文件处理工具类
+/**
+ * 文件处理工具类
  * Created by Ilovezilian on 2017/4/19.
  */
 public class FileUtils {
     /**
      * 解压zip文件
+     *
      * @param file
      * @return
      */
@@ -31,13 +37,14 @@ public class FileUtils {
 
     /**
      * 解压输入流zip文件
+     *
      * @param is
      * @return
      */
     public static String unzipFile(InputStream is) {
         String res = null;
         int size = 0;
-        try (ZipInputStream zis = new ZipInputStream(is)) {
+        try (ZipInputStream zis = new ZipInputStream(new BufferedInputStream(is))) {
             for (ZipEntry ze = zis.getNextEntry(); null != ze; ze = zis.getNextEntry()) {
                 OUT.prt("ZipEntryname", ze.getName());
                 if (ze.isDirectory()) {
@@ -57,7 +64,7 @@ public class FileUtils {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 is.close();
             } catch (IOException e) {
@@ -66,4 +73,31 @@ public class FileUtils {
         }
         return res;
     }
+
+    public static File zipFile(List<TestdatasEntity> entityList) {
+        String fileName = entityList.get(0).getProblemId() + "_myFiles.zip";
+        File file = new File(fileName);
+        if (file.exists() && file.isFile()) {
+            file.deleteOnExit();
+        }
+
+        try (FileOutputStream dest = new
+                FileOutputStream(fileName);
+             ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(dest))) {
+            for (TestdatasEntity entity : entityList) {
+                ZipEntry entryOut = new ZipEntry(entity.getNo() + ".out");
+                OUT.prt("out file", entity.getNo() + ".out");
+                out.putNextEntry(entryOut);
+                out.write(entity.getOutput());
+                ZipEntry entryIn = new ZipEntry(entity.getNo() + ".in");
+                out.putNextEntry(entryIn);
+                out.write(entity.getInput());
+                OUT.prt("in file", entity.getNo() + ".in");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
 }
