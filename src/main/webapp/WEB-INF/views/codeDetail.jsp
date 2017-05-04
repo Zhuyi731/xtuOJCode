@@ -26,7 +26,7 @@
         </p>
     </div>
     <div class="panel panel-body" align="left" >
-        <pre class="prettyprint linenums">
+        <pre class="prettyprint linenums" >
             <xmp>
             ${entity.code}
             </xmp>
@@ -43,7 +43,6 @@ window.onload=
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
     }
-
     // this page's own source code
     var quineHtml = htmlEscape(
         document.getElementById("quine").innerHTML );

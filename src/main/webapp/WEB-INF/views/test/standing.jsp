@@ -12,9 +12,25 @@
     pageContext.setAttribute("entityList",entityList);
     pageContext.setAttribute("mapList",mapList);
     int problemNum= mapList.size();
+    int ct=1;
+    pageContext.setAttribute("ct",ct);
+    int rank=0;
 %>
 <script>
-
+    window.onload=setProblemTitle;
+    function setProblemTitle() {
+        var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        alert(${mapList.get(0).acProblemsNum});
+        <c:set value="${0}" var="ctt"/>
+        for(var i=1;i<=${mapList.size()};i++){
+            var a= document.getElementById("problem"+i);
+            a.innerHTML=alpha[i-1];
+            a.innerHTML+="(${mapList.get(ct).acProblemsNum}/${mapList.get(ct).submitProblemsNum})";
+           if(i)
+            <c:set value="${ctt+1}" scope="page" var="ctt"/>
+            alert(i+"${ctt}");
+        }
+    }
 </script>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -24,47 +40,48 @@
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <link href="/css/custom.css" rel="stylesheet"/>
 </head>
-<body style=" overflow-y:auto;">
+<body style="overflow-y:auto;padding-left: 0px;">
+
 <div class="functionNav" align="center">
 <table class="table table-hover text-info">
     <tbody>
-    <tr>
+    <tr >
         <td class="col-md-2 col-sm-2 "><a  class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-        <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing/${vo.entityList[0].contestId}">Standing</a></td>
+        <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing/${vo.entityList[0].entityList[0].contestId}">Standing</a></td>
         <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/status/0">Status</a></td>
     </tr>
     </tbody>
 </table>
 
 <div class="head"></div>
-<div class="container" align="center">
     <table class="table table-bordered table-hover">
         <thead>
-        <tr>
+        <tr style="background-color: #2b669a">
             <td class="col-md-1">Rank</td>
             <td class="col-md-1">Username</td>
             <td class="col-md-1">Punishment</td>
             <td class="col-md-1">Solved</td>
-            <td class="col-md-1">Punishment</td>
+            <td class="col-md-1">Score</td>
             <c:forEach items="${mapList}" var="mapList" varStatus="index">
-                <td class="col-md-1" id="problem${mapList.no}">(${mapList.acProblemsNum}/${mapList.submitProblemsNum})</td>
+                <td class="col-md-1" id="problem${mapList.no}"></td>
             </c:forEach>
-            <td> </td>
         </tr>
         </thead>
+        <tbody>
+        <c:forEach items="${entityList}" var="entity" varStatus="index">
+            <tr>
+                <td><%=++rank%></td>
+                <td>${entity.entity.userId}</td>
+                <td>${entity.entity.penalty}</td>
+                <td>${entity.entity.acProblemsNum}</td>
+                <td>${entity.entity.totScore}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
     </table>
 </div>
-</div>
-<script>
-    window.onload=setProblemTitle();
-    function setProblemTitle() {
-        for(var i=0;i<${mapList.size()};i++)
-        var a= document.getElementById("problem"+i);
-        var head='A'+i;
-        alert(head);
-        a.innerHTML=head+"(${mapList.acProblemsNum}/${mapList.submitProblemsNum})";
-    }
 
-</script>
+
+<script src="/js/custom.js"></script>
 </body>
 </html>
