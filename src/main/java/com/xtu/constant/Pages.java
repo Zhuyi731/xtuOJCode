@@ -65,6 +65,10 @@ public class Pages {
      */
     public static final String PROBLEM_DETAIL = "proDetail";
     /**
+     * 标准输入输出文件下载
+     */
+    public static final String PROBLEM_DATA = "problemData";
+    /**
      * 竞赛题库题目详情
      */
     public static final String TEST_PROBLEM_DETAIL = "testProDetail";

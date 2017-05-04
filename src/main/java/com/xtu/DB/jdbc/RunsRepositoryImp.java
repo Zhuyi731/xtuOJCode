@@ -71,7 +71,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 " WHERE `problem_id` = ? AND `contest_id` = ? AND `no` = ?";
         Map<String, Object> map = jdbcOperations.queryForMap(sql, problemId, contestId, no);
         Map<String, Integer> resMap = new HashMap<>();
-        resMap.put("no", (int)no);
+        resMap.put("no", (int) no);
         resMap.put("acProblemsNum", Integer.parseInt(map.get("acProblemsNum").toString()));
         resMap.put("submitProblemsNum", Integer.parseInt(map.get("submitProblemsNum").toString()));
         return resMap;
@@ -140,7 +140,7 @@ public class RunsRepositoryImp implements RunsRepository {
         List<StatusEntityVO> entityList = jdbcOperations.query(sql,
                 new StatusEntityVORowMapper(), start * size, size);
 
-        hideCode(entityList);
+//        hideCode(entityList);
 
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
@@ -197,7 +197,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 statusDTO.getLanguage(),
                 start * size, size);
 
-        hideCode(entityList);
+//        hideCode(entityList);
 
         StatusVO vo = new StatusVO();
         vo.setEntityList(entityList);
