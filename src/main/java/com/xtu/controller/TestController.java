@@ -45,6 +45,8 @@ public class TestController {
     ProblemsRepository problemsRepository;
     @Autowired
     RunsRepository runsRepository;
+    @Autowired
+    TestdatasRepository testdatasRepository;
 
     @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.GET)
     public String submit(
@@ -141,7 +143,8 @@ public class TestController {
     @RequestMapping(value = "/" + Pages.STANDING_PAGE + "/{id}", method = RequestMethod.GET)
     public String showStandingPage(
             @PathVariable("id") int contestId,
-            Model model) {
+            Model model,
+            Principal principal) {
         OUT.prt("request", Pages.STANDING_PAGE);
         OUT.prt("contestId", contestId);
         StandingVO vo = new StandingVO();
@@ -149,6 +152,9 @@ public class TestController {
         List<ContestRanklistEntity> contestRanklistEntityList = contestRanklistRepository.queryList(contestId);
         for (ContestRanklistEntity rank : contestRanklistEntityList) {
             StandingEntityVO entity = new StandingEntityVO();
+            UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+            entity.setUsersEntity(usersEntity);
+
             List<ContestDetailEntity> contestDetailList = contestDetailRepository.queryList(rank.getUserId(), rank.getContestId());
             entity.setEntity(rank);
             entity.setEntityList(contestDetailList);
@@ -255,4 +261,5 @@ public class TestController {
         String res = Pages.TEST + "/" + Pages.JOIN_TEST;
         return res;
     }
+
 }

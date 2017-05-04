@@ -187,25 +187,8 @@ function  pageGo() {
     }
 }
 //设置result  className
-function setClass(){
-    for(var index=0;index<20;index++){
-        var rr=document.getElementById("result"+index);
-        var result=rr.innerHTML;
-        if(result=="Accept"){
-            rr.className="btn accept";
-        }else if(result=="Wrong Answer"){
-            rr.className="btn wrongAnswer";
-        }else if(result=="Compile Error"){
-            rr.className="btn compileError";
-        }else if(result=="Presentation Error"){
-            rr.className="btn presentationError";
-        }else if(result=="Time Limit Exceed"){
-            rr.className="btn timeLimitExceed";
-        }else if(result=="Memory Limit Exceed"){
-            rr.className="btn memoryLimitExceed";
-        }else{
-            rr.className="outputLimitExceed"
-        }
-    }
-}
 
+//   /test/standing 设置题目序号 A B C ...
+/*
+* 获得代码的内容    显示在弹窗内
+* */

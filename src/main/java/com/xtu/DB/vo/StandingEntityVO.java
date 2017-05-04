@@ -2,6 +2,7 @@ package com.xtu.DB.vo;
 
 import com.xtu.DB.entity.ContestDetailEntity;
 import com.xtu.DB.entity.ContestRanklistEntity;
+import com.xtu.DB.entity.UsersEntity;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 public class StandingEntityVO {
     ContestRanklistEntity entity;
+    UsersEntity usersEntity;
     List<ContestDetailEntity> entityList;
 
 }

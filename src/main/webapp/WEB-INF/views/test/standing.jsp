@@ -20,15 +20,12 @@
     window.onload=setProblemTitle;
     function setProblemTitle() {
         var alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        alert(${mapList.get(0).acProblemsNum});
         <c:set value="${0}" var="ctt"/>
         for(var i=1;i<=${mapList.size()};i++){
             var a= document.getElementById("problem"+i);
             a.innerHTML=alpha[i-1];
             a.innerHTML+="(${mapList.get(ct).acProblemsNum}/${mapList.get(ct).submitProblemsNum})";
-           if(i)
-            <c:set value="${ctt+1}" scope="page" var="ctt"/>
-            alert(i+"${ctt}");
+            <c:set value="${ctt+1}" scope="page" var="ctt"/>;
         }
     }
 </script>

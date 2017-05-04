@@ -15,25 +15,26 @@ import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Constant;
 import com.xtu.constant.Pages;
+import com.xtu.tools.FileUtils;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -391,5 +392,31 @@ public class ProblemController {
         runsRepository.save(submitContestDTO);
         String res = "redirect:/" + Pages.STATUS;
         return res;
+    }
+
+//    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}", method = RequestMethod.GET)
+    public String loadZipFile(
+            @PathVariable("id") int problemId,
+            Model model) {
+        OUT.prt("request", Pages.PROBLEM_DATA);
+        String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
+        List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
+        FileUtils.zipFile(entityList);
+//        FileSystemResource()
+
+        return res;
+    }
+
+    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
+    @ResponseBody
+    public FileSystemResource loadZipFile1(
+            @PathVariable("id") int problemId,
+            Model model) {
+        OUT.prt("request", Pages.PROBLEM_DATA);
+        String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
+        List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
+        File file = FileUtils.zipFile(entityList);
+
+        return new FileSystemResource(file);
     }
 }

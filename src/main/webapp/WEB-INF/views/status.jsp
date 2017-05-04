@@ -50,8 +50,6 @@
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
     <script src="/js/run_prettify.js"></script>
-    <script src="/css/prettify.css"></script>
-    <%--<link href="/css/prettify.css" rel='stylesheet' type='text/css'/>--%>
 
 </head>
 <body onload="prettyPrint()">

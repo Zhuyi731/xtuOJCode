@@ -137,6 +137,7 @@ public class MainController {
         OUT.prt("id", id);
         StatusEntityVO vo = runsRepository.queryCode(runId, id);
         model.addAttribute("entity", vo);
+        OUT.prt("vo", vo);
         String res = Pages.CODE_DETAIL_PAGE;
         return res;
     }
