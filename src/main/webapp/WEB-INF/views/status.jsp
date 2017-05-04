@@ -244,10 +244,7 @@
 window.onload = setClass;
 //window.onload = replace;
 function setClass(){
-    $(window).load(function(){
-        $("pre").addClass("prettyprint");
-        prettyPrint();
-    })
+
     for(var index=0;index<20;index++){
         var rr=document.getElementById("result"+index);
         var result=rr.innerHTML;
@@ -295,7 +292,7 @@ function setIndex(index) {
         "submitTime:" + submitTime + " <br/>" +
         "*********************************/" +
         "<br/><br/><br/>";
-    codeContent.innerHTML = temp + code;
+    codeContent.innerHTML = code + temp;
     prettyPrint();
 }
 function htmlEscape(s) {

@@ -68,10 +68,14 @@
         <c:forEach items="${entityList}" var="entity" varStatus="index">
             <tr>
                 <td><%=++rank%></td>
-                <td>${entity.entity.userId}</td>
+                <td>${entity.usersEntity.id}</td>
                 <td>${entity.entity.penalty}</td>
                 <td>${entity.entity.acProblemsNum}</td>
                 <td>${entity.entity.totScore}</td>
+                <c:forEach items="${entity.entityList}" var="contestEntity">
+                    <td>${contestEntity.acceptedTime}<br/>
+                        (${contestEntity.penaltyTimes})</td>
+                </c:forEach>
             </tr>
         </c:forEach>
         </tbody>
