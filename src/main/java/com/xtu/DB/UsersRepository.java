@@ -11,6 +11,8 @@ public interface UsersRepository {
 
     UsersEntity findOne(String id);
 
+    UsersEntity findOne(int userId);
+
     UsersEntity save(UsersEntity usersEntity);
 
     void delete(long id);

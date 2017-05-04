@@ -36,6 +36,15 @@ public class UsersRepositoryImp implements UsersRepository {
                 id);
     }
 
+    public UsersEntity findOne(int userId) {
+        String finduserSql = "SELECT * FROM " + Tables.USERS
+                + " WHERE `user_id` = ?";
+        return jdbcOperations.queryForObject(
+                finduserSql,
+                new UsersEntityRowMapper(),
+                userId);
+    }
+
     public UsersEntity save(UsersEntity usersEntity) {
         Integer userId = usersEntity.getUserId();
         String sql = null;
