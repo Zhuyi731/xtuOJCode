@@ -143,8 +143,7 @@ public class TestController {
     @RequestMapping(value = "/" + Pages.STANDING_PAGE + "/{id}", method = RequestMethod.GET)
     public String showStandingPage(
             @PathVariable("id") int contestId,
-            Model model,
-            Principal principal) {
+            Model model) {
         OUT.prt("request", Pages.STANDING_PAGE);
         OUT.prt("contestId", contestId);
         StandingVO vo = new StandingVO();
@@ -152,10 +151,12 @@ public class TestController {
         List<ContestRanklistEntity> contestRanklistEntityList = contestRanklistRepository.queryList(contestId);
         for (ContestRanklistEntity rank : contestRanklistEntityList) {
             StandingEntityVO entity = new StandingEntityVO();
-            UsersEntity usersEntity = usersRepository.findOne(principal.getName());
+
+            int userId = rank.getUserId();
+            UsersEntity usersEntity = usersRepository.findOne(userId);
             entity.setUsersEntity(usersEntity);
 
-            List<ContestDetailEntity> contestDetailList = contestDetailRepository.queryList(rank.getUserId(), rank.getContestId());
+            List<ContestDetailEntity> contestDetailList = contestDetailRepository.queryList(userId, rank.getContestId());
             entity.setEntity(rank);
             entity.setEntityList(contestDetailList);
             entityList.add(entity);
