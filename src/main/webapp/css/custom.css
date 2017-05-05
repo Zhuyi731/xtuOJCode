@@ -78,6 +78,10 @@
     color: blue;
     size: 30px;
 }
+.statuscontainer{
+    width:auto;
+    margin:30px 30px;
+}
 .status table thead {
     background-color: #2C333D;
     color: white;
@@ -159,4 +163,38 @@ result样式设计
 
 .statusTr td{
     text-align: center; vertical-align: middle; width: 80px;
+}
+.standingTable thead tr td {
+    width: 80px;
+    background-color: #f0ad4e;
+    color: #000000;
+    text-align: center;
+}
+.standingTable tbody tr td{
+    width: 80px;
+    background-color: #FFFFFF;
+    color:#000000;
+    text-align: center;
+}
+.standingTable tbody tr .notFirstBlood{
+    width:80px;
+    background-color: #90ee90;
+    color:#000000;
+}
+.standingTable tbody tr .firstBlood{
+    width:80px;
+    background-color: #69b2f1;
+    color:#000000;
+}
+.standingTable tbody tr .rankTop3{
+    !important;background-color: #337ab7;
+}
+.standingTable tbody tr .rankTop10{
+    !important;background-color: #5cb85c;
+}
+.standingTable tbody tr .rankAfter10{
+ !important;background-color: slategray;
+ }
+.standingTable tbody tr .notPassed{
+    !important;background-color:#d9534f;
 }

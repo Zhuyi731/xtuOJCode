@@ -192,3 +192,9 @@ function  pageGo() {
 /*
 * 获得代码的内容    显示在弹窗内
 * */
+/*
+standing页面设置样式
+ */
+/*
+standing页面题目标题获取
+ */
