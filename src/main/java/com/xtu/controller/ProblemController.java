@@ -15,10 +15,14 @@ import com.xtu.DB.vo.ProblemsEntityVO;
 import com.xtu.DB.vo.ProblemsVO;
 import com.xtu.constant.Constant;
 import com.xtu.constant.Pages;
-import com.xtu.tools.FileUtils;
+import com.xtu.tools.MyFileUtils;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -394,14 +399,14 @@ public class ProblemController {
         return res;
     }
 
-//    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}", method = RequestMethod.GET)
+    //    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}", method = RequestMethod.GET)
     public String loadZipFile(
             @PathVariable("id") int problemId,
             Model model) {
         OUT.prt("request", Pages.PROBLEM_DATA);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
         List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
-        FileUtils.zipFile(entityList);
+        MyFileUtils.zipFile(entityList);
 //        FileSystemResource()
 
         return res;
@@ -415,8 +420,35 @@ public class ProblemController {
         OUT.prt("request", Pages.PROBLEM_DATA);
         String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
         List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
-        File file = FileUtils.zipFile(entityList);
+        File file = MyFileUtils.zipFile(entityList);
 
         return new FileSystemResource(file);
+    }
+
+    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> loadZipFile1(
+            HttpServletRequest request,
+            @PathVariable("id") int problemId,
+            Model model) throws Exception {
+        OUT.prt("request", Pages.PROBLEM_DATA);
+        //下载文件路径
+//        String path = request.getServletContext().getRealPath("/images/");
+//        File file = new File(path + File.separator + filename);
+
+
+        List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
+        File file = MyFileUtils.zipFile(entityList);
+        String filename = file.getName();
+        HttpHeaders headers = new HttpHeaders();
+        //下载显示的文件名，解决中文名称乱码问题
+        String downloadFielName = new String(filename.getBytes("UTF-8"), "iso-8859-1");
+        //通知浏览器以attachment（下载方式）打开图片
+        headers.setContentDispositionFormData("attachment", downloadFielName);
+        //application/octet-stream ： 二进制流数据（最常见的文件下载）。
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // TODO: 2017/5/4 file out put
+        return new ResponseEntity<byte[]>(MyFileUtils.readFileToByteArray(file),
+                headers, HttpStatus.CREATED);
     }
 }
