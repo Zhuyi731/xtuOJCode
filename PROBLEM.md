@@ -44,7 +44,16 @@
 3. 公告不用单独存入一个数据库表里面么？
 
 ### 说明：
-1. 没有用到problem_sets(题目集表)暂时是谁创建了，直接指定创建者！
+1. 没有用到的表：
+    * action_groups
+    * actions
+    * clarifications
+    * prints
+    * problem_set_detail
+    * problem_sets
+    * judge
+    * user_role
+    * validator
 
 ### web pages relation solve by zhuyi
 1. submit must add a field open choose options
