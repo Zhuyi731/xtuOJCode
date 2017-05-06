@@ -100,4 +100,12 @@ public class FileUtils {
         return file;
     }
 
+    public static byte[] readFileToByteArray(File file) {
+        try {
+            FileInputStream fis = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
