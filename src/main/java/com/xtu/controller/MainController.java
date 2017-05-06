@@ -2,12 +2,14 @@ package com.xtu.controller;
 
 import com.sun.istack.internal.NotNull;
 import com.xtu.DB.RunsRepository;
+import com.xtu.DB.UsersRepository;
 import com.xtu.DB.dto.StatusDTO;
 import com.xtu.DB.entity.UsersEntity;
 import com.xtu.DB.vo.RankEntityVO;
 import com.xtu.DB.vo.RankVO;
 import com.xtu.DB.vo.StatusEntityVO;
 import com.xtu.DB.vo.StatusVO;
+import com.xtu.constant.Constant;
 import com.xtu.constant.Pages;
 import com.xtu.tools.MyFileUtils;
 import com.xtu.tools.OUT;
@@ -30,6 +32,8 @@ import java.util.List;
  */
 @Controller
 public class MainController {
+    @Autowired
+    UsersRepository usersRepository;
     @Autowired
     RunsRepository runsRepository;
 
@@ -136,6 +140,16 @@ public class MainController {
         String id = principal.getName();
         OUT.prt("id", id);
         StatusEntityVO vo = runsRepository.queryCode(runId, id);
+
+        UsersEntity usersEntity = usersRepository.findOne(id);
+
+        if (vo.getId().equals(id)
+                || vo.getOpen() == 1
+                || usersEntity.getRoleId() == Constant.ADMIN
+                || usersEntity.getRoleId() == Constant.TEACHER) {
+        } else {
+            vo = new StatusEntityVO();
+        }
         model.addAttribute("entity", vo);
         OUT.prt("vo", vo);
         String res = Pages.CODE_DETAIL_PAGE;
