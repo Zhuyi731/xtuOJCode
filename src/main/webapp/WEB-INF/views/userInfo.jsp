@@ -32,7 +32,7 @@
 </c:if>
 <div align="center">
     <div class="top50 panel panel-default panel-primary" align="center" style="text-align:center; width:800px;">
-        <div class="panel panel-heading ">${entity.id}</div>
+        <div class="panel panel-heading " style="background-color: #2C333D">${entity.id}</div>
         <div class="panel panel-body" align="left">
             <p>学号:${entity.id}</p><br>
             <p>Name:${entity.name}</p><br>

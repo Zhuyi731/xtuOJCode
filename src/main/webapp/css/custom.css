@@ -135,6 +135,11 @@ result样式设计
     background-color: red;
     border-color: #d43f3a;
 }
+.runtimeError{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
 .compileError{
     color: #fff;
     background-color: #f0ad4e;

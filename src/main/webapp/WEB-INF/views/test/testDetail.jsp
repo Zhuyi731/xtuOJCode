@@ -33,7 +33,7 @@
     <%@ include file="/WEB-INF/views/navigation.jsp" %>
 </c:if>
 <div class="headTitle" align="center">
-    <h2>${vo.entityList[0].contestId}</h2><br>
+    <h2>${vo.contestEntity.contestId}</h2><br>
     <%--<small>Start Time:${vo.entityList[0].startTime}</small>--%>
     <%--<small>End Time:${entity.endTime}</small>--%>
 </div>
