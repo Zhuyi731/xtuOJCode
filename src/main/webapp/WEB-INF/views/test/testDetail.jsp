@@ -14,6 +14,7 @@
     <link href="/css/custom.css" rel="stylesheet"/>
 </head>
 <body>
+<%--判断是否后台进入--%>
 <%
     String url = request.getHeader("referer");
     String backgroud = "http://localhost:8080/admin/menu";
@@ -32,16 +33,16 @@
     <%@ include file="/WEB-INF/views/navigation.jsp" %>
 </c:if>
 <div class="headTitle" align="center">
-    <h2>${entity.title}</h2><br>
-    <small>Start Time:${entity.startTime}</small>
-    <small>End Time:${entity.endTime}</small>
+    <h2>${vo.entityList[0].contestId}</h2><br>
+    <%--<small>Start Time:${vo.entityList[0].startTime}</small>--%>
+    <%--<small>End Time:${entity.endTime}</small>--%>
 </div>
 <div class="functionNav" align="center">
     <table class="table table-hover text-info">
         <tbody>
         <tr>
             <td class="col-md-2 col-sm-2 "><a  class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing">Standing</a></td>
+            <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/test/standing/${vo.entityList[0].contestId}">Standing</a></td>
             <td class="col-md-2 col-sm-2"><a  class="btn btn-link" href="/status/0">Status</a></td>
         </tr>
         </tbody>
@@ -54,8 +55,8 @@
         <tr>
             <td class="col-md-1">Pro.ID</td>
             <td class="col-md-4">Problem Title</td>
-            <td class="col-md-2">Solved(Accept/Submit)</td>
-            <td class="col-md-1">ratio</td>
+            <td class="col-md-2">Accept/Submit</td>
+            <td class="col-md-1">Ratio</td>
         </tr>
         </thead>
         <tbody>
@@ -64,8 +65,8 @@
             <tr>
                 <td><%=(no++)%></td>
                 <td><a href="/test/testProDetail/${entity.contestId}?contestId=${entity.contestId}&no=${entity.no}">${entity.title}</a></td>
-                <%--<td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>--%>
-                <%--<td>${entity.ratio}</td>--%>
+                <td>${entity.acProblemsNum}/${entity.submitProblemsNum}</td>
+                <td>${entity.ratio}&nbsp;%</td>
             </tr>
         </c:forEach>
         </tbody>

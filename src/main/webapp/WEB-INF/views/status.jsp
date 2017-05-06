@@ -9,19 +9,38 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+
     StatusVO vo = (StatusVO) request.getAttribute("vo");
     String currentPage = String.valueOf(vo.getStart() + 1);
     pageContext.setAttribute("currentPage", currentPage);
     String totalPage = String.valueOf(vo.getTotal() / 20 + 1);
     pageContext.setAttribute("totalPage", totalPage);
-    List<StatusEntityVO>  list=vo.getEntityList();
-    Iterator it=list.iterator();
-    String []trans={"Accept","Wrong Answer","Compile Error","Runtime Error","Presentation Error","Time Limit Exceed","Memory Limit Exceed","Output Limit Exceed"};
-    ArrayList result=new ArrayList<String>();
-    for(int i=0;i<list.size();i++){
-            result.add(trans[list.get(i).getResultCode()]);
+    List<StatusEntityVO> list = vo.getEntityList();
+    Iterator it = list.iterator();
+    String[] trans = {"Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed"};
+    ArrayList result = new ArrayList<String>();
+    ArrayList problemId = new ArrayList<String>();
+    ArrayList language = new ArrayList<String>();
+    ArrayList resultCode = new ArrayList<String>();
+    ArrayList runMemory = new ArrayList<String>();
+    ArrayList runTime = new ArrayList<String>();
+    ArrayList runId = new ArrayList<String>();
+    for (int i = 0; i < list.size(); i++) {
+        result.add(trans[list.get(i).getResultCode()]);
+        problemId.add(list.get(i).getProblemId());
+        language.add(list.get(i).getLanguage());
+        resultCode.add(list.get(i).getResultCode());
+        runMemory.add(list.get(i).getRunMemory());
+        runTime.add(list.get(i).getRunTime());
+        runId.add(list.get(i).getRunId());
     }
-   pageContext.setAttribute("result",result);
+    pageContext.setAttribute("result", result);
+    pageContext.setAttribute("problemId", problemId);
+    pageContext.setAttribute("language", language);
+    pageContext.setAttribute("resultCode", resultCode);
+    pageContext.setAttribute("runMemory", runMemory);
+    pageContext.setAttribute("runTime", runTime);
+    pageContext.setAttribute("runId", runId);
 %>
 <!DOCTYPE HTML>
 <html>
@@ -30,9 +49,10 @@
     <title>Online Status</title>
     <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
     <link href="/css/custom.css" rel='stylesheet' type='text/css'/>
+    <script src="/js/run_prettify.js"></script>
 
 </head>
-<body>
+<body onload="prettyPrint()">
 <%
     String url = request.getHeader("referer");
     String background = "http://localhost:8080/admin/menu";
@@ -129,13 +149,13 @@
     </ul>
 </div>
 <div class="status">
-    <table class="table table-bordered table-hover" >
+    <table class="table table-bordered table-hover">
         <thead>
-        <tr >
+        <tr>
             <td class="col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1">Run.ID</td>
             <td class="col-md-1 col-sm-1">Pro.ID</td>
-            <td class="col-md-1 col-sm-1">Author</td>
-            <td class="col-md-1 col-sm-1" >Result</td>
+            <td class="col-md-1 col-sm-1">Username</td>
+            <td class="col-md-1 col-sm-1">Result</td>
             <td class="col-md-1 col-sm-1">Memory</td>
             <td class="col-md-1 col-sm-1">Time</td>
             <td class="col-md-1 col-sm-1">Code Status</td>
@@ -144,48 +164,154 @@
             <td class="col-md-2 col-sm-2">Submit Time</td>
         </thead>
         <tbody>
-
-
-            <c:forEach items="${vo.entityList}" var="entity" varStatus="loop">
-            <tr>
-                <td>${entity.runId}</td>
-                <td>${entity.problemId}</td>
-                <td>${entity.id}</td>
-                <td  id="result${loop.count-1}" >${result[loop.count-1]}</td>
-                <td>${entity.runMemory}&nbsp;KB</td>
-                <td>${entity.runTime}&nbsp;MS</td>
+        <c:forEach items="${vo.entityList}" var="entity" varStatus="loop">
+            <tr class="statusTr">
+                <td id="runId${loop.count-1}">${entity.runId}</td>
+                <td id="problemId${loop.count-1}">${entity.problemId}</td>
+                <td id="id${loop.count-1}">${entity.id}</td>
+                <td id="result${loop.count-1}" style="width: 120px;">${result[loop.count-1]}</td>
+                <td id="runMemory${loop.count-1}">${entity.runMemory}&nbsp;KB</td>
+                <td id="runTime${loop.count-1}">${entity.runTime}&nbsp;MS</td>
+                <td style="display: none">
+                    <pre id="code${loop.count-1}"><xmp>${entity.code}</xmp></pre>
+                </td>
                     <%--管理员--%>
                 <c:if test="${roleId eq '[0]'}">
-                    <td><a href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
+                    <td><a
+                            href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#codeModal"
+                                onclick="setIndex(${loop.count-1})">See Codes
+                        </button>
+                    </td>
                 </c:if>
                     <%--不是管理员--%>
                 <c:if test="${roleId ne '[0]'}">
                     <%--自己人--%>
                     <c:if test="${userId eq entity.id}">
-                      <td><a href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
-                      </c:if>
+                        <td>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#codeModal">See Codes
+                            </button>
+                        </td>
+                    </c:if>
                     <%--别人--%>
-                     <c:if test="${userId ne entity.id}">
-                            <c:if test="${entity.open eq 0}">
-                             <td><span class="btn btn-danger" disabled="disabled">Private</span></td>
-                             </c:if>
-                              <c:if test="${entity.open eq 1}">
-                             <td><a
-                                href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
+                    <c:if test="${userId ne entity.id}">
+                        <c:if test="${entity.open eq 0}">
+                            <td><span class="btn btn-danger" disabled="disabled">Private</span></td>
+                        </c:if>
+                        <c:if test="${entity.open eq 1}">
+                            <td><a
+                                    href="/codeDetail/${entity.runId}" class="btn btn-success">See Codes</a></td>
+                        </c:if>
                     </c:if>
                 </c:if>
-                </c:if>
-                <td>${entity.language}</td>
-                <td>${entity.codeLength}</td>
-                <td>${entity.submitTime}</td>
+                <td id="language${loop.count-1}">${entity.language}</td>
+                <td id="codeLength${loop.count-1}">${entity.codeLength}</td>
+                <td id="submitTime${loop.count-1}" style="width: 160px;">${entity.submitTime}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<script src="/js/custom.js"></script>
-<script >
-    window.onload=setClass;
+
+<!-- 模态框（Modal） -->
+<div class="modal fade in" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalTitle" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header " align="center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="codeModalTitle">
+                </h4>
+            </div>
+            <div class="modal-body">
+                <pre class="prettyprint" id="codeContent" onload="prettyPrint()">
+                     <xmp  class="prettyprint">
+                     </xmp>
+                 </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script type="text/JavaScript" src="/js/jquery.js"></script>
+<%--<script src="/js/run_prettify.js"></script>--%>
+<script type="text/JavaScript" src="/js/custom.js"></script>
+<script type="text/javascript">//<![CDATA[
+window.onload = setClass;
+//window.onload = replace;
+function setClass(){
+
+    for(var index=0;index<20;index++){
+        var rr=document.getElementById("result"+index);
+        var result=rr.innerHTML;
+        if(result=="Accept"){
+            rr.className="btn accept";
+        }else if(result=="Wrong Answer"){
+            rr.className="btn wrongAnswer";
+        }else if(result=="Compile Error"){
+            rr.className="btn compileError";
+        }else if(result=="Presentation Error"){
+            rr.className="btn presentationError";
+        }else if(result=="Time Limit Exceed"){
+            rr.className="btn timeLimitExceed";
+        }else if(result=="Memory Limit Exceed"){
+            rr.className="btn memoryLimitExceed";
+        }else{
+            rr.className="outputLimitExceed"
+        }
+    }
+}
+function setIndex(index) {
+    var runId = document.getElementById("runId" + index).innerHTML;
+    var problemId = document.getElementById("problemId" + index).innerHTML;
+    var runId = document.getElementById("runId" + index).innerHTML;
+    var language = document.getElementById("language" + index).innerHTML;
+    var result = document.getElementById("result" + index).innerHTML;
+    var runTime = document.getElementById("runTime" + index).innerHTML;
+    var runMemory = document.getElementById("runMemory" + index).innerHTML;
+    var codeLength = document.getElementById("codeLength" + index).innerHTML;
+    var code = document.getElementById("code" + index).innerHTML;
+    var submitTime = document.getElementById("submitTime" + index).innerHTML;
+    var codeTitle = document.getElementById("codeModalTitle");
+    var codeContent = document.getElementById("codeContent");
+    codeTitle.innerHTML = "Source Code #" + runId;
+    var temp = "/*********************************<br/>" +
+        "runId:" + runId + "<br/>" +
+        "Problem:" + problemId + "<br/>" +
+        "User:" + runId + "<br/>" +
+        "language:" + language + "<br/>" +
+        "result:" + result + "<br/>" +
+        "runTime:" + runTime + " ms<br/>" +
+        "runMemory:" + runMemory + " mb<br/>" +
+        "codeLength:" + codeLength + " b<br/>" +
+        "codeLength:" + codeLength + " b<br/>" +
+        "submitTime:" + submitTime + " <br/>" +
+        "*********************************/" +
+        "<br/><br/><br/>";
+    codeContent.innerHTML = code + temp;
+    prettyPrint();
+}
+function htmlEscape(s) {
+    return s
+    //                .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+function replace() {
+    var quineHtml = htmlEscape(document.getElementById("code0").innerHTML);
+    document.getElementById("code").innerHTML = quineHtml;
+
+//        // this page's own source code
+//        var quineHtml = htmlEscape(
+//            document.getElementById("quine").innerHTML );
+//            alert(123123);
+//        // insert into PRE
+//        document.getElementById("quine").innerHTML = quineHtml;
+}
 </script>
 </body>
 </html>

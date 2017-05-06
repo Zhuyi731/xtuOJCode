@@ -31,7 +31,7 @@
         <tbody>
         <tr>
             <td class="col-md-2 col-sm-2"><a class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-            <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/test/standing">Standing</a></td>
+            <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/test/standing/${contestId}">Standing</a></td>
             <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/status/0">Status</a></td>
         </tr>
         </tbody>
@@ -60,7 +60,7 @@
     <p>
 </div>
 <div class="tailSubmit" align="center">
-    <a class="btn btn-info btn-lg " href="/test/testSubmit/${entity.problemId}?contestId=<%=contestId%>&no=${no}">Submit code</a>
+    <a class="btn btn-info btn-lg " href="/test/testSubmit/${entity.problemId}?contestId=${contestId}&no=${no}">Submit code</a>
     <a class="btn btn-info btn-lg" style="margin-left:40px;" href="/discuss/${entity.problemId}" disabled="disabled">Discuss</a>
 </div>
 <%@ include file="/WEB-INF/views/copyright.html" %>
