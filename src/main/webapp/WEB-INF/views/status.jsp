@@ -17,7 +17,7 @@
     pageContext.setAttribute("totalPage", totalPage);
     List<StatusEntityVO> list = vo.getEntityList();
     Iterator it = list.iterator();
-    String[] trans = {"All","Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed"};
+    String[] trans = {"All","Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed","Running","Pending"};
     ArrayList result = new ArrayList<String>();
 //    ArrayList problemId = new ArrayList<String>();
 //    ArrayList language = new ArrayList<String>();
@@ -106,6 +106,8 @@
                 <option value="6">Time Limit Exceed</option>
                 <option value="7">Memory Exceed Exceed</option>
                 <option value="8">Output Limit Exceed</option>
+                <option value="9">Pending</option>
+                <option value="10">Running</option>
             </select>
         </div>
         <div class="form-group" style="padding-top:15px;">
@@ -168,7 +170,7 @@
                 <td id="runId${loop.count-1}">${entity.runId}</td>
                 <td id="problemId${loop.count-1}">${entity.problemId}</td>
                 <td id="id${loop.count-1}">${entity.id}</td>
-                <td  ><a id="result${loop.count-1}" style="width: 140px; padding-top:6px;">${result[loop.count-1]}</a></td>
+                <td  ><span id="result${loop.count-1}" style="width: 140px; padding-top:6px;">${result[loop.count-1]}</span></td>
                 <td id="runMemory${loop.count-1}">${entity.runMemory}&nbsp;KB</td>
                 <td id="runTime${loop.count-1}">${entity.runTime}&nbsp;MS</td>
                    <%--管理员--%>
@@ -252,9 +254,14 @@ function setClass() {
             rr.className = "btn  timeLimitExceed";
         } else if (result == "Memory Limit Exceed") {
             rr.className = "btn  memoryLimitExceed";
-        } else {
+        } else if(result == "Output Limit Exceed"){
             rr.className = "btn  outputLimitExceed"
+        }else if(result=="Running"){
+            rr.className = "running glyphicon glyphicon-repeat"
+        }else{
+            rr.className = "pending glyphicon glyphicon-repeat"
         }
+
     }
 }
 </script>

@@ -30,9 +30,9 @@
     <table class="table table-hover text-info">
         <tbody>
         <tr>
-            <td class="col-md-2 col-sm-2"><a class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-            <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/test/standing/${contestId}">Standing</a></td>
-            <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/status/0">Status</a></td>
+            <td class="col-md-2 col-sm-2"><a class="btn btn-danger glyphicon glyphicon-arrow-left" onclick='window.history.go(-1)'>Go Back</a></td>
+            <td class="col-md-2 col-sm-2"><a class="btn  btn-primary" href="/test/standing/${contestId}">Standing</a></td>
+            <td class="col-md-2 col-sm-2"><a class="btn  btn-primary" href="/status/0">Status</a></td>
         </tr>
         </tbody>
     </table>

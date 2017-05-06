@@ -48,11 +48,11 @@
         <table class="table table-hover ">
             <tbody>
             <tr class="text-info">
-                <td class="col-md-2 col-sm-2 "><a class="btn btn-link" onclick='window.history.go(-1)'>Go Back</a></td>
-                <td class="col-md-2 col-sm-2"><a class="btn btn-link"
-                                                 href="/test/standing/${vo.entityList[0].entityList[0].contestId}">Standing</a>
+                <td class="col-md-2 col-sm-2 "><a class="btn btn-danger glyphicon glyphicon-arrow-left" onclick='window.history.go(-1)'>Go Back</a></td>
+                <td class="col-md-2 col-sm-2"><a class="btn btn-primary"
+                                                 href="/test/standing/${vo.entityList[0].entityList[0].contestId}" >Standing</a>
                 </td>
-                <td class="col-md-2 col-sm-2"><a class="btn btn-link" href="/status/0">Status</a></td>
+                <td class="col-md-2 col-sm-2"><a class="btn btn-primary" href="/status/0">Status</a></td>
             </tr>
             </tbody>
         </table>
