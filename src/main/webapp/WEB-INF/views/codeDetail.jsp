@@ -27,34 +27,11 @@
     </div>
     <div class="panel panel-body" align="left" >
         <pre class="prettyprint linenums" >
-            <xmp>
-            ${entity.code}
-            </xmp>
+            <xmp>${entity.code}</xmp>
         </pre>
     </div>
     <div class="panel panel-footer"></div>
 </div></div>
-<script type="text/javascript">//<![CDATA[
-window.onload=
-(function () {
-    function htmlEscape(s) {
-        return s
-//            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
-    }
-    // this page's own source code
-    var quineHtml = htmlEscape(
-        document.getElementById("quine").innerHTML );
-    // Highlight the operative parts:
-//    quineHtml = quineHtml.replace(
-//        /&lt;script src[\s\S]*?&gt;&lt;\/script&gt;|&lt;!--\?[\s\S]*?--&gt;|&lt;pre\b[\s\S]*?&lt;\/pre&gt;/g,
-//        '<span class="operative">$&<\/span>');
 
-    // insert into PRE
-    document.getElementById("quine").innerHTML = quineHtml;
-})();
-//]]>
-</script>
 </body>
 </html>

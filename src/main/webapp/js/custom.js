@@ -186,6 +186,47 @@ function  pageGo() {
         self.location=to;
     }
 }
+/*
+
+
+*/
+function setIndex(index) {
+    var runId = document.getElementById("runId" + index).innerHTML;
+    var problemId = document.getElementById("problemId" + index).innerHTML;
+    var runId = document.getElementById("runId" + index).innerHTML;
+    var language = document.getElementById("language" + index).innerHTML;
+    var result = document.getElementById("result" + index).innerHTML;
+    var runTime = document.getElementById("runTime" + index).innerHTML;
+    var runMemory = document.getElementById("runMemory" + index).innerHTML;
+    var codeLength = document.getElementById("codeLength" + index).innerHTML;
+    var code = document.getElementById("code" + index).innerHTML;
+    var submitTime = document.getElementById("submitTime" + index).innerHTML;
+    var codeTitle = document.getElementById("codeModalTitle");
+    var codeContent = document.getElementById("codeContent");
+    codeTitle.innerHTML = "Source Code #" + runId;
+    var temp = "/*********************************<br/>" +
+        "runId:" + runId + "<br/>" +
+        "Problem:" + problemId + "<br/>" +
+        "User:" + runId + "<br/>" +
+        "language:" + language + "<br/>" +
+        "result:" + result + "<br/>" +
+        "runTime:" + runTime + " ms<br/>" +
+        "runMemory:" + runMemory + " mb<br/>" +
+        "codeLength:" + codeLength + " b<br/>" +
+        "codeLength:" + codeLength + " b<br/>" +
+        "submitTime:" + submitTime + " <br/>" +
+        "*********************************/" +
+        "<br/><br/><br/>";
+    codeContent.innerHTML = code + temp;
+}
+function checkStatusSubmit(){
+
+    var a =document.getElementById("problemId");
+    if(a.value == ""){
+        a.value=0;
+    }
+    return true;
+}
 //设置result  className
 
 //   /test/standing 设置题目序号 A B C ...

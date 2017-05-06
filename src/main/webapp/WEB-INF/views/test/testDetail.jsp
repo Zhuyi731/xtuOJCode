@@ -33,9 +33,9 @@
     <%@ include file="/WEB-INF/views/navigation.jsp" %>
 </c:if>
 <div class="headTitle" align="center">
-    <h2>${vo.entityList[0].contestId}</h2><br>
-    <%--<small>Start Time:${vo.entityList[0].startTime}</small>--%>
-    <%--<small>End Time:${entity.endTime}</small>--%>
+    <h2><strong>${vo.contestsEntity.title}</strong> </h2><br>
+    <p><small>Start Time:${vo.contestsEntity.startTime}</small>&nbsp;&nbsp;&nbsp;
+    <small>End Time:${vo.contestsEntity.endTime}</small></p>
 </div>
 <div class="functionNav" align="center">
     <table class="table table-hover text-info">
