@@ -395,7 +395,7 @@ public class ProblemController {
         UsersEntity usersEntity = usersRepository.findOne(id);
         submitContestDTO.setUserId(usersEntity.getUserId());
         runsRepository.save(submitContestDTO);
-        String res = "redirect:/" + Pages.STATUS;
+        String res = "redirect:/" + Pages.STATUS + "/{id}";
         return res;
     }
 
