@@ -117,7 +117,6 @@ public class TestController {
             AllContestProblemEntityVO problemEntityVO = new AllContestProblemEntityVO();
             BeanUtils.copyProperties(entity, problemEntityVO);
 
-
             Map<String, Integer> map = runsRepository.queryContestNum(entity.getProblemId(), entity.getContestId(), entity.getNo());
             problemEntityVO.setAcProblemsNum(map.get("acProblemsNum"));
             problemEntityVO.setSubmitProblemsNum(map.get("submitProblemsNum"));
@@ -131,6 +130,9 @@ public class TestController {
             problemEntityVO.setTitle(problemsEntity.getTitle());
             entityVO.add(problemEntityVO);
         }
+        ContestsEntity contestsEntity = contestRepository.findOne(contestId);
+        vo.setContestsEntity(contestsEntity);
+
         vo.setEntityList(entityVO);
         vo.setStart(0);
         vo.setTotal(entityList.size());

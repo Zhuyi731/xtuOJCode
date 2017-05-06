@@ -18,7 +18,6 @@ import com.xtu.constant.Pages;
 import com.xtu.tools.MyFileUtils;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -412,6 +411,7 @@ public class ProblemController {
         return res;
     }
 
+    /**
     @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
     @ResponseBody
     public FileSystemResource loadZipFile1(
@@ -424,6 +424,7 @@ public class ProblemController {
 
         return new FileSystemResource(file);
     }
+     */
 
     @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
     @ResponseBody

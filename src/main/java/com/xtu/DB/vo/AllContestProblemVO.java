@@ -1,5 +1,6 @@
 package com.xtu.DB.vo;
 
+import com.xtu.DB.entity.ContestsEntity;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 public class AllContestProblemVO {
     private List<AllContestProblemEntityVO> entityList;
+    ContestsEntity contestsEntity;
     private int total;
     private int start;
 }
