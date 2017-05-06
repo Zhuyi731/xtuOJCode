@@ -223,9 +223,6 @@ public class TestController {
             Principal principal) {
         OUT.prt("post", Pages.CREATE_TEST);
         OUT.prt("post", createTestDTO);
-//        createTestDTO.setStartTime(new Timestamp(createTestDTO.getStartTimeStr()));
-//        createTestDTO.setFrozenStartTime(new Timestamp(createTestDTO.getFrozenStartTimeStr()));
-//        createTestDTO.setEndTime(new Timestamp(createTestDTO.getEndTimeStr()));
         createTestDTO.setStartTime(DateUtil.getTimestamp(createTestDTO.getStartTimeStr()));
         createTestDTO.setFrozenStartTime(DateUtil.getTimestamp(createTestDTO.getFrozenStartTimeStr()));
         createTestDTO.setEndTime(DateUtil.getTimestamp(createTestDTO.getEndTimeStr()));
@@ -259,8 +256,7 @@ public class TestController {
     }
 
     @RequestMapping(value = "/" + Pages.JOIN_TEST, method = RequestMethod.GET)
-    public String joinTest(
-            Model model) {
+    public String joinTest() {
         OUT.prt("request", Pages.JOIN_TEST);
         String res = Pages.TEST + "/" + Pages.JOIN_TEST;
         return res;

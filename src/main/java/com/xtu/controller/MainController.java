@@ -174,17 +174,12 @@ public class MainController {
      * 上传文件请求
      *
      * @param zip
-     * @param error
      * @param model
      * @return
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public String uploadsFilesPost(
-//            @RequestPart("picture") byte[] picture,
-//            @RequestPart("picture") MultipartFile picture,
-//            @RequestPart("picture") Part picture1,
             @RequestPart("zip") @NotNull MultipartFile zip,
-            Error error,
             Model model) {
         OUT.prt("post:", "uploadFile");
         try {

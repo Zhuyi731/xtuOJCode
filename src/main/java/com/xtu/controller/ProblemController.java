@@ -18,23 +18,21 @@ import com.xtu.constant.Pages;
 import com.xtu.tools.MyFileUtils;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -99,7 +97,6 @@ public class ProblemController {
      * @param uploadFile
      * @param problemsEntity
      * @param errors
-     * @param model
      * @return
      */
     @Transactional
@@ -108,7 +105,6 @@ public class ProblemController {
             @RequestPart("uploadFile") @NotNull MultipartFile uploadFile,
             @NotNull @Valid ProblemsEntity problemsEntity,
             Errors errors,
-            Model model,
             Principal principal) {
         OUT.prt("post", Pages.ADD_PROBLEM);
         if (errors.hasErrors()) {
@@ -378,7 +374,6 @@ public class ProblemController {
      * 提交代码请求
      *
      * @param submitContestDTO
-     * @param model
      * @param principal
      * @return
      */
@@ -386,7 +381,6 @@ public class ProblemController {
     public String submitPost(
             @PathVariable("id") int problemId,
             @NotNull @Valid SubmitContestDTO submitContestDTO,
-            Model model,
             Principal principal) {
         OUT.prt("post", Pages.SUBMIT);
         OUT.prt("submitContestDTO", submitContestDTO);
@@ -399,57 +393,33 @@ public class ProblemController {
         return res;
     }
 
-    //    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}", method = RequestMethod.GET)
-    public String loadZipFile(
-            @PathVariable("id") int problemId,
-            Model model) {
-        OUT.prt("request", Pages.PROBLEM_DATA);
-        String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
-        List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
-        MyFileUtils.zipFile(entityList);
-//        FileSystemResource()
-
-        return res;
-    }
-
     /**
-     * @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
-     * @ResponseBody public FileSystemResource loadZipFile1(
-     * @PathVariable("id") int problemId,
-     * Model model) {
-     * OUT.prt("request", Pages.PROBLEM_DATA);
-     * String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
-     * List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
-     * File file = MyFileUtils.zipFile(entityList);
-     * <p>
-     * return new FileSystemResource(file);
-     * }
+     * 下载标准输入输出压缩包文件
+     * <href>http://memorynotfound.com/spring-mvc-download-file-examples/</href>
+     *
+     * @param problemId
+     * @param response
+     * @throws Exception
      */
-
     @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
     @ResponseBody
-    public ResponseEntity<byte[]> loadZipFile1(
-            HttpServletRequest request,
+    public void loadZipFile1(
             @PathVariable("id") int problemId,
-            Model model) throws Exception {
+            HttpServletResponse response) throws Exception {
         OUT.prt("request", Pages.PROBLEM_DATA);
         //下载文件路径
 //        String path = request.getServletContext().getRealPath("/images/");
 //        File file = new File(path + File.separator + filename);
 
-
         List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
         File file = MyFileUtils.zipFile(entityList);
-        String filename = file.getName();
-        HttpHeaders headers = new HttpHeaders();
-        //下载显示的文件名，解决中文名称乱码问题
-        String downloadFielName = new String(filename.getBytes("UTF-8"), "iso-8859-1");
-        //通知浏览器以attachment（下载方式）打开图片
-        headers.setContentDispositionFormData("attachment", downloadFielName);
-        //application/octet-stream ： 二进制流数据（最常见的文件下载）。
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        // TODO: 2017/5/4 file out put
-        return new ResponseEntity<byte[]>(MyFileUtils.readFileToByteArray(file),
-                headers, HttpStatus.CREATED);
+        InputStream in = new FileInputStream(file);
+
+        response.setContentType("applicatioin/zip");
+        response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+        response.setHeader("Content-Length", String.valueOf(file.length()));
+        FileCopyUtils.copy(in, response.getOutputStream());
+        file.deleteOnExit();
+        OUT.prt("end", "success download");
     }
 }

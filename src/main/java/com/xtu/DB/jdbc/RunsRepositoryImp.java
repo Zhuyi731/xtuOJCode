@@ -281,8 +281,8 @@ public class RunsRepositoryImp implements RunsRepository {
                 submitContestDTO.getCode(),
                 submitContestDTO.getLanguage(),
                 submitContestDTO.getOpen(),
-                1,
-                "@_@");
+                10, // 表示刚刚提交的状态
+                "@_@"); // just for fun
     }
 
     private static final class RunsEntityRowMapper implements RowMapper<RunsUsersEntity> {

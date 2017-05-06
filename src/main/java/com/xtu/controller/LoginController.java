@@ -33,6 +33,7 @@ public class LoginController {
 
     /**
      * 用户信息界面
+     *
      * @param id
      * @param model
      * @return
@@ -112,15 +113,11 @@ public class LoginController {
     /**
      * 显示用户信息界面
      *
-     * @param usersEntiy
-     * @param errors
      * @param model
      * @return
      */
     @RequestMapping(value = "/" + Pages.INFO, method = RequestMethod.GET)
     public String showUsersInfo(
-            @NotNull @Valid UsersEntity usersEntiy,
-            Errors errors,
             Model model) {
         OUT.prt("request", Pages.INFO);
         String res;
