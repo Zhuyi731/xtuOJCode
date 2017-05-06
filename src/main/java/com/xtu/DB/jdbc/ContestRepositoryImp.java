@@ -42,7 +42,7 @@ public class ContestRepositoryImp implements ContestRepository {
     public ContestsEntity findOne(int contestId) {
         String sql = "select * from " +
                 Tables.CONTESTS +
-                " from where `contest_id` = ?";
+                " where `contest_id` = ?";
         return jdbcOperations.queryForObject(sql, new ContestsEntityRowMapper(), contestId);
     }
 

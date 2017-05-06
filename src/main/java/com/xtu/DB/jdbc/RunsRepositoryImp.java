@@ -44,10 +44,7 @@ public class RunsRepositoryImp implements RunsRepository {
                 " FROM runs LEFT JOIN users ON runs.`user_id` = users.`user_id` " +
                 " WHERE `run_id` = ?";
         StatusEntityVO entity = jdbcOperations.queryForObject(sql, new StatusEntityVORowMapper(), runsId);
-        if (entity.getId().equals(id) || entity.getOpen() == 1) {
-            return entity;
-        }
-        return null;
+        return entity;
     }
 
     @Override

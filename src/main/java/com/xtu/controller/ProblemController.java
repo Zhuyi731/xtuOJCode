@@ -367,7 +367,7 @@ public class ProblemController {
         OUT.prt("requst", Pages.SUBMIT);
         ProblemsEntityVO entity = new ProblemsEntityVO();
         entity.setProblemId(id);
-        model.addAttribute("id", id);
+        model.addAttribute("entity", entity);
         OUT.prt("entity", entity);
         String res = Pages.PROBLEM + "/" + Pages.SUBMIT;
         return res;
@@ -384,6 +384,7 @@ public class ProblemController {
      */
     @RequestMapping(value = "/" + Pages.SUBMIT + "/{id}", method = RequestMethod.POST)
     public String submitPost(
+            @PathVariable("id") int problemId,
             @NotNull @Valid SubmitContestDTO submitContestDTO,
             Model model,
             Principal principal) {
@@ -412,18 +413,17 @@ public class ProblemController {
     }
 
     /**
-    @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
-    @ResponseBody
-    public FileSystemResource loadZipFile1(
-            @PathVariable("id") int problemId,
-            Model model) {
-        OUT.prt("request", Pages.PROBLEM_DATA);
-        String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
-        List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
-        File file = MyFileUtils.zipFile(entityList);
-
-        return new FileSystemResource(file);
-    }
+     * @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
+     * @ResponseBody public FileSystemResource loadZipFile1(
+     * @PathVariable("id") int problemId,
+     * Model model) {
+     * OUT.prt("request", Pages.PROBLEM_DATA);
+     * String res = Pages.PROBLEM + "/" + Pages.PROBLEM_DATA;
+     * List<TestdatasEntity> entityList = testdatasRepository.queryList(problemId);
+     * File file = MyFileUtils.zipFile(entityList);
+     * <p>
+     * return new FileSystemResource(file);
+     * }
      */
 
     @RequestMapping(value = "/" + Pages.PROBLEM_DATA + "/{id}")
