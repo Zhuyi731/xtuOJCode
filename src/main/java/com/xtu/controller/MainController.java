@@ -9,7 +9,7 @@ import com.xtu.DB.vo.RankVO;
 import com.xtu.DB.vo.StatusEntityVO;
 import com.xtu.DB.vo.StatusVO;
 import com.xtu.constant.Pages;
-import com.xtu.tools.FileUtils;
+import com.xtu.tools.MyFileUtils;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -174,7 +174,7 @@ public class MainController {
             Model model) {
         OUT.prt("post:", "uploadFile");
         try {
-            FileUtils.unzipFile(zip.getInputStream());
+            MyFileUtils.unzipFile(zip.getInputStream());
 //            zip.transferTo(new File("D:/uploadstmp/" + (System.currentTimeMillis() / 100)+ zip.getOriginalFilename().substring(zip.getOriginalFilename().lastIndexOf("\\") + 1)));
         } catch (IOException e) {
             e.printStackTrace();

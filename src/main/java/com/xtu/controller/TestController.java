@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 考试、竞赛管理制器
  * Created by Ilovezilian on 2017/4/18.
  */
 @Controller

@@ -12,7 +12,7 @@ import java.util.zip.ZipOutputStream;
  * 文件处理工具类
  * Created by Ilovezilian on 2017/4/19.
  */
-public class FileUtils {
+public class MyFileUtils {
     /**
      * 解压zip文件
      *

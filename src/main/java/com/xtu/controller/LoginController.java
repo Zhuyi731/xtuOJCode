@@ -31,6 +31,12 @@ public class LoginController {
     @Autowired
     private UsersRepository usersRepository;
 
+    /**
+     * 用户信息界面
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/" + Pages.USER_INFO + "/{id}", method = RequestMethod.GET)
     public String showUserInfo(
             @PathVariable("id") String id,

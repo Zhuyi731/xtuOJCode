@@ -37,7 +37,8 @@ public class ContestRanklistRepositoryImp implements ContestRanklistRepository {
     public List<ContestRanklistEntity> queryList(int contestId) {
         String sql = "SELECT * FROM " +
                 Tables.CONTEST_RANKLIST +
-                " WHERE `contest_id` = ? ";
+                " WHERE `contest_id` = ? " +
+                " ORDER BY `tot_score` ASC ";
 //                " Limit ?,?";
         return jdbcOperations.query(sql,
                 new ContestRanklistEntityRowMapper(),
