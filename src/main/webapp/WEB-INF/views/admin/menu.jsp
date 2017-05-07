@@ -85,7 +85,7 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu5">
-        <li role="presentation"><a href="admin/showUsers">用户列表</a></li>
+        <li role="presentation"><a href="admin/showUsers/0">用户列表</a></li>
         <li role="presentation"><a href="admin/createNewUsers">添加用户</a></li>
     </ul>
 </div>
