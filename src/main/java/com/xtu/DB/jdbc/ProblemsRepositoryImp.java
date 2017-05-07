@@ -131,7 +131,7 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
 
     @Override
     public ModifyProblemsVO queryModifyPage(int start, int size, int userId) {
-        // TODO: 2017/4/23 about admin query
+        // TODO: 2017/4/23 about admin queryList
         String sql = "SELECT * FROM " +
                 Tables.PROBLEMS +
                 " WHERE `owner` = ?" +

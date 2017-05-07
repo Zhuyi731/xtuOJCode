@@ -1,6 +1,7 @@
 package com.xtu.constant;
 
-/** 页面常量
+/**
+ * 页面常量
  * Created by Ilovezilian on 2017/4/17.
  */
 public class Pages {
@@ -207,4 +208,12 @@ public class Pages {
      * 显示提交详情
      */
     public static final String CODE_DETAIL_PAGE = "codeDetail";
+    /**
+     * 显示所有用户
+     */
+    public static final String SHOW_USERS_PAGE = "showUsers";
+    /**
+     * 增加新用户
+     */
+    public static final String CREATE_NEW_USERS = "createNewUsers";
 }

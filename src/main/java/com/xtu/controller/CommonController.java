@@ -6,7 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/** 老师管理员通用界面控制器
+/**
+ * 老师管理员通用界面控制器
  * Created by Ilovezilian on 2017/4/20.
  */
 @Controller
@@ -15,6 +16,7 @@ public class CommonController {
 
     /**
      * 显示学生信息
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.SHOW_STUDENT_INFO, method = RequestMethod.GET)
@@ -26,6 +28,7 @@ public class CommonController {
 
     /**
      * 添加学生功能
+     *
      * @return
      */
     @RequestMapping(value = "/" + Pages.ADD_STUDENT, method = RequestMethod.GET)

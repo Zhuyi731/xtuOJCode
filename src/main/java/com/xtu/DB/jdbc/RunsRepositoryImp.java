@@ -270,8 +270,9 @@ public class RunsRepositoryImp implements RunsRepository {
     public void save(SubmitContestDTO submitContestDTO) {
         String sql = "INSERT INTO " +
                 Tables.RUNS +
-                " (`user_id`, `problem_id`, `contest_id`, `no`, `code`, `language`,`open`)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                " (`user_id`, `problem_id`, `contest_id`, `no`, `code`, `language`,`open`," +
+                " `result_code`, `result_msg` )" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcOperations.update(sql,
                 submitContestDTO.getUserId(),
                 submitContestDTO.getProblemId(),
@@ -279,7 +280,9 @@ public class RunsRepositoryImp implements RunsRepository {
                 submitContestDTO.getNo(),
                 submitContestDTO.getCode(),
                 submitContestDTO.getLanguage(),
-                submitContestDTO.getOpen());
+                submitContestDTO.getOpen(),
+                10, // 表示刚刚提交的状态
+                "@_@"); // just for fun
     }
 
     private static final class RunsEntityRowMapper implements RowMapper<RunsUsersEntity> {

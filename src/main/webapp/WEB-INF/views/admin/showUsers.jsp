@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
     String path = request.getContextPath();
@@ -9,14 +10,14 @@
     <base href="<%=basePath%>">
     <title>所有用户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href=./css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="searchDiv">
     <form class="" method="get" role="form">
-        <div class="form-group">
-        <select name="roleID" class="col-md-2">
+        <div class="form-group col-md-2 col-md-offset-1">
+        <select class="form-control" name="roleID"  >
             <option value="0">所有</option>
             <option value="1">老师</option>
             <option value="2">学生</option>
@@ -34,38 +35,36 @@
                 <input type="text" name="classId" id="classId" class="form-control">
             </div>
         </div>
+        <div class="form-group col-md-1" >
+            <input type="submit" value="search" class="btn btn-primary form-control">
+        </div>
     </form>
 
 </div>
 <div class="container">
     <table class="table table-hover table-bordered" >
         <thead>
-        <tr><td class="col-md-2">学号</td><td class="col-md-2">姓名</td><td class="col-md-3">专业</td><td class="col-md-3">班级</td><td class="col-md-2"><input type="checkbox" value="1" id="checkAll" onclick="checkAll()">全选</td>
+        <tr><td class="col-md-2">User.ID</td>
+            <td class="col-md-2">User.name</td>
+            <td class="col-md-2">Nickname</td>
+            <td class="col-md-2">Class</td>
+            <td class="col-md-2">Modify</td>
         </tr></thead>
         <tbody>
-        <tr><td>2013550336</td><td>朱义</td><td>计算机</td><td>1班</td><td><input type="checkbox" name="select"></td></tr>
-        <tr><td>2013550337</td><td>潘定荣</td><td>软件</td><td>3班</td><td><input type="checkbox" name="select"></td></tr>
+        <c:forEach items="${vo}" var="entity">
+        <tr>
+            <td>${entity.id}</td>
+            <td>${entity.name}</td>
+            <td>${entity.nickname}</td>
+            <td>${entity.classId}</td>
+            <td><a href="/admin/modifyUserInfo">Enter Modify</a></td>
+        </tr>
+        </c:forEach>
         </tbody>
     </table>
-    <div class="function">
-        <a class="btn btn-lg btn-primary " href="teacher/addStudent.jsp">添加学生</a>
-        <a class="btn btn-lg btn-primary " href="deleteStuServlet">删除选中</a>
+    <div class="function pull-right" >
+        <a class="btn btn-lg btn-primary " href="/admin/createNewUsers">添加学生</a>
     </div>
 </div>
-<script type="text/javascript">
-    function checkAll(){
-        var a=document.getElementById("checkAll");
-        var b=document.getElementsByName("select");
-        if(a.checked==true){
-            for(var i=0;i<b.length;i++){
-                b[i].checked=true;
-            }
-        }else{
-            for(var i=0;i<b.length;i++){
-                b[i].checked=false;
-            }
-        }
-    }
-</script>
 </body>
 </html>

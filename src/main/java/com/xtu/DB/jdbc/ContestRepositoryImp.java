@@ -237,19 +237,31 @@ public class ContestRepositoryImp implements ContestRepository {
 
     public Long queryAllContestPagesTotal(int userId) {
         String sql = "SELECT count(`contest_id`) from " +
-                Tables.CONTESTS +
-                " WHERE `owner` = ?";
+                Tables.CONTESTS;
+        if (userId != 0) {
+            sql += " WHERE `owner` != ?";
+        } else {
+            sql += " WHERE `owner` = ?";
+        }
         return jdbcOperations.queryForObject(sql, Long.class, userId);
     }
 
     @Override
-    public AllContestVO queryAllContestPages(int start, int size, int userId) {
+    public AllContestVO queryAllContestPages(int start, int size, UsersEntity usersEntity) {
         String sql = "SELECT  * from " +
-                Tables.CONTESTS +
-                " WHERE `owner` = ? " +
-                " LIMIT ?, ?";
+                Tables.CONTESTS;
+        if (usersEntity.getRoleId() == Constant.ADMIN) {
+            sql += " WHERE `owner` != ? ";
+            usersEntity.setUserId(0);
+        } else if (usersEntity.getRoleId() == Constant.TEACHER) {
+            sql += " WHERE `owner` = ? ";
+        }
+        sql += " LIMIT ?, ?";
         List<ContestsEntity> entityList =
-                jdbcOperations.query(sql, new ContestsEntityRowMapper(), userId, start * size, size);
+                jdbcOperations.query(sql,
+                        new ContestsEntityRowMapper(),
+                        usersEntity.getUserId(),
+                        start * size, size);
         AllContestVO vo = new AllContestVO();
         List<AllContestEntityVO> entityListVO = new ArrayList<>();
         for (ContestsEntity entity : entityList) {
@@ -258,15 +270,15 @@ public class ContestRepositoryImp implements ContestRepository {
             entityListVO.add(entityVO);
         }
         vo.setEntityList(entityListVO);
-        Long total = queryAllContestPagesTotal(userId);
+        Long total = queryAllContestPagesTotal(usersEntity.getUserId());
         vo.setTotal(total.intValue());
         vo.setStart(start);
         return vo;
     }
 
     @Override
-    public AllContestVO queryAllContestPages(int start, int userId) {
-        return queryAllContestPages(start, Integer.parseInt(Constant.PAGE_SIZE), userId);
+    public AllContestVO queryAllContestPages(int start, UsersEntity usersEntity) {
+        return queryAllContestPages(start, Integer.parseInt(Constant.PAGE_SIZE), usersEntity);
     }
 
     private static final class ContestsEntityRowMapper implements RowMapper<ContestsEntity> {
