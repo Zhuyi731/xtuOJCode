@@ -98,7 +98,7 @@ public class TestController {
         OUT.prt("request", Pages.TEST);
         String id = principal.getName();
         UsersEntity usersEntity = usersRepository.findOne(id);
-        AllContestVO vo = contestRepository.queryAllContestPages(start, usersEntity.getUserId());
+        AllContestVO vo = contestRepository.queryAllContestPages(start, usersEntity);
         model.addAttribute("vo", vo);
         OUT.prt("vo", vo);
         String res = Pages.TEST + "/" + Pages.TEST;
