@@ -88,10 +88,12 @@
 > 现在做的比较简单，初步解决方案：以后迭代！
 
 ### web pages relation solve by zhuyi
-1. submit must add a field open choose options
-2. add a page about cat code details!
+1. submit must add a field open choose options! ok
+2. add a page about cat code details! ok
+3. back stage management url links to /info rather than /role_string/info.
+4. url with users management must add page start. 
 
 ### web java relation solve by panshuai
-1. cat source code must consider situation in period of contest. do a condition filter.
-2. status result vo change the output.
+1. cat source code must consider situation in period of contest. do a condition filter. ok
+2. status result vo change the output. ok
 
