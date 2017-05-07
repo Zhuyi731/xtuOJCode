@@ -113,6 +113,10 @@ public class UsersRepositoryImp implements UsersRepository {
 
     @Override
     public List<UsersEntity> queryList(int start, int size, UsersDTO dto) {
+        if (null == dto.getClassId() || "".equals(dto.getClassId())) {
+            return queryListByClassId(start, size, dto);
+        }
+
         String sql = "SELECT * FROM "
                 + Tables.USERS;
         if (null == dto.getName() || "".equals(dto.getName())) {
@@ -121,7 +125,7 @@ public class UsersRepositoryImp implements UsersRepository {
         } else {
             sql += " WHERE `name` = ? ";
         }
-        if (dto.getRoleId() != 0) {
+        if (dto.getRoleId() != -1) {
             sql += " AND `role_id` = ?";
         } else {
             sql += " AND `role_id` != ?";
@@ -139,6 +143,44 @@ public class UsersRepositoryImp implements UsersRepository {
                 dto.getName(),
                 dto.getRoleId(),
                 dto.getId(),
+                start * size,
+                size);
+    }
+
+    public List<UsersEntity> queryListByClassId(int start, int size, UsersDTO dto) {
+        String sql = "SELECT * FROM "
+                + Tables.USERS;
+        if (null == dto.getName() || "".equals(dto.getName())) {
+            sql += " WHERE `name` != ? ";
+            dto.setName("@_@");
+        } else {
+            sql += " WHERE `name` = ? ";
+        }
+        if (dto.getRoleId() != -1) {
+            sql += " AND `role_id` = ?";
+        } else {
+            sql += " AND `role_id` != ?";
+        }
+        if (null == dto.getId() || "".equals(dto.getId())) {
+            sql += " AND `id` != ? ";
+            dto.setId("(^_^)");
+        } else {
+            sql += " AND `id` = ? ";
+        }
+        if (null == dto.getClassId() || "".equals(dto.getClassId())) {
+            sql += " AND `class_id` != ? ";
+            dto.setClassId("T_T");
+        } else {
+            sql += " AND `class_id` = ? ";
+        }
+
+        sql += " LIMIT ?, ?";
+        return jdbcOperations.query(sql,
+                new UsersEntityRowMapper(),
+                dto.getName(),
+                dto.getRoleId(),
+                dto.getId(),
+                dto.getClassId(),
                 start * size,
                 size);
     }
