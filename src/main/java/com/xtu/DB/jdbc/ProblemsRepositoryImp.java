@@ -77,20 +77,27 @@ public class ProblemsRepositoryImp implements ProblemsRepository {
                 Tables.PROBLEMS +
                 " WHERE ";
         if ("".equals(problemsDTO.getTitle()) || null == problemsDTO.getTitle()) {
-            sql += " `title` != ? ";
+            sql += " `title` != ? OR `problem_id` != ?";
         } else {
-            sql += " `title` = ?";
+            sql += " `title` = ? OR `problem_id` = ?";
         }
-        if (0 == problemsDTO.getProblemId()) {
-            sql += " AND `problem_id` != ? ";
-        } else {
-            sql += " AND `problem_id` = ?";
-        }
+        /** 拓展的话可以修改
+         if ("".equals(problemsDTO.getTitle()) || null == problemsDTO.getTitle()) {
+         sql += " `title` != ? ";
+         } else {
+         sql += " `title` = ? ";
+         }
+         if (0 == problemsDTO.getProblemId()) {
+         sql += " AND `problem_id` != ?";
+         } else {
+         sql += " AND `problem_id` = ?";
+         }
+         */
         sql += " Limit ?,?";
         List<ProblemsEntity> entityList = jdbcOperations.query(sql,
                 new ProblemsEntityRowMapper(),
                 problemsDTO.getTitle(),
-                problemsDTO.getProblemId(),
+                problemsDTO.getTitle(),
                 start * size, size);
 
         ProblemsVO vo = new ProblemsVO();

@@ -132,19 +132,13 @@ public class UsersRepositoryImp implements UsersRepository {
         } else {
             sql += " AND `id` = ? ";
         }
-        if (null == dto.getClassId() || "".equals(dto.getClassId())) {
-            sql += " AND `class_id` != ? ";
-            dto.setClassId("T_T");
-        } else {
-            sql += " AND `class_id` = ? ";
-        }
+
         sql += " LIMIT ?, ?";
         return jdbcOperations.query(sql,
                 new UsersEntityRowMapper(),
                 dto.getName(),
                 dto.getRoleId(),
                 dto.getId(),
-                dto.getClassId(),
                 start * size,
                 size);
     }
