@@ -87,4 +87,17 @@ public class AdminController {
         String res = "/" + Pages.ADMIN + "/" + Pages.CREATE_NEW_USERS;
         return res;
     }
+
+    /**
+     * 修改用户信息
+     */
+    @RequestMapping(value = "/" + Pages.MODIFY_USER_INFO, method = RequestMethod.POST)
+    public String modifyUsers(
+            UsersEntity usersEntity) {
+        OUT.prt("post", "admin/modify users info page");
+        OUT.prt("userEntity", usersEntity);
+        usersRepository.save(usersEntity);
+        String res = "/" + Pages.ADMIN + "/" + Pages.SHOW_USERS_PAGE;
+        return res;
+    }
 }
