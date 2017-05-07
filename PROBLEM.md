@@ -92,6 +92,8 @@
 2. add a page about cat code details! ok
 3. back stage management url links to /info rather than /role_string/info.
 4. url with users management must add page start. 
+5. back stage management about display of test detail, must remove the navigation.
+
 
 ### web java relation solve by panshuai
 1. cat source code must consider situation in period of contest. do a condition filter. ok
