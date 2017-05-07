@@ -1,14 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%@ page import="com.xtu.DB.vo.ProblemsVO" %>
+<%@ page import="com.xtu.DB.vo.ModifyProblemsVO" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-//    ProblemsVO vo= (ProblemsVO) request.getAttribute("vo");
-//    String currentPage=String.valueOf(vo.getStart()+1);
-//    pageContext.setAttribute("currentPage",currentPage);
-//    String totalPage=String.valueOf(vo.getTotal()/20+1);
-//    pageContext.setAttribute("totalPage",totalPage);
+     ModifyProblemsVO mpvo= (ModifyProblemsVO) request.getAttribute("vo");
+     Long total=mpvo.getTotal();
+     int start=mpvo.getStart();
+     Long totalPage=total/20+1;
+     int currentPage=start+1;
+     pageContext.setAttribute("totalPage",totalPage);
+     pageContext.setAttribute("currentPage",currentPage);
 %>
 <!DOCTYPE HTML >
 <html>
@@ -20,7 +23,7 @@
     <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body style="padding-left: 100px;">
-<div style="margin-top:50px;">
+<div style="margin-top:50px;margin-left: 30px;">
     <sf:form class="form-inline" method=" post" role="form">
         <div class="form-group">
             <label class="control-label col-md-offset-1  col-md-1 col-sm-offset-1 col-sm-1 col-xs-2" for="problemId">Pro.ID</label>
@@ -47,7 +50,7 @@
         </div>
     </sf:form>
 </div>
-<div class="page" align="justify" style="margin:0px 160px; text-align: justify">
+<div class="page" align="justify" style=" text-align: justify">
     <ul class="pager">
         <li class="previous"><a href="/problem/proManager/0">&laquo;&laquo;The First Page</a></li>
         <c:if test="${vo.start != 0}">

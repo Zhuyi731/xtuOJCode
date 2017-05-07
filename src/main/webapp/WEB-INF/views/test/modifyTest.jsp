@@ -87,13 +87,13 @@
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">比赛描述日志</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="description" name="description" cols="60" rows="5">${entity.decription}</textarea>
+                            <textarea id="description" name="description" cols="60" rows="5">${entity.description}</textarea>
                         </div>
                     </div>
                     <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="anouncement">比赛公告</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="announcement">比赛公告</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="anouncement" name="anouncement" cols="60" rows="5">${entity.anouncement}</textarea>
+                            <textarea id="announcement" name="announcement" cols="60" rows="5">${entity.announcement}</textarea>
                         </div>
                     </div>
                 </div>

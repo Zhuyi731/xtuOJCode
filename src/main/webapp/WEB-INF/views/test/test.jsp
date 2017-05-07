@@ -52,8 +52,8 @@
         <tbody>
         <c:forEach items="${vo.entityList}" var="entity">
         <tr>
-            <td><a href="/test/testDetail/${entity.contestId}">${entity.contestId}</a></td>
-            <td><a href="/test/testDetail/${entity.contestId}">${entity.title}</a></td>
+            <td><a href="/test/testDetail/${entity.contestId}" target="_top">${entity.contestId}</a></td>
+            <td><a href="/test/testDetail/${entity.contestId}" target="_top">${entity.title}</a></td>
             <td>${entity.startTime}</td>
             <td>${entity.endTime}</td>
             <td><a href="/test/modifyTest/${entity.contestId}">进入修改</a></td>
