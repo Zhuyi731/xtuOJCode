@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
+ * 题目筛选数据传输对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

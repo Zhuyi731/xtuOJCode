@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * 修改密码数据传输对象
  * Created by Ilovezilian on 2017/4/29.
  */
 @Data

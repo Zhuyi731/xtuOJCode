@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.Size;
 
 /**
+ * 修改用户信息数据传输对象
  * Created by Ilovezilian on 2017/4/29.
  */
 @Data

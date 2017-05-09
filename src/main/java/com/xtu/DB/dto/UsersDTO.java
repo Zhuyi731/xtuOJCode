@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-/**
+/** 用户筛选数据传输对象
  * Created by Ilovezilian on 2017/5/6.
  */
 @Data

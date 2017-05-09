@@ -3,6 +3,7 @@ package com.xtu.DB.dto;
 import lombok.Data;
 
 /**
+ * 比赛、作业数据传输对象
  * Created by Ilovezilian on 2017/4/27.
  */
 @Data

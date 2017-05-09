@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
+ * 比赛、作业代码提交数据传输对象
  * Created by Ilovezilian on 2017/4/23.
  */
 @Data

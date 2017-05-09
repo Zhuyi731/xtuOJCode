@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * 创建比赛、作业数据传输对象
  * Created by Ilovezilian on 2017/4/25.
  */
 @Data
@@ -34,20 +35,20 @@ public class CreateTestDTO {
      */
 //    @NotNull
     private String startTimeStr;
-//    private Long startTimeStr;
+    //    private Long startTimeStr;
     private Timestamp startTime;
     /**
      * 封榜时间
      */
     private String frozenStartTimeStr;
-//    private Long frozenStartTimeStr;
+    //    private Long frozenStartTimeStr;
     private Timestamp frozenStartTime;
     /**
      * 结束时间
      */
 //    @NotNull
     private String endTimeStr;
-//    private Long endTimeStr;
+    //    private Long endTimeStr;
     private Timestamp endTime;
     /**
      * 比赛类型（0公开；1可公开看榜，看题，非注册不可交题；2注册私有；3密码私有；4名单导入私有）
