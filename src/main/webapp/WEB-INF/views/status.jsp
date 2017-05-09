@@ -96,7 +96,7 @@
         </div>
         <div class="form-group">
             <label for="result" class="control-label">Result</label>
-            <select id="result" name="result" class="form-control col-md-offset-1 col-sm-offset-1">
+            <select id="result" name="resultCode" class="form-control col-md-offset-1 col-sm-offset-1">
                 <option value="0">All</option>
                 <option value="1">Accept</option>
                 <option value="2">Wrong Answer</option>
