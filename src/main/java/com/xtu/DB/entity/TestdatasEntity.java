@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 
 /**
+ * 测试数据表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

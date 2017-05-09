@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 /**
+ * 比赛表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

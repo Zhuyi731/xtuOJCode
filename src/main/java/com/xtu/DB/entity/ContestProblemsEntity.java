@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
+ * 比赛题目集表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 /**
- * 题目表
+ * 题目表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

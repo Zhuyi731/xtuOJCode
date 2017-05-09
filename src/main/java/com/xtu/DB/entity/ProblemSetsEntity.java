@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 /**
- * 题目集
+ * 题目集表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data

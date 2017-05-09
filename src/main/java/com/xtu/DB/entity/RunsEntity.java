@@ -5,6 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 /**
+ * 运行表实体对象
  * Created by Ilovezilian on 2017/4/18.
  */
 @Data
