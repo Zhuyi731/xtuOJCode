@@ -73,7 +73,7 @@ public class LoginController {
      * @param model
      * @return
      */
-    @RequestMapping(value = {"/" + Pages.LOGIN, "/" + Pages.INFO}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/" + Pages.LOGIN}, method = RequestMethod.POST)
     public String loginPost(
             @NotNull @Valid UsersEntity usersEntiy,
             Errors errors,
@@ -121,11 +121,7 @@ public class LoginController {
             Model model) {
         OUT.prt("request", Pages.INFO);
         String res;
-        if (!model.containsAttribute("usersEntity")) {
-            res = Pages.LOGIN;
-        } else {
-            res = Pages.INFO;
-        }
+        res = Pages.INFO;
         return res;
     }
 

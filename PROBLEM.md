@@ -90,9 +90,9 @@
 ### web pages relation solve by zhuyi
 1. submit must add a field open choose options! ok
 2. add a page about cat code details! ok
-3. back stage management url links to /info rather than /role_string/info.
-4. url with users management must add page start. 
-5. back stage management about display of test detail, must remove the navigation.
+3. back stage management url links to /info rather than /role_string/info. ok
+4. url with users management must add page start. ok
+5. back stage management about display of test detail, must remove the navigation. ok
 
 
 ### web java relation solve by panshuai

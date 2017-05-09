@@ -9,10 +9,16 @@ import java.util.List;
  */
 @Data
 public class StatusVO {
+    /**
+     * 查询的实体
+     */
     private List<StatusEntityVO> entityList;
     /**
      * 总数
      */
     private long total;
+    /**
+     * 页数
+     */
     private int start;
 }

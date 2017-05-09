@@ -9,7 +9,16 @@ import java.util.List;
  */
 @Data
 public class ProblemsVO {
+    /**
+     * ProblemsEntityVO列表
+     */
     private List<ProblemsEntityVO> entityList;
+    /**
+     * 总数
+     */
     private long total;
+    /**
+     * 页数
+     */
     private int start;
 }

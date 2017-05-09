@@ -17,16 +17,17 @@
 <div class="searchDiv">
     <form class="" method="get" role="form">
         <div class="form-group col-md-2 col-md-offset-1">
-        <select class="form-control" name="roleID"  >
-            <option value="0">所有</option>
+        <select class="form-control" name="roleId"  >
+            <option value="-1">所有</option>
+            <option value="0">管理员</option>
             <option value="1">老师</option>
             <option value="2">学生</option>
         </select>
         </div>
         <div class="form-group">
-            <label role="label" class="control-label col-md-1" for="userId">学号:</label>
+            <label role="label" class="control-label col-md-1" for="id">学号:</label>
             <div class="col-md-2">
-            <input type="text" name="userId" id="userId" class="form-control">
+            <input type="text" name="id" id="id" class="form-control">
             </div>
         </div>
         <div class="form-group">

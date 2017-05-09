@@ -10,8 +10,17 @@ import java.util.List;
  */
 @Data
 public class AllContestProblemVO {
+    /**
+     * AllContestProblemEntityVO列表
+     */
     private List<AllContestProblemEntityVO> entityList;
-    ContestsEntity contestsEntity;
-    private int total;
+    private ContestsEntity contestsEntity;
+    /**
+     * 总数
+     */
+    private long total;
+    /**
+     * 页数
+     */
     private int start;
 }

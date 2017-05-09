@@ -15,17 +15,17 @@ public class ModifyPasswordDTO {
      */
     @NotNull
     @Size(min = 6, max = 32)
-    String oldPassword;
+    private String oldPassword;
     /**
      * 密码
      */
     @NotNull
     @Size(min = 6, max = 32)
-    String password;
+    private String password;
     /**
      * 密码确认
      */
     @NotNull
     @Size(min = 6, max = 32)
-    String repPassword;
+    private String repPassword;
 }

@@ -9,7 +9,16 @@ import java.util.List;
  */
 @Data
 public class RankVO {
+    /**
+     * RankEntityVO列表
+     */
     private List<RankEntityVO> entityList;
+    /**
+     * 总数
+     */
     private long total;
+    /**
+     * 页数
+     */
     private int start;
 }

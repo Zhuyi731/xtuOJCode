@@ -113,7 +113,7 @@ public class UsersRepositoryImp implements UsersRepository {
 
     @Override
     public List<UsersEntity> queryList(int start, int size, UsersDTO dto) {
-        if (null == dto.getClassId() || "".equals(dto.getClassId())) {
+        if (null != dto.getClassId() && !"".equals(dto.getClassId())) {
             return queryListByClassId(start, size, dto);
         }
 
