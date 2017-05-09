@@ -179,6 +179,14 @@ public class TestController {
         return res;
     }
 
+    /**
+     * 显示所有比赛、作业列表页面
+     * @param start
+     * @param contestDTO
+     * @param model
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = {"/" + Pages.TOTAL_TEST, "/" + Pages.TOTAL_TEST + "/{start}"}, method = RequestMethod.GET)
     public String showTotalTest(
             @PathVariable("start") int start,

@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 比赛、作业中列表题目信息视图
  * Created by Ilovezilian on 2017/4/27.
  */
 @Data

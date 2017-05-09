@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 列表排行榜视图
  * Created by Ilovezilian on 2017/4/22.
  */
 @Data

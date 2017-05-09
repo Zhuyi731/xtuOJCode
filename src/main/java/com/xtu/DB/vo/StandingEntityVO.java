@@ -8,6 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 指定比赛、作业单项排行榜视图
  * Created by Ilovezilian on 2017/4/30.
  */
 @Data

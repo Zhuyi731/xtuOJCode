@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 指定比赛、作业列表排行榜视图
  * Created by Ilovezilian on 2017/4/30.
  */
 @Data

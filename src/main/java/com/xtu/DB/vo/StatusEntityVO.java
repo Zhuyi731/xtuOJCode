@@ -5,6 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 /**
+ * 单项状态视图
  * Created by Ilovezilian on 2017/4/22.
  */
 @Data

@@ -3,6 +3,7 @@ package com.xtu.DB.vo;
 import lombok.Data;
 
 /**
+ * 比赛、作业中单项题目信息视图
  * Created by Ilovezilian on 2017/4/27.
  */
 @Data

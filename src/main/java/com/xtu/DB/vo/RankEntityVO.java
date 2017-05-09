@@ -3,6 +3,7 @@ package com.xtu.DB.vo;
 import lombok.Data;
 
 /**
+ * 单项排行榜视图
  * Created by Ilovezilian on 2017/4/21.
  */
 @Data
