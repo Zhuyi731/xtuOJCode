@@ -11,12 +11,10 @@ import javax.servlet.ServletRegistration;
  * 配置 DispatcherServlet
  * Created by Ilovezilian on 2017/4/12.
  */
-
-/**
- */
 public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     /**
      * set RootConfig
+     *
      * @return
      */
     @Override
@@ -26,6 +24,7 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
     /**
      * set ServletConfig
+     *
      * @return
      */
     @Override
@@ -35,15 +34,17 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
     /**
      * set ServletMap
+     *
      * @return
      */
     @Override
     protected String[] getServletMappings() {
-        return new String[] {"/"};
+        return new String[]{"/"};
     }
 
     /**
      * set multipart uploads file
+     *
      * @param registration
      */
     @Override
@@ -56,19 +57,12 @@ public class OJWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 
     /**
      * set filter
+     *
      * @return
      */
     @Override
-    protected Filter[] getServletFilters(){
+    protected Filter[] getServletFilters() {
         return new Filter[]{new CharacterEncodingFilter("UTF-8", true)};
     }
-
-//    @Override
-//    public void onStartup(ServletContext servletContext) throws ServletException {
-//         TODO Auto-generated method stub
-//        super.onStartup(servletContext);
-//        servletContext.addFilter("name", new CharacterEncodingFilter("UTF-8", true))
-//                .addMappingForUrlPatterns(null, false, "/*");
-//    }
 
 }

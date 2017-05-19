@@ -36,7 +36,8 @@ public class NoticeController {
      * @return
      */
     @RequestMapping(value = "/" + Pages.ADD_NOTICE, method = RequestMethod.POST)
-    public String addNoticePost(Model model) {
+    public String addNoticePost(String content
+            ,Model model) {
         OUT.prt("post", Pages.ADD_NOTICE);
         String res = Pages.NOTICE + "/" + Pages.ADD_NOTICE;
         return res;

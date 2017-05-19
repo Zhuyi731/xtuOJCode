@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -84,6 +86,16 @@ public class AdminController {
      */
     @RequestMapping(value = "/" + Pages.CREATE_NEW_USERS, method = RequestMethod.GET)
     public String createNewUsers() {
+        String res = "/" + Pages.ADMIN + "/" + Pages.CREATE_NEW_USERS;
+        return res;
+    }
+
+    /**
+     * 添加用户
+     */
+    @RequestMapping(value = "/" + Pages.CREATE_NEW_USERS, method = RequestMethod.GET)
+    public String createNewUsersPost(
+            @RequestPart("usersFile") MultipartFile usersFile) {
         String res = "/" + Pages.ADMIN + "/" + Pages.CREATE_NEW_USERS;
         return res;
     }
