@@ -73,7 +73,7 @@
         </tbody>
     </table>
     <div class="function pull-right">
-        <a class="btn btn-lg btn-primary " href="/admin/createNewUsers">添加学生</a>
+        <a class="btn btn-lg btn-primary " href="/admin/createNewUsers">添加用户</a>
     </div>
 </div>
 <div class="modal fade  " id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"

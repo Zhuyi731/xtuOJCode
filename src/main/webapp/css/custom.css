@@ -174,7 +174,6 @@ result样式设计
     color:red;
 
  }
-
 .statusTr td{
     text-align: center; vertical-align: middle; width: 80px;
 }
@@ -210,5 +209,7 @@ result样式设计
  !important;background-color: slategray;
  }
 .standingTable tbody tr .notPassed{
-    !important;background-color:#d9534f;
+    width:80px;
+    background-color:#d9534f;
+    color:#000000;
 }

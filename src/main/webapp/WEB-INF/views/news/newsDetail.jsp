@@ -12,12 +12,17 @@
 </head>
 <body>
 <div align="center">
-        <pre style="font-size:25px;">
-            力微任重久神疲，再竭衰庸定不支。
-            <font color="red">苟利国家生死以，岂因祸福避趋之。</font>
-            谪居正是君恩厚，养拙刚于戍卒宜。
-            戏与山妻谈故事，试吟断送老头皮。
-        </pre>
+    <font color=#337ab7 size="20px">Welcome to XTU Online Judge</font>
+
+    <p >
+    <ul align="left" style="margin-left: 260px;">
+        <li>公告:第一次登录,请使用自己的学号作为用户名和密码登录系统</li>
+        <li> 登陆以后可以修改自己的用户信息与密码，点击右上角</li>
+        <li>点击<a href="/problem/problems">Problem Set</a>进入题库联系</li>
+        <li> 点击<a href="/test/allTest">Contest</a> 参加考试</li>
+        <li> 系统试运行，欢迎大家报告Bug</li>
+    </ul>
+    </p>
 </div>
 </body>
 </html>

@@ -19,28 +19,10 @@
     Iterator it = list.iterator();
     String[] trans = {"All","Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed","Running","Pending"};
     ArrayList result = new ArrayList<String>();
-//    ArrayList problemId = new ArrayList<String>();
-//    ArrayList language = new ArrayList<String>();
-//    ArrayList resultCode = new ArrayList<String>();
-//    ArrayList runMemory = new ArrayList<String>();
-//    ArrayList runTime = new ArrayList<String>();
-//    ArrayList runId = new ArrayList<String>();
     for (int i = 0; i < list.size(); i++) {
         result.add(trans[list.get(i).getResultCode()]);
-//        problemId.add(list.get(i).getProblemId());
-//        language.add(list.get(i).getLanguage());
-//        resultCode.add(list.get(i).getResultCode());
-//        runMemory.add(list.get(i).getRunMemory());
-//        runTime.add(list.get(i).getRunTime());
-//        runId.add(list.get(i).getRunId());
     }
     pageContext.setAttribute("result", result);
-//    pageContext.setAttribute("problemId", problemId);
-//    pageContext.setAttribute("language", language);
-//    pageContext.setAttribute("resultCode", resultCode);
-//    pageContext.setAttribute("runMemory", runMemory);
-//    pageContext.setAttribute("runTime", runTime);
-//    pageContext.setAttribute("runId", runId);
 %>
 <!DOCTYPE HTML>
 <html>

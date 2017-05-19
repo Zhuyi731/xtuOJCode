@@ -145,7 +145,7 @@ function checkPassword() {
     var s = document.getElementById("alert");
     var ss = document.getElementById("alert0");
     var p1 = document.getElementById("password");
-    var p2 = document.getElementById("passwordRep");
+    var p2 = document.getElementById("repPassword");
     if (p1.value.length < 6) {
         ss.style.display = "";
         return false;
@@ -182,7 +182,7 @@ function  pageGo() {
         alert("页码超出范围！");
     }else{
         page--;
-        var to='/problem/problems/'+page;
+        var to='/problem/proneblems/'+page;
         self.location=to;
     }
 }
