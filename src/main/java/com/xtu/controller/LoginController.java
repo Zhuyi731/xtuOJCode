@@ -159,7 +159,7 @@ public class LoginController {
 //        usersRepository.save(usersEntity);
         usersEntity.setRoleId(Constant.STUDENT);
 
-        res = "redirect:/" + Pages.INFO;
+        res = "redirect:/" + Pages.LOGIN;
         return res;
     }
 

@@ -108,4 +108,30 @@ public class MyFileUtils {
         }
         return null;
     }
+
+    public static String readTxtFile(InputStream inputStream) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                String[] users = line.split("|");
+                for (String user: users){
+
+                }
+//                sb.append(line + "\n");
+            }
+//            System.out.println(sb.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
 }
