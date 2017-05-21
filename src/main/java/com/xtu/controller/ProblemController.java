@@ -183,7 +183,7 @@ public class ProblemController {
         dto.setProblemId(problemsEntity.getProblemId());
         ProblemsEntity entity = problemsRepository.findOne(dto);
         model.addFlashAttribute("entity", entity);
-        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER;
+        String res = "redirect:/" + Pages.PROBLEM + "/" + Pages.PROBLEM_MANAGER + "/0";
         return res;
     }
 
@@ -385,11 +385,12 @@ public class ProblemController {
         OUT.prt("post", Pages.SUBMIT);
         OUT.prt("submitContestDTO", submitContestDTO);
         String id = principal.getName();
+        submitContestDTO.setProblemId(problemId);
         submitContestDTO.setId(id);
         UsersEntity usersEntity = usersRepository.findOne(id);
         submitContestDTO.setUserId(usersEntity.getUserId());
         runsRepository.save(submitContestDTO);
-        String res = "redirect:/" + Pages.STATUS + "/{id}";
+        String res = "redirect:/" + Pages.STATUS + "/0";
         return res;
     }
 

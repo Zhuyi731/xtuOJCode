@@ -18,7 +18,7 @@ public class UsersEntity {
     @Min(0)
     private int userId;
     @Min(0)
-    private int roleId;
+    private int roleId = 2;
     @NotNull
     @Size(min = 5, max = 10)
     private String id;

@@ -51,13 +51,13 @@ public class UsersRepositoryImp implements UsersRepository {
     public UsersEntity save(UsersEntity usersEntity) {
         Integer userId = usersEntity.getUserId();
         String sql = null;
-        if (null == userId) {
+        if (null == userId || 0 == userId) {
             sql = "INSERT INTO "
                     + Tables.USERS
                     + "(`role_id`,`id`, `name`, `class_id`," +
                     " `nickname`, `password`,`status`, `email`," +
                     "`email_open`, `QQ`, `QQ_open`, `phone`, `phone_open`) " +
-                    "VALUES (?, ?, ?, ?, ?, " +
+                    "VALUES (?, ?, ?, ?," +
                     "?, ?, ?, ?," +
                     "?, ?, ?, ?, ?)";
             jdbcOperations.update(sql,
