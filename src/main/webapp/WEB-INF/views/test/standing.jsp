@@ -42,17 +42,25 @@
         </c:forEach>
     }
 </script>
+<div class="headTitle" align="center">
+    <h2><strong>${vo.contestsEntity.title}</strong></h2><br>
+    <p>
+        <small>Start Time:${vo.contestsEntity.startTime}</small>&nbsp;&nbsp;&nbsp;
+        <small>End Time:${vo.contestsEntity.endTime}</small>
+    </p>
+</div>
 
-<div class="top50">
+<div class="top50" >
     <div class="functionNav">
-        <table class="table table-hover ">
+        <table class="table table-hover text-info">
             <tbody>
-            <tr class="text-info">
-                <td class="col-md-2 col-sm-2 "><a class="btn btn-danger glyphicon glyphicon-arrow-left" onclick='window.history.go(-1)'>Go Back</a></td>
-                <td class="col-md-2 col-sm-2"><a class="btn btn-primary"
-                                                 href="/test/standing/${vo.entityList[0].entityList[0].contestId}" >Standing</a>
+            <tr>
+                <td class="col-md-2 col-sm-2 " align="center"><a class="btn btn-danger glyphicon glyphicon-arrow-left"
+                                                  onclick='window.history.go(-1)'>Go Back</a></td>
+                <td class="col-md-2 col-sm-2" align="center"><a class="btn btn-primary"
+                                                 href="/test/standing/${vo.contestsEntity.contestId}">Standing</a>
                 </td>
-                <td class="col-md-2 col-sm-2"><a class="btn btn-primary" href="/status/0">Status</a></td>
+                <td class="col-md-2 col-sm-2" align="center"><a class="btn btn-primary" href="/status/0">Status</a></td>
             </tr>
             </tbody>
         </table>
