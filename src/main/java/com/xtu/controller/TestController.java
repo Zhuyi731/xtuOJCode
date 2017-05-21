@@ -4,6 +4,7 @@ import com.xtu.DB.*;
 import com.xtu.DB.dto.ContestDTO;
 import com.xtu.DB.dto.CreateTestDTO;
 import com.xtu.DB.dto.ProblemsDTO;
+import com.xtu.DB.dto.SubmitContestDTO;
 import com.xtu.DB.entity.*;
 import com.xtu.DB.vo.*;
 import com.xtu.constant.Pages;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -61,8 +63,33 @@ public class TestController {
         model.addAttribute("id", id);
         model.addAttribute("contestId", contestId);
         model.addAttribute("no", no);
+        model.addAttribute("entity", entity);
         OUT.prt("entity", entity);
         String res = Pages.TEST + "/" + Pages.TEST_SUBMIT;
+        return res;
+    }
+
+    /**
+     * 提交代码请求
+     *
+     * @param submitContestDTO
+     * @param principal
+     * @return
+     */
+    @RequestMapping(value = "/" + Pages.TEST_SUBMIT + "/{id}", method = RequestMethod.POST)
+    public String submitPost(
+            @PathVariable("id") int problemId,
+            @NotNull @Valid SubmitContestDTO submitContestDTO,
+            Principal principal) {
+        OUT.prt("post", Pages.TEST_SUBMIT);
+        OUT.prt("submitContestDTO", submitContestDTO);
+        String id = principal.getName();
+        submitContestDTO.setProblemId(problemId);
+        submitContestDTO.setId(id);
+        UsersEntity usersEntity = usersRepository.findOne(id);
+        submitContestDTO.setUserId(usersEntity.getUserId());
+        runsRepository.save(submitContestDTO);
+        String res = "redirect:/" + Pages.STATUS + "/0";
         return res;
     }
 
@@ -150,6 +177,7 @@ public class TestController {
         OUT.prt("request", Pages.STANDING_PAGE);
         OUT.prt("contestId", contestId);
         StandingVO vo = new StandingVO();
+
         List<StandingEntityVO> entityList = new ArrayList<>();
         List<ContestRanklistEntity> contestRanklistEntityList = contestRanklistRepository.queryList(contestId);
         for (ContestRanklistEntity rank : contestRanklistEntityList) {
@@ -173,6 +201,8 @@ public class TestController {
         vo.setEntityList(entityList);
         vo.setTotal(entityList.size());
         vo.setMapList(mapList);
+        ContestsEntity contestsEntity = contestRepository.findOne(contestId);
+        vo.setContestsEntity(contestsEntity);
         OUT.prt("vo", vo);
         model.addAttribute("vo", vo);
         String res = Pages.TEST + "/" + Pages.STANDING_PAGE;
@@ -181,6 +211,7 @@ public class TestController {
 
     /**
      * 显示所有比赛、作业列表页面
+     *
      * @param start
      * @param contestDTO
      * @param model
