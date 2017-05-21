@@ -12,10 +12,13 @@ import java.util.List;
 @Data
 public class AllContestProblemVO {
     /**
+     * 比赛、题库信息
+     */
+    private ContestsEntity contestsEntity;
+    /**
      * AllContestProblemEntityVO列表
      */
     private List<AllContestProblemEntityVO> entityList;
-    private ContestsEntity contestsEntity;
     /**
      * 总数
      */
