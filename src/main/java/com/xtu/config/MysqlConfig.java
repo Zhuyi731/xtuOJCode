@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
+ * mysql数据库配置
  * Created by Ilovezilian on 2017/4/11.
  */
 @Configuration
@@ -18,16 +19,17 @@ public class MysqlConfig {
 //    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
 
     /**
-     * set dataSource
+     * 设置数据源
+     *
      * @return
      */
     @Bean
-    public BasicDataSource basedataSource () {
+    public BasicDataSource basedataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/exam2017");
         ds.setUsername("root");
-        ds.setPassword("nicai123456");
+        ds.setPassword("123456");
         ds.setInitialSize(5);
 //        there isn't exists in dbcp
 //        ds.setMaxActive(10);
@@ -56,14 +58,15 @@ public class MysqlConfig {
 //    {
 //        return new JdbcTemplate(dataSource);
 //    }
+
     /**
-     * set jdbcTemplate
+     * 设置jdbc模版
+     *
      * @param dataSource
      * @return
      */
     @Bean
-    public JdbcTemplate jdbcTemplate(BasicDataSource dataSource)
-    {
+    public JdbcTemplate jdbcTemplate(BasicDataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 }

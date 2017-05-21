@@ -1,50 +1,51 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Ilovezilian
-  Date: 2017/4/15
-  Time: 10:21
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Title</title>
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
-<sf:form commandName="usersEntity" method="POST" name="login" class="form-horizontal"  role="form">
-    <%--<sf:form commandName="usersEntity" method="POST" name="login" class="form-horizontal" action="${basePath}/info.jsp" role="form">--%>
-    <div class="form-group">
-        <label for="username" class="col-sm-2 col-sm-offset-2 control-label">账号：</label>
-        <div class="col-sm-3">
-            <sf:input path="id" type="text" class="form-control" id="username" name="username" placeholder="请输入账号"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="username" class="col-sm-2 col-sm-offset-2 control-label">名字：</label>
-        <div class="col-sm-3">
-            <sf:input path="name" type="text" class="form-control" id="username" name="username" placeholder="请输入账号"/>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="password" class="col-sm-2 col-sm-offset-2 control-label">密码：</label>
-        <div class="col-sm-3">
-            <%--<sf:password path="password" type="password" id="password" name="password" class="form-control"--%>
-            <%--placeholder="请输入密码"/>--%>
-            <%--<sf:errors path="password"/>--%>
-            <sf:input path="password" type="password" id="password" name="password" class="form-control"
-                   placeholder="请输入密码"/>
-        </div>
-    </div>
-    <div>
-        <div class="col-sm-offset-4 col-sm-2">
-            <input type="checkbox" id="remember"/>记住密码
-        </div>
-        <div class="col-sm-2">
-            <input type="submit" class="btn btn-info btn-lg" value="登录"/>
-        </div>
-    </div>
-</sf:form>
+<%@ include file="/WEB-INF/views/navigation.jsp"%>
+<div class="row ">
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong> Please Login First </strong>
+            </div>
+            <div class="panel-body">
+                <sf:form commandName="usersEntity" role="form" method="post">
+                    <br>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Username</span>
+                        <input type="text" class="form-control" id="username"  name="username" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Password</span>
+                        <input type="password" id="password" name="password" class="form-control"  placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <%--<input type="checkbox" name="remember"> Remember me--%>
+                        </label>
+                        <span class="pull-right">
+                            <a href="forgetPassword">Forget password ? </a>
+                        </span>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Login Now">
+                    <hr>
+                    Not register ? <a href="register">click here </a>
+                </sf:form>
+            </div>
 
+        </div>
+    </div>
+
+
+</div>
 </body>
 </html>

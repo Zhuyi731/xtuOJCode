@@ -1,6 +1,6 @@
 package com.xtu.constant;
 
-/**
+/** 数据库表常量
  * Created by Ilovezilian on 2017/4/12.
  */
 public class Tables{

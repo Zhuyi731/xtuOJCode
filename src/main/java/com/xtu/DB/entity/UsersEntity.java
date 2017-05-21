@@ -4,12 +4,12 @@ package com.xtu.DB.entity;
 import com.sun.istack.internal.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 /**
+ * 用户表实体对象
  * Created by Ilovezilian on 2017/4/12.
  */
 
@@ -18,11 +18,11 @@ public class UsersEntity {
     @Min(0)
     private int userId;
     @Min(0)
-    private int roleId;
+    private int roleId = 2;
     @NotNull
     @Size(min = 5, max = 10)
     private String id;
-    @NotNull
+    //    @NotNull
     @Size(min = 2, max = 20)
     private String name;
     @Size(min = 0, max = 50)
@@ -34,7 +34,7 @@ public class UsersEntity {
     private String password;
     @Min(0)
     private byte status = 0;
-    @Max(50)
+    @Size(max = 50)
     private String email;
     @Size(min = 1, max = 1)
     private String emailOpen = "Y";

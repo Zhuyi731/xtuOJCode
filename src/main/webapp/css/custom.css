@@ -1,0 +1,215 @@
+/*
+显示题目详细信息界面
+*/
+.proDetail {
+    font-family: Times New Roman;
+    margin: 10px 30px;
+    padding: 20px 250px;
+    background-color: white;
+}
+.proDetail > p {
+    font-family: Times New Roman;
+    font-size: 20px;
+    background-color: #FFF093;
+}
+.proDetail > h3 {
+    margin-top: 20px;
+}
+/*Status界面*/
+
+.status {
+    width: 1040px;
+}
+
+.status > table {
+    margin-left: 160px;
+}
+/*分页部分居中调整*/
+.pager{
+    padding: 0px 150px;
+}
+.pageNo{
+    padding:0px 30px;
+    margin:20px 0px;
+}
+/*提交按钮*/
+.tailSubmit > a{
+    width:150px;
+}
+/*下移50像素 容器*/
+.container {
+    margin-top: 50px;
+}
+/*ranklist界面容器*/
+.ranklist{
+    position:relative;height:auto;min-height:100%;padding-bottom:60px;
+}
+
+/*
+跳转按钮样式
+*/
+.pageGoContainer{
+  height:100px;width: 300px;
+    margin-right: 150px;
+}
+.pageGo{
+    text-align: center;
+    display: inline-block;
+    margin-left:0;
+}
+/*
+搜索栏
+*/
+.search{
+    text-align: right;
+    margin-top: 20px;
+    padding-right:250px;
+}
+.search >form{
+    line-height: 25px;
+    padding-right: 20px;
+}
+.statusSearch {
+    margin-top: 20px;
+    text-align: center;
+}
+.statusHead {
+    text-align: center;
+    color: blue;
+    size: 30px;
+}
+.statuscontainer{
+    width:auto;
+    margin:30px 30px;
+}
+.status table thead {
+    background-color: #2C333D;
+    color: white;
+    text-align: center;
+}
+/*
+小型输入按钮
+*/
+.smallInput{
+    width: 50px;
+    height:30px;
+}
+/*
+登录按钮
+ */
+.logBtn>button{
+    width:160px;
+}
+.logBtn>ul>li{
+    width:160px;
+}
+.private{
+    font-color:RED;
+    font-size:larger;
+}
+/*头标题*/
+.headTitle{
+    margin-top:100px;
+}
+/*比赛导航栏*/
+.functionNav{
+    width: 800px;
+    margin-left:250px;
+    margin-top:50px;
+    text-align: center;
+}
+/*下移50px;*/
+.top50{
+    margin-top: 50px;
+}
+/*
+result样式设计
+*/
+.accept{
+    color:#FFF;
+    background-color: #66afe9;
+    border-color: #03a9f4;
+}
+.wrongAnswer{
+    color: #fff;
+    background-color: red;
+    border-color: #d43f3a;
+}
+.runtimeError{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.compileError{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.presentationError{
+    color: #fff;
+    background-color: rebeccapurple;
+    border-color: purple;
+  }
+.timeLimitExceed{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.memoryLimitExceed{
+    color: #fff;
+    background-color: #262626;
+    border-color: black;
+}
+.outputLimitExceed{
+    color:#FFF;
+    background-color: #122b40;
+    border-color: #2b669a;
+}
+.running {
+    background-color: #FFFFFF;
+    color:green;
+}
+.pending{
+    background-color: #FFFFFF;
+    color:red;
+
+ }
+.statusTr td{
+    text-align: center; vertical-align: middle; width: 80px;
+}
+.standingTable thead tr td {
+    width: 80px;
+    background-color: #f0ad4e;
+    color: #000000;
+    text-align: center;
+}
+.standingTable tbody tr td{
+    width: 80px;
+    background-color: #FFFFFF;
+    color:#000000;
+    text-align: center;
+}
+.standingTable tbody tr .notFirstBlood{
+    width:80px;
+    background-color: #90ee90;
+    color:#000000;
+}
+.standingTable tbody tr .firstBlood{
+    width:80px;
+    background-color: #69b2f1;
+    color:#000000;
+}
+.standingTable tbody tr .rankTop3{
+    !important;background-color: #337ab7;
+}
+.standingTable tbody tr .rankTop10{
+    !important;background-color: #5cb85c;
+}
+.standingTable tbody tr .rankAfter10{
+ !important;background-color: slategray;
+ }
+.standingTable tbody tr .notPassed{
+    width:80px;
+    background-color:#d9534f;
+    color:#000000;
+}
