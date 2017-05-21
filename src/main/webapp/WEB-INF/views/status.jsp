@@ -17,7 +17,7 @@
     pageContext.setAttribute("totalPage", totalPage);
     List<StatusEntityVO> list = vo.getEntityList();
     Iterator it = list.iterator();
-    String[] trans = {"All","Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed","Running","Pending"};
+    String[] trans = {"All", "Accept", "Wrong Answer", "Compile Error", "Runtime Error", "Presentation Error", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Running", "Pending"};
     ArrayList result = new ArrayList<String>();
     for (int i = 0; i < list.size(); i++) {
         result.add(trans[list.get(i).getResultCode()]);
@@ -52,11 +52,12 @@
 </security:authorize>
 <h1 class="statusHead">Online Status</h1>
 <div class="statusSearch" style="line-height:15px;">
-    <sf:form commandName="statusDTO" role="form" method="post" class="form-inline" onsubmit="return checkStatusSubmit()">
+    <sf:form commandName="statusDTO" role="form" method="post" class="form-inline"
+             onsubmit="return checkStatusSubmit()">
         <div class="form-group">
             <label for="problemId" class="control-label col-md-1 col-sm-1">Pro.ID</label>
             <div class="col-md-offset-1 col-sm-offset-1">
-                <input type="text" class="form-control" name="problemId" id="problemId"  placeholder="题目编号">
+                <input type="text" class="form-control" name="problemId" id="problemId" placeholder="题目编号">
             </div>
         </div>
         <div class="form-group">
@@ -69,10 +70,8 @@
             <label for="language" class="control-label ">Language</label>
             <select id="language" name="language" class="form-control col-sm-offset-1 col-md-offset-1">
                 <option value="0">All</option>
-                <option value="MS C">MS C</option>
-                <option value="MS C++">MS C++</option>
-                <option value="GUN C">GUN C</option>
-                <option value="GUN C++">GUN C++</option>
+                <option value="C">C</option>
+                <option value="C++">C++</option>
                 <option value="Java">Java</option>
             </select>
         </div>
@@ -152,12 +151,13 @@
                 <td id="runId${loop.count-1}">${entity.runId}</td>
                 <td id="problemId${loop.count-1}">${entity.problemId}</td>
                 <td id="id${loop.count-1}">${entity.id}</td>
-                <td  ><span id="result${loop.count-1}" style="width: 140px; padding-top:6px;">${result[loop.count-1]}</span></td>
+                <td><span id="result${loop.count-1}"
+                          style="width: 140px; padding-top:6px;">${result[loop.count-1]}</span></td>
                 <td id="runMemory${loop.count-1}">${entity.runMemory}&nbsp;KB</td>
                 <td id="runTime${loop.count-1}">${entity.runTime}&nbsp;MS</td>
-                   <%--管理员--%>
+                    <%--管理员--%>
                 <c:if test="${roleId eq '[0]'}">
-                    <td ><a href="/codeDetail/${entity.runId}" class="btn btn-success ">See Codes</a>
+                    <td><a href="/codeDetail/${entity.runId}" class="btn btn-success ">See Codes</a>
                     </td>
                 </c:if>
                     <%--不是管理员--%>
@@ -190,62 +190,62 @@
 
 <%--<!-- 模态框（Modal） -->--%>
 <%--<div class="modal fade in" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalTitle"--%>
-     <%--aria-hidden="true">--%>
-    <%--<div class="modal-dialog">--%>
-        <%--<div class="modal-content">--%>
-            <%--<div class="modal-header " align="center">--%>
-                <%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">--%>
-                    <%--&times;--%>
-                <%--</button>--%>
-                <%--<h4 class="modal-title" id="codeModalTitle">--%>
-                <%--</h4>--%>
-            <%--</div>--%>
-            <%--<div class="modal-body">--%>
-                <%--<pre class="prettyprint" id="codeContent" onload="prettyPrint()">--%>
-                     <%--<xmp>--%>
-                     <%--</xmp>--%>
-                 <%--</pre>--%>
-            <%--</div>--%>
-            <%--<div class="modal-footer">--%>
-                <%--<button type="button" class="btn btn-default" data-dismiss="modal">关闭--%>
-                <%--</button>--%>
-            <%--</div>--%>
-        <%--</div><!-- /.modal-content -->--%>
-    <%--</div><!-- /.modal -->--%>
+<%--aria-hidden="true">--%>
+<%--<div class="modal-dialog">--%>
+<%--<div class="modal-content">--%>
+<%--<div class="modal-header " align="center">--%>
+<%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">--%>
+<%--&times;--%>
+<%--</button>--%>
+<%--<h4 class="modal-title" id="codeModalTitle">--%>
+<%--</h4>--%>
+<%--</div>--%>
+<%--<div class="modal-body">--%>
+<%--<pre class="prettyprint" id="codeContent" onload="prettyPrint()">--%>
+<%--<xmp>--%>
+<%--</xmp>--%>
+<%--</pre>--%>
+<%--</div>--%>
+<%--<div class="modal-footer">--%>
+<%--<button type="button" class="btn btn-default" data-dismiss="modal">关闭--%>
+<%--</button>--%>
+<%--</div>--%>
+<%--</div><!-- /.modal-content -->--%>
+<%--</div><!-- /.modal -->--%>
 <%--</div>--%>
 <%--<script type="text/JavaScript" src="/js/jquery.js"></script>--%>
 <script type="text/JavaScript" src="/js/custom.js"></script>
 <script type="text/javascript">
-window.onload = setClass;
-function setClass() {
-    for (var index = 0; index < ${vo.entityList.size()}; index++) {
-        var rr = document.getElementById("result" + index);
-        var result = rr.innerHTML;
-        if (result == "Accept") {
-            rr.className = "btn  accept";
-        } else if (result == "Wrong Answer") {
-            rr.className = "btn  wrongAnswer";
-        } else if (result == "Runtime Error") {
-            rr.className = "btn  runtimeError";
-        }
-        else if (result == "Compile Error") {
-            rr.className = "btn compileError";
-        } else if (result == "Presentation Error") {
-            rr.className = "btn  presentationError";
-        } else if (result == "Time Limit Exceed") {
-            rr.className = "btn  timeLimitExceed";
-        } else if (result == "Memory Limit Exceed") {
-            rr.className = "btn  memoryLimitExceed";
-        } else if(result == "Output Limit Exceed"){
-            rr.className = "btn  outputLimitExceed"
-        }else if(result=="Running"){
-            rr.className = "running glyphicon glyphicon-repeat"
-        }else{
-            rr.className = "pending glyphicon glyphicon-repeat"
-        }
+    window.onload = setClass;
+    function setClass() {
+        for (var index = 0; index < ${vo.entityList.size()}; index++) {
+            var rr = document.getElementById("result" + index);
+            var result = rr.innerHTML;
+            if (result == "Accept") {
+                rr.className = "btn  accept";
+            } else if (result == "Wrong Answer") {
+                rr.className = "btn  wrongAnswer";
+            } else if (result == "Runtime Error") {
+                rr.className = "btn  runtimeError";
+            }
+            else if (result == "Compile Error") {
+                rr.className = "btn compileError";
+            } else if (result == "Presentation Error") {
+                rr.className = "btn  presentationError";
+            } else if (result == "Time Limit Exceed") {
+                rr.className = "btn  timeLimitExceed";
+            } else if (result == "Memory Limit Exceed") {
+                rr.className = "btn  memoryLimitExceed";
+            } else if (result == "Output Limit Exceed") {
+                rr.className = "btn  outputLimitExceed"
+            } else if (result == "Running") {
+                rr.className = "running glyphicon glyphicon-repeat"
+            } else {
+                rr.className = "pending glyphicon glyphicon-repeat"
+            }
 
+        }
     }
-}
 </script>
 </body>
 </html>

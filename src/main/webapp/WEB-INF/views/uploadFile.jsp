@@ -54,7 +54,7 @@
         </div>
     </div>
 </sf:form>--%>
-<form method="post" enctype="multipart/form-data">
+<sf:form method="post" enctype="multipart/form-data">
     <div>
         <label>profile picture</label>
         <input id="picture" name="picture" type="file" accept="image/png,image/jpeg, image/gif"/>
@@ -64,7 +64,7 @@
         <input id="zip" name="zip" type="file" accept="application/zip"/>
         <input type="submit" value="上传"/>
     </div>
-</form>
+</sf:form>
 
 </body>
 </html>

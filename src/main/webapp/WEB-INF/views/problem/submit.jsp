@@ -1,70 +1,72 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE HTML >
 <html>
-   <head>
+<head>
     <title>${entity.problemId}&nbsp;&nbsp;${entity.title}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link href="/css/custom.css" rel="stylesheet" />
-<style type="text/css">
-  label{
-   padding-top:7px;
-  }
-</style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/custom.css" rel="stylesheet"/>
+    <style type="text/css">
+        label {
+            padding-top: 7px;
+        }
+    </style>
 </head>
-	<body>
-	 <%@ include file="/WEB-INF/views/navigation.jsp" %>
-        <div class="container" align="center">
-          <form role="form" method="post" class="form-horizontal" >
-          <div class="form-group">
-         	<label for="problemId" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
+<body>
+<%@ include file="/WEB-INF/views/navigation.jsp" %>
+<div class="container" align="center">
+    <sf:form role="form" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="problemId" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
             <div class="col-md-4">
-            <input id="problemId" name="problemId" type="text" class="form-control" width="60px;" value="${entity.problemId}" readonly="readonly">
-           	</div>
-          </div>
-          
-         <div class="form-group">
-         	<label for="language" class="col-md-2 col-md-offset-2 control-label">Language:</label>
+                <input id="problemId" name="problemId" type="text" class="form-control" width="60px;"
+                       value="${entity.problemId}" readonly="readonly">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="language" class="col-md-2 col-md-offset-2 control-label">Language:</label>
             <div class="col-md-4">
-            	<select id="language" name="language" class="form-control">
-           			 <option value="GUN G++" selected="selected">GUN G++</option>
-            		<option value="java">java</option>
-            		<option value="c" >c</option>
-            	</select> 
-          </div>
-          </div>
-              <div class="form-group">
-                  <label for="open" class="col-md-2 col-md-offset-2 control-label">是否公开代码:</label>
-                  <div class="col-md-4">
-                      <select id="open" name="open" class="form-control">
-                          <option value="0" selected="selected">否</option>
-                          <option value="1" >是</option>
-                      </select>
-                  </div>
-              </div>
-          <div class="form-group">
-           <label for="code" class="col-md-2 col-md-offset-2 control-label">Source code:</label>
-            <div class="col-md-6 " >
-            <textarea  class="form-control" name="code" id="code" style="height:400px;padding-left:0;">
+                <select id="language" name="language" class="form-control">
+                    <option value="C++" selected="selected">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="open" class="col-md-2 col-md-offset-2 control-label">是否公开代码:</label>
+            <div class="col-md-4">
+                <select id="open" name="open" class="form-control">
+                    <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="code" class="col-md-2 col-md-offset-2 control-label">Source code:</label>
+            <div class="col-md-6 ">
+            <textarea class="form-control" name="code" id="code" style="height:400px;padding-left:0;">
 input your code...
             </textarea>
             </div>
-          </div>
-          <div class="form-group">
-           <div class="col-md-offset-4 col-md-2" text-align="middle">
-           <input type="submit" class="form-control btn btn-info btn-lg" value="submit">
-           </div>
-           <div class="col-md-2">
-           <input type="reset" class="form-control btn btn-info btn-lg" value="reset">
-          </div>
-          </div>
-          </form>
-        </div>  
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-2" text-align="middle">
+                <input type="submit" class="form-control btn btn-info btn-lg" value="submit">
+            </div>
+            <div class="col-md-2">
+                <input type="reset" class="form-control btn btn-info btn-lg" value="reset">
+            </div>
+        </div>
+    </sf:form>
+</div>
 
-     <%@ include file="/WEB-INF/views/copyright.html" %>
-	</body>
+<%@ include file="/WEB-INF/views/copyright.html" %>
+</body>
 </html>

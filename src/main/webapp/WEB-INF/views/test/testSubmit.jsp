@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
@@ -23,7 +24,7 @@
 <body>
 <%@ include file="/WEB-INF/views/navigation.jsp" %>
 <div class="container" align="center">
-    <form role="form" method="post" class="form-horizontal">
+    <sf:form  action="/problem/submit/${entity.problemId}" role="form" method="post" class="form-horizontal">
         <div class="form-group">
             <label for="contestId" class="col-md-2 col-md-offset-2 control-label">Contest.ID:</label>
             <div class="col-md-4">
@@ -32,7 +33,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="no" class="col-md-2 col-md-offset-2 control-label">Pro.ID:</label>
+            <label for="no" class="col-md-2 col-md-offset-2 control-label">no</label>
             <div class="col-md-4">
                 <input id="no" name="no" type="text" class="form-control" width="60px;" value="${no}"
                        readonly="readonly">
@@ -43,9 +44,9 @@
             <label for="language" class="col-md-2 col-md-offset-2 control-label">Language:</label>
             <div class="col-md-4">
                 <select id="language" name="language" class="form-control">
-                    <option value="GUN G++" selected="selected">GUN G++</option>
-                    <option value="java">java</option>
-                    <option value="c">c</option>
+                    <option value="C++" selected="selected">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="C">C</option>
                 </select>
             </div>
         </div>
@@ -54,6 +55,7 @@
             <div class="col-md-4">
                 <select id="open" name="open" class="form-control">
                     <option value="0" selected="selected">否</option>
+                    <option value="1">是</option>
                 </select>
             </div>
         </div>
@@ -73,7 +75,7 @@ input your code...
                 <input type="reset" class="form-control btn btn-info btn-lg" value="reset">
             </div>
         </div>
-    </form>
+    </sf:form>
 </div>
 
 <%@ include file="/WEB-INF/views/copyright.html" %>

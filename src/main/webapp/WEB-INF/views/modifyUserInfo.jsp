@@ -43,7 +43,7 @@
     <div class="form-group">
         <label for="QQ" class="col-sm-2 col-sm-offset-2 control-label">QQ：</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control" id="QQ" name="QQ" value=${entity.qq}>
+            <input type="text" class="form-control" id="QQ" name="qq" value=${entity.qq}>
         </div>
     </div>
     <div class="form-group">

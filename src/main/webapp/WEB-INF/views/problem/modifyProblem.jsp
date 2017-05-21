@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
@@ -15,7 +16,7 @@
 <body>
 <div class="container">
 </div>
-<form class="form-horizontal form-label-left" role="form" method="post" enctype="multipart/form-data">
+<sf:form class="form-horizontal form-label-left" role="form" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="problemId">Pro.ID:</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -102,7 +103,7 @@
     <div class="form-group" align="center">
         <input type="submit" class="btn btn-lg btn-primary" value="确定">
     </div>
-</form>
+</sf:form>
 <%--<script language="JavaScript">--%>
 <%--var context="1{{{(>_<)}}}2{{{(>_<)}}}3{{{(>_<)}}}4{{{(>_<)}}}5";--%>
 <%--var des=new Array();--%>
