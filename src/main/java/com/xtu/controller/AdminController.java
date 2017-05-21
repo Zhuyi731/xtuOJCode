@@ -7,6 +7,7 @@ import com.xtu.constant.Pages;
 import com.xtu.tools.OUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -92,11 +97,22 @@ public class AdminController {
 
     /**
      * 添加用户
+     * 单个用户占一行，单行内容的顺序为id,name,class,role，用一个'\'符号分开
+     *
+     * @param usersFile
+     * @return
      */
-    @RequestMapping(value = "/" + Pages.CREATE_NEW_USERS, method = RequestMethod.GET)
+    @RequestMapping(value = "/" + Pages.CREATE_NEW_USERS, method = RequestMethod.POST)
+    @Transactional
     public String createNewUsersPost(
             @RequestPart("usersFile") MultipartFile usersFile) {
-        String res = "/" + Pages.ADMIN + "/" + Pages.CREATE_NEW_USERS;
+        try {
+            addUsersFromFile(usersFile.getInputStream());
+        } catch (IOException e) {
+            OUT.prt("file", usersFile.getOriginalFilename() + "文件出错");
+            e.printStackTrace();
+        }
+        String res = "redirect:/" + Pages.ADMIN + "/" + Pages.SHOW_USERS_PAGE + "/0";
         return res;
     }
 
@@ -109,7 +125,37 @@ public class AdminController {
         OUT.prt("post", "admin/modify users info page");
         OUT.prt("userEntity", usersEntity);
         usersRepository.save(usersEntity);
-        String res = "/" + Pages.ADMIN + "/" + Pages.SHOW_USERS_PAGE;
+        String res = "/" + Pages.ADMIN + "/" + Pages.SHOW_USERS_PAGE + "/0";
         return res;
+    }
+
+    public String addUsersFromFile(InputStream inputStream) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"))) {
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                UsersEntity usersEntity = new UsersEntity();
+                String[] users = line.split("\\|");
+                usersEntity.setId(users[0]);
+                usersEntity.setPassword(users[0]);
+                usersEntity.setName(users[1]);
+                usersEntity.setClassId(users[2]);
+                usersEntity.setRoleId(Integer.parseInt(users[3]));
+                usersRepository.save(usersEntity);
+                OUT.prt("add user", usersEntity);
+            }
+//            System.out.println(sb.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
     }
 }
